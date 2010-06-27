@@ -17,13 +17,19 @@
  */
 package com.naesc2011.conference.shared;
 
+import java.util.List;
+
+import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 
-public class ConferenceAttendee {
+@PersistenceCapable
+public class CorporateCompany {
 	/**
 	 * 
 	 */
@@ -39,63 +45,65 @@ public class ConferenceAttendee {
 	
 	/**
 	 * 
+	 * @param name
 	 */
-	@Persistent
-	private String council;
-	
-	/**
-	 * 
-	 */
-	@Persistent
-	private String major;
-	
-	/**
-	 * 
-	 */
-	@Persistent
-	private String email;
-	
-	/**
-	 * 
-	 */
-	@Persistent
-	private Boolean delegate;
-	
-	/**
-	 * 
-	 */
-	@Persistent
-	private Gender gender;
-	
-	/**
-	 * 
-	 */
-	@Persistent
-	private ShirtSize shirtSize;
-	
-	/**
-	 * 
-	 */
-	@Persistent
-	private String emergencyContact;
-	
-	/**
-	 * 
-	 */
-	@Persistent
-	private String emergencyPhone;
-	
-	/**
-	 *
-	 */
-	public enum Gender {
-	    MALE, FEMALE
+	public CorporateCompany(String name){
+		this.name = name;
 	}
 	
 	/**
 	 * 
+	 * @return
 	 */
-	public enum ShirtSize {
-		S, M, L, XL, XXL
+	public Key getKey(){
+		return this.key;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getName(){
+		return this.name;
+	}
+	
+	/**
+	 * 
+	 * @param name
+	 */
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	/**
+	 * 
+	 * @param pm
+	 * @param company
+	 */
+	public static void InsertCompany(PersistenceManager pm, CorporateCompany company){
+		pm.makePersistent(company);
+	}
+	
+	/**
+	 * 
+	 * @param pm
+	 * @return
+	 */
+	public static List<CorporateCompany> GetAllCompanies(PersistenceManager pm){
+		String query = "select from " + CorporateCompany.class.getName();
+	    return (List<CorporateCompany>) pm.newQuery(query).execute();
+	}
+	
+	/**
+	 * 
+	 * @param pm
+	 * @param i
+	 * @return
+	 */
+	public static CorporateCompany GetCompany(PersistenceManager pm, String id ){
+		int i = Integer.parseInt(id);
+		Key key = KeyFactory.createKey(CorporateCompany.class.getSimpleName(), i);
+		CorporateCompany c = pm.getObjectById(CorporateCompany.class, key);
+		return c;
 	}
 }
