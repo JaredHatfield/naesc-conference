@@ -48,6 +48,7 @@ public class ProcessCompanyEdit extends HttpServlet {
 		if (user != null) {
 			String name = req.getParameter("name");
 			String id = req.getParameter("id");
+			String contact = req.getParameter("contact");
 			if (name == null || id == null) {
 				Log.info("The required field was not found");
 			}
@@ -55,6 +56,7 @@ public class ProcessCompanyEdit extends HttpServlet {
 				PersistenceManager pm = PMF.get().getPersistenceManager();
 				CorporateCompany c = CorporateCompany.GetCompany(pm, id);
 				c.setName(name);
+				c.setContact(contact);
 				pm.close();
 			}
 		} 

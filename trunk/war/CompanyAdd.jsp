@@ -32,6 +32,7 @@
 <h2>Add A Company</h2>
 	<form action="/Process/CompanyAdd" method="post">
 		<div>Name: <input type="text" name="name" /></div>
+		<div>Contact: <input type="text" name="contact" /></div>
 		<div><input type="submit" value="Submit" /></div>
 	</form>
 
