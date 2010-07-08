@@ -42,6 +42,133 @@ public class CorporateCompany {
 	 */
 	@Persistent
 	private String name;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private String address;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private double pledged;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private String pledgeDate;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private String sector;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private String products;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private Boolean majorMechanical;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private Boolean majorCivil;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private Boolean majorComputer;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private Boolean majorElectrical;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private Boolean majorChemical;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private Boolean majorBiological;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private Boolean majorIndustrial;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private Boolean majorAeronautical;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private Boolean majorManagement;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private Boolean majorMaterials;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private String description;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private String primaryPOCName;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private String primaryPOCTitle;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private String primaryPOCCellPhone;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private String primaryPOCWorkPhone;
+
+	/**
+	 * 
+	 */
+	@Persistent
+	private String primaryPOCEmail;
+	
 	
 	/**
 	 * 
