@@ -232,6 +232,307 @@ public class CorporateCompany {
 	}
 	
 	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	/**
+	 * @return the pledged
+	 */
+	public double getPledged() {
+		return pledged;
+	}
+
+	/**
+	 * @param pledged the pledged to set
+	 */
+	public void setPledged(double pledged) {
+		this.pledged = pledged;
+	}
+
+	/**
+	 * @return the pledgeDate
+	 */
+	public String getPledgeDate() {
+		return pledgeDate;
+	}
+
+	/**
+	 * @param pledgeDate the pledgeDate to set
+	 */
+	public void setPledgeDate(String pledgeDate) {
+		this.pledgeDate = pledgeDate;
+	}
+
+	/**
+	 * @return the sector
+	 */
+	public String getSector() {
+		return sector;
+	}
+
+	/**
+	 * @param sector the sector to set
+	 */
+	public void setSector(String sector) {
+		this.sector = sector;
+	}
+
+	/**
+	 * @return the products
+	 */
+	public String getProducts() {
+		return products;
+	}
+
+	/**
+	 * @param products the products to set
+	 */
+	public void setProducts(String products) {
+		this.products = products;
+	}
+
+	/**
+	 * @return the majorMechanical
+	 */
+	public Boolean getMajorMechanical() {
+		return majorMechanical;
+	}
+
+	/**
+	 * @param majorMechanical the majorMechanical to set
+	 */
+	public void setMajorMechanical(Boolean majorMechanical) {
+		this.majorMechanical = majorMechanical;
+	}
+
+	/**
+	 * @return the majorCivil
+	 */
+	public Boolean getMajorCivil() {
+		return majorCivil;
+	}
+
+	/**
+	 * @param majorCivil the majorCivil to set
+	 */
+	public void setMajorCivil(Boolean majorCivil) {
+		this.majorCivil = majorCivil;
+	}
+
+	/**
+	 * @return the majorComputer
+	 */
+	public Boolean getMajorComputer() {
+		return majorComputer;
+	}
+
+	/**
+	 * @param majorComputer the majorComputer to set
+	 */
+	public void setMajorComputer(Boolean majorComputer) {
+		this.majorComputer = majorComputer;
+	}
+
+	/**
+	 * @return the majorElectrical
+	 */
+	public Boolean getMajorElectrical() {
+		return majorElectrical;
+	}
+
+	/**
+	 * @param majorElectrical the majorElectrical to set
+	 */
+	public void setMajorElectrical(Boolean majorElectrical) {
+		this.majorElectrical = majorElectrical;
+	}
+
+	/**
+	 * @return the majorChemical
+	 */
+	public Boolean getMajorChemical() {
+		return majorChemical;
+	}
+
+	/**
+	 * @param majorChemical the majorChemical to set
+	 */
+	public void setMajorChemical(Boolean majorChemical) {
+		this.majorChemical = majorChemical;
+	}
+
+	/**
+	 * @return the majorBiological
+	 */
+	public Boolean getMajorBiological() {
+		return majorBiological;
+	}
+
+	/**
+	 * @param majorBiological the majorBiological to set
+	 */
+	public void setMajorBiological(Boolean majorBiological) {
+		this.majorBiological = majorBiological;
+	}
+
+	/**
+	 * @return the majorIndustrial
+	 */
+	public Boolean getMajorIndustrial() {
+		return majorIndustrial;
+	}
+
+	/**
+	 * @param majorIndustrial the majorIndustrial to set
+	 */
+	public void setMajorIndustrial(Boolean majorIndustrial) {
+		this.majorIndustrial = majorIndustrial;
+	}
+
+	/**
+	 * @return the majorAeronautical
+	 */
+	public Boolean getMajorAeronautical() {
+		return majorAeronautical;
+	}
+
+	/**
+	 * @param majorAeronautical the majorAeronautical to set
+	 */
+	public void setMajorAeronautical(Boolean majorAeronautical) {
+		this.majorAeronautical = majorAeronautical;
+	}
+
+	/**
+	 * @return the majorManagement
+	 */
+	public Boolean getMajorManagement() {
+		return majorManagement;
+	}
+
+	/**
+	 * @param majorManagement the majorManagement to set
+	 */
+	public void setMajorManagement(Boolean majorManagement) {
+		this.majorManagement = majorManagement;
+	}
+
+	/**
+	 * @return the majorMaterials
+	 */
+	public Boolean getMajorMaterials() {
+		return majorMaterials;
+	}
+
+	/**
+	 * @param majorMaterials the majorMaterials to set
+	 */
+	public void setMajorMaterials(Boolean majorMaterials) {
+		this.majorMaterials = majorMaterials;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @return the primaryPOCName
+	 */
+	public String getPrimaryPOCName() {
+		return primaryPOCName;
+	}
+
+	/**
+	 * @param primaryPOCName the primaryPOCName to set
+	 */
+	public void setPrimaryPOCName(String primaryPOCName) {
+		this.primaryPOCName = primaryPOCName;
+	}
+
+	/**
+	 * @return the primaryPOCTitle
+	 */
+	public String getPrimaryPOCTitle() {
+		return primaryPOCTitle;
+	}
+
+	/**
+	 * @param primaryPOCTitle the primaryPOCTitle to set
+	 */
+	public void setPrimaryPOCTitle(String primaryPOCTitle) {
+		this.primaryPOCTitle = primaryPOCTitle;
+	}
+
+	/**
+	 * @return the primaryPOCCellPhone
+	 */
+	public String getPrimaryPOCCellPhone() {
+		return primaryPOCCellPhone;
+	}
+
+	/**
+	 * @param primaryPOCCellPhone the primaryPOCCellPhone to set
+	 */
+	public void setPrimaryPOCCellPhone(String primaryPOCCellPhone) {
+		this.primaryPOCCellPhone = primaryPOCCellPhone;
+	}
+
+	/**
+	 * @return the primaryPOCWorkPhone
+	 */
+	public String getPrimaryPOCWorkPhone() {
+		return primaryPOCWorkPhone;
+	}
+
+	/**
+	 * @param primaryPOCWorkPhone the primaryPOCWorkPhone to set
+	 */
+	public void setPrimaryPOCWorkPhone(String primaryPOCWorkPhone) {
+		this.primaryPOCWorkPhone = primaryPOCWorkPhone;
+	}
+
+	/**
+	 * @return the primaryPOCEmail
+	 */
+	public String getPrimaryPOCEmail() {
+		return primaryPOCEmail;
+	}
+
+	/**
+	 * @param primaryPOCEmail the primaryPOCEmail to set
+	 */
+	public void setPrimaryPOCEmail(String primaryPOCEmail) {
+		this.primaryPOCEmail = primaryPOCEmail;
+	}
+
+	/**
+	 * @param key the key to set
+	 */
+	public void setKey(Key key) {
+		this.key = key;
+	}
+
+	/**
 	 * 
 	 * @param pm
 	 * @param company
