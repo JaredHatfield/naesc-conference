@@ -49,6 +49,7 @@
 
 	<form action="/Process/CompanyEdit" method="post">
 		<div>Name: <input type="text" name="name" value="<%= c.getName() %>" /></div>
+		<div>Contact: <input type="text" name="contact" value="<%= c.getContact() %>" /></div>
 		<input type="hidden" name="id" value="<%= c.getKey().getId() %>">
 		<div><input type="submit" value="Update" /></div>
 	</form>

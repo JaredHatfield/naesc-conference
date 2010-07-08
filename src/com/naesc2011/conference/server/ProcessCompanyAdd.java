@@ -46,12 +46,13 @@ public class ProcessCompanyAdd extends HttpServlet {
 		
 		if (user != null) {
 			String name = req.getParameter("name");
+			String contact = req.getParameter("contact");
 			if (name == null) {
 				Log.info("The required field name was not found");
 			}
 			else{
 				PersistenceManager pm = PMF.get().getPersistenceManager();
-				CorporateCompany cc = new CorporateCompany(name);
+				CorporateCompany cc = new CorporateCompany(name, contact);
 				try {
 					pm.makePersistent(cc);
 		        } finally {
