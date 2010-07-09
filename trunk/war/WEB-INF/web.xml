@@ -5,6 +5,10 @@
 
 <web-app>
   
+  <system-properties>
+    <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
+  </system-properties>
+    
   <!-- Servlets -->
   <servlet>
     <servlet-name>processCompanyAdd</servlet-name>
