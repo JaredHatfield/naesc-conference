@@ -43,10 +43,6 @@ public class CorporateCompany {
 	@Persistent
 	private String name;
 
-	@Persistent
-	private String contact;
-
-
 	/**
 	 * 
 	 */
@@ -57,7 +53,7 @@ public class CorporateCompany {
 	 * 
 	 */
 	@Persistent
-	private double pledged;
+	private Double pledged;
 
 	/**
 	 * 
@@ -179,16 +175,6 @@ public class CorporateCompany {
 	 */
 	public CorporateCompany(String name){
 		this.name = name;
-		this.contact = "";
-	}
-	
-	/**
-	 * 
-	 * @param name, contact
-	 */
-	public CorporateCompany(String name, String contact){
-		this.name = name;
-		this.contact = contact;
 	}
 	
 	/**
@@ -216,22 +202,6 @@ public class CorporateCompany {
 	}
 	
 	/**
-	 * 
-	 * @return
-	 */
-	public String getContact(){
-		return this.contact;
-	}
-	
-	/**
-	 * 
-	 * @param contact
-	 */
-	public void setContact(String contact){
-		this.contact = contact;
-	}
-	
-	/**
 	 * @return the address
 	 */
 	public String getAddress() {
@@ -248,14 +218,14 @@ public class CorporateCompany {
 	/**
 	 * @return the pledged
 	 */
-	public double getPledged() {
+	public Double getPledged() {
 		return pledged;
 	}
 
 	/**
 	 * @param pledged the pledged to set
 	 */
-	public void setPledged(double pledged) {
+	public void setPledged(Double pledged) {
 		this.pledged = pledged;
 	}
 

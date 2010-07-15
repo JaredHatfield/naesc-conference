@@ -18,7 +18,6 @@
 package com.naesc2011.conference.server;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.*;
@@ -46,13 +45,54 @@ public class ProcessCompanyAdd extends HttpServlet {
 		
 		if (user != null) {
 			String name = req.getParameter("name");
-			String contact = req.getParameter("contact");
+			String address = req.getParameter("address");
+			Double pledged = Double.valueOf(req.getParameter("pledged"));
+			String pledgeDate = req.getParameter("pledgeDate");
+			String sector = req.getParameter("sector");
+			String products = req.getParameter("products");
+			Boolean majorMechanical = Boolean.valueOf(req.getParameter("majorMechanical"));
+			Boolean majorCivil = Boolean.valueOf(req.getParameter("majorCivil"));
+			Boolean majorComputer = Boolean.valueOf(req.getParameter("majorComputer"));
+			Boolean majorElectrical = Boolean.valueOf(req.getParameter("majorElectrical"));
+			Boolean majorChemical = Boolean.valueOf(req.getParameter("majorChemical"));
+			Boolean majorBiological = Boolean.valueOf(req.getParameter("majorBiological"));
+			Boolean majorIndustrial = Boolean.valueOf(req.getParameter("majorIndustrial"));
+			Boolean majorAeronautical = Boolean.valueOf(req.getParameter("majorAeronautical"));
+			Boolean majorManagement = Boolean.valueOf(req.getParameter("majorManagement"));
+			Boolean majorMaterials = Boolean.valueOf(req.getParameter("majorMaterials"));
+			String description = req.getParameter("description");
+			String primaryPOCName = req.getParameter("primaryPOCName");
+			String primaryPOCTitle = req.getParameter("primaryPOCTitle");
+			String primaryPOCCellPhone = req.getParameter("primaryPOCCellPhone");
+			String primaryPOCWorkPhone = req.getParameter("primaryPOCWorkPhone");
+			String primaryPOCEmail = req.getParameter("primaryPOCEmail");
 			if (name == null) {
 				Log.info("The required field name was not found");
 			}
 			else{
 				PersistenceManager pm = PMF.get().getPersistenceManager();
-				CorporateCompany cc = new CorporateCompany(name, contact);
+				CorporateCompany cc = new CorporateCompany(name);
+				cc.setAddress(address);
+				cc.setPledged(pledged);
+				cc.setPledgeDate(pledgeDate);
+				cc.setSector(sector);
+				cc.setProducts(products);
+				cc.setMajorMechanical(majorMechanical);
+				cc.setMajorCivil(majorCivil);
+				cc.setMajorComputer(majorComputer);
+				cc.setMajorElectrical(majorElectrical);
+				cc.setMajorChemical(majorChemical);
+				cc.setMajorBiological(majorBiological);
+				cc.setMajorIndustrial(majorIndustrial);
+				cc.setMajorAeronautical(majorAeronautical);
+				cc.setMajorManagement(majorManagement);
+				cc.setMajorMaterials(majorMaterials);
+				cc.setDescription(description);
+				cc.setPrimaryPOCName(primaryPOCName);
+				cc.setPrimaryPOCTitle(primaryPOCTitle);
+				cc.setPrimaryPOCCellPhone(primaryPOCCellPhone);
+				cc.setPrimaryPOCWorkPhone(primaryPOCWorkPhone);
+				cc.setPrimaryPOCEmail(primaryPOCEmail);
 				try {
 					pm.makePersistent(cc);
 		        } finally {
