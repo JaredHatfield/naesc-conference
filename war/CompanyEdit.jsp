@@ -47,9 +47,31 @@
 		
 <%		pm.close(); %>
 
-	<form action="/Process/CompanyEdit" method="post">
+	<form method="post" action="/Process/CompanyEdit">
 		<div>Name: <input type="text" name="name" value="<%= c.getName() %>" /></div>
-		<div>Contact: <input type="text" name="contact" value="<%= c.getContact() %>" /></div>
+		<div>Address: <input type="text" name="address" value="<%= c.getAddress() %>" /></div>
+		<div>Pledged: <input type="text" name="pledged" value="<%= c.getPledged() %>" /></div>
+		<div>Pledge Date: <input type="text" name="pledgeDate" value="<%= c.getPledgeDate() %>" /></div>
+		<div>Sector: <input type="text" name="sector" value="<%= c.getSector() %>" /></div>
+		<div>Products: <input type="text" name="products" value="<%= c.getProducts() %>" /></div>
+		<br />
+		<div>Mechanical: <input type="text" name="majorMechanical" value="<%= c.getMajorMechanical() %>" /></div>
+		<div>Civil: <input type="text" name="majorCivil" value="<%= c.getMajorCivil() %>" /></div>
+		<div>Computer: <input type="text" name="majorComputer" value="<%= c.getMajorComputer() %>" /></div>
+		<div>Electrical: <input type="text" name="majorElectrical" value="<%= c.getMajorElectrical() %>" /></div>
+		<div>Chemical: <input type="text" name="majorChemical" value="<%= c.getMajorChemical() %>" /></div>
+		<div>Biological: <input type="text" name="majorChemical" value="<%= c.getMajorBiological() %>" /></div>
+		<div>Industrial: <input type="text" name="majorIndustrial" value="<%= c.getMajorIndustrial() %>" /></div>
+		<div>Aeronautical: <input type="text" name="majorAeronautical" value="<%= c.getMajorAeronautical() %>" /></div>
+		<div>Management: <input type="text" name="majorManagement" value="<%= c.getMajorManagement() %>" /></div>
+		<div>Materials: <input type="text" name="majorMaterials" value="<%= c.getMajorMaterials() %>" /></div>
+		<br />
+		<div>Description: <input type="text" name="description" value="<%= c.getDescription() %>" /></div>
+		<div>Primary POC Name: <input type="text" name="primaryPOCName" value="<%= c.getPrimaryPOCName() %>" /></div>
+		<div>Primary POC Title: <input type="text" name="primaryPOCTitle" value="<%= c.getPrimaryPOCTitle() %>" /></div>
+		<div>Primary POC CellPhone: <input type="text" name="primaryPOCCellPhone" value="<%= c.getPrimaryPOCCellPhone() %>" /></div>
+		<div>Primary POC WorkPhone: <input type="text" name="primaryPOCWorkPhone" value="<%= c.getPrimaryPOCWorkPhone() %>" /></div>
+		<div>Primary POC Email: <input type="text" name="primaryPOCEmail" value="<%= c.getPrimaryPOCEmail() %>" /></div>
 		<input type="hidden" name="id" value="<%= c.getKey().getId() %>">
 		<div><input type="submit" value="Update" /></div>
 	</form>

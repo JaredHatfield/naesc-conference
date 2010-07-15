@@ -43,7 +43,7 @@
 		for(int i = 0; i < c.size(); i++){
 			CorporateCompany cc =  c.get(i);
 %>
-		<%= (i+1) %>) <%= cc.getName() %> , <%= cc.getContact() %> - <a href="/CompanyEdit.jsp?id=<%= cc.getKey().getId() %>">edit</a>
+		<%= (i+1) %>) <%= cc.getName() %> - <a href="/CompanyEdit.jsp?id=<%= cc.getKey().getId() %>">edit</a>
 		<br />
 <%		}
 		pm.close(); %>

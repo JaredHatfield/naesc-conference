@@ -47,8 +47,28 @@ public class ProcessCompanyEdit extends HttpServlet {
 		
 		if (user != null) {
 			String name = req.getParameter("name");
+			String address = req.getParameter("address");
+			Double pledged = Double.valueOf(req.getParameter("pledged"));
+			String pledgeDate = req.getParameter("pledgeDate");
+			String sector = req.getParameter("sector");
+			String products = req.getParameter("products");
+			Boolean majorMechanical = Boolean.valueOf(req.getParameter("majorMechanical"));
+			Boolean majorCivil = Boolean.valueOf(req.getParameter("majorCivil"));
+			Boolean majorComputer = Boolean.valueOf(req.getParameter("majorComputer"));
+			Boolean majorElectrical = Boolean.valueOf(req.getParameter("majorElectrical"));
+			Boolean majorChemical = Boolean.valueOf(req.getParameter("majorChemical"));
+			Boolean majorBiological = Boolean.valueOf(req.getParameter("majorBiological"));
+			Boolean majorIndustrial = Boolean.valueOf(req.getParameter("majorIndustrial"));
+			Boolean majorAeronautical = Boolean.valueOf(req.getParameter("majorAeronautical"));
+			Boolean majorManagement = Boolean.valueOf(req.getParameter("majorManagement"));
+			Boolean majorMaterials = Boolean.valueOf(req.getParameter("majorMaterials"));
+			String description= req.getParameter("description");
+			String primaryPOCName = req.getParameter("primaryPOCName");
+			String primaryPOCTitle = req.getParameter("primaryPOCTitle");
+			String primaryPOCCellPhone = req.getParameter("primaryPOCCellPhone");
+			String primaryPOCWorkPhone = req.getParameter("primaryPOCWorkPhone");
+			String primaryPOCEmail = req.getParameter("primaryPOCEmail");
 			String id = req.getParameter("id");
-			String contact = req.getParameter("contact");
 			if (name == null || id == null) {
 				Log.info("The required field was not found");
 			}
@@ -56,7 +76,27 @@ public class ProcessCompanyEdit extends HttpServlet {
 				PersistenceManager pm = PMF.get().getPersistenceManager();
 				CorporateCompany c = CorporateCompany.GetCompany(pm, id);
 				c.setName(name);
-				c.setContact(contact);
+				c.setAddress(address);
+				c.setPledged(pledged);
+				c.setPledgeDate(pledgeDate);
+				c.setSector(sector);
+				c.setProducts(products);
+				c.setMajorMechanical(majorMechanical);
+				c.setMajorCivil(majorCivil);
+				c.setMajorComputer(majorComputer);
+				c.setMajorElectrical(majorElectrical);
+				c.setMajorChemical(majorChemical);
+				c.setMajorBiological(majorBiological);
+				c.setMajorIndustrial(majorIndustrial);
+				c.setMajorAeronautical(majorAeronautical);
+				c.setMajorManagement(majorManagement);
+				c.setMajorMaterials(majorMaterials);
+				c.setDescription(description);
+				c.setPrimaryPOCName(primaryPOCName);
+				c.setPrimaryPOCTitle(primaryPOCTitle);
+				c.setPrimaryPOCCellPhone(primaryPOCCellPhone);
+				c.setPrimaryPOCWorkPhone(primaryPOCWorkPhone);
+				c.setPrimaryPOCEmail(primaryPOCEmail);
 				pm.close();
 			}
 		} 
