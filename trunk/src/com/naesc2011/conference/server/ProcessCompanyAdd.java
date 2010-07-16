@@ -50,16 +50,57 @@ public class ProcessCompanyAdd extends HttpServlet {
 			String pledgeDate = req.getParameter("pledgeDate");
 			String sector = req.getParameter("sector");
 			String products = req.getParameter("products");
-			Boolean majorMechanical = Boolean.valueOf(req.getParameter("majorMechanical"));
-			Boolean majorCivil = Boolean.valueOf(req.getParameter("majorCivil"));
-			Boolean majorComputer = Boolean.valueOf(req.getParameter("majorComputer"));
-			Boolean majorElectrical = Boolean.valueOf(req.getParameter("majorElectrical"));
-			Boolean majorChemical = Boolean.valueOf(req.getParameter("majorChemical"));
-			Boolean majorBiological = Boolean.valueOf(req.getParameter("majorBiological"));
-			Boolean majorIndustrial = Boolean.valueOf(req.getParameter("majorIndustrial"));
-			Boolean majorAeronautical = Boolean.valueOf(req.getParameter("majorAeronautical"));
-			Boolean majorManagement = Boolean.valueOf(req.getParameter("majorManagement"));
-			Boolean majorMaterials = Boolean.valueOf(req.getParameter("majorMaterials"));
+
+			Boolean majorMechanical = false;
+			if(req.getParameter("majorMechanical") != null && req.getParameter("majorMechanical").equals("on")){
+				majorMechanical = true;
+			}
+			
+			Boolean majorCivil = false;
+			if(req.getParameter("majorCivil") != null && req.getParameter("majorCivil").equals("on")){
+				majorCivil = true;
+			}
+
+			Boolean majorComputer = false;
+			if(req.getParameter("majorComputer") != null && req.getParameter("majorComputer").equals("on")){
+				majorComputer = true;
+			}
+			
+			Boolean majorElectrical = false;
+			if(req.getParameter("majorElectrical") != null && req.getParameter("majorElectrical").equals("on")){
+				majorElectrical = true;
+			}
+			
+			Boolean majorChemical = false;
+			if(req.getParameter("majorChemical") != null && req.getParameter("majorChemical").equals("on")){
+				majorChemical = true;
+			}
+			
+			Boolean majorBiological = false;
+			if(req.getParameter("majorBiological") != null && req.getParameter("majorBiological").equals("on")){
+				majorBiological = true;
+			}
+			
+			Boolean majorIndustrial = false;
+			if(req.getParameter("majorIndustrial") != null && req.getParameter("majorIndustrial").equals("on")){
+				majorIndustrial = true;
+			}
+			
+			Boolean majorAeronautical = false;
+			if(req.getParameter("majorAeronautical") != null && req.getParameter("majorAeronautical").equals("on")){
+				majorAeronautical = true;
+			}
+			
+			Boolean majorManagement = false;
+			if(req.getParameter("majorManagement") != null && req.getParameter("majorManagement").equals("on")){
+				majorManagement = true;
+			}
+			
+			Boolean majorMaterials = false;
+			if(req.getParameter("majorMaterials") != null && req.getParameter("majorMaterials").equals("on")){
+				majorMaterials = true;
+			}
+			
 			String description = req.getParameter("description");
 			String primaryPOCName = req.getParameter("primaryPOCName");
 			String primaryPOCTitle = req.getParameter("primaryPOCTitle");

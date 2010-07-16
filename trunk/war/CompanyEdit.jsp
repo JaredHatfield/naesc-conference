@@ -55,16 +55,87 @@
 		<div>Sector: <input type="text" name="sector" value="<%= c.getSector() %>" /></div>
 		<div>Products: <input type="text" name="products" value="<%= c.getProducts() %>" /></div>
 		<br />
-		<div>Mechanical: <input type="text" name="majorMechanical" value="<%= c.getMajorMechanical() %>" /></div>
-		<div>Civil: <input type="text" name="majorCivil" value="<%= c.getMajorCivil() %>" /></div>
-		<div>Computer: <input type="text" name="majorComputer" value="<%= c.getMajorComputer() %>" /></div>
-		<div>Electrical: <input type="text" name="majorElectrical" value="<%= c.getMajorElectrical() %>" /></div>
-		<div>Chemical: <input type="text" name="majorChemical" value="<%= c.getMajorChemical() %>" /></div>
-		<div>Biological: <input type="text" name="majorChemical" value="<%= c.getMajorBiological() %>" /></div>
-		<div>Industrial: <input type="text" name="majorIndustrial" value="<%= c.getMajorIndustrial() %>" /></div>
-		<div>Aeronautical: <input type="text" name="majorAeronautical" value="<%= c.getMajorAeronautical() %>" /></div>
-		<div>Management: <input type="text" name="majorManagement" value="<%= c.getMajorManagement() %>" /></div>
-		<div>Materials: <input type="text" name="majorMaterials" value="<%= c.getMajorMaterials() %>" /></div>
+		
+		<% if(c.getMajorMechanical()){ %>
+			<div>Mechanical:  <input type="checkbox" name="majorMechanical" checked="yes" /></div>
+		<% } 
+		   else {
+		%>
+			<div>Mechanical:  <input type="checkbox" name="majorMechanical" /></div>
+		<% } %>
+		
+		<% if(c.getMajorCivil()){ %>
+			<div>Civil:  <input type="checkbox" name="majorCivil" checked="yes" /></div>
+		<% } 
+		   else {
+		%>
+			<div>Civil:  <input type="checkbox" name="majorCivil" /></div>
+		<% } %>
+		
+		<% if(c.getMajorComputer()){ %>
+			<div>Computer:  <input type="checkbox" name="majorComputer" checked="yes" /></div>
+		<% } 
+		   else {
+		%>
+			<div>Computer:  <input type="checkbox" name="majorComputer" /></div>
+		<% } %>
+		
+		<% if(c.getMajorElectrical()){ %>
+			<div>Electrical:  <input type="checkbox" name="majorElectrical" checked="yes" /></div>
+		<% } 
+		   else {
+		%>
+			<div>Electrical:  <input type="checkbox" name="majorElectrical" /></div>
+		<% } %>
+		
+		<% if(c.getMajorChemical()){ %>
+			<div>Chemical:  <input type="checkbox" name="majorChemical" checked="yes" /></div>
+		<% } 
+		   else {
+		%>
+			<div>Chemical:  <input type="checkbox" name="majorChemical" /></div>
+		<% } %>
+		
+		<% if(c.getMajorBiological()){ %>
+			<div>Biological:  <input type="checkbox" name="majorBiological" checked="yes" /></div>
+		<% } 
+		   else {
+		%>
+			<div>Biological:  <input type="checkbox" name="majorBiological" /></div>
+		<% } %>
+		
+		<% if(c.getMajorIndustrial()){ %>
+			<div>Industrial:  <input type="checkbox" name="majorIndustrial" checked="yes" /></div>
+		<% } 
+		   else {
+		%>
+			<div>Industrial:  <input type="checkbox" name="majorIndustrial" /></div>
+		<% } %>
+		
+		<% if(c.getMajorAeronautical()){ %>
+			<div>Aeronautical:  <input type="checkbox" name="majorAeronautical" checked="yes" /></div>
+		<% } 
+		   else {
+		%>
+			<div>Aeronautical:  <input type="checkbox" name="majorAeronautical" /></div>
+		<% } %>
+		
+		<% if(c.getMajorManagement()){ %>
+			<div>Management:  <input type="checkbox" name="majorManagement" checked="yes" /></div>
+		<% } 
+		   else {
+		%>
+			<div>Management:  <input type="checkbox" name="majorManagement" /></div>
+		<% } %>
+		
+		<% if(c.getMajorMaterials()){ %>
+			<div>Materials:  <input type="checkbox" name="majorMaterials" checked="yes" /></div>
+		<% } 
+		   else {
+		%>
+			<div>Materials:  <input type="checkbox" name="majorMaterials" /></div>
+		<% } %>
+		
 		<br />
 		<div>Description: <input type="text" name="description" value="<%= c.getDescription() %>" /></div>
 		<div>Primary POC Name: <input type="text" name="primaryPOCName" value="<%= c.getPrimaryPOCName() %>" /></div>
