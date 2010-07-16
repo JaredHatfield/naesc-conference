@@ -48,103 +48,106 @@
 <%		pm.close(); %>
 
 	<form method="post" action="/Process/CompanyEdit">
-		<div>Name: <input type="text" name="name" value="<%= c.getName() %>" /></div>
-		<div>Address: <input type="text" name="address" value="<%= c.getAddress() %>" /></div>
-		<div>Pledged: <input type="text" name="pledged" value="<%= c.getPledged() %>" /></div>
-		<div>Pledge Date: <input type="text" name="pledgeDate" value="<%= c.getPledgeDate() %>" /></div>
-		<div>Sector: <input type="text" name="sector" value="<%= c.getSector() %>" /></div>
-		<div>Products: <input type="text" name="products" value="<%= c.getProducts() %>" /></div>
-		<br />
+		<fieldset> 
+		<legend>Add Company</legend>
+		<p><label>Name:</label><input type="text" name="name" value="<%= c.getName() %>" /></p>
+		<p><label>Address:</label><input type="text" name="address" value="<%= c.getAddress() %>" /></p>
+		<p><label>Pledged:</label><input type="text" name="pledged" value="<%= c.getPledged() %>" /></p>
+		<p><label>Pledge Date:</label><input type="text" name="pledgeDate" value="<%= c.getPledgeDate() %>" /></p>
+		<p><label>Sector:</label><input type="text" name="sector" value="<%= c.getSector() %>" /></p>
+		<p><label>Products:</label><input type="text" name="products" value="<%= c.getProducts() %>" /></p>
 		
 		<% if(c.getMajorMechanical()){ %>
-			<div>Mechanical:  <input type="checkbox" name="majorMechanical" checked="yes" /></div>
+			<p><label>Mechanical:</label><input type="checkbox" name="majorMechanical" checked="yes" /></p>
 		<% } 
 		   else {
 		%>
-			<div>Mechanical:  <input type="checkbox" name="majorMechanical" /></div>
+			<p><label>Mechanical:</label><input type="checkbox" name="majorMechanical" /></p>
 		<% } %>
 		
 		<% if(c.getMajorCivil()){ %>
-			<div>Civil:  <input type="checkbox" name="majorCivil" checked="yes" /></div>
+			<p><label>Civil:</label><input type="checkbox" name="majorCivil" checked="yes" /></p>
 		<% } 
 		   else {
 		%>
-			<div>Civil:  <input type="checkbox" name="majorCivil" /></div>
+			<p><label>Civil:</label><input type="checkbox" name="majorCivil" /></p>
 		<% } %>
 		
 		<% if(c.getMajorComputer()){ %>
-			<div>Computer:  <input type="checkbox" name="majorComputer" checked="yes" /></div>
+			<p><label>Computer:</label><input type="checkbox" name="majorComputer" checked="yes" /></p>
 		<% } 
 		   else {
 		%>
-			<div>Computer:  <input type="checkbox" name="majorComputer" /></div>
+			<p><label>Computer:</label><input type="checkbox" name="majorComputer" /></p>
 		<% } %>
 		
 		<% if(c.getMajorElectrical()){ %>
-			<div>Electrical:  <input type="checkbox" name="majorElectrical" checked="yes" /></div>
+			<p><label>Electrical:</label><input type="checkbox" name="majorElectrical" checked="yes" /></p>
 		<% } 
 		   else {
 		%>
-			<div>Electrical:  <input type="checkbox" name="majorElectrical" /></div>
+			<p><label>Electrical:</label><input type="checkbox" name="majorElectrical" /></p>
 		<% } %>
 		
 		<% if(c.getMajorChemical()){ %>
-			<div>Chemical:  <input type="checkbox" name="majorChemical" checked="yes" /></div>
+			<p><label>Chemical:</label><input type="checkbox" name="majorChemical" checked="yes" /></p>
 		<% } 
 		   else {
 		%>
-			<div>Chemical:  <input type="checkbox" name="majorChemical" /></div>
+			<p><label>Chemical:</label><input type="checkbox" name="majorChemical" /></p>
 		<% } %>
 		
 		<% if(c.getMajorBiological()){ %>
-			<div>Biological:  <input type="checkbox" name="majorBiological" checked="yes" /></div>
+			<p><label>Biological:</label><input type="checkbox" name="majorBiological" checked="yes" /></p>
 		<% } 
 		   else {
 		%>
-			<div>Biological:  <input type="checkbox" name="majorBiological" /></div>
+			<p><label>Biological:</label><input type="checkbox" name="majorBiological" /></p>
 		<% } %>
 		
 		<% if(c.getMajorIndustrial()){ %>
-			<div>Industrial:  <input type="checkbox" name="majorIndustrial" checked="yes" /></div>
+			<p><label>Industrial:</label><input type="checkbox" name="majorIndustrial" checked="yes" /></p>
 		<% } 
 		   else {
 		%>
-			<div>Industrial:  <input type="checkbox" name="majorIndustrial" /></div>
+			<p><label>Industrial:</label><input type="checkbox" name="majorIndustrial" /></p>
 		<% } %>
 		
 		<% if(c.getMajorAeronautical()){ %>
-			<div>Aeronautical:  <input type="checkbox" name="majorAeronautical" checked="yes" /></div>
+			<p><label>Aeronautical:</label><input type="checkbox" name="majorAeronautical" checked="yes" /></p>
 		<% } 
 		   else {
 		%>
-			<div>Aeronautical:  <input type="checkbox" name="majorAeronautical" /></div>
+			<p><label>Aeronautical:</label><input type="checkbox" name="majorAeronautical" /></p>
 		<% } %>
 		
 		<% if(c.getMajorManagement()){ %>
-			<div>Management:  <input type="checkbox" name="majorManagement" checked="yes" /></div>
+			<p><label>Management:</label><input type="checkbox" name="majorManagement" checked="yes" /></p>
 		<% } 
 		   else {
 		%>
-			<div>Management:  <input type="checkbox" name="majorManagement" /></div>
+			<p><label>Management:</label><input type="checkbox" name="majorManagement" /></p>
 		<% } %>
 		
 		<% if(c.getMajorMaterials()){ %>
-			<div>Materials:  <input type="checkbox" name="majorMaterials" checked="yes" /></div>
+			<p><label>Materials:</label><input type="checkbox" name="majorMaterials" checked="yes" /></p>
 		<% } 
 		   else {
 		%>
-			<div>Materials:  <input type="checkbox" name="majorMaterials" /></div>
+			<p><label>Materials:</label><input type="checkbox" name="majorMaterials" /></p>
 		<% } %>
 		
-		<br />
-		<div>Description: <input type="text" name="description" value="<%= c.getDescription() %>" /></div>
-		<div>Primary POC Name: <input type="text" name="primaryPOCName" value="<%= c.getPrimaryPOCName() %>" /></div>
-		<div>Primary POC Title: <input type="text" name="primaryPOCTitle" value="<%= c.getPrimaryPOCTitle() %>" /></div>
-		<div>Primary POC CellPhone: <input type="text" name="primaryPOCCellPhone" value="<%= c.getPrimaryPOCCellPhone() %>" /></div>
-		<div>Primary POC WorkPhone: <input type="text" name="primaryPOCWorkPhone" value="<%= c.getPrimaryPOCWorkPhone() %>" /></div>
-		<div>Primary POC Email: <input type="text" name="primaryPOCEmail" value="<%= c.getPrimaryPOCEmail() %>" /></div>
+		<p><label>Description:</label><input type="text" name="description" value="<%= c.getDescription() %>" /></p>
+		<p><label>Primary POC Name:</label><input type="text" name="primaryPOCName" value="<%= c.getPrimaryPOCName() %>" /></p>
+		<p><label>Primary POC Title:</label><input type="text" name="primaryPOCTitle" value="<%= c.getPrimaryPOCTitle() %>" /></p>
+		<p><label>Primary POC CellPhone:</label><input type="text" name="primaryPOCCellPhone" value="<%= c.getPrimaryPOCCellPhone() %>" /></p>
+		<p><label>Primary POC WorkPhone:</label><input type="text" name="primaryPOCWorkPhone" value="<%= c.getPrimaryPOCWorkPhone() %>" /></p>
+		<p><label>Primary POC Email:</label><input type="text" name="primaryPOCEmail" value="<%= c.getPrimaryPOCEmail() %>" /></p>
+		<p class="submit">
 		<input type="hidden" name="id" value="<%= c.getKey().getId() %>">
-		<div><input type="submit" value="Update" /></div>
+		<input type="submit" value="Update" />
+		</p>
+		</fieldset>
 	</form>
 
 <%
