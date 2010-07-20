@@ -19,24 +19,45 @@
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ page import="javax.jdo.PersistenceManager" %>
+<%@ page import="java.util.List;" %>
+<%@ page import="com.naesc2011.conference.shared.PMF" %>
 <%@ page import="com.naesc2011.conference.server.*" %>
 <html>
   <body>
-<%
-	PermissionManager p = new PermissionManager();
-    if (p.IsUserLoggedIn()) {
+<%		PersistenceManager pm = PMF.get().getPersistenceManager();
+		List<PermissionUserInstance> allUsers = PermissionManager.GetAllUsers(pm);
 %>
-<p>Hello, <%= p.getUser().getNickname() %>! (You can
-<a href="<%= p.getUserService().createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
-<a href="/CompanyList.jsp">Company List</a>
-<%
-    } else {
+	<h1>Manage Users</h1>
+		<table border=1>
+			<tr>
+				<td>Email</td>
+				<td>Permissions</td>
+			</tr>
+<%		for(int i = 0; i < allUsers.size(); i++){
+			PermissionUserInstance p =  allUsers.get(i);
 %>
-<p>Hello!
-<a href="<%= p.getUserService().createLoginURL(request.getRequestURI()) %>">Sign in</a>
-to include your name with greetings you post.</p>
-<%
-    }
-%>
+			<tr>
+				<td><%= p.getUser().getEmail() %></td>
+				<td>
+					<form method="post" action="/admin/PermissionChange">
+						<select name='permission' onchange='this.form.submit()'>
+						<% for (PermissionUserInstance.Permission perm : PermissionUserInstance.Permission.values()) { %>
+							<% if(perm == p.getUserPermission()) { %>
+								<option selected="selected"><%= perm %></option>
+							<% }
+							   else { %>
+							   	<option><%= perm %></option>
+							<% } %>
+						<% } %>
+						</select>
+						<input type="hidden" name="userid" value="<%= p.getUserId() %>" />
+					</form>
+				</td>
+			</tr>
+		<br />
+<%		} %>
+		</table>
+<%		pm.close(); %>
   </body>
 </html>

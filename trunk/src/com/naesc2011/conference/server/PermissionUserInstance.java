@@ -17,16 +17,13 @@
  */
 package com.naesc2011.conference.server;
 
-import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.users.User;
-import com.naesc2011.conference.shared.CorporateCompany;
 
 @PersistenceCapable
 public class PermissionUserInstance {
@@ -42,6 +39,12 @@ public class PermissionUserInstance {
 	 */
 	@Persistent
 	private String userId;
+	
+	/**
+	 * 
+	 */
+	@Persistent
+	private User user;
 	
 	/**
 	 * 
@@ -65,6 +68,7 @@ public class PermissionUserInstance {
 	 */
 	public PermissionUserInstance(User user, Permission userPermission){
 		this.userId = user.getUserId();
+		this.user = user;
 		this.userPermission = userPermission;
 	}
 	
@@ -88,6 +92,20 @@ public class PermissionUserInstance {
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	/**

@@ -26,6 +26,7 @@ import javax.jdo.Query;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.naesc2011.conference.shared.CorporateCompany;
 import com.naesc2011.conference.shared.PMF;
 
 public class PermissionManager {
@@ -33,6 +34,11 @@ public class PermissionManager {
 	 * 
 	 */
 	private static final Logger log = Logger.getLogger(PermissionManager.class.getName());
+	
+	/**
+	 * 
+	 */
+	UserService userService;
 	
 	/**
 	 * The user instance, if the user was logged in.
@@ -48,7 +54,7 @@ public class PermissionManager {
 	 * 
 	 */
 	public PermissionManager(){
-		UserService userService = UserServiceFactory.getUserService();
+		this.userService = UserServiceFactory.getUserService();
 	    this.currentUser = userService.getCurrentUser();
 
 	    // Get the user permissions from the datastore.
@@ -61,6 +67,7 @@ public class PermissionManager {
 				List<PermissionUserInstance> results = (List<PermissionUserInstance>)query.execute(this.currentUser.getUserId());
 				if(results.size() == 1){
 					this.currentPermissions = results.get(0);
+			        this.currentPermissions.setUser(this.currentUser);
 					log.info("Located the user's permissions." + this.currentPermissions.getUserPermission());
 				}
 				else if(results.size() == 0){
@@ -98,6 +105,22 @@ public class PermissionManager {
 	 * 
 	 * @return
 	 */
+	public User getUser(){
+		return this.currentUser;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public UserService getUserService(){
+		return this.userService;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public PermissionUserInstance.Permission GetPermissionLevel(){
 		if(this.currentPermissions != null){
 			return this.currentPermissions.getUserPermission();
@@ -105,5 +128,38 @@ public class PermissionManager {
 		else{
 			return PermissionUserInstance.Permission.UNAUTHENTICATED;
 		}
+	}
+
+	/**
+	 * 
+	 * @param pm
+	 * @return
+	 */
+	public static List<PermissionUserInstance> GetAllUsers(PersistenceManager pm){
+		String query = "select from " + PermissionUserInstance.class.getName();
+	    return (List<PermissionUserInstance>) pm.newQuery(query).execute();
+	}
+	
+	/**
+	 * 
+	 * @param userId
+	 * @param permission
+	 */
+	public static void SetPermission(String userId, PermissionUserInstance.Permission permission){
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+	    Query query = pm.newQuery(PermissionUserInstance.class);
+	    query.setFilter("userId == userIdParam");
+	    query.declareParameters("String userIdParam");
+		try{
+			List<PermissionUserInstance> results = (List<PermissionUserInstance>)query.execute(userId);
+			if(results.size() == 1){
+				results.get(0).setUserPermission(permission);
+			}
+		}
+		finally {
+	        query.closeAll();
+	    }
+		
+		pm.close();
 	}
 }

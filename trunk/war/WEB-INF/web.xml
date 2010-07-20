@@ -2,35 +2,53 @@
 <!DOCTYPE web-app
     PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
     "http://java.sun.com/dtd/web-app_2_3.dtd">
-
 <web-app>
-  
-  <system-properties>
-    <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
-  </system-properties>
-    
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>processCompanyAdd</servlet-name>
-    <servlet-class>com.naesc2011.conference.server.ProcessCompanyAdd</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>processCompanyAdd</servlet-name>
-    <url-pattern>/Process/CompanyAdd</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>processCompanyEdit</servlet-name>
-    <servlet-class>com.naesc2011.conference.server.ProcessCompanyEdit</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>processCompanyEdit</servlet-name>
-    <url-pattern>/Process/CompanyEdit</url-pattern>
-  </servlet-mapping>
-  
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>home.jsp</welcome-file>
-  </welcome-file-list>
+	<system-properties>
+		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
+	</system-properties>
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>processCompanyAdd</servlet-name>
+		<servlet-class>com.naesc2011.conference.server.ProcessCompanyAdd</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>processCompanyAdd</servlet-name>
+		<url-pattern>/Process/CompanyAdd</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>processCompanyEdit</servlet-name>
+		<servlet-class>com.naesc2011.conference.server.ProcessCompanyEdit</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>processCompanyEdit</servlet-name>
+		<url-pattern>/Process/CompanyEdit</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Admin Servlets -->
+	<servlet>
+		<servlet-name>processPermissionChange</servlet-name>
+		<servlet-class>com.naesc2011.conference.server.admin.ProcessPermissionChange</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>processPermissionChange</servlet-name>
+		<url-pattern>/admin/PermissionChange</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>home.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!--  Security Constraints -->
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/admin/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
 
 </web-app>
