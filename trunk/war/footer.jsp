@@ -15,19 +15,5 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.google.appengine.api.users.User" %>
-<%@ page import="com.google.appengine.api.users.UserService" %>
-<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
-<%@ page import="com.naesc2011.conference.server.*" %>
-<%  PermissionManager p = new PermissionManager(); %>
-<%@ include file="header.jsp" %>
-<%
-    if (p.IsUserLoggedIn()) {
-%>
-
-<a href="/CompanyList.jsp">Company List</a>
-
-
-<% } %>
-<%@ include file="footer.jsp" %>
+  </body>
+</html>
