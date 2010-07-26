@@ -19,15 +19,14 @@
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
-<html>
-  <body>
+<%@ page import="com.naesc2011.conference.server.*" %>
+<%  PermissionManager p = new PermissionManager(); %>
+<%@ include file="header.jsp" %>
 <%
-    UserService userService = UserServiceFactory.getUserService();
-    User user = userService.getCurrentUser();
-    if (user != null) {
+    if (p.IsUserLoggedIn()) {
 %>
-<p>Hello, <%= user.getNickname() %>! (You can
-<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
+
+
 <a href="/CompanyList.jsp">Company List</a>
 <h2>Add A Company</h2>
 	<form action="/Process/CompanyAdd" method="post">
@@ -59,14 +58,7 @@
 		</fieldset>
 	</form>
 
-<%
-    } else {
-%>
-<p>Hello!
-<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-to include your name with greetings you post.</p>
-<%
-    }
-%>
-  </body>
-</html>
+
+
+<% } %>
+<%@ include file="footer.jsp" %>

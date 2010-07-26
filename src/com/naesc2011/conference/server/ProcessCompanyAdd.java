@@ -46,7 +46,15 @@ public class ProcessCompanyAdd extends HttpServlet {
 		if (user != null) {
 			String name = req.getParameter("name");
 			String address = req.getParameter("address");
-			Double pledged = Double.valueOf(req.getParameter("pledged"));
+			
+			Double pledged;
+			try{
+				pledged = Double.valueOf(req.getParameter("pledged"));
+			}
+			catch(Exception ex){
+				pledged = 0.0;
+			}
+			
 			String pledgeDate = req.getParameter("pledgeDate");
 			String sector = req.getParameter("sector");
 			String products = req.getParameter("products");

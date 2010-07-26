@@ -23,8 +23,13 @@
 <%@ page import="java.util.List;" %>
 <%@ page import="com.naesc2011.conference.shared.PMF" %>
 <%@ page import="com.naesc2011.conference.server.*" %>
-<html>
-  <body>
+<%  PermissionManager p = new PermissionManager(); %>
+<%@ include file="../header.jsp" %>
+<%
+    if (p.IsUserLoggedIn()) {
+%>
+
+
 <%		PersistenceManager pm = PMF.get().getPersistenceManager();
 		List<PermissionUserInstance> allUsers = PermissionManager.GetAllUsers(pm);
 %>
@@ -35,15 +40,15 @@
 				<td>Permissions</td>
 			</tr>
 <%		for(int i = 0; i < allUsers.size(); i++){
-			PermissionUserInstance p =  allUsers.get(i);
+			PermissionUserInstance pui =  allUsers.get(i);
 %>
 			<tr>
-				<td><%= p.getUser().getEmail() %></td>
+				<td><%= pui.getUser().getEmail() %></td>
 				<td>
 					<form method="post" action="/admin/PermissionChange">
 						<select name='permission' onchange='this.form.submit()'>
 						<% for (PermissionUserInstance.Permission perm : PermissionUserInstance.Permission.values()) { %>
-							<% if(perm == p.getUserPermission()) { %>
+							<% if(perm == pui.getUserPermission()) { %>
 								<option selected="selected"><%= perm %></option>
 							<% }
 							   else { %>
@@ -51,7 +56,7 @@
 							<% } %>
 						<% } %>
 						</select>
-						<input type="hidden" name="userid" value="<%= p.getUserId() %>" />
+						<input type="hidden" name="userid" value="<%= pui.getUserId() %>" />
 					</form>
 				</td>
 			</tr>
@@ -59,5 +64,7 @@
 <%		} %>
 		</table>
 <%		pm.close(); %>
-  </body>
-</html>
+
+
+<% } %>
+<%@ include file="../footer.jsp" %>

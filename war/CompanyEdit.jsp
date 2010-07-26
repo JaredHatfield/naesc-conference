@@ -22,15 +22,15 @@
 <%@ page import="javax.jdo.PersistenceManager" %>
 <%@ page import="com.naesc2011.conference.shared.CorporateCompany" %>
 <%@ page import="com.naesc2011.conference.shared.PMF" %>
-<html>
-  <body>
+<%@ page import="com.naesc2011.conference.server.*" %>
+
+<%  PermissionManager p = new PermissionManager(); %>
+<%@ include file="header.jsp" %>
 <%
-    UserService userService = UserServiceFactory.getUserService();
-    User user = userService.getCurrentUser();
-    if (user != null) {
+    if (p.IsUserLoggedIn()) {
 %>
-<p>Hello, <%= user.getNickname() %>! (You can
-<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
+
+
 <a href="/CompanyList.jsp">Company List</a>
 <h2>Edit a Company</h2>
 
@@ -150,14 +150,6 @@
 		</fieldset>
 	</form>
 
-<%
-    } else {
-%>
-<p>Hello!
-<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-to include your name with greetings you post.</p>
-<%
-    }
-%>
-  </body>
-</html>
+
+<% } %>
+<%@ include file="footer.jsp" %>
