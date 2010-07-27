@@ -56,7 +56,6 @@ public class ProcessCorrespondenceAdd extends HttpServlet {
 			else{
 				PersistenceManager pm = PMF.get().getPersistenceManager();
 				CorporateCompany c = CorporateCompany.GetCompany(pm, id);
-				c.setName(c.getName() + "a");
 				CorporateCorrespondence cc = new CorporateCorrespondence(outcome, nextSteps, notes);
 				c.getCorrespondence().add(cc);
 		        pm.close();
