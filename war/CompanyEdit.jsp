@@ -140,8 +140,8 @@
 		<p><label>Description:</label><input type="text" name="description" value="<%= c.getDescription() %>" /></p>
 		<p><label>Primary POC Name:</label><input type="text" name="primaryPOCName" value="<%= c.getPrimaryPOCName() %>" /></p>
 		<p><label>Primary POC Title:</label><input type="text" name="primaryPOCTitle" value="<%= c.getPrimaryPOCTitle() %>" /></p>
-		<p><label>Primary POC CellPhone:</label><input type="text" name="primaryPOCCellPhone" value="<%= c.getPrimaryPOCCellPhone() %>" /></p>
-		<p><label>Primary POC WorkPhone:</label><input type="text" name="primaryPOCWorkPhone" value="<%= c.getPrimaryPOCWorkPhone() %>" /></p>
+		<p><label>Primary POC Cell Phone:</label><input type="text" name="primaryPOCCellPhone" value="<%= c.getPrimaryPOCCellPhone() %>" /></p>
+		<p><label>Primary POC Work Phone:</label><input type="text" name="primaryPOCWorkPhone" value="<%= c.getPrimaryPOCWorkPhone() %>" /></p>
 		<p><label>Primary POC Email:</label><input type="text" name="primaryPOCEmail" value="<%= c.getPrimaryPOCEmail() %>" /></p>
 		<p class="submit">
 		<input type="hidden" name="id" value="<%= c.getKey().getId() %>">

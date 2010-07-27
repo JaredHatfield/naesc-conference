@@ -31,19 +31,24 @@
 %>
 
 <h2>List of Companies</h2>
-<%		PersistenceManager pm = PMF.get().getPersistenceManager();
-		List<CorporateCompany> c = CorporateCompany.GetAllCompanies(pm);
+<%	PersistenceManager pm = PMF.get().getPersistenceManager();
+	List<CorporateCompany> c = CorporateCompany.GetAllCompanies(pm);
 %>
-		<a href="/CompanyAdd.jsp">Add a Company</a><br />
-<%
-		for(int i = 0; i < c.size(); i++){
+	<a href="/CompanyAdd.jsp">Add a Company</a><br /><br />
+	<table border=1 cellpadding=4 cellspacing=0>
+<%		for(int i = 0; i < c.size(); i++)
+		{
 			CorporateCompany cc =  c.get(i);
 %>
-		<%= (i+1) %>) <%= cc.getName() %> - <a href="/CompanyEdit.jsp?id=<%= cc.getKey().getId() %>">edit</a>
-		<br />
+			<tr>
+				<td><%= (i+1) %></td>
+				<td><a href="/CompanyDisplay.jsp?id=<%= cc.getKey().getId() %>"><%= cc.getName() %></a></td>
+				<td><a href="/CompanyEdit.jsp?id=<%= cc.getKey().getId() %>">edit</a></td>
+			</tr>
 <%		}
-		pm.close(); %>
-
+		pm.close();
+%>
+	</table>
 
 <% } %>
 <%@ include file="footer.jsp" %>

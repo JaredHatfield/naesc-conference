@@ -26,7 +26,6 @@ import javax.jdo.Query;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.naesc2011.conference.shared.CorporateCompany;
 import com.naesc2011.conference.shared.PMF;
 
 public class PermissionManager {

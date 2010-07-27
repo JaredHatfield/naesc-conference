@@ -24,13 +24,11 @@ import javax.servlet.http.*;
 
 import org.mortbay.log.Log;
 
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import com.naesc2011.conference.shared.CorporateCompany;
 import com.naesc2011.conference.shared.PMF;
 
 public class ProcessCompanyAdd extends HttpServlet {
+	
 	/**
 	 * 
 	 */
@@ -40,10 +38,10 @@ public class ProcessCompanyAdd extends HttpServlet {
 	 * 
 	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
+		PermissionManager p = new PermissionManager();
 		
-		if (user != null) {
+		// TODO: (Security) Check the permission level
+		if (p.IsUserLoggedIn()) {
 			String name = req.getParameter("name");
 			String address = req.getParameter("address");
 			
