@@ -42,9 +42,8 @@
 <%		PersistenceManager pm = PMF.get().getPersistenceManager();
 		CorporateCompany c = CorporateCompany.GetCompany(pm, request.getParameter("id"));
 %>
-		
-<%		pm.close(); %>
-	<br /><br >
+	<br />
+	<h2>Company Information</h2>
 	<table>
 		<tr>
 		<td valign=top>
@@ -158,9 +157,10 @@
 	<br />
 	
 <%	List<CorporateCorrespondence> ccd = c.getCorrespondence(); %>
-	
+	<h2>Correspondences</h2>
 	<table border=1>
 		<tr>
+			<td></td>
 			<td>Outcome</td>
 			<td>Next Steps</td>
 			<td>Notes</td>
@@ -190,5 +190,10 @@
 		<p class="submit"><input type="submit" value="Submit" /></p>
 		</fieldset>
 	</form>
+
+<%  pm.close(); %>
+
 <% } %>
+
+
 <%@ include file="footer.jsp" %>

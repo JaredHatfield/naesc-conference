@@ -176,7 +176,7 @@ public class CorporateCompany {
 	 */
 	@Persistent
 	@Element(dependent = "true")
-	private List<CorporateCorrespondence> correspondence;
+	private List<CorporateCorrespondence> correspondenceList;
 	
 	/**
 	 * 
@@ -184,7 +184,7 @@ public class CorporateCompany {
 	 */
 	public CorporateCompany(String name){
 		this.name = name;
-		this.correspondence = new ArrayList<CorporateCorrespondence>();
+		this.correspondenceList = new ArrayList<CorporateCorrespondence>();
 	}
 	
 	/**
@@ -516,11 +516,11 @@ public class CorporateCompany {
 	 * @return the correspondence
 	 */
 	public List<CorporateCorrespondence> getCorrespondence() {
-		if(this.correspondence == null){
-			this.correspondence = new ArrayList<CorporateCorrespondence>();
+		if(this.correspondenceList == null){
+			this.correspondenceList = new ArrayList<CorporateCorrespondence>();
 		}
 		
-		return correspondence;
+		return correspondenceList;
 	}
 
 	/**
