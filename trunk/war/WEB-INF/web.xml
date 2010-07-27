@@ -26,6 +26,15 @@
 		<url-pattern>/Process/CompanyEdit</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>processCorrespondenceAdd</servlet-name>
+		<servlet-class>com.naesc2011.conference.server.ProcessCorrespondenceAdd</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>processCorrespondenceAdd</servlet-name>
+		<url-pattern>/Process/CorrespondenceAdd</url-pattern>
+	</servlet-mapping>
+	
 	<!-- Admin Servlets -->
 	<servlet>
 		<servlet-name>processPermissionChange</servlet-name>

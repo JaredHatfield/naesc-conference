@@ -17,9 +17,11 @@
  */
 package com.naesc2011.conference.shared;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -171,10 +173,18 @@ public class CorporateCompany {
 	
 	/**
 	 * 
+	 */
+	@Persistent
+	@Element(dependent = "true")
+	private List<CorporateCorrespondence> correspondence;
+	
+	/**
+	 * 
 	 * @param name
 	 */
 	public CorporateCompany(String name){
 		this.name = name;
+		this.correspondence = new ArrayList<CorporateCorrespondence>();
 	}
 	
 	/**
@@ -500,6 +510,17 @@ public class CorporateCompany {
 	 */
 	public void setKey(Key key) {
 		this.key = key;
+	}
+
+	/**
+	 * @return the correspondence
+	 */
+	public List<CorporateCorrespondence> getCorrespondence() {
+		if(this.correspondence == null){
+			this.correspondence = new ArrayList<CorporateCorrespondence>();
+		}
+		
+		return correspondence;
 	}
 
 	/**
