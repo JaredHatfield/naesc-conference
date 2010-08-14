@@ -17,6 +17,7 @@
 		<url-pattern>/Process/CompanyAdd</url-pattern>
 	</servlet-mapping>
 
+
 	<servlet>
 		<servlet-name>processCompanyEdit</servlet-name>
 		<servlet-class>com.naesc2011.conference.server.ProcessCompanyEdit</servlet-class>
@@ -26,6 +27,7 @@
 		<url-pattern>/Process/CompanyEdit</url-pattern>
 	</servlet-mapping>
 	
+    
 	<servlet>
 		<servlet-name>processCorrespondenceAdd</servlet-name>
 		<servlet-class>com.naesc2011.conference.server.ProcessCorrespondenceAdd</servlet-class>
@@ -35,6 +37,27 @@
 		<url-pattern>/Process/CorrespondenceAdd</url-pattern>
 	</servlet-mapping>
 	
+    
+    <servlet>
+        <servlet-name>processConferenceAttendeeEdit</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.ProcessConferenceAttendeeEdit</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>processConferenceAttendeeEdit</servlet-name>
+        <url-pattern>/Process/ConferenceAttendeeEdit</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>processConferenceAttendeeAdd</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.ProcessConferenceAttendeeAdd</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>processConferenceAttendeeAdd</servlet-name>
+        <url-pattern>/Process/ConferenceAttendeeAdd</url-pattern>
+    </servlet-mapping>
+    
+    
 	<!-- Admin Servlets -->
 	<servlet>
 		<servlet-name>processPermissionChange</servlet-name>
@@ -45,11 +68,13 @@
 		<url-pattern>/admin/PermissionChange</url-pattern>
 	</servlet-mapping>
 	
+    
 	<!-- Default page to serve -->
 	<welcome-file-list>
 		<welcome-file>home.jsp</welcome-file>
 	</welcome-file-list>
 	
+    
 	<!--  Security Constraints -->
 	<security-constraint>
 		<web-resource-collection>

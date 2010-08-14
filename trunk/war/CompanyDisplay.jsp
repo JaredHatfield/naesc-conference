@@ -29,9 +29,6 @@
     if (p.IsUserLoggedIn()) {
 %>
 
-<a href="/CompanyList.jsp">Company List</a>
-
-
 <%
 	if(request.getParameter("id") == null){
     	String redirectURL = "/CompanyList.jsp";
