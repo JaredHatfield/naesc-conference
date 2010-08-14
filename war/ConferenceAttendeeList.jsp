@@ -19,12 +19,35 @@
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ page import="javax.jdo.PersistenceManager" %>
+<%@ page import="java.util.List;" %>
+<%@ page import="com.naesc2011.conference.shared.*" %>
 <%@ page import="com.naesc2011.conference.server.*" %>
 <%  PermissionManager p = new PermissionManager(); %>
 <%@ include file="header.jsp" %>
 <%
     if (p.IsUserLoggedIn()) {
 %>
+
+<h2>List of Attendees</h2>
+<%	PersistenceManager pm = PMF.get().getPersistenceManager();
+	List<ConferenceAttendee> a = ConferenceAttendee.GetAllAttendees(pm);
+%>
+	<a href="/ConferenceAttendeeAdd.jsp">Add an Attendee</a><br /><br />
+	<table border=1 cellpadding=4 cellspacing=0>
+<%		for(int i = 0; i < a.size(); i++)
+		{
+			ConferenceAttendee ca =  a.get(i);
+%>
+			<tr>
+				<td><%= (i+1) %></td>
+				<td><%= ca.getLastName() %>, <%= ca.getFirstName() %> <%= ca.getMiddleName() %></td>
+				<td><a href="/ConferenceAttendeeEdit.jsp?id=<%= ca.getKey().getId() %>">edit</a></td>
+			</tr>
+<%		}
+		pm.close();
+%>
+	</table>
 
 <% } %>
 <%@ include file="footer.jsp" %>

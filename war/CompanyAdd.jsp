@@ -26,8 +26,6 @@
     if (p.IsUserLoggedIn()) {
 %>
 
-
-<a href="/CompanyList.jsp">Company List</a>
 <h2>Add A Company</h2>
 	<form action="/Process/CompanyAdd" method="post">
 		<fieldset> 

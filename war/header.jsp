@@ -22,6 +22,9 @@
 %>
 <p>Hello, <%= p.getUser().getNickname() %>! (You can
 <a href="<%= p.getUserService().createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
+
+<a href="/CompanyList.jsp">Company List</a> | <a href="/ConferenceAttendeeList.jsp">Attendee List</a><br />
+
 <%
     } else {
 %>

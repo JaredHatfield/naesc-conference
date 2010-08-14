@@ -30,8 +30,6 @@
     if (p.IsUserLoggedIn()) {
 %>
 
-
-<a href="/CompanyList.jsp">Company List</a>
 <h2>Edit a Company</h2>
 
 <%
@@ -49,7 +47,7 @@
 
 	<form method="post" action="/Process/CompanyEdit">
 		<fieldset> 
-		<legend>Add Company</legend>
+		<legend>Edit Company</legend>
 		<p><label>Name:</label><input type="text" name="name" value="<%= c.getName() %>" /></p>
 		<p><label>Address:</label><input type="text" name="address" value="<%= c.getAddress() %>" /></p>
 		<p><label>Pledged:</label><input type="text" name="pledged" value="<%= c.getPledged() %>" /></p>
