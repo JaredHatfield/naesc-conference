@@ -7,7 +7,57 @@
 		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
 	</system-properties>
 
-	<!-- Servlets -->
+    <servlet>
+        <servlet-name>editattendee</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.EditAttendeeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editaward</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.EditAwardServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editcouncil</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.EditCouncilServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>home</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.HomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>mycouncil</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.MyCouncilServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>register</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>editattendee</servlet-name>
+        <url-pattern>/editattendee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editaward</servlet-name>
+        <url-pattern>/editaward</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editcouncil</servlet-name>
+        <url-pattern>/editcouncil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mycouncil</servlet-name>
+        <url-pattern>/mycouncil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    
+	<!-- Delete these old servlets! -->
+    <!--
 	<servlet>
 		<servlet-name>processCompanyAdd</servlet-name>
 		<servlet-class>com.naesc2011.conference.server.ProcessCompanyAdd</servlet-class>
@@ -56,9 +106,10 @@
         <servlet-name>processConferenceAttendeeAdd</servlet-name>
         <url-pattern>/Process/ConferenceAttendeeAdd</url-pattern>
     </servlet-mapping>
-    
+    -->
     
 	<!-- Admin Servlets -->
+    <!-- 
 	<servlet>
 		<servlet-name>processPermissionChange</servlet-name>
 		<servlet-class>com.naesc2011.conference.server.admin.ProcessPermissionChange</servlet-class>
@@ -67,15 +118,16 @@
 		<servlet-name>processPermissionChange</servlet-name>
 		<url-pattern>/admin/PermissionChange</url-pattern>
 	</servlet-mapping>
-	
+	-->
     
 	<!-- Default page to serve -->
 	<welcome-file-list>
-		<welcome-file>home.jsp</welcome-file>
+		<welcome-file>home</welcome-file>
 	</welcome-file-list>
 	
     
 	<!--  Security Constraints -->
+    <!--
 	<security-constraint>
 		<web-resource-collection>
             <web-resource-name>Administrative Pages</web-resource-name>
@@ -87,5 +139,5 @@
 			<role-name>admin</role-name>
 		</auth-constraint>
 	</security-constraint>
-
+    -->
 </web-app>
