@@ -78,7 +78,10 @@
 	<!--  Security Constraints -->
 	<security-constraint>
 		<web-resource-collection>
+            <web-resource-name>Administrative Pages</web-resource-name>
 			<url-pattern>/admin/*</url-pattern>
+            <http-method>POST</http-method>
+            <http-method>GET</http-method>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>admin</role-name>
