@@ -24,6 +24,7 @@
 <title>NAESC 2011 National Conference: My Council</title>
 </head>
 <body>
+	<%@ include file="header.jsp" %>
 	<h1>My Council</h1>
 </body>
 </html>

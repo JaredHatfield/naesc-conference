@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.PermissionManager;
+
 public class MyCouncilServlet extends HttpServlet {
 
     /**
@@ -38,6 +40,9 @@ public class MyCouncilServlet extends HttpServlet {
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PermissionManager p = new PermissionManager();
+        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
+
         String url = "/naesc/mycouncil.jsp";
         ServletContext context = getServletContext();
         RequestDispatcher dispatcher = context.getRequestDispatcher(url);
