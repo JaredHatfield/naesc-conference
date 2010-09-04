@@ -24,6 +24,7 @@
 <title>NAESC 2011 National Conference: Register</title>
 </head>
 <body>
+	<%@ include file="header.jsp" %>
 	<h1>Register</h1>
 </body>
 </html>

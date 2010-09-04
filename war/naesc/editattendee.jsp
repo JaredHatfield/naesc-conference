@@ -24,6 +24,7 @@
 <title>NAESC 2011 National Conference: Edit Attendee</title>
 </head>
 <body>
+	<%@ include file="header.jsp" %>
 	<h1>Edit Attendee</h1>
 </body>
 </html>
