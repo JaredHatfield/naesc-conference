@@ -38,7 +38,7 @@
 			<% List<Council> councils = (List<Council>)request.getAttribute("councils");
 			   for(int i = 0; i < councils.size(); i++){ %>
 			   	<a href="/mycouncil?id=<%= councils.get(i).getKey().getId() %>">
-			   		<%= councils.get(i).getName() %>
+			   		<b>Manage:</b> <%= councils.get(i).getName() %>
 		   		</a>
 			   	
 			<% } %>
