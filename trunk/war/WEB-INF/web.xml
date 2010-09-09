@@ -35,6 +35,10 @@
         <servlet-name>processregister</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.ProcessRegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processsavecouncil</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.ProcessSaveCouncilServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>editattendee</servlet-name>
         <url-pattern>/editattendee</url-pattern>
@@ -63,70 +67,10 @@
         <servlet-name>processregister</servlet-name>
         <url-pattern>/process/register</url-pattern>
     </servlet-mapping>
-    
-	<!-- Delete these old servlets! -->
-    <!--
-	<servlet>
-		<servlet-name>processCompanyAdd</servlet-name>
-		<servlet-class>com.naesc2011.conference.server.ProcessCompanyAdd</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>processCompanyAdd</servlet-name>
-		<url-pattern>/Process/CompanyAdd</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet>
-		<servlet-name>processCompanyEdit</servlet-name>
-		<servlet-class>com.naesc2011.conference.server.ProcessCompanyEdit</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>processCompanyEdit</servlet-name>
-		<url-pattern>/Process/CompanyEdit</url-pattern>
-	</servlet-mapping>
-	
-    
-	<servlet>
-		<servlet-name>processCorrespondenceAdd</servlet-name>
-		<servlet-class>com.naesc2011.conference.server.ProcessCorrespondenceAdd</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>processCorrespondenceAdd</servlet-name>
-		<url-pattern>/Process/CorrespondenceAdd</url-pattern>
-	</servlet-mapping>
-	
-    
-    <servlet>
-        <servlet-name>processConferenceAttendeeEdit</servlet-name>
-        <servlet-class>com.naesc2011.conference.server.ProcessConferenceAttendeeEdit</servlet-class>
-    </servlet>
     <servlet-mapping>
-        <servlet-name>processConferenceAttendeeEdit</servlet-name>
-        <url-pattern>/Process/ConferenceAttendeeEdit</url-pattern>
+        <servlet-name>processsavecouncil</servlet-name>
+        <url-pattern>/process/savecouncil</url-pattern>
     </servlet-mapping>
-    
-    
-    <servlet>
-        <servlet-name>processConferenceAttendeeAdd</servlet-name>
-        <servlet-class>com.naesc2011.conference.server.ProcessConferenceAttendeeAdd</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>processConferenceAttendeeAdd</servlet-name>
-        <url-pattern>/Process/ConferenceAttendeeAdd</url-pattern>
-    </servlet-mapping>
-    -->
-    
-	<!-- Admin Servlets -->
-    <!-- 
-	<servlet>
-		<servlet-name>processPermissionChange</servlet-name>
-		<servlet-class>com.naesc2011.conference.server.admin.ProcessPermissionChange</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>processPermissionChange</servlet-name>
-		<url-pattern>/admin/PermissionChange</url-pattern>
-	</servlet-mapping>
-	-->
     
 	<!-- Default page to serve -->
 	<welcome-file-list>

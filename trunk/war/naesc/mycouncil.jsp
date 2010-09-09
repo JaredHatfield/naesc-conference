@@ -28,6 +28,7 @@
 	<%@ include file="header.jsp" %>
 	<h1>My Council</h1>
 	<% Council council = (Council)request.getAttribute("council"); %>
+	<a href="/editcouncil?id=<%= council.getKey().getId() %>">Edit</a><br />
 	Name: <%= council.getName() %><br />
 	University: <%= council.getUniversity() %><br />
 	Location: <%= council.getLocation() %><br />
