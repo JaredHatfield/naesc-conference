@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  --%>
 <h1>NAESC 2011 National Conference Registration</h1>
+<a href="/">Home</a><br />
 <% if((Boolean)request.getAttribute("authenticated")){ %>
 	Hello, <%= request.getAttribute("username") %>.
 	<a href="<%= request.getAttribute("logouturl") %>">Logout</a>

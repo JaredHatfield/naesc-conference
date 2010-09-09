@@ -65,11 +65,14 @@ public class PermissionManager {
             query.setFilter("userId == userIdParam");
             query.declareParameters("String userIdParam");
             try {
+                @SuppressWarnings("unchecked")
                 List<PermissionUserInstance> results = (List<PermissionUserInstance>) query
                         .execute(this.currentUser.getUserId());
                 if (results.size() == 1) {
                     this.currentPermissions = results.get(0);
                     this.currentPermissions.setUser(this.currentUser);
+                    this.currentPermissions.setEmail(this.currentUser
+                            .getEmail());
                     log.info("Located the user's permissions."
                             + this.currentPermissions.getUserPermission());
                 } else if (results.size() == 0) {
@@ -137,6 +140,7 @@ public class PermissionManager {
      * @param pm
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static List<PermissionUserInstance> GetAllUsers(PersistenceManager pm) {
         String query = "select from " + PermissionUserInstance.class.getName();
         return (List<PermissionUserInstance>) pm.newQuery(query).execute();
@@ -147,6 +151,7 @@ public class PermissionManager {
      * @param userId
      * @param permission
      */
+    @SuppressWarnings("unchecked")
     public static void SetPermission(String userId,
             PermissionUserInstance.Permission permission) {
         PersistenceManager pm = PMF.get().getPersistenceManager();
