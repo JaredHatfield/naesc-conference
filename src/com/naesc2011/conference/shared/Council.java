@@ -164,7 +164,7 @@ public class Council {
      * @param pm
      * @param company
      */
-    public static void InserCouncil(PersistenceManager pm, Council council) {
+    public static void InsertCouncil(PersistenceManager pm, Council council) {
         pm.makePersistent(council);
     }
 
@@ -188,6 +188,17 @@ public class Council {
     public static Council GetCouncil(PersistenceManager pm, String id) {
         int i = Integer.parseInt(id);
         Key key = KeyFactory.createKey(Council.class.getSimpleName(), i);
+        Council c = pm.getObjectById(Council.class, key);
+        return c;
+    }
+
+    /**
+     * 
+     * @param pm
+     * @param key
+     * @return
+     */
+    public static Council GetCouncil(PersistenceManager pm, Key key) {
         Council c = pm.getObjectById(Council.class, key);
         return c;
     }

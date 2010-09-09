@@ -18,7 +18,10 @@
 package com.naesc2011.conference.server.naesc;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -27,6 +30,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.Council;
+import com.naesc2011.conference.shared.CouncilPermission;
+import com.naesc2011.conference.shared.PMF;
 
 public class HomeServlet extends HttpServlet {
 
@@ -43,6 +49,28 @@ public class HomeServlet extends HttpServlet {
         PermissionManager p = new PermissionManager();
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
 
+        if (authenticated) {
+            // We are authenticated, determine if the user is a council admin
+            PersistenceManager pm = PMF.get().getPersistenceManager();
+            List<CouncilPermission> councils = CouncilPermission.GetPermission(
+                    pm, p.getUser().getUserId());
+
+            if (councils.size() == 0) {
+                // The user has no permissions to existing councils
+                request.setAttribute("nocouncil", true);
+            } else {
+                // The user has access to an existing council
+                request.setAttribute("nocouncil", false);
+
+                List<Council> c = new ArrayList<Council>();
+                for (int i = 0; i < councils.size(); i++) {
+                    c.add(Council.GetCouncil(pm, councils.get(i).getCouncil()));
+                }
+
+                request.setAttribute("councils", c);
+            }
+            pm.close();
+        }
         String url = "/naesc/home.jsp";
         ServletContext context = getServletContext();
         RequestDispatcher dispatcher = context.getRequestDispatcher(url);

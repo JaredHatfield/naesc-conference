@@ -15,72 +15,62 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.naesc2011.conference.server;
+package com.naesc2011.conference.shared;
 
+import java.util.List;
+
+import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.users.User;
 
 @PersistenceCapable
-public class PermissionUserInstance {
+public class CouncilPermission {
     /**
-	 * 
-	 */
+     * 
+     */
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
 
     /**
-	 * 
-	 */
+     * 
+     */
     @Persistent
     private String userId;
 
     /**
-	 * 
-	 */
+     * 
+     */
     @Persistent
-    private User user;
-
-    /**
-	 * 
-	 */
-    @Persistent
-    private String email;
-
-    /**
-	 * 
-	 */
-    @Persistent
-    private Permission userPermission;
-
-    /**
-	 * 
-	 */
-    public enum Permission {
-        UNAUTHENTICATED, AUTHENTICATED, USER, MANAGER, ADMIN
-    }
-
-    /**
-	 * 
-	 */
-    public PermissionUserInstance(User user, Permission userPermission) {
-        this.userId = user.getUserId();
-        this.email = user.getEmail();
-        this.user = user;
-        this.userPermission = userPermission;
-    }
+    private Key council;
 
     /**
      * 
-     * @return
+     * @param userId
+     * @param council
+     */
+    public CouncilPermission(String userId, Key council) {
+        this.userId = userId;
+        this.council = council;
+    }
+
+    /**
+     * @return the key
      */
     public Key getKey() {
-        return this.key;
+        return key;
+    }
+
+    /**
+     * @param key
+     *            the key to set
+     */
+    public void setKey(Key key) {
+        this.key = key;
     }
 
     /**
@@ -99,47 +89,41 @@ public class PermissionUserInstance {
     }
 
     /**
-     * @return the user
+     * @return the council
      */
-    public User getUser() {
-        return user;
+    public Key getCouncil() {
+        return council;
     }
 
     /**
-     * @param user
-     *            the user to set
+     * @param council
+     *            the council to set
      */
-    public void setUser(User user) {
-        this.user = user;
+    public void setCouncil(Key council) {
+        this.council = council;
     }
 
     /**
-     * @return the email
+     * 
+     * @param pm
+     * @param company
      */
-    public String getEmail() {
-        return email;
+    public static void InserCouncilPermission(PersistenceManager pm,
+            CouncilPermission cp) {
+        pm.makePersistent(cp);
     }
 
     /**
-     * @param email
-     *            the email to set
+     * 
+     * @param pm
+     * @return
      */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the userPermission
-     */
-    public Permission getUserPermission() {
-        return userPermission;
-    }
-
-    /**
-     * @param userPermission
-     *            the userPermission to set
-     */
-    public void setUserPermission(Permission userPermission) {
-        this.userPermission = userPermission;
+    @SuppressWarnings("unchecked")
+    public static List<CouncilPermission> GetPermission(PersistenceManager pm,
+            String userId) {
+        javax.jdo.Query query = pm.newQuery(CouncilPermission.class);
+        query.setFilter("userId == userIdParam");
+        query.declareParameters("String userIdParam");
+        return (List<CouncilPermission>) query.execute(userId);
     }
 }

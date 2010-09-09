@@ -31,6 +31,10 @@
         <servlet-name>register</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processregister</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.ProcessRegisterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>editattendee</servlet-name>
         <url-pattern>/editattendee</url-pattern>
@@ -54,6 +58,10 @@
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processregister</servlet-name>
+        <url-pattern>/process/register</url-pattern>
     </servlet-mapping>
     
 	<!-- Delete these old servlets! -->
