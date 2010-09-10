@@ -71,6 +71,7 @@ public class HomeServlet extends HttpServlet {
             }
             pm.close();
         }
+
         String url = "/naesc/home.jsp";
         ServletContext context = getServletContext();
         RequestDispatcher dispatcher = context.getRequestDispatcher(url);

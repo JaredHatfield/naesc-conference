@@ -149,17 +149,6 @@ public class Council {
     }
 
     /**
-     * @return the correspondence
-     */
-    public List<ConferenceAttendee> GetAttendees() {
-        if (this.attendees == null) {
-            this.attendees = new ArrayList<ConferenceAttendee>();
-        }
-
-        return this.attendees;
-    }
-
-    /**
      * 
      * @param pm
      * @param company

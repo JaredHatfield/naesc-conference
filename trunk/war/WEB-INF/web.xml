@@ -12,6 +12,10 @@
         <servlet-class>com.naesc2011.conference.server.naesc.EditAttendeeServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>addattendee</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.AddAttendeeServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>editaward</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.EditAwardServlet</servlet-class>
     </servlet>
@@ -39,9 +43,17 @@
         <servlet-name>processsavecouncil</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.ProcessSaveCouncilServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processaddattendee</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.ProcessAddAttendeeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>editattendee</servlet-name>
         <url-pattern>/editattendee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addattendee</servlet-name>
+        <url-pattern>/addattendee</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>editaward</servlet-name>
@@ -70,6 +82,10 @@
     <servlet-mapping>
         <servlet-name>processsavecouncil</servlet-name>
         <url-pattern>/process/savecouncil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processaddattendee</servlet-name>
+        <url-pattern>/process/addattendee</url-pattern>
     </servlet-mapping>
     
 	<!-- Default page to serve -->

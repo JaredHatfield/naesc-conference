@@ -29,12 +29,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
 
-public class ProcessSaveCouncilServlet extends HttpServlet {
-
+public class ProcessAddAttendeeServlet extends HttpServlet {
     /**
      * 
      */
@@ -49,7 +49,7 @@ public class ProcessSaveCouncilServlet extends HttpServlet {
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
 
         if (authenticated) {
-            String pid = request.getParameter("id");
+            String pid = request.getParameter("councilid");
             if (pid != null) {
                 long id = Long.parseLong(pid);
                 PersistenceManager pm = PMF.get().getPersistenceManager();
@@ -66,11 +66,28 @@ public class ProcessSaveCouncilServlet extends HttpServlet {
 
                 if (haspermission) {
                     Council council = Council.GetCouncil(pm, pid);
-                    council.setName(request.getParameter("name"));
-                    council.setUniversity(request.getParameter("university"));
-                    council.setLocation(request.getParameter("location"));
+                    ConferenceAttendee ca = new ConferenceAttendee();
 
-                    pm.close();
+                    // Set all of the parameters that were passed in
+                    ca.setFirstName(request.getParameter("firstName"));
+                    ca.setMiddleName(request.getParameter("middleName"));
+                    ca.setLastName(request.getParameter("lastName"));
+                    ca.setMajor(request.getParameter("major"));
+                    ca.setEmail(request.getParameter("email"));
+                    ca.setGender(ConferenceAttendee.Gender.valueOf(request
+                            .getParameter("gender")));
+                    ca.setShirtSize(ConferenceAttendee.ShirtSize
+                            .valueOf(request.getParameter("shirtSize")));
+                    ca.setEmergencyContactName(request.getParameter("ecName"));
+                    ca.setEmergencyContactPhone(request.getParameter("ecPhone"));
+
+                    // Make the object persistent
+                    try {
+                        council.getAttendees().add(ca);
+                        pm.makePersistent(ca);
+                    } finally {
+                        pm.close();
+                    }
 
                     request.setAttribute("redirecturl", "/mycouncil?id=" + pid);
                     String url = "/naesc/redirect.jsp";
