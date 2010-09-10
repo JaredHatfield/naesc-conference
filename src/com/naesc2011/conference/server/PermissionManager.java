@@ -185,7 +185,7 @@ public class PermissionManager {
             request.setAttribute("authenticated", true);
             request.setAttribute("username", p.getUser().getNickname());
             request.setAttribute("logouturl", p.getUserService()
-                    .createLogoutURL(request.getRequestURI()));
+                    .createLogoutURL("/home"));
             return true;
         } else {
             // The user is NOT logged in

@@ -28,7 +28,8 @@
 	<%@ include file="header.jsp" %>
 	<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
 	<h1>Edit Attendee</h1>
-		<form method="post" action="/Process/ConferenceAttendeeEdit">
+		<a href="/mycouncil?id=<%= request.getAttribute("id") %>">Back</a>
+		<form method="post" action="/process/saveattendee">
 		<fieldset> 
 		<legend>Edit Attendee</legend>
 		<p><label>First Name:</label><input type="text" name="firstName" value="<%= a.getFirstName() %>" /></p>
@@ -57,7 +58,8 @@
 		<p><label>Emergency Contact Phone:</label><input type="text" name="ecPhone" value="<%= a.getEmergencyContactPhone() %>" /></p>
 		
 		<p class="submit">
-		<input type="hidden" name="id" value="<%= a.getKey().getId() %>">
+		<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
+		<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
 		<input type="submit" value="Update" />
 		</p>
 		</fieldset>
