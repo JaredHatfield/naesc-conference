@@ -43,9 +43,13 @@ public class RegisterServlet extends HttpServlet {
         PermissionManager p = new PermissionManager();
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
 
-        String url = "/naesc/register.jsp";
-        ServletContext context = getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+        if (authenticated) {
+            String url = "/naesc/register.jsp";
+            ServletContext context = getServletContext();
+            RequestDispatcher dispatcher = context.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        } else {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        }
     }
 }

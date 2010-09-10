@@ -71,12 +71,14 @@ public class ProcessRegisterServlet extends HttpServlet {
                     }
                 }
             }
-        }
 
-        request.setAttribute("redirecturl", "/home");
-        String url = "/naesc/redirect.jsp";
-        ServletContext context = getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+            request.setAttribute("redirecturl", "/home");
+            String url = "/naesc/redirect.jsp";
+            ServletContext context = getServletContext();
+            RequestDispatcher dispatcher = context.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        } else {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        }
     }
 }

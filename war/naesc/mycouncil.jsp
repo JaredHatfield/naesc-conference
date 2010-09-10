@@ -27,10 +27,23 @@
 <body>
 	<%@ include file="header.jsp" %>
 	<h1>My Council</h1>
+	<h2>Information</h2>
 	<% Council council = (Council)request.getAttribute("council"); %>
 	<a href="/editcouncil?id=<%= council.getKey().getId() %>">Edit</a><br />
 	Name: <%= council.getName() %><br />
 	University: <%= council.getUniversity() %><br />
 	Location: <%= council.getLocation() %><br />
+	
+	<h2>Award Applications</h2>
+	
+	<h2>Attending Members</h2>
+	<a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a><br />
+	<% if(council.getAttendees() != null && council.getAttendees().size() > 0) { %>
+		<% for(int i = 0; i < council.getAttendees().size(); i++) { %>
+			<%= i %>) <%= council.getAttendees().get(i).getFirstName() %>
+		<% } %>
+	<% } else { %>
+		No members.
+	<% } %>
 </body>
 </html>

@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
 
-public class EditAwardServlet extends HttpServlet {
+public class AddAttendeeServlet extends HttpServlet {
 
     /**
      * 
@@ -44,7 +44,9 @@ public class EditAwardServlet extends HttpServlet {
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
 
         if (authenticated) {
-            String url = "/naesc/editaward.jsp";
+            String pid = request.getParameter("id");
+            request.setAttribute("councilid", pid);
+            String url = "/naesc/addattendee.jsp";
             ServletContext context = getServletContext();
             RequestDispatcher dispatcher = context.getRequestDispatcher(url);
             dispatcher.forward(request, response);

@@ -67,13 +67,19 @@ public class EditCouncilServlet extends HttpServlet {
                 if (haspermission) {
                     Council council = Council.GetCouncil(pm, pid);
                     request.setAttribute("council", council);
+                    String url = "/naesc/editcouncil.jsp";
+                    ServletContext context = getServletContext();
+                    RequestDispatcher dispatcher = context
+                            .getRequestDispatcher(url);
+                    dispatcher.forward(request, response);
+                } else {
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 }
+            } else {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
             }
+        } else {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
-
-        String url = "/naesc/editcouncil.jsp";
-        ServletContext context = getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher(url);
-        dispatcher.forward(request, response);
     }
 }
