@@ -47,6 +47,10 @@
         <servlet-name>processaddattendee</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.ProcessAddAttendeeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processsaveattendee</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.ProcessSaveAttendeeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>editattendee</servlet-name>
         <url-pattern>/editattendee</url-pattern>
@@ -86,6 +90,10 @@
     <servlet-mapping>
         <servlet-name>processaddattendee</servlet-name>
         <url-pattern>/process/addattendee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processsaveattendee</servlet-name>
+        <url-pattern>/process/saveattendee</url-pattern>
     </servlet-mapping>
     
 	<!-- Default page to serve -->

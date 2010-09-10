@@ -39,9 +39,14 @@
 	<h2>Attending Members</h2>
 	<a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a><br />
 	<% if(council.getAttendees() != null && council.getAttendees().size() > 0) { %>
+		<table>
 		<% for(int i = 0; i < council.getAttendees().size(); i++) { %>
-			<%= i %>) <%= council.getAttendees().get(i).getFirstName() %>
+			<tr>
+				<td><%= i %></td>
+				<td><%= council.getAttendees().get(i).getFirstName() %> <%= council.getAttendees().get(i).getLastName() %></td>
+				<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= council.getAttendees().get(i).getKey().getId() %>">Edit</a></td>
 		<% } %>
+		</table>
 	<% } else { %>
 		No members.
 	<% } %>
