@@ -98,6 +98,12 @@ public class ProcessSaveAttendeeServlet extends HttpServlet {
                                     .getParameter("ecName"));
                             ca.setEmergencyContactPhone(request
                                     .getParameter("ecPhone"));
+                            ca.setArrivalInformation(request
+                            		.getParameter("arrivalInformation"));
+                            ca.setVegetarian(request
+                            		.getParameter("vegetarian") != null);
+                            ca.setAllergies(request
+                            		.getParameter("allergies"));
 
                             pm.close();
 

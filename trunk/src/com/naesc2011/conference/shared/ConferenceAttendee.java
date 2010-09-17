@@ -90,6 +90,24 @@ public class ConferenceAttendee {
      */
     @Persistent
     private String emergencyContactPhone;
+    
+    /**
+     * The arrival information.
+     */
+    @Persistent
+    private String arrivalInformation;
+    
+    /**
+     * The vegetarian option.
+     */
+    @Persistent
+    private boolean vegetarian;
+    
+    /**
+     * The list of allergies.
+     */
+    @Persistent
+    private String allergies;
 
     /**
      * The valid options for gender.
@@ -260,7 +278,52 @@ public class ConferenceAttendee {
     public void setEmergencyContactPhone(String emergencyContactPhone) {
         this.emergencyContactPhone = emergencyContactPhone;
     }
-
+    
+    /**
+     * @return the arrivalInformation
+     */
+    public String getArrivalInformation() {
+    	return arrivalInformation;
+    }
+    
+    /**
+     * @param arrivalInformation
+     * 			the arrivalInformation to set
+     */
+    public void setArrivalInformation(String arrivalInformation) {
+    	this.arrivalInformation = arrivalInformation;
+    }
+    
+    /**
+     * @return the vegetarian option
+     */
+    public boolean getVegetarian() {
+    	return vegetarian;
+    }
+    
+    /**
+     * @param vegetarian
+     * 			the vegetarian to set
+     */
+    public void setVegetarian(boolean vegetarian) {
+    	this.vegetarian = vegetarian;
+    }
+    
+    /**
+     * @return the allergies
+     */
+    public String getAllergies() {
+    	return allergies;
+    }
+    
+    /**
+     * @param allergies
+     * 			the allergies to set
+     */
+    public void setAllergies(String allergies) {
+    	this.allergies = allergies;
+    }
+    
     /**
      * 
      * @param pm

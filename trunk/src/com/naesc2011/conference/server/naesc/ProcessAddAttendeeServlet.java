@@ -80,7 +80,10 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
                             .valueOf(request.getParameter("shirtSize")));
                     ca.setEmergencyContactName(request.getParameter("ecName"));
                     ca.setEmergencyContactPhone(request.getParameter("ecPhone"));
-
+                    ca.setArrivalInformation(request.getParameter("arrivalInformation"));
+                    ca.setVegetarian(request.getParameter("vegetarian") != null);
+                    ca.setAllergies(request.getParameter("allergies"));
+                    
                     // Make the object persistent
                     try {
                         council.getAttendees().add(ca);

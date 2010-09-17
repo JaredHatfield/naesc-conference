@@ -56,6 +56,16 @@
 		
 		<p><label>Emergency Contact Name:</label><input type="text" name="ecName" value="<%= a.getEmergencyContactName() %>" /></p>
 		<p><label>Emergency Contact Phone:</label><input type="text" name="ecPhone" value="<%= a.getEmergencyContactPhone() %>" /></p>
+		<p><label>Arrival Information:</label><input type="text" name="arrivalInformation" value="<%= a.getArrivalInformation() %>" /></p>
+		<p>
+			<label>Vegetarian:</label>
+				<% if(a.getVegetarian()) { %>
+					<input type="checkbox" name="vegetarian" checked="checked" />
+				<% } else { %>
+					<input type="checkbox" name="vegetarian" />
+				<% } %>
+		</p>
+		<p><label>Allergies:</label><input type="text" name="allergies" value="<%= a.getAllergies() %>" /></p>
 		
 		<p class="submit">
 		<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />

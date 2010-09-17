@@ -55,6 +55,10 @@
 		
 		<p><label>Emergency Contact Name:</label><input type="text" name="ecName" /></p>
 		<p><label>Emergency Contact Phone:</label><input type="text" name="ecPhone" /></p>
+		<p><label>Arrival Information:</label><input type="text" name="arrivalInformation" /></p>
+		<p><label>Vegetarian:</label><input type="checkbox" name="vegetarian" /></p>
+		<p><label>Allergies:</label><input type="text" name="allergies" /></p>
+		
 		<input type="hidden" name="councilid" value="<%= request.getAttribute("councilid") %>">
 		<p class="submit">
 		<input type="hidden" name="id">
