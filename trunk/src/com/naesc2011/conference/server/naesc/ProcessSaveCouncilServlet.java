@@ -69,6 +69,7 @@ public class ProcessSaveCouncilServlet extends HttpServlet {
                     council.setName(request.getParameter("name"));
                     council.setUniversity(request.getParameter("university"));
                     council.setLocation(request.getParameter("location"));
+                    council.setWebsite(request.getParameter("website"));
 
                     pm.close();
 

@@ -63,6 +63,12 @@ public class Council {
     @Persistent
     @Element(dependent = "true")
     private List<ConferenceAttendee> attendees;
+    
+    /**
+     * 
+     */
+    @Persistent
+    private String website;
 
     /**
      * 
@@ -146,6 +152,21 @@ public class Council {
      */
     public void setAttendees(List<ConferenceAttendee> attendees) {
         this.attendees = attendees;
+    }
+    
+    /**
+     * @return the website
+     */
+    public String getWebsite() {
+    	return website;
+    }
+    
+    /**
+     * @param website
+     * 			the website to set
+     */
+    public void setWebsite(String website) {
+    	this.website = website;
     }
 
     /**
