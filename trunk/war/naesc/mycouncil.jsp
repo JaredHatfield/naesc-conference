@@ -18,6 +18,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.naesc2011.conference.shared.Council" %>
+<%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -43,8 +44,17 @@
 		<table>
 		<% for(int i = 0; i < council.getAttendees().size(); i++) { %>
 			<tr>
+				<% ConferenceAttendee att = council.getAttendees().get(i); %>
 				<td><%= i %></td>
-				<td><%= council.getAttendees().get(i).getFirstName() %> <%= council.getAttendees().get(i).getLastName() %></td>
+				<td><%= att.getFirstName() %> <%= council.getAttendees().get(i).getLastName() %></td>
+				<td>
+					<% if(att.getVoteStatus() == null) { %>
+					<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.VOTING)) { %>
+						Voting Delegate
+					<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.ALTERNATE)) { %>
+						Alternate Delegate
+					<% } %>
+				</td>
 				<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= council.getAttendees().get(i).getKey().getId() %>">Edit</a></td>
 		<% } %>
 		</table>
