@@ -90,24 +90,36 @@ public class ConferenceAttendee {
      */
     @Persistent
     private String emergencyContactPhone;
-    
+
     /**
      * The arrival information.
      */
     @Persistent
     private String arrivalInformation;
-    
+
     /**
      * The vegetarian option.
      */
     @Persistent
     private boolean vegetarian;
-    
+
     /**
      * The list of allergies.
      */
     @Persistent
     private String allergies;
+
+    /**
+     * The attendee's voting status.
+     */
+    private VoteStatus voteStatus;
+
+    /**
+     *
+     */
+    public enum VoteStatus {
+        NONE, VOTING, ALTERNATE
+    }
 
     /**
      * The valid options for gender.
@@ -187,6 +199,13 @@ public class ConferenceAttendee {
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    /**
+     * 
+     */
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
     }
 
     /**
@@ -278,52 +297,67 @@ public class ConferenceAttendee {
     public void setEmergencyContactPhone(String emergencyContactPhone) {
         this.emergencyContactPhone = emergencyContactPhone;
     }
-    
+
     /**
      * @return the arrivalInformation
      */
     public String getArrivalInformation() {
-    	return arrivalInformation;
+        return arrivalInformation;
     }
-    
+
     /**
      * @param arrivalInformation
-     * 			the arrivalInformation to set
+     *            the arrivalInformation to set
      */
     public void setArrivalInformation(String arrivalInformation) {
-    	this.arrivalInformation = arrivalInformation;
+        this.arrivalInformation = arrivalInformation;
     }
-    
+
     /**
      * @return the vegetarian option
      */
     public boolean getVegetarian() {
-    	return vegetarian;
+        return vegetarian;
     }
-    
+
     /**
      * @param vegetarian
-     * 			the vegetarian to set
+     *            the vegetarian to set
      */
     public void setVegetarian(boolean vegetarian) {
-    	this.vegetarian = vegetarian;
+        this.vegetarian = vegetarian;
     }
-    
+
     /**
      * @return the allergies
      */
     public String getAllergies() {
-    	return allergies;
+        return allergies;
     }
-    
+
     /**
      * @param allergies
-     * 			the allergies to set
+     *            the allergies to set
      */
     public void setAllergies(String allergies) {
-    	this.allergies = allergies;
+        this.allergies = allergies;
     }
-    
+
+    /**
+     * @return the voteStatus
+     */
+    public VoteStatus getVoteStatus() {
+        return voteStatus;
+    }
+
+    /**
+     * @param voteStatus
+     *            the voteStatus to set
+     */
+    public void setVoteStatus(VoteStatus voteStatus) {
+        this.voteStatus = voteStatus;
+    }
+
     /**
      * 
      * @param pm
