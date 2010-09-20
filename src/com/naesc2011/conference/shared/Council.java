@@ -29,6 +29,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.naesc2011.conference.shared.ConferenceAttendee.VoteStatus;
 
 @PersistenceCapable
 public class Council {
@@ -63,7 +64,7 @@ public class Council {
     @Persistent
     @Element(dependent = "true")
     private List<ConferenceAttendee> attendees;
-    
+
     /**
      * 
      */
@@ -77,6 +78,40 @@ public class Council {
     public Council(String name) {
         this.name = name;
         this.attendees = new ArrayList<ConferenceAttendee>();
+    }
+
+    /**
+     * 
+     * @param id
+     */
+    public void SetVotingDelegate(String id) {
+        for (int i = 0; i < this.attendees.size(); i++) {
+            ConferenceAttendee att = this.attendees.get(i);
+            if ((att.getKey().getId() + "").equals(id)) {
+                att.setVoteStatus(VoteStatus.VOTING);
+            } else if (att.getVoteStatus() == null) {
+                att.setVoteStatus(VoteStatus.NONE);
+            } else if (att.getVoteStatus().equals(VoteStatus.VOTING)) {
+                att.setVoteStatus(VoteStatus.NONE);
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param id
+     */
+    public void SetAlternateDeleaget(String id) {
+        for (int i = 0; i < this.attendees.size(); i++) {
+            ConferenceAttendee att = this.attendees.get(i);
+            if ((att.getKey().getId() + "").equals(id)) {
+                att.setVoteStatus(VoteStatus.ALTERNATE);
+            } else if (att.getVoteStatus().equals(VoteStatus.ALTERNATE)) {
+                att.setVoteStatus(VoteStatus.NONE);
+            } else if (att.getVoteStatus() == null) {
+                att.setVoteStatus(VoteStatus.NONE);
+            }
+        }
     }
 
     /**
@@ -153,20 +188,20 @@ public class Council {
     public void setAttendees(List<ConferenceAttendee> attendees) {
         this.attendees = attendees;
     }
-    
+
     /**
      * @return the website
      */
     public String getWebsite() {
-    	return website;
+        return website;
     }
-    
+
     /**
      * @param website
-     * 			the website to set
+     *            the website to set
      */
     public void setWebsite(String website) {
-    	this.website = website;
+        this.website = website;
     }
 
     /**

@@ -37,6 +37,7 @@
 	<h2>Award Applications</h2>
 	
 	<h2>Attending Members</h2>
+	<a href="/editdelegate?id=<%= council.getKey().getId() %>">Manage Delegates</a><br />
 	<a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a><br />
 	<% if(council.getAttendees() != null && council.getAttendees().size() > 0) { %>
 		<table>

@@ -18,24 +18,47 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.naesc2011.conference.shared.Council" %>
+<%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>NAESC 2011 National Conference: Edit Council</title>
+<title>NAESC 2011 National Conference: Edit Delegate</title>
 </head>
 <body>
 	<%@ include file="header.jsp" %>
-	<h1>Edit Council</h1>
 	<% Council council = (Council)request.getAttribute("council"); %>
+	<h1><%= council.getName() %> Delegates</h1>
 	<a href="/mycouncil?id=<%= council.getKey().getId() %>">Back</a><br />
-	<form action="/process/savecouncil" method="post"> 
+	<form action="/process/savedelegate" method="post"> 
 		<fieldset> 
-			<legend>Register Council</legend> 
-			<p><label>Council Name:</label><input class="insmall" type="text" name="name" value="<%= council.getName() %>" /></p>
-			<p><label>University:</label><input class="insmall" type="text" name="university" value="<%= council.getUniversity() %>" /></p>
-			<p><label>Location:</label><input class="insmall" type="text" name="location" value="<%= council.getLocation() %>" /></p>
-			<p><label>Website:</label><input class="insmall" type="text" name="website" value="<%= council.getWebsite() %>" /></p>
+			<legend>Select Delegates</legend> 
+			<p>
+				<label>Voting Delegate</label>
+				<select name="vote">
+					<option id="-1">Select Voting Delegate</option>
+					<% for(int i = 0; i < council.getAttendees().size();i++) { %>
+						<% ConferenceAttendee att = council.getAttendees().get(i); %>
+						<% ConferenceAttendee.VoteStatus vote = att.getVoteStatus(); %>
+						<option value="<%= att.getKey().getId() %>" <% if(vote != null && vote.equals(ConferenceAttendee.VoteStatus.VOTING)) { %>selected="yes"<% } %>>
+						<%= att.getFullName() %>
+						</option>
+					<% } %>
+				</select>
+			</p>
+			<p>
+				<label>Alternate Delegate</label>
+				<select name="alternate">
+					<option id="-1">Select Alternate Delegate</option>
+					<% for(int i = 0; i < council.getAttendees().size();i++) { %>
+						<% ConferenceAttendee att = council.getAttendees().get(i); %>
+						<% ConferenceAttendee.VoteStatus vote = att.getVoteStatus(); %>
+						<option value="<%= att.getKey().getId() %>" <% if(vote != null && vote.equals(ConferenceAttendee.VoteStatus.ALTERNATE)) { %>selected="yes"<% } %>>
+						<%= att.getFullName() %>
+						</option>
+					<% } %>
+				</select>
+			</p>
 			<input type="hidden" name="id" value="<%= council.getKey().getId() %>">
 			<p class="submit"><input type="submit" value="Submit" /></p>
 		</fieldset> 

@@ -3,10 +3,6 @@
     PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 <web-app>
-	<system-properties>
-		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
-	</system-properties>
-
     <servlet>
         <servlet-name>editattendee</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.EditAttendeeServlet</servlet-class>
@@ -22,6 +18,10 @@
     <servlet>
         <servlet-name>editcouncil</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.EditCouncilServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editdelegate</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.EditDelegateServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>home</servlet-name>
@@ -51,6 +51,11 @@
         <servlet-name>processsaveattendee</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.ProcessSaveAttendeeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processsavedelegate</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.ProcessSaveDelegateServlet</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>editattendee</servlet-name>
         <url-pattern>/editattendee</url-pattern>
@@ -66,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>editcouncil</servlet-name>
         <url-pattern>/editcouncil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editdelegate</servlet-name>
+        <url-pattern>/editdelegate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
@@ -94,6 +103,10 @@
     <servlet-mapping>
         <servlet-name>processsaveattendee</servlet-name>
         <url-pattern>/process/saveattendee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processsavedelegate</servlet-name>
+        <url-pattern>/process/savedelegate</url-pattern>
     </servlet-mapping>
     
 	<!-- Default page to serve -->
