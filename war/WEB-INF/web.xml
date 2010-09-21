@@ -35,6 +35,11 @@
         <servlet-name>register</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.RegisterServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>adminlistcouncil</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.admin.AdminListCouncilServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>processregister</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.ProcessRegisterServlet</servlet-class>
@@ -87,6 +92,10 @@
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminlistcouncil</servlet-name>
+        <url-pattern>/admin/listcouncil</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>processregister</servlet-name>
