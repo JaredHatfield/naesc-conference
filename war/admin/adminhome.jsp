@@ -21,11 +21,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Admin: List Council</title>
+<title>Admin: Home</title>
 </head>
 <body>
 	<%@ include file="../naesc/header.jsp" %>
-	<h1>List of Registered Councils</h1>
-	<!-- TODO: Display all of the councils here with appropriate information and links. -->
+	<h1>Admin</h1>
+	<!-- TODO: Display the admin interface for the application. -->
 </body>
 </html>
