@@ -41,6 +41,14 @@
         <servlet-class>com.naesc2011.conference.server.admin.AdminListCouncilServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>admincouncilcsv</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.admin.AdminCouncilCSVServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminattendeecsv</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.admin.AdminAttendeeCSVServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>processregister</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.ProcessRegisterServlet</servlet-class>
     </servlet>
@@ -101,6 +109,14 @@
     <servlet-mapping>
         <servlet-name>adminlistcouncil</servlet-name>
         <url-pattern>/admin/listcouncil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>admincouncilcsv</servlet-name>
+        <url-pattern>/admin/council.csv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminattendeecsv</servlet-name>
+        <url-pattern>/admin/attendee.csv</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>processregister</servlet-name>
