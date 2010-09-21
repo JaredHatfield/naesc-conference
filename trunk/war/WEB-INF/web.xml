@@ -60,6 +60,11 @@
         <servlet-name>processsavedelegate</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.ProcessSaveDelegateServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processsaveaward</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.ProcessSaveAwardServlet</servlet-class>
+    </servlet>
+    
     
     <servlet-mapping>
         <servlet-name>editattendee</servlet-name>
@@ -116,6 +121,10 @@
     <servlet-mapping>
         <servlet-name>processsavedelegate</servlet-name>
         <url-pattern>/process/savedelegate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processsaveaward</servlet-name>
+        <url-pattern>/process/saveaward</url-pattern>
     </servlet-mapping>
     
 	<!-- Default page to serve -->
