@@ -8,6 +8,14 @@
         <servlet-class>com.naesc2011.conference.server.naesc.EditAttendeeServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>uploadresume</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.UploadResumeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>downloadresume</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.DownloadResumeServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>addattendee</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.AddAttendeeServlet</servlet-class>
     </servlet>
@@ -69,6 +77,14 @@
         <servlet-class>com.naesc2011.conference.server.naesc.ProcessSaveAttendeeServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>processuploadresume</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.ProcessUploadResumeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processdeleteresume</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.ProcessDeleteResumeServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>processsavedelegate</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.ProcessSaveDelegateServlet</servlet-class>
     </servlet>
@@ -81,6 +97,14 @@
     <servlet-mapping>
         <servlet-name>editattendee</servlet-name>
         <url-pattern>/editattendee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>uploadresume</servlet-name>
+        <url-pattern>/uploadresume</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>downloadresume</servlet-name>
+        <url-pattern>/downloadresume</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>addattendee</servlet-name>
@@ -142,6 +166,15 @@
         <servlet-name>processsaveattendee</servlet-name>
         <url-pattern>/process/saveattendee</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processuploadresume</servlet-name>
+        <url-pattern>/process/uploadresume</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processdeleteresume</servlet-name>
+        <url-pattern>/process/deleteresume</url-pattern>
+    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>processsavedelegate</servlet-name>
         <url-pattern>/process/savedelegate</url-pattern>
