@@ -1,4 +1,10 @@
-<!-- Indices written at Mon, 30 Aug 2010 00:36:51 UTC -->
+<!-- Indices written at Wed, 22 Sep 2010 16:03:55 UTC -->
 
-<datastore-indexes/>
+<datastore-indexes>
 
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="ConferenceAttendee" ancestor="true" source="auto">
+        <property name="attendees_INTEGER_IDX" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>
