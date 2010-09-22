@@ -72,12 +72,7 @@ public class ProcessSaveDelegateServlet extends HttpServlet {
                     council.SetVotingDelegate(vote);
                     pm.close();
 
-                    request.setAttribute("redirecturl", "/mycouncil?id=" + pid);
-                    String url = "/naesc/redirect.jsp";
-                    ServletContext context = getServletContext();
-                    RequestDispatcher dispatcher = context
-                            .getRequestDispatcher(url);
-                    dispatcher.forward(request, response);
+                    response.sendRedirect("/mycouncil?id=" + pid);
                 } else {
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 }

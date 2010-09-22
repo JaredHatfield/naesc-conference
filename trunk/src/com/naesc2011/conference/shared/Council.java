@@ -106,9 +106,9 @@ public class Council {
             ConferenceAttendee att = this.attendees.get(i);
             if ((att.getKey().getId() + "").equals(id)) {
                 att.setVoteStatus(VoteStatus.ALTERNATE);
-            } else if (att.getVoteStatus().equals(VoteStatus.ALTERNATE)) {
-                att.setVoteStatus(VoteStatus.NONE);
             } else if (att.getVoteStatus() == null) {
+                att.setVoteStatus(VoteStatus.NONE);
+            } else if (att.getVoteStatus().equals(VoteStatus.ALTERNATE)) {
                 att.setVoteStatus(VoteStatus.NONE);
             }
         }
