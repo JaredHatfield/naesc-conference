@@ -17,6 +17,8 @@
  */
 package com.naesc2011.conference.shared;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -25,6 +27,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
@@ -113,6 +116,11 @@ public class ConferenceAttendee {
      * The attendee's voting status.
      */
     private VoteStatus voteStatus;
+
+    /**
+     * The resume.
+     */
+    private BlobKey resume;
 
     /**
      *
@@ -356,6 +364,37 @@ public class ConferenceAttendee {
      */
     public void setVoteStatus(VoteStatus voteStatus) {
         this.voteStatus = voteStatus;
+    }
+
+    /**
+     * @return the resume
+     */
+    public BlobKey getResume() {
+        return resume;
+    }
+
+    /**
+     * @param resume
+     *            the resume to set
+     */
+    public void setResume(BlobKey resume) {
+        this.resume = resume;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public String getResumeKey() {
+        String s = this.key.toString();
+        MessageDigest m;
+        try {
+            m = MessageDigest.getInstance("MD5");
+            m.update(s.getBytes(), 0, s.length());
+            return new BigInteger(1, m.digest()).toString(16);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**

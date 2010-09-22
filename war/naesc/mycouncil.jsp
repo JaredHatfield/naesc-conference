@@ -55,7 +55,14 @@
 						Alternate Delegate
 					<% } %>
 				</td>
-				<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= council.getAttendees().get(i).getKey().getId() %>">Edit</a></td>
+				<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= att.getKey().getId() %>">Edit</a></td>
+				<td>
+					<% if(att.getResume() == null) { %>
+						No Resume
+					<% } else { %>
+						Resume (Check)
+					<% } %>
+				</td>
 		<% } %>
 		</table>
 	<% } else { %>

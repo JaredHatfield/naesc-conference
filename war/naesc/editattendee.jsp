@@ -74,5 +74,23 @@
 		</p>
 		</fieldset>
 	</form>
+	<br />
+	<form method="post" action="/process/deleteresume">
+		<fieldset> 
+		<legend>Resume</legend>
+			<% if(a.getResume() == null) { %>
+				<a href="/uploadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Upload Resume</a>
+			<% } else { %>
+				<a href="/downloadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Download Resume</a>
+				<p class="submit">
+				<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
+				<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
+				<input type="submit" value="Delete Resume" />
+				</p>
+				
+			<% } %>
+		</fieldset>
+	
+	</form>
 </body>
 </html>
