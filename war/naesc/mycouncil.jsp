@@ -38,29 +38,36 @@
 	<h2>Award Applications</h2>
 	
 	<h2>Attending Members</h2>
-	<a href="/editdelegate?id=<%= council.getKey().getId() %>">Manage Delegates</a><br />
-	<a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a><br />
 	<% if(council.getAttendees() != null && council.getAttendees().size() > 0) { %>
-		<table>
+		<table border="1">
+			<tr>
+				<td><a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a></td>
+				<td>Name</td>
+				<td>Email</td>
+				<td>Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>">(Manage)</a></td>
+				<td>Information</td>
+				<td>Resume</td>
+			</tr>
 		<% for(int i = 0; i < council.getAttendees().size(); i++) { %>
 			<tr>
 				<% ConferenceAttendee att = council.getAttendees().get(i); %>
-				<td><%= i %></td>
+				<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= att.getKey().getId() %>">Edit</a></td>
 				<td><%= att.getFirstName() %> <%= council.getAttendees().get(i).getLastName() %></td>
+				<td><%= att.getEmail() %></td>
 				<td>
 					<% if(att.getVoteStatus() == null) { %>
 					<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.VOTING)) { %>
-						Voting Delegate
+						Voting
 					<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.ALTERNATE)) { %>
-						Alternate Delegate
+						Alternate
 					<% } %>
 				</td>
-				<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= att.getKey().getId() %>">Edit</a></td>
+				<td><!-- TODO: Add the logic to display if the required fields have been completed --></td>
 				<td>
 					<% if(att.getResume() == null) { %>
-						No Resume
+						No
 					<% } else { %>
-						Resume (Check)
+						Yes
 					<% } %>
 				</td>
 		<% } %>
