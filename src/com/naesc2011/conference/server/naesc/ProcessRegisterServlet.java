@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -72,11 +70,7 @@ public class ProcessRegisterServlet extends HttpServlet {
                 }
             }
 
-            request.setAttribute("redirecturl", "/home");
-            String url = "/naesc/redirect.jsp";
-            ServletContext context = getServletContext();
-            RequestDispatcher dispatcher = context.getRequestDispatcher(url);
-            dispatcher.forward(request, response);
+            response.sendRedirect("/home");
         } else {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }

@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -80,10 +78,11 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
                             .valueOf(request.getParameter("shirtSize")));
                     ca.setEmergencyContactName(request.getParameter("ecName"));
                     ca.setEmergencyContactPhone(request.getParameter("ecPhone"));
-                    ca.setArrivalInformation(request.getParameter("arrivalInformation"));
+                    ca.setArrivalInformation(request
+                            .getParameter("arrivalInformation"));
                     ca.setVegetarian(request.getParameter("vegetarian") != null);
                     ca.setAllergies(request.getParameter("allergies"));
-                    
+
                     // Make the object persistent
                     try {
                         council.getAttendees().add(ca);
@@ -92,12 +91,7 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
                         pm.close();
                     }
 
-                    request.setAttribute("redirecturl", "/mycouncil?id=" + pid);
-                    String url = "/naesc/redirect.jsp";
-                    ServletContext context = getServletContext();
-                    RequestDispatcher dispatcher = context
-                            .getRequestDispatcher(url);
-                    dispatcher.forward(request, response);
+                    response.sendRedirect("/mycouncil?id=" + pid);
                 } else {
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 }
