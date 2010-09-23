@@ -61,6 +61,18 @@
         <servlet-class>com.naesc2011.conference.server.admin.AdminHomeServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>adminmanagetour</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.admin.AdminManageTourServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminprocessaddtour</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.admin.AdminProcessAddTourServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminprocesssavetour</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.admin.AdminProcessSaveTourServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>processregister</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.ProcessRegisterServlet</servlet-class>
     </servlet>
@@ -149,6 +161,18 @@
     <servlet-mapping>
         <servlet-name>adminhome</servlet-name>
         <url-pattern>/admin/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminmanagetour</servlet-name>
+        <url-pattern>/admin/managetour</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminprocessaddtour</servlet-name>
+        <url-pattern>/admin/process/addtour</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminprocesssavetour</servlet-name>
+        <url-pattern>/admin/process/savetour</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>processregister</servlet-name>
