@@ -23,11 +23,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>NAESC 2011 National Conference: Upload Resume</title>
+	<%@ include file="../htmlhead.jsp" %>
+	<title>NAESC 2011 National Conference: Upload Resume</title>
 </head>
 <body>
-	<%@ include file="header.jsp" %>
+	<%@ include file="../header.jsp" %>
 	<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
 	<h1><%= a.getFirstName() %> <%= a.getMiddleName() %> <%= a.getLastName() %>'s  Resume</h1>
 		<a href="/mycouncil?id=<%= request.getAttribute("id") %>">Back</a>
