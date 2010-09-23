@@ -412,6 +412,7 @@ public class ConferenceAttendee {
      * @param pm
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static List<ConferenceAttendee> GetAllAttendees(PersistenceManager pm) {
         String query = "select from " + ConferenceAttendee.class.getName();
         return (List<ConferenceAttendee>) pm.newQuery(query).execute();

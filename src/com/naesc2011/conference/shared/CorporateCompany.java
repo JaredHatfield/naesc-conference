@@ -32,526 +32,551 @@ import com.google.appengine.api.datastore.KeyFactory;
 
 @PersistenceCapable
 public class CorporateCompany {
-	/**
+    /**
 	 * 
 	 */
-	@PrimaryKey
+    @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
-	
-	/**
+
+    /**
 	 * 
 	 */
-	@Persistent
-	private String name;
+    @Persistent
+    private String name;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private String address;
+    @Persistent
+    private String address;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private Double pledged;
+    @Persistent
+    private Double pledged;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private String pledgeDate;
+    @Persistent
+    private String pledgeDate;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private String sector;
+    @Persistent
+    private String sector;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private String products;
+    @Persistent
+    private String products;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private Boolean majorMechanical;
+    @Persistent
+    private Boolean majorMechanical;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private Boolean majorCivil;
+    @Persistent
+    private Boolean majorCivil;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private Boolean majorComputer;
+    @Persistent
+    private Boolean majorComputer;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private Boolean majorElectrical;
+    @Persistent
+    private Boolean majorElectrical;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private Boolean majorChemical;
+    @Persistent
+    private Boolean majorChemical;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private Boolean majorBiological;
+    @Persistent
+    private Boolean majorBiological;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private Boolean majorIndustrial;
+    @Persistent
+    private Boolean majorIndustrial;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private Boolean majorAeronautical;
+    @Persistent
+    private Boolean majorAeronautical;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private Boolean majorManagement;
+    @Persistent
+    private Boolean majorManagement;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private Boolean majorMaterials;
+    @Persistent
+    private Boolean majorMaterials;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private String description;
+    @Persistent
+    private String description;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private String primaryPOCName;
+    @Persistent
+    private String primaryPOCName;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private String primaryPOCTitle;
+    @Persistent
+    private String primaryPOCTitle;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private String primaryPOCCellPhone;
+    @Persistent
+    private String primaryPOCCellPhone;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private String primaryPOCWorkPhone;
+    @Persistent
+    private String primaryPOCWorkPhone;
 
-	/**
+    /**
 	 * 
 	 */
-	@Persistent
-	private String primaryPOCEmail;
-	
-	/**
+    @Persistent
+    private String primaryPOCEmail;
+
+    /**
 	 * 
 	 */
-	@Persistent
-	@Element(dependent = "true")
-	private List<CorporateCorrespondence> correspondenceList;
-	
-	/**
-	 * 
-	 * @param name
-	 */
-	public CorporateCompany(String name){
-		this.name = name;
-		this.correspondenceList = new ArrayList<CorporateCorrespondence>();
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public Key getKey(){
-		return this.key;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public String getName(){
-		return this.name;
-	}
-	
-	/**
-	 * 
-	 * @param name
-	 */
-	public void setName(String name){
-		this.name = name;
-	}
-	
-	/**
-	 * @return the address
-	 */
-	public String getAddress() {
-		return address;
-	}
+    @Persistent
+    @Element(dependent = "true")
+    private List<CorporateCorrespondence> correspondenceList;
 
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    /**
+     * 
+     * @param name
+     */
+    public CorporateCompany(String name) {
+        this.name = name;
+        this.correspondenceList = new ArrayList<CorporateCorrespondence>();
+    }
 
-	/**
-	 * @return the pledged
-	 */
-	public Double getPledged() {
-		return pledged;
-	}
+    /**
+     * 
+     * @return
+     */
+    public Key getKey() {
+        return this.key;
+    }
 
-	/**
-	 * @param pledged the pledged to set
-	 */
-	public void setPledged(Double pledged) {
-		this.pledged = pledged;
-	}
+    /**
+     * 
+     * @return
+     */
+    public String getName() {
+        return this.name;
+    }
 
-	/**
-	 * @return the pledgeDate
-	 */
-	public String getPledgeDate() {
-		return pledgeDate;
-	}
+    /**
+     * 
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * @param pledgeDate the pledgeDate to set
-	 */
-	public void setPledgeDate(String pledgeDate) {
-		this.pledgeDate = pledgeDate;
-	}
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
 
-	/**
-	 * @return the sector
-	 */
-	public String getSector() {
-		return sector;
-	}
+    /**
+     * @param address
+     *            the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	/**
-	 * @param sector the sector to set
-	 */
-	public void setSector(String sector) {
-		this.sector = sector;
-	}
+    /**
+     * @return the pledged
+     */
+    public Double getPledged() {
+        return pledged;
+    }
 
-	/**
-	 * @return the products
-	 */
-	public String getProducts() {
-		return products;
-	}
+    /**
+     * @param pledged
+     *            the pledged to set
+     */
+    public void setPledged(Double pledged) {
+        this.pledged = pledged;
+    }
 
-	/**
-	 * @param products the products to set
-	 */
-	public void setProducts(String products) {
-		this.products = products;
-	}
+    /**
+     * @return the pledgeDate
+     */
+    public String getPledgeDate() {
+        return pledgeDate;
+    }
 
-	/**
-	 * @return the majorMechanical
-	 */
-	public Boolean getMajorMechanical() {
-		return majorMechanical;
-	}
+    /**
+     * @param pledgeDate
+     *            the pledgeDate to set
+     */
+    public void setPledgeDate(String pledgeDate) {
+        this.pledgeDate = pledgeDate;
+    }
 
-	/**
-	 * @param majorMechanical the majorMechanical to set
-	 */
-	public void setMajorMechanical(Boolean majorMechanical) {
-		this.majorMechanical = majorMechanical;
-	}
+    /**
+     * @return the sector
+     */
+    public String getSector() {
+        return sector;
+    }
 
-	/**
-	 * @return the majorCivil
-	 */
-	public Boolean getMajorCivil() {
-		return majorCivil;
-	}
+    /**
+     * @param sector
+     *            the sector to set
+     */
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
 
-	/**
-	 * @param majorCivil the majorCivil to set
-	 */
-	public void setMajorCivil(Boolean majorCivil) {
-		this.majorCivil = majorCivil;
-	}
+    /**
+     * @return the products
+     */
+    public String getProducts() {
+        return products;
+    }
 
-	/**
-	 * @return the majorComputer
-	 */
-	public Boolean getMajorComputer() {
-		return majorComputer;
-	}
+    /**
+     * @param products
+     *            the products to set
+     */
+    public void setProducts(String products) {
+        this.products = products;
+    }
 
-	/**
-	 * @param majorComputer the majorComputer to set
-	 */
-	public void setMajorComputer(Boolean majorComputer) {
-		this.majorComputer = majorComputer;
-	}
+    /**
+     * @return the majorMechanical
+     */
+    public Boolean getMajorMechanical() {
+        return majorMechanical;
+    }
 
-	/**
-	 * @return the majorElectrical
-	 */
-	public Boolean getMajorElectrical() {
-		return majorElectrical;
-	}
+    /**
+     * @param majorMechanical
+     *            the majorMechanical to set
+     */
+    public void setMajorMechanical(Boolean majorMechanical) {
+        this.majorMechanical = majorMechanical;
+    }
 
-	/**
-	 * @param majorElectrical the majorElectrical to set
-	 */
-	public void setMajorElectrical(Boolean majorElectrical) {
-		this.majorElectrical = majorElectrical;
-	}
+    /**
+     * @return the majorCivil
+     */
+    public Boolean getMajorCivil() {
+        return majorCivil;
+    }
 
-	/**
-	 * @return the majorChemical
-	 */
-	public Boolean getMajorChemical() {
-		return majorChemical;
-	}
+    /**
+     * @param majorCivil
+     *            the majorCivil to set
+     */
+    public void setMajorCivil(Boolean majorCivil) {
+        this.majorCivil = majorCivil;
+    }
 
-	/**
-	 * @param majorChemical the majorChemical to set
-	 */
-	public void setMajorChemical(Boolean majorChemical) {
-		this.majorChemical = majorChemical;
-	}
+    /**
+     * @return the majorComputer
+     */
+    public Boolean getMajorComputer() {
+        return majorComputer;
+    }
 
-	/**
-	 * @return the majorBiological
-	 */
-	public Boolean getMajorBiological() {
-		return majorBiological;
-	}
+    /**
+     * @param majorComputer
+     *            the majorComputer to set
+     */
+    public void setMajorComputer(Boolean majorComputer) {
+        this.majorComputer = majorComputer;
+    }
 
-	/**
-	 * @param majorBiological the majorBiological to set
-	 */
-	public void setMajorBiological(Boolean majorBiological) {
-		this.majorBiological = majorBiological;
-	}
+    /**
+     * @return the majorElectrical
+     */
+    public Boolean getMajorElectrical() {
+        return majorElectrical;
+    }
 
-	/**
-	 * @return the majorIndustrial
-	 */
-	public Boolean getMajorIndustrial() {
-		return majorIndustrial;
-	}
+    /**
+     * @param majorElectrical
+     *            the majorElectrical to set
+     */
+    public void setMajorElectrical(Boolean majorElectrical) {
+        this.majorElectrical = majorElectrical;
+    }
 
-	/**
-	 * @param majorIndustrial the majorIndustrial to set
-	 */
-	public void setMajorIndustrial(Boolean majorIndustrial) {
-		this.majorIndustrial = majorIndustrial;
-	}
+    /**
+     * @return the majorChemical
+     */
+    public Boolean getMajorChemical() {
+        return majorChemical;
+    }
 
-	/**
-	 * @return the majorAeronautical
-	 */
-	public Boolean getMajorAeronautical() {
-		return majorAeronautical;
-	}
+    /**
+     * @param majorChemical
+     *            the majorChemical to set
+     */
+    public void setMajorChemical(Boolean majorChemical) {
+        this.majorChemical = majorChemical;
+    }
 
-	/**
-	 * @param majorAeronautical the majorAeronautical to set
-	 */
-	public void setMajorAeronautical(Boolean majorAeronautical) {
-		this.majorAeronautical = majorAeronautical;
-	}
+    /**
+     * @return the majorBiological
+     */
+    public Boolean getMajorBiological() {
+        return majorBiological;
+    }
 
-	/**
-	 * @return the majorManagement
-	 */
-	public Boolean getMajorManagement() {
-		return majorManagement;
-	}
+    /**
+     * @param majorBiological
+     *            the majorBiological to set
+     */
+    public void setMajorBiological(Boolean majorBiological) {
+        this.majorBiological = majorBiological;
+    }
 
-	/**
-	 * @param majorManagement the majorManagement to set
-	 */
-	public void setMajorManagement(Boolean majorManagement) {
-		this.majorManagement = majorManagement;
-	}
+    /**
+     * @return the majorIndustrial
+     */
+    public Boolean getMajorIndustrial() {
+        return majorIndustrial;
+    }
 
-	/**
-	 * @return the majorMaterials
-	 */
-	public Boolean getMajorMaterials() {
-		return majorMaterials;
-	}
+    /**
+     * @param majorIndustrial
+     *            the majorIndustrial to set
+     */
+    public void setMajorIndustrial(Boolean majorIndustrial) {
+        this.majorIndustrial = majorIndustrial;
+    }
 
-	/**
-	 * @param majorMaterials the majorMaterials to set
-	 */
-	public void setMajorMaterials(Boolean majorMaterials) {
-		this.majorMaterials = majorMaterials;
-	}
+    /**
+     * @return the majorAeronautical
+     */
+    public Boolean getMajorAeronautical() {
+        return majorAeronautical;
+    }
 
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * @param majorAeronautical
+     *            the majorAeronautical to set
+     */
+    public void setMajorAeronautical(Boolean majorAeronautical) {
+        this.majorAeronautical = majorAeronautical;
+    }
 
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * @return the majorManagement
+     */
+    public Boolean getMajorManagement() {
+        return majorManagement;
+    }
 
-	/**
-	 * @return the primaryPOCName
-	 */
-	public String getPrimaryPOCName() {
-		return primaryPOCName;
-	}
+    /**
+     * @param majorManagement
+     *            the majorManagement to set
+     */
+    public void setMajorManagement(Boolean majorManagement) {
+        this.majorManagement = majorManagement;
+    }
 
-	/**
-	 * @param primaryPOCName the primaryPOCName to set
-	 */
-	public void setPrimaryPOCName(String primaryPOCName) {
-		this.primaryPOCName = primaryPOCName;
-	}
+    /**
+     * @return the majorMaterials
+     */
+    public Boolean getMajorMaterials() {
+        return majorMaterials;
+    }
 
-	/**
-	 * @return the primaryPOCTitle
-	 */
-	public String getPrimaryPOCTitle() {
-		return primaryPOCTitle;
-	}
+    /**
+     * @param majorMaterials
+     *            the majorMaterials to set
+     */
+    public void setMajorMaterials(Boolean majorMaterials) {
+        this.majorMaterials = majorMaterials;
+    }
 
-	/**
-	 * @param primaryPOCTitle the primaryPOCTitle to set
-	 */
-	public void setPrimaryPOCTitle(String primaryPOCTitle) {
-		this.primaryPOCTitle = primaryPOCTitle;
-	}
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * @return the primaryPOCCellPhone
-	 */
-	public String getPrimaryPOCCellPhone() {
-		return primaryPOCCellPhone;
-	}
+    /**
+     * @param description
+     *            the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	/**
-	 * @param primaryPOCCellPhone the primaryPOCCellPhone to set
-	 */
-	public void setPrimaryPOCCellPhone(String primaryPOCCellPhone) {
-		this.primaryPOCCellPhone = primaryPOCCellPhone;
-	}
+    /**
+     * @return the primaryPOCName
+     */
+    public String getPrimaryPOCName() {
+        return primaryPOCName;
+    }
 
-	/**
-	 * @return the primaryPOCWorkPhone
-	 */
-	public String getPrimaryPOCWorkPhone() {
-		return primaryPOCWorkPhone;
-	}
+    /**
+     * @param primaryPOCName
+     *            the primaryPOCName to set
+     */
+    public void setPrimaryPOCName(String primaryPOCName) {
+        this.primaryPOCName = primaryPOCName;
+    }
 
-	/**
-	 * @param primaryPOCWorkPhone the primaryPOCWorkPhone to set
-	 */
-	public void setPrimaryPOCWorkPhone(String primaryPOCWorkPhone) {
-		this.primaryPOCWorkPhone = primaryPOCWorkPhone;
-	}
+    /**
+     * @return the primaryPOCTitle
+     */
+    public String getPrimaryPOCTitle() {
+        return primaryPOCTitle;
+    }
 
-	/**
-	 * @return the primaryPOCEmail
-	 */
-	public String getPrimaryPOCEmail() {
-		return primaryPOCEmail;
-	}
+    /**
+     * @param primaryPOCTitle
+     *            the primaryPOCTitle to set
+     */
+    public void setPrimaryPOCTitle(String primaryPOCTitle) {
+        this.primaryPOCTitle = primaryPOCTitle;
+    }
 
-	/**
-	 * @param primaryPOCEmail the primaryPOCEmail to set
-	 */
-	public void setPrimaryPOCEmail(String primaryPOCEmail) {
-		this.primaryPOCEmail = primaryPOCEmail;
-	}
+    /**
+     * @return the primaryPOCCellPhone
+     */
+    public String getPrimaryPOCCellPhone() {
+        return primaryPOCCellPhone;
+    }
 
-	/**
-	 * @param key the key to set
-	 */
-	public void setKey(Key key) {
-		this.key = key;
-	}
+    /**
+     * @param primaryPOCCellPhone
+     *            the primaryPOCCellPhone to set
+     */
+    public void setPrimaryPOCCellPhone(String primaryPOCCellPhone) {
+        this.primaryPOCCellPhone = primaryPOCCellPhone;
+    }
 
-	/**
-	 * @return the correspondence
-	 */
-	public List<CorporateCorrespondence> getCorrespondence() {
-		if(this.correspondenceList == null){
-			this.correspondenceList = new ArrayList<CorporateCorrespondence>();
-		}
-		
-		return correspondenceList;
-	}
+    /**
+     * @return the primaryPOCWorkPhone
+     */
+    public String getPrimaryPOCWorkPhone() {
+        return primaryPOCWorkPhone;
+    }
 
-	/**
-	 * 
-	 * @param pm
-	 * @param company
-	 */
-	public static void InsertCompany(PersistenceManager pm, CorporateCompany company){
-		pm.makePersistent(company);
-	}
-	
-	/**
-	 * 
-	 * @param pm
-	 * @return
-	 */
-	public static List<CorporateCompany> GetAllCompanies(PersistenceManager pm){
-		String query = "select from " + CorporateCompany.class.getName();
-	    return (List<CorporateCompany>) pm.newQuery(query).execute();
-	}
-	
-	/**
-	 * 
-	 * @param pm
-	 * @param i
-	 * @return
-	 */
-	public static CorporateCompany GetCompany(PersistenceManager pm, String id ){
-		int i = Integer.parseInt(id);
-		Key key = KeyFactory.createKey(CorporateCompany.class.getSimpleName(), i);
-		CorporateCompany c = pm.getObjectById(CorporateCompany.class, key);
-		return c;
-	}
+    /**
+     * @param primaryPOCWorkPhone
+     *            the primaryPOCWorkPhone to set
+     */
+    public void setPrimaryPOCWorkPhone(String primaryPOCWorkPhone) {
+        this.primaryPOCWorkPhone = primaryPOCWorkPhone;
+    }
+
+    /**
+     * @return the primaryPOCEmail
+     */
+    public String getPrimaryPOCEmail() {
+        return primaryPOCEmail;
+    }
+
+    /**
+     * @param primaryPOCEmail
+     *            the primaryPOCEmail to set
+     */
+    public void setPrimaryPOCEmail(String primaryPOCEmail) {
+        this.primaryPOCEmail = primaryPOCEmail;
+    }
+
+    /**
+     * @param key
+     *            the key to set
+     */
+    public void setKey(Key key) {
+        this.key = key;
+    }
+
+    /**
+     * @return the correspondence
+     */
+    public List<CorporateCorrespondence> getCorrespondence() {
+        if (this.correspondenceList == null) {
+            this.correspondenceList = new ArrayList<CorporateCorrespondence>();
+        }
+
+        return correspondenceList;
+    }
+
+    /**
+     * 
+     * @param pm
+     * @param company
+     */
+    public static void InsertCompany(PersistenceManager pm,
+            CorporateCompany company) {
+        pm.makePersistent(company);
+    }
+
+    /**
+     * 
+     * @param pm
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static List<CorporateCompany> GetAllCompanies(PersistenceManager pm) {
+        String query = "select from " + CorporateCompany.class.getName();
+        return (List<CorporateCompany>) pm.newQuery(query).execute();
+    }
+
+    /**
+     * 
+     * @param pm
+     * @param i
+     * @return
+     */
+    public static CorporateCompany GetCompany(PersistenceManager pm, String id) {
+        int i = Integer.parseInt(id);
+        Key key = KeyFactory.createKey(CorporateCompany.class.getSimpleName(),
+                i);
+        CorporateCompany c = pm.getObjectById(CorporateCompany.class, key);
+        return c;
+    }
 }

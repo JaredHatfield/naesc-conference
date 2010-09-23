@@ -35,7 +35,7 @@
 		<% if((Boolean)request.getAttribute("nocouncil")){ %>
 			<a href="/register">Register New Council</a>
 		<% } else { %>
-			<% List<Council> councils = (List<Council>)request.getAttribute("councils");
+			<% @SuppressWarnings("unchecked") List<Council> councils = (List<Council>)request.getAttribute("councils");
 			   for(int i = 0; i < councils.size(); i++){ %>
 			   	<a href="/mycouncil?id=<%= councils.get(i).getKey().getId() %>">
 			   		<b>Manage:</b> <%= councils.get(i).getName() %>

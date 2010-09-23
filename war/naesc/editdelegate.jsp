@@ -40,7 +40,11 @@
 					<% for(int i = 0; i < council.getAttendees().size();i++) { %>
 						<% ConferenceAttendee att = council.getAttendees().get(i); %>
 						<% ConferenceAttendee.VoteStatus vote = att.getVoteStatus(); %>
-						<option value="<%= att.getKey().getId() %>" <% if(vote != null && vote.equals(ConferenceAttendee.VoteStatus.VOTING)) { %>selected="yes"<% } %>>
+						<% if(vote != null && vote.equals(ConferenceAttendee.VoteStatus.VOTING)) { %>
+							<option value="<%= att.getKey().getId() %>" selected="selected">
+						<% } else { %>
+							<option value="<%= att.getKey().getId() %>">
+						<% } %>
 						<%= att.getFullName() %>
 						</option>
 					<% } %>
@@ -53,7 +57,11 @@
 					<% for(int i = 0; i < council.getAttendees().size();i++) { %>
 						<% ConferenceAttendee att = council.getAttendees().get(i); %>
 						<% ConferenceAttendee.VoteStatus vote = att.getVoteStatus(); %>
-						<option value="<%= att.getKey().getId() %>" <% if(vote != null && vote.equals(ConferenceAttendee.VoteStatus.ALTERNATE)) { %>selected="yes"<% } %>>
+						<% if(vote != null && vote.equals(ConferenceAttendee.VoteStatus.ALTERNATE)) { %>
+							<option value="<%= att.getKey().getId() %>" selected="selected">
+						<% } else { %>
+							<option value="<%= att.getKey().getId() %>">
+						<% } %>
 						<%= att.getFullName() %>
 						</option>
 					<% } %>

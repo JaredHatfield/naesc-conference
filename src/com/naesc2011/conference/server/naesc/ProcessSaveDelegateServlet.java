@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
