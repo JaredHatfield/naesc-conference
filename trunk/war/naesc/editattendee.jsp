@@ -41,7 +41,12 @@
 			<label>Gender:</label>
 			<select name="gender">
 			<% for(ConferenceAttendee.Gender g : ConferenceAttendee.Gender.values()) { %>
-				<option value="<%= g.toString() %>"<% if(g.equals(a.getGender())) { %> selected="yes"<% } %>><%= g.toString() %></option>
+				<% if(g.equals(a.getGender())) { %>
+					<option value="<%= g.toString() %>" selected="selected"><%= g.toString() %></option>
+				<% } else { %>
+					<option value="<%= g.toString() %>"><%= g.toString() %></option>
+				<% } %>
+				
 			<% } %>
 			</select>
 		</p>
@@ -49,7 +54,12 @@
 			<label>Shirt Size:</label>
 			<select name="shirtSize">
 			<% for(ConferenceAttendee.ShirtSize ss : ConferenceAttendee.ShirtSize.values()) { %>
-				<option value="<%= ss.toString() %>"<% if(ss.equals(a.getShirtSize())) { %> selected="yes"<% } %>><%= ss.toString() %></option>
+				<% if(ss.equals(a.getShirtSize())) { %>
+					<option value="<%= ss.toString() %>" selected="selected"><%= ss.toString() %></option>
+				<% } else { %>
+					<option value="<%= ss.toString() %>"><%= ss.toString() %></option>
+				<% } %>
+				
 			<% } %>
 			</select>
 		</p>

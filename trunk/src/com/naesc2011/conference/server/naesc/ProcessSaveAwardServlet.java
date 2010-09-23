@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
-import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
 
@@ -62,8 +61,7 @@ public class ProcessSaveAwardServlet extends HttpServlet {
                 }
 
                 if (haspermission) {
-                    Council council = Council.GetCouncil(pm, pid);
-
+                    // Council council = Council.GetCouncil(pm, pid);
                     // TODO: Implement logic to update the submitted award
 
                     pm.close();
