@@ -18,6 +18,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List" %>
+<%@ page import="com.naesc2011.conference.shared.Award" %>
+<%@ page import="com.naesc2011.conference.shared.AwardSubmission" %>
 <%@ page import="com.naesc2011.conference.shared.Tour" %>
 <%@ page import="com.naesc2011.conference.shared.Council" %>
 <%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
@@ -33,6 +35,7 @@
 	<h2>Information</h2>
 	<% Council council = (Council)request.getAttribute("council"); %>
 	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
+	<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards"); %>
 	
 	<a href="/editcouncil?id=<%= council.getKey().getId() %>">Edit</a><br />
 	Name: <%= council.getName() %><br />
@@ -40,6 +43,19 @@
 	Location: <%= council.getLocation() %><br />
 	
 	<h2>Award Applications</h2>
+	<% List<AwardSubmission> submitted = council.getAwardSubmissions(); %>
+	<% for(int i = 0; i < awards.size(); i++) { %>
+		<% Award a = awards.get(i); %>
+		<a href="/editaward?id=<%= council.getKey().getId() %>&a=<%= a.getKey().getId() %>"><%= a.getName() %></a>
+		<% for(int j = 0; submitted != null && j < submitted.size(); j++) { %>
+			<% if(submitted.get(j).getAward().equals(a.getKey())) { %>
+				<% if(submitted.get(j).getSubmitted()){ %>
+					(Award Submitted)
+				<% } %>
+			<% break; } %>
+		<% } %>
+		<br />
+	<% } %>
 	
 	<h2>Attending Members</h2>
 	<% if(council.getAttendees() != null && council.getAttendees().size() > 0) { %>
@@ -85,7 +101,7 @@
 		<% } %>
 		</table>
 	<% } else { %>
-		No members.
+		<a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a>
 	<% } %>
 </body>
 </html>

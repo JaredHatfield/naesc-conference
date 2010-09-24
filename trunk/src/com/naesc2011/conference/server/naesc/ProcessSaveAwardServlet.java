@@ -27,6 +27,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.Award;
+import com.naesc2011.conference.shared.AwardApplication;
+import com.naesc2011.conference.shared.AwardSubmission;
+import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
 
@@ -46,7 +50,8 @@ public class ProcessSaveAwardServlet extends HttpServlet {
 
         if (authenticated) {
             String pid = request.getParameter("id");
-            if (pid != null) {
+            String aid = request.getParameter("a");
+            if (pid != null && aid != null) {
                 long id = Long.parseLong(pid);
                 PersistenceManager pm = PMF.get().getPersistenceManager();
 
@@ -61,11 +66,45 @@ public class ProcessSaveAwardServlet extends HttpServlet {
                 }
 
                 if (haspermission) {
-                    // Council council = Council.GetCouncil(pm, pid);
-                    // TODO: Implement logic to update the submitted award
+                    Award award = Award.GetAward(pm, aid);
+                    Council council = Council.GetCouncil(pm, pid);
+                    List<AwardSubmission> sub = council.getAwardSubmissions();
+                    AwardSubmission csub = null;
 
-                    pm.close();
+                    String q1 = request.getParameter("q1");
+                    String q2 = request.getParameter("q2");
+                    String q3 = request.getParameter("q3");
+                    String q4 = request.getParameter("q4");
 
+                    if (q1 != null && q2 != null && q3 != null && q4 != null) {
+                        for (int i = 0; i < sub.size(); i++) {
+                            if (sub.get(i).getAward().equals(award.getKey())) {
+                                // Located the submision
+                                csub = sub.get(i);
+                                break;
+                            }
+                        }
+
+                        if (csub != null) {
+                            // Retrieve the application and update it
+                            AwardApplication app = AwardApplication.GetAward(
+                                    pm, csub.getApplication());
+                            app.setQuestion1(q1);
+                            app.setQuestion2(q2);
+                            app.setQuestion3(q3);
+                            app.setQuestion4(q4);
+                        } else {
+                            // There was no submission so we need to add one
+                            AwardApplication app = new AwardApplication(q1, q2,
+                                    q3, q4);
+                            AwardApplication.InsertAward(pm, app);
+                            AwardSubmission submission = new AwardSubmission(
+                                    award.getKey(), app.getKey());
+                            council.getAwardSubmissions().add(submission);
+                        }
+
+                        pm.close();
+                    }
                     response.sendRedirect("/mycouncil?id=" + pid);
                 } else {
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED);

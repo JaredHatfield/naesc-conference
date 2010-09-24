@@ -86,7 +86,7 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
 
                     // Save the tour selection
                     String tourid = request.getParameter("tour");
-                    if (tourid != null && tourid != "-1") {
+                    if (tourid != null && !tourid.equals("-1")) {
                         Tour t = Tour.GetTour(pm, tourid);
                         t.addAttendee(council.getKey(), ca);
                     }

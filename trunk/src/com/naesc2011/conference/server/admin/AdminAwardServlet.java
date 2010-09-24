@@ -18,15 +18,21 @@
 package com.naesc2011.conference.server.admin;
 
 import java.io.IOException;
+import java.util.List;
 
+import javax.jdo.PersistenceManager;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.Award;
+import com.naesc2011.conference.shared.PMF;
 
-public class AdminAttendeeCSVServlet extends HttpServlet {
+public class AdminAwardServlet extends HttpServlet {
     /**
      * 
      */
@@ -41,7 +47,15 @@ public class AdminAttendeeCSVServlet extends HttpServlet {
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
 
         if (authenticated) {
-            response.getWriter().write("test");
+            // TODO: Implement the logic for displaying the award interface
+            PersistenceManager pm = PMF.get().getPersistenceManager();
+            List<Award> awards = Award.GetAllAwards(pm);
+            request.setAttribute("awards", awards);
+
+            String url = "/admin/award.jsp";
+            ServletContext context = getServletContext();
+            RequestDispatcher dispatcher = context.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
         } else {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
