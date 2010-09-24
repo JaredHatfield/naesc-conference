@@ -55,8 +55,8 @@ public class Tour {
      * 
      */
     @Persistent
-    @Element(dependent = "false")
-    private List<ConferenceAttendee> attendees;
+    @Element(dependent = "true")
+    private List<TourMember> tourMembers;
 
     /**
      * 
@@ -66,7 +66,7 @@ public class Tour {
     public Tour(String name, String description) {
         this.name = name;
         this.description = description;
-        this.attendees = new ArrayList<ConferenceAttendee>();
+        this.setTourMembers(new ArrayList<TourMember>());
     }
 
     /**
@@ -115,18 +115,18 @@ public class Tour {
     }
 
     /**
-     * @param attendees
-     *            the attendees to set
+     * @param tourMembers
+     *            the tourMembers to set
      */
-    public void setAttendees(List<ConferenceAttendee> attendees) {
-        this.attendees = attendees;
+    public void setTourMembers(List<TourMember> tourMembers) {
+        this.tourMembers = tourMembers;
     }
 
     /**
-     * @return the attendees
+     * @return the tourMembers
      */
-    public List<ConferenceAttendee> getAttendees() {
-        return attendees;
+    public List<TourMember> getTourMembers() {
+        return tourMembers;
     }
 
     /**
@@ -135,9 +135,10 @@ public class Tour {
      * @param att
      *            The ConferenceAttendee.
      */
-    public void addAttendee(ConferenceAttendee att) {
-        att.setTour(this);
-        this.attendees.add(att);
+    public void addAttendee(Key council, ConferenceAttendee att) {
+        att.setTour(this.key);
+        TourMember tm = new TourMember(council, att.getKey());
+        this.tourMembers.add(tm);
     }
 
     /**
@@ -146,9 +147,20 @@ public class Tour {
      * @param att
      *            The ConferenceAttendee.
      */
-    public void removeAttendee(ConferenceAttendee att) {
+    public void removeAttendee(Key council, ConferenceAttendee att) {
         att.setTour(null);
-        this.attendees.remove(att);
+        TourMember tm = null;
+        for (int i = 0; i < this.tourMembers.size(); i++) {
+            tm = this.tourMembers.get(i);
+            if (tm.getCouncil().equals(council)
+                    && tm.getAttendee().equals(att.getKey())) {
+                break;
+            }
+        }
+
+        if (tm != null) {
+            this.tourMembers.remove(tm);
+        }
     }
 
     /**

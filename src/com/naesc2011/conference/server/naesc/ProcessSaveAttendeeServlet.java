@@ -31,6 +31,7 @@ import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
+import com.naesc2011.conference.shared.Tour;
 
 public class ProcessSaveAttendeeServlet extends HttpServlet {
 
@@ -101,7 +102,29 @@ public class ProcessSaveAttendeeServlet extends HttpServlet {
                             ca.setVegetarian(request.getParameter("vegetarian") != null);
                             ca.setAllergies(request.getParameter("allergies"));
 
-                            // TODO: Update the tour selection
+                            // Update the tour selection
+                            String tourid = request.getParameter("tour");
+                            if (tourid != null) {
+                                if (tourid.equals("-1")) {
+                                    // No tour was selected
+                                    if (ca.getTour() != null) {
+                                        // Remove the previously selected tour
+                                        Tour t = Tour.GetTour(pm, ca.getTour());
+                                        t.removeAttendee(council.getKey(), ca);
+                                    }
+                                } else {
+                                    // Remove the previously selected tour
+                                    if (ca.getTour() != null) {
+                                        // Remove the previously selected tour
+                                        Tour t = Tour.GetTour(pm, ca.getTour());
+                                        t.removeAttendee(council.getKey(), ca);
+                                    }
+
+                                    // Set the new tour as selected
+                                    Tour t = Tour.GetTour(pm, tourid);
+                                    t.addAttendee(council.getKey(), ca);
+                                }
+                            }
 
                             // Close the persistence connection
                             pm.close();

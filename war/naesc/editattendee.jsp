@@ -71,9 +71,9 @@
 		<p>
 			<label>Tour:</label>
 			<select name="tour">
-				<option value="-1">Select Tour</option>
+				<option value="-1">Select a Tour From the Following</option>
 			<% for(Tour t : tours) { %>
-				<% if(a.getTour() != null && t.equals(a.getTour())) { %>
+				<% if(a.getTour() != null && t.getKey().equals(a.getTour())) { %>
 					<option value="<%= t.getKey().getId() %>" selected="selected"><%= t.getName() %></option>
 				<% } else { %>
 					<option value="<%= t.getKey().getId() %>"><%= t.getName() %></option>

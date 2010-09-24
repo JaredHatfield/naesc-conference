@@ -17,6 +17,8 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.naesc2011.conference.shared.Tour" %>
 <%@ page import="com.naesc2011.conference.shared.Council" %>
 <%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,6 +32,8 @@
 	<h1>My Council</h1>
 	<h2>Information</h2>
 	<% Council council = (Council)request.getAttribute("council"); %>
+	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
+	
 	<a href="/editcouncil?id=<%= council.getKey().getId() %>">Edit</a><br />
 	Name: <%= council.getName() %><br />
 	University: <%= council.getUniversity() %><br />
@@ -44,6 +48,7 @@
 				<td><a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a></td>
 				<td>Name</td>
 				<td>Email</td>
+				<td>Tour</td>
 				<td>Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>">(Manage)</a></td>
 				<td>Information</td>
 				<td>Resume</td>
@@ -54,6 +59,13 @@
 				<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= att.getKey().getId() %>">Edit</a></td>
 				<td><%= att.getFirstName() %> <%= council.getAttendees().get(i).getLastName() %></td>
 				<td><%= att.getEmail() %></td>
+				<td>
+					<% for(int j = 0; j < tours.size(); j++) { %>
+						<% if(tours.get(j).getKey().equals(att.getTour())) { %>
+							<%= tours.get(j).getName() %>
+						<% break; } %>
+					<% } %>
+				</td>
 				<td>
 					<% if(att.getVoteStatus() == null) { %>
 					<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.VOTING)) { %>
