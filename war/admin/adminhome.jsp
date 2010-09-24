@@ -27,5 +27,16 @@
 	<%@ include file="../header.jsp" %>
 	<h1>Admin</h1>
 	<!-- TODO: Display the admin interface for the application. -->
+	
+	<h2><a href="/admin/managetour">Manage Tours</a></h2>
+	
+	<h2><a href="/admin/award">Manage Awards</a></h2>
+	
+	<h2><a href="/admin/listcouncil">List All Councils</a></h2>
+	
+	<h2><a href="/admin/council.csv">Export Councils</a></h2>
+	
+	<h2><a href="/admin/attendee.csv">Export Attendees</a></h2>
+	
 </body>
 </html>
