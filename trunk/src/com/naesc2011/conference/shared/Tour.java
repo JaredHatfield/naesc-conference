@@ -130,6 +130,28 @@ public class Tour {
     }
 
     /**
+     * Adds a ConferenceAttendee to a tour.
+     * 
+     * @param att
+     *            The ConferenceAttendee.
+     */
+    public void addAttendee(ConferenceAttendee att) {
+        att.setTour(this);
+        this.attendees.add(att);
+    }
+
+    /**
+     * Removes a ConferenceAttendee from a tour.
+     * 
+     * @param att
+     *            The ConferenceAttendee.
+     */
+    public void removeAttendee(ConferenceAttendee att) {
+        att.setTour(null);
+        this.attendees.remove(att);
+    }
+
+    /**
      * 
      * @param pm
      * @param company

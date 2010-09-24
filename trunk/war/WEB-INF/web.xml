@@ -215,7 +215,6 @@
 	
     
 	<!--  Security Constraints -->
-    <!--
 	<security-constraint>
 		<web-resource-collection>
             <web-resource-name>Administrative Pages</web-resource-name>
@@ -227,5 +226,4 @@
 			<role-name>admin</role-name>
 		</auth-constraint>
 	</security-constraint>
-    -->
 </web-app>

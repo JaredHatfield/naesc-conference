@@ -17,6 +17,8 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.naesc2011.conference.shared.Tour" %>
 <%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,6 +29,8 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
+	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
+	
 	<h1>Edit Attendee</h1>
 		<a href="/mycouncil?id=<%= request.getAttribute("id") %>">Back</a>
 		<form method="post" action="/process/saveattendee">
@@ -58,6 +62,21 @@
 					<option value="<%= ss.toString() %>" selected="selected"><%= ss.toString() %></option>
 				<% } else { %>
 					<option value="<%= ss.toString() %>"><%= ss.toString() %></option>
+				<% } %>
+				
+			<% } %>
+			</select>
+		</p>
+		
+		<p>
+			<label>Tour:</label>
+			<select name="tour">
+				<option value="-1">Select Tour</option>
+			<% for(Tour t : tours) { %>
+				<% if(a.getTour() != null && t.equals(a.getTour())) { %>
+					<option value="<%= t.getKey().getId() %>" selected="selected"><%= t.getName() %></option>
+				<% } else { %>
+					<option value="<%= t.getKey().getId() %>"><%= t.getName() %></option>
 				<% } %>
 				
 			<% } %>

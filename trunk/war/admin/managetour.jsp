@@ -45,6 +45,7 @@
 					<legend>Update Tour</legend> 
 					<p><label>Tour Name:</label><input class="insmall" type="text" name="name" value="<%= tours.get(i).getName() %>" /></p>
 					<p><label>Tour Description:</label><input class="insmall" type="text" name="description" value="<%= tours.get(i).getDescription() %>" /></p>
+					<p><label>Attending:</label><%= tours.get(i).getAttendees().size() %></p>
 					<p class="submit">
 						<input type="hidden" name="id" value="<%= tours.get(i).getKey().getId() %>" />
 						<input type="submit" value="Add" />

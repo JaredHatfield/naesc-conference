@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
+import com.naesc2011.conference.shared.Tour;
 
 public class AddAttendeeServlet extends HttpServlet {
 
@@ -65,6 +66,7 @@ public class AddAttendeeServlet extends HttpServlet {
                 }
 
                 if (haspermission) {
+                    request.setAttribute("tours", Tour.GetAllTours(pm));
                     String url = "/naesc/addattendee.jsp";
                     ServletContext context = getServletContext();
                     RequestDispatcher dispatcher = context
