@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.Award;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
@@ -55,6 +56,8 @@ public class MyCouncilServlet extends HttpServlet {
                 long id = Long.parseLong(pid);
                 PersistenceManager pm = PMF.get().getPersistenceManager();
 
+                List<Award> awards = Award.GetAllAwards(pm);
+                request.setAttribute("awards", awards);
                 List<CouncilPermission> councils = CouncilPermission
                         .GetPermission(pm, p.getUser().getUserId());
                 Boolean haspermission = false;

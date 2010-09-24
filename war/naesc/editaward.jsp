@@ -17,6 +17,10 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.naesc2011.conference.shared.Award" %>
+<%@ page import="com.naesc2011.conference.shared.AwardSubmission" %>
+<%@ page import="com.naesc2011.conference.shared.AwardApplication" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,6 +29,51 @@
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
+	<% Award a = (Award)request.getAttribute("award"); %>
+	<% AwardApplication app = (AwardApplication)request.getAttribute("application"); %>
 	<h1>Edit Award</h1>
+	<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">Back</a><br />
+	<br />
+	
+	<form action="/process/saveaward" method="post"> 
+		<fieldset> 
+			<legend><%= a.getName() %></legend> 
+			<% if(app == null) { %>
+				<p><label><%= a.getQuestion1() %></label></p>
+				<p><textarea cols="80" rows="8" name="q1"></textarea></p>
+				<br />
+				<p><label><%= a.getQuestion2() %></label></p>
+				<p><textarea cols="80" rows="8" name="q2"></textarea></p>
+				<br />
+				<p><label><%= a.getQuestion3() %></label></p>
+				<p><textarea cols="80" rows="8" name="q3"></textarea></p>
+				<br />
+				<p><label><%= a.getQuestion4() %></label></p>
+				<p><textarea cols="80" rows="8" name="q4"></textarea></p>
+			<% } else { %>
+				<p><label><%= a.getQuestion1() %></label></p>
+				<p><textarea cols="80" rows="8" name="q1"><%= app.getQuestion1() %></textarea></p>
+				<br />
+				<p><label><%= a.getQuestion2() %></label></p>
+				<p><textarea cols="80" rows="8" name="q2"><%= app.getQuestion2() %></textarea></p>
+				<br />
+				<p><label><%= a.getQuestion3() %></label></p>
+				<p><textarea cols="80" rows="8" name="q3"><%= app.getQuestion3() %></textarea></p>
+				<br />
+				<p><label><%= a.getQuestion4() %></label></p>
+				<p><textarea cols="80" rows="8" name="q4"><%= app.getQuestion4() %></textarea></p>
+			<% } %>
+			<br />
+			<input type="hidden" name="id" value="<%= request.getAttribute("councilid") %>" />
+			<input type="hidden" name="a" value="<%= a.getKey().getId() %>" />
+			<p class="submit">
+				<label>Save Current Responses</label>
+				<input type="submit" value="Save Progress" />
+			</p>
+		</fieldset> 
+	</form>
+	
+	
+	
 </body>
 </html>

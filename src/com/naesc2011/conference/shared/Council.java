@@ -73,11 +73,19 @@ public class Council {
 
     /**
      * 
+     */
+    @Persistent
+    @Element(dependent = "true")
+    private List<AwardSubmission> awardSubmissions;
+
+    /**
+     * 
      * @param name
      */
     public Council(String name) {
         this.name = name;
         this.attendees = new ArrayList<ConferenceAttendee>();
+        this.setAwardSubmissions(new ArrayList<AwardSubmission>());
     }
 
     /**
@@ -202,6 +210,21 @@ public class Council {
      */
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    /**
+     * @param awardSubmissions
+     *            the awardSubmissions to set
+     */
+    public void setAwardSubmissions(List<AwardSubmission> awardSubmissions) {
+        this.awardSubmissions = awardSubmissions;
+    }
+
+    /**
+     * @return the awardSubmissions
+     */
+    public List<AwardSubmission> getAwardSubmissions() {
+        return awardSubmissions;
     }
 
     /**

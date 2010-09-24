@@ -28,7 +28,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.datastore.Key;
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.Award;
+import com.naesc2011.conference.shared.AwardApplication;
+import com.naesc2011.conference.shared.AwardSubmission;
+import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
 
@@ -49,8 +54,10 @@ public class EditAwardServlet extends HttpServlet {
 
         if (authenticated) {
             String pid = request.getParameter("id");
-            if (pid != null) {
+            String aid = request.getParameter("a");
+            if (pid != null && aid != null) {
                 long id = Long.parseLong(pid);
+
                 PersistenceManager pm = PMF.get().getPersistenceManager();
 
                 List<CouncilPermission> councils = CouncilPermission
@@ -64,8 +71,25 @@ public class EditAwardServlet extends HttpServlet {
                 }
 
                 if (haspermission) {
-                    // Council council = Council.GetCouncil(pm, pid);
-                    // TODO: Set the specified award as the attribute
+                    // Set the award
+                    Award award = Award.GetAward(pm, aid);
+                    request.setAttribute("award", award);
+
+                    Council council = Council.GetCouncil(pm, pid);
+                    request.setAttribute("councilid", council.getKey().getId());
+                    List<AwardSubmission> las = council.getAwardSubmissions();
+
+                    for (int i = 0; las != null && i < las.size(); i++) {
+                        Key k1 = las.get(i).getAward();
+                        Key k2 = award.getKey();
+                        if (k1.equals(k2)) {
+                            AwardSubmission sub = las.get(i);
+                            AwardApplication aa = AwardApplication.GetAward(pm,
+                                    sub.getApplication());
+                            request.setAttribute("application", aa);
+                            break;
+                        }
+                    }
 
                     String url = "/naesc/editaward.jsp";
                     ServletContext context = getServletContext();
