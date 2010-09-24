@@ -18,13 +18,19 @@
 package com.naesc2011.conference.server.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.List;
 
+import javax.jdo.PersistenceManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.Council;
+import com.naesc2011.conference.shared.PMF;
 
 public class AdminCouncilCSVServlet extends HttpServlet {
     /**
@@ -41,7 +47,21 @@ public class AdminCouncilCSVServlet extends HttpServlet {
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
 
         if (authenticated) {
-            // TODO: Display all of the council information in CSV format
+        	PersistenceManager pm = PMF.get().getPersistenceManager();
+        	
+        	List<Council> councils = Council.GetAllCouncils(pm);
+        	PrintWriter writer = response.getWriter(); 
+        	writer.write("\"Council\",\"University\",\"Location\",\"Website\",\"Attendees\"\n");
+        	
+        	for (int i = 0; i < councils.size(); i++)
+        	{
+        		writer.write('"' + councils.get(i).getName() + '"' + ','
+        				+ '"' + councils.get(i).getUniversity() + '"' + ','
+        				+ '"' + councils.get(i).getLocation() + '"' + ','
+        				+ '"' + councils.get(i).getWebsite() + '"' + ','
+        				+ '"' + councils.get(i).getAttendees().size() + '"' + "\n");
+        	}
+        	
         } else {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
