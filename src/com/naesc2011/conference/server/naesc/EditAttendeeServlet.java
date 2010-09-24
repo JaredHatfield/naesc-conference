@@ -33,6 +33,7 @@ import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
+import com.naesc2011.conference.shared.Tour;
 
 public class EditAttendeeServlet extends HttpServlet {
 
@@ -77,6 +78,7 @@ public class EditAttendeeServlet extends HttpServlet {
                             ConferenceAttendee ca = council.getAttendees().get(
                                     i);
                             request.setAttribute("attendee", ca);
+                            request.setAttribute("tours", Tour.GetAllTours(pm));
                             found = true;
                             break;
                         }

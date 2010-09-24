@@ -101,6 +101,9 @@ public class ProcessSaveAttendeeServlet extends HttpServlet {
                             ca.setVegetarian(request.getParameter("vegetarian") != null);
                             ca.setAllergies(request.getParameter("allergies"));
 
+                            // TODO: Update the tour selection
+
+                            // Close the persistence connection
                             pm.close();
 
                             response.sendRedirect("/mycouncil?id=" + pid);

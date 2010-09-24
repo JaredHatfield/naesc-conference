@@ -118,6 +118,11 @@ public class ConferenceAttendee {
     private VoteStatus voteStatus;
 
     /**
+     * The selected tour.
+     */
+    private Tour tour;
+
+    /**
      * The resume.
      */
     private BlobKey resume;
@@ -364,6 +369,21 @@ public class ConferenceAttendee {
      */
     public void setVoteStatus(VoteStatus voteStatus) {
         this.voteStatus = voteStatus;
+    }
+
+    /**
+     * @param tour
+     *            the tour to set
+     */
+    public void setTour(Tour tour) {
+        this.tour = tour;
+    }
+
+    /**
+     * @return the tour
+     */
+    public Tour getTour() {
+        return tour;
     }
 
     /**

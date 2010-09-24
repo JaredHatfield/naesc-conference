@@ -17,6 +17,8 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.naesc2011.conference.shared.Tour" %>
 <%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,6 +28,8 @@
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
+	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
+	
 	<h1>Add Attendee</h1>
 		<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">Back</a>
 		<form method="post" action="/process/addattendee">
@@ -49,6 +53,16 @@
 			<select name="shirtSize">
 			<% for(ConferenceAttendee.ShirtSize ss : ConferenceAttendee.ShirtSize.values()) { %>
 				<option value="<%= ss.toString() %>"><%= ss.toString() %></option>
+			<% } %>
+			</select>
+		</p>
+		
+		<p>
+			<label>Tour:</label>
+			<select name="tour">
+				<option value="-1">Select Tour</option>
+			<% for(Tour t : tours) { %>
+				<option value="<%= t.getKey().getId() %>"><%= t.getName() %></option>
 			<% } %>
 			</select>
 		</p>

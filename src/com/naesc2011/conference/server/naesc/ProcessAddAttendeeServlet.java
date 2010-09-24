@@ -83,6 +83,8 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
                     ca.setVegetarian(request.getParameter("vegetarian") != null);
                     ca.setAllergies(request.getParameter("allergies"));
 
+                    // TODO: Save the tour selection
+
                     // Make the object persistent
                     try {
                         council.getAttendees().add(ca);
