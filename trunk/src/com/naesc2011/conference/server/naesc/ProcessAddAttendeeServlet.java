@@ -31,6 +31,7 @@ import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
+import com.naesc2011.conference.shared.Tour;
 
 public class ProcessAddAttendeeServlet extends HttpServlet {
     /**
@@ -83,7 +84,12 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
                     ca.setVegetarian(request.getParameter("vegetarian") != null);
                     ca.setAllergies(request.getParameter("allergies"));
 
-                    // TODO: Save the tour selection
+                    // Save the tour selection
+                    String tourid = request.getParameter("tour");
+                    if (tourid != null && tourid != "-1") {
+                        Tour t = Tour.GetTour(pm, tourid);
+                        t.addAttendee(council.getKey(), ca);
+                    }
 
                     // Make the object persistent
                     try {

@@ -60,7 +60,7 @@
 		<p>
 			<label>Tour:</label>
 			<select name="tour">
-				<option value="-1">Select Tour</option>
+				<option value="-1">Select a Tour From the Following</option>
 			<% for(Tour t : tours) { %>
 				<option value="<%= t.getKey().getId() %>"><%= t.getName() %></option>
 			<% } %>

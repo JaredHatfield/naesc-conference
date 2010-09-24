@@ -115,16 +115,19 @@ public class ConferenceAttendee {
     /**
      * The attendee's voting status.
      */
+    @Persistent
     private VoteStatus voteStatus;
 
     /**
      * The selected tour.
      */
-    private Tour tour;
+    @Persistent
+    private Key tour;
 
     /**
      * The resume.
      */
+    @Persistent
     private BlobKey resume;
 
     /**
@@ -375,14 +378,14 @@ public class ConferenceAttendee {
      * @param tour
      *            the tour to set
      */
-    public void setTour(Tour tour) {
+    public void setTour(Key tour) {
         this.tour = tour;
     }
 
     /**
      * @return the tour
      */
-    public Tour getTour() {
+    public Key getTour() {
         return tour;
     }
 

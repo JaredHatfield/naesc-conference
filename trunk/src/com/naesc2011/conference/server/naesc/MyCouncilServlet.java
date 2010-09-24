@@ -32,6 +32,7 @@ import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
+import com.naesc2011.conference.shared.Tour;
 
 public class MyCouncilServlet extends HttpServlet {
 
@@ -66,6 +67,7 @@ public class MyCouncilServlet extends HttpServlet {
 
                 if (haspermission) {
                     Council council = Council.GetCouncil(pm, pid);
+                    request.setAttribute("tours", Tour.GetAllTours(pm));
                     request.setAttribute("council", council);
                     String url = "/naesc/mycouncil.jsp";
                     ServletContext context = getServletContext();
