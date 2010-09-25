@@ -47,11 +47,11 @@ public class AdminAwardServlet extends HttpServlet {
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
 
         if (authenticated) {
-            // TODO: Implement the logic for displaying the award interface
             PersistenceManager pm = PMF.get().getPersistenceManager();
             List<Award> awards = Award.GetAllAwards(pm);
             request.setAttribute("awards", awards);
 
+            // Display the JSP page.
             String url = "/admin/award.jsp";
             ServletContext context = getServletContext();
             RequestDispatcher dispatcher = context.getRequestDispatcher(url);
