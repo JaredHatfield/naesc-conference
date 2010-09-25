@@ -41,7 +41,7 @@ public class AdminAttendeeCSVServlet extends HttpServlet {
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
 
         if (authenticated) {
-            response.getWriter().write("test");
+            // TODO: Display all of the attendee information in CSV format
         } else {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
