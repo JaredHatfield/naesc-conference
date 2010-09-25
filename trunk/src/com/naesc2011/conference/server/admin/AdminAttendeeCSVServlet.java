@@ -18,13 +18,20 @@
 package com.naesc2011.conference.server.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
+import javax.jdo.PersistenceManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.ConferenceAttendee;
+import com.naesc2011.conference.shared.Council;
+import com.naesc2011.conference.shared.PMF;
+import com.naesc2011.conference.shared.Tour;
 
 public class AdminAttendeeCSVServlet extends HttpServlet {
     /**
@@ -41,7 +48,72 @@ public class AdminAttendeeCSVServlet extends HttpServlet {
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
 
         if (authenticated) {
-            // TODO: Display all of the attendee information in CSV format
+        	PersistenceManager pm = PMF.get().getPersistenceManager();
+        	
+        	List<Council> councils = Council.GetAllCouncils(pm);
+        	List<Tour> tours = Tour.GetAllTours(pm);
+        	
+        	PrintWriter writer = response.getWriter();
+        	writer.write("\"Council\",\"Last Name\",\"First Name\",\"Middle Name\"," +
+        			"\"Major\",\"Email\",\"Gender\",\"Shirt Size\"," +
+        			"\"Emergency Contact Name\",\"Emergency Contact Phone\",\"Arrival Informtion\"," +
+        			"\"Vegetarian\",\"Allergies\",\"Voting Status\",\"Tour\"\n");
+        	
+        	for (int i = 0; i < councils.size(); i++)
+        	{
+        		Council council = councils.get(i);
+        		
+        		writer.write('"' + council.getName() + '"' + ',');
+         		
+        		List<ConferenceAttendee> attendees = council.getAttendees();
+        		
+        		for (int j = 0; j < attendees.size(); j++)
+        		{
+        			if (j > 0)
+        			{
+        				writer.write('"' + council.getName() + '"' + ',');
+        			}
+        			
+        			ConferenceAttendee attendee = attendees.get(j);
+        			
+        			writer.write('"' + attendee.getLastName() + '"' + ','
+        					+ '"' + attendee.getFirstName() + '"' + ','
+        					+ '"' + attendee.getMiddleName() + '"' + ','
+        					+ '"' + attendee.getMajor() + '"' + ','
+        					+ '"' + attendee.getEmail() + '"' + ','
+        					+ '"' + attendee.getGender() + '"' + ','
+        					+ '"' + attendee.getShirtSize() + '"' + ','
+        					+ '"' + attendee.getEmergencyContactName() + '"' + ','
+        					+ '"' + attendee.getEmergencyContactPhone() + '"' + ','
+        					+ '"' + attendee.getArrivalInformation() + '"' + ',');
+        			
+        			if (attendee.getVegetarian())
+        			{
+        				writer.write('"' + "Yes" + '"' + ',');
+        			}
+        			else
+        			{
+        				writer.write('"' + "No" + '"' + ',');
+        			}
+        			
+        			writer.write('"' + attendee.getAllergies() + '"' + ','
+        					+ '"' + attendee.getVoteStatus() + '"' + ',');
+        			
+        			for (int k = 0; k < tours.size(); k++)
+        			{
+        				Tour tour = tours.get(k);
+        				if (tour.getKey().equals(attendee.getTour()))
+        				{
+        					writer.write('"' + tour.getName() + '"');
+        				}
+        			}
+        			
+        			writer.write("\n");	
+        		}
+        		
+        		writer.write("\n");
+        	}
+        	
         } else {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }

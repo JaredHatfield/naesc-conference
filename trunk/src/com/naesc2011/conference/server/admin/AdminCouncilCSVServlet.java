@@ -19,7 +19,6 @@ package com.naesc2011.conference.server.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
