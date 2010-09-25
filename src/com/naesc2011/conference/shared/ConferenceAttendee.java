@@ -363,7 +363,14 @@ public class ConferenceAttendee {
      * @return the voteStatus
      */
     public VoteStatus getVoteStatus() {
-        return voteStatus;
+    	if (voteStatus == null)
+    	{
+    		return VoteStatus.NONE;
+    	}
+    	else
+    	{
+    		return voteStatus;
+    	}
     }
 
     /**
