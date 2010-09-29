@@ -39,29 +39,23 @@
 		<fieldset> 
 			<legend><%= a.getName() %></legend> 
 			<% if(app == null) { %>
-				<p><label><%= a.getQuestion1() %></label></p>
-				<p><textarea cols="80" rows="8" name="q1"></textarea></p>
-				<br />
-				<p><label><%= a.getQuestion2() %></label></p>
-				<p><textarea cols="80" rows="8" name="q2"></textarea></p>
-				<br />
-				<p><label><%= a.getQuestion3() %></label></p>
-				<p><textarea cols="80" rows="8" name="q3"></textarea></p>
-				<br />
-				<p><label><%= a.getQuestion4() %></label></p>
-				<p><textarea cols="80" rows="8" name="q4"></textarea></p>
+				<p><label class="widelabel"><%= a.getQuestion1() %></label></p>
+				<p><textarea cols="70" rows="8" name="q1"></textarea></p>
+				<p><label class="widelabel"><%= a.getQuestion2() %></label></p>
+				<p><textarea cols="70" rows="8" name="q2"></textarea></p>
+				<p><label class="widelabel"><%= a.getQuestion3() %></label></p>
+				<p><textarea cols="70" rows="8" name="q3"></textarea></p>
+				<p><label class="widelabel"><%= a.getQuestion4() %></label></p>
+				<p><textarea cols="70" rows="8" name="q4"></textarea></p>
 			<% } else { %>
-				<p><label><%= a.getQuestion1() %></label></p>
-				<p><textarea cols="80" rows="8" name="q1"><%= app.getQuestion1() %></textarea></p>
-				<br />
-				<p><label><%= a.getQuestion2() %></label></p>
-				<p><textarea cols="80" rows="8" name="q2"><%= app.getQuestion2() %></textarea></p>
-				<br />
-				<p><label><%= a.getQuestion3() %></label></p>
-				<p><textarea cols="80" rows="8" name="q3"><%= app.getQuestion3() %></textarea></p>
-				<br />
-				<p><label><%= a.getQuestion4() %></label></p>
-				<p><textarea cols="80" rows="8" name="q4"><%= app.getQuestion4() %></textarea></p>
+				<p><label class="widelabel"><%= a.getQuestion1() %></label></p>
+				<p><textarea cols="70" rows="8" name="q1"><%= app.getQuestion1() %></textarea></p>
+				<p><label class="widelabel"><%= a.getQuestion2() %></label></p>
+				<p><textarea cols="70" rows="8" name="q2"><%= app.getQuestion2() %></textarea></p>
+				<p><label class="widelabel"><%= a.getQuestion3() %></label></p>
+				<p><textarea cols="70" rows="8" name="q3"><%= app.getQuestion3() %></textarea></p>
+				<p><label class="widelabel"><%= a.getQuestion4() %></label></p>
+				<p><textarea cols="70" rows="8" name="q4"><%= app.getQuestion4() %></textarea></p>
 			<% } %>
 			<br />
 			<input type="hidden" name="id" value="<%= request.getAttribute("councilid") %>" />

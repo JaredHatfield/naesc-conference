@@ -38,29 +38,58 @@
 	<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards"); %>
 	
 	<a href="/editcouncil?id=<%= council.getKey().getId() %>">Edit</a><br />
-	Name: <%= council.getName() %><br />
-	University: <%= council.getUniversity() %><br />
-	Location: <%= council.getLocation() %><br />
+	<table class="infotable">
+		<tr>
+			<td class="titlecol">Name:</td>
+			<td><%= council.getName() %></td>
+		</tr>
+		<tr>
+			<td class="titlecol">University:</td>
+			<td><%= council.getUniversity() %></td>
+		</tr>
+		<tr>
+			<td class="titlecol">Location:</td>
+			<td><%= council.getLocation() %></td>
+		</tr>
+		<tr>
+			<td class="titlecol">Website:</td>
+			<td><%= council.getWebsite() %></td>
+		</tr>
+	</table>
 	
 	<h2>Award Applications</h2>
 	<% List<AwardSubmission> submitted = council.getAwardSubmissions(); %>
-	<% for(int i = 0; i < awards.size(); i++) { %>
-		<% Award a = awards.get(i); %>
-		<a href="/editaward?id=<%= council.getKey().getId() %>&a=<%= a.getKey().getId() %>"><%= a.getName() %></a>
-		<% for(int j = 0; submitted != null && j < submitted.size(); j++) { %>
-			<% if(submitted.get(j).getAward().equals(a.getKey())) { %>
-				<% if(submitted.get(j).getSubmitted()){ %>
-					(Award Submitted)
-				<% } %>
-			<% break; } %>
+	<table class="infotable">
+		<tr class="titlerow">
+			<td>Award Application</td>
+			<td>Submitted</td>
+		</tr>
+		<% for(int i = 0; i < awards.size(); i++) { %>
+			<tr>
+				<td>
+					<% Award a = awards.get(i); %>
+				<a href="/editaward?id=<%= council.getKey().getId() %>&a=<%= a.getKey().getId() %>"><%= a.getName() %></a>
+				</td>
+				<td>
+					<% for(int j = 0; submitted != null && j < submitted.size(); j++) { %>
+						<% if(submitted.get(j).getAward().equals(a.getKey())) { %>
+							<% if(submitted.get(j).getSubmitted()){ %>
+								<img src="/static/check.png" alt="Submitted" title="Submitted" class="center">
+							<% } else { %>
+								<!-- TODO: This should be an image. -->
+								In Progress!
+							<% } %>
+						<% break; } %>
+					<% } %>
+				</td>
+			</tr>
 		<% } %>
-		<br />
-	<% } %>
+	</table>
 	
 	<h2>Attending Members</h2>
 	<% if(council.getAttendees() != null && council.getAttendees().size() > 0) { %>
-		<table border="1">
-			<tr>
+		<table class="infotable">
+			<tr class="titlerow">
 				<td><a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a></td>
 				<td>Name</td>
 				<td>Email</td>
@@ -68,6 +97,7 @@
 				<td>Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>">(Manage)</a></td>
 				<td>Information</td>
 				<td>Resume</td>
+				<td>Complete</td>
 			</tr>
 		<% for(int i = 0; i < council.getAttendees().size(); i++) { %>
 			<tr>
@@ -92,10 +122,13 @@
 				</td>
 				<td><!-- TODO: Add the logic to display if the required fields have been completed --></td>
 				<td>
-					<% if(att.getResume() == null) { %>
-						No
-					<% } else { %>
-						Yes
+					<% if(att.getResume() != null) { %>
+						<img src="/static/document.png" alt="Resume Uploaded" title="Resume Uploaded" class="center">
+					<% } %>
+				</td>
+				<td>
+					<% if(att.isAttendeeComplete()) { %>
+						<img src="/static/check.png" alt="Complete" title="Complete" class="center">
 					<% } %>
 				</td>
 		<% } %>

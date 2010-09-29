@@ -363,14 +363,11 @@ public class ConferenceAttendee {
      * @return the voteStatus
      */
     public VoteStatus getVoteStatus() {
-    	if (voteStatus == null)
-    	{
-    		return VoteStatus.NONE;
-    	}
-    	else
-    	{
-    		return voteStatus;
-    	}
+        if (voteStatus == null) {
+            return VoteStatus.NONE;
+        } else {
+            return voteStatus;
+        }
     }
 
     /**
@@ -425,6 +422,18 @@ public class ConferenceAttendee {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    /**
+     * Performs a check to see if the attendee record has all of the required
+     * fields.
+     * 
+     * @return True if the attendee record has all of the required fields.
+     */
+    public boolean isAttendeeComplete() {
+        // TODO: Implement the logic to check if an attendee has all of the
+        // required fields.
+        return false;
     }
 
     /**
