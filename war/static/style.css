@@ -1,4 +1,75 @@
 h1 {
 	font-size: 30px;
 	font-weight: bold;
-} 
+}
+
+img.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+/* Format the tables */
+table.infotable {
+	border-spacing: ;
+	border-style: none;
+}
+table.infotable td {
+	border-width: 1px;
+	padding: 3px;
+	border-style: inset;
+	border-color: gray;
+}
+table.infotable tr.titlerow {
+	background-color: lightgray;
+	font-weight: bold;
+}
+table.infotable td.titlecol {
+	background-color: lightgray;
+	font-weight: bold;
+}
+
+/* Format the HTML form */
+label {
+	font-size: 80%;
+	font-weight: bold;
+	width: 12em;
+	float: left;
+	text-align: right;
+	margin-right: 0.5em;
+	display: block
+}
+label.widelabel {
+	width: 30em;
+	text-align: left;
+	margin-right: 0em;
+	margin-left: 1em;
+}
+input, select {
+	color: black;
+	background: lightgrey;
+	border: 1px solid #556644;
+}
+input.text {
+	width: 80em;
+}
+.submit input {
+	margin-left: 10em;
+	color: #000;
+	background: lightgrey;
+	border: 2px outset #556644;
+}
+fieldset {
+	border: 1px solid #556644;
+	width: 40em
+}
+legend {
+	font-size: 110%;
+	color: black;
+	background: lightgrey;
+	border: 1px solid black;
+	padding: 4px 40px
+}
+
+
