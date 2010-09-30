@@ -53,22 +53,13 @@ public class MyCouncilServlet extends HttpServlet {
         if (authenticated) {
             String pid = request.getParameter("id");
             if (pid != null) {
-                long id = Long.parseLong(pid);
                 PersistenceManager pm = PMF.get().getPersistenceManager();
-
-                List<Award> awards = Award.GetAllAwards(pm);
-                request.setAttribute("awards", awards);
-                List<CouncilPermission> councils = CouncilPermission
-                        .GetPermission(pm, p.getUser().getUserId());
-                Boolean haspermission = false;
-                for (int i = 0; i < councils.size(); i++) {
-                    if (councils.get(i).getCouncil().getId() == id) {
-                        haspermission = true;
-                        break;
-                    }
-                }
+                boolean haspermission = CouncilPermission.HasPermission(pm,
+                        pid, p);
 
                 if (haspermission) {
+                    List<Award> awards = Award.GetAllAwards(pm);
+                    request.setAttribute("awards", awards);
                     Council council = Council.GetCouncil(pm, pid);
                     request.setAttribute("tours", Tour.GetAllTours(pm));
                     request.setAttribute("council", council);

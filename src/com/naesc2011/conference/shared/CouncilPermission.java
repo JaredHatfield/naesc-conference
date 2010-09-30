@@ -26,6 +26,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
+import com.naesc2011.conference.server.PermissionManager;
 
 @PersistenceCapable
 public class CouncilPermission {
@@ -125,5 +126,32 @@ public class CouncilPermission {
         query.setFilter("userId == userIdParam");
         query.declareParameters("String userIdParam");
         return (List<CouncilPermission>) query.execute(userId);
+    }
+
+    /**
+     * Tests if a given user has the necessary permissions to modify a council.
+     * 
+     * @param pm
+     *            The Persistence Manager.
+     * @param councilId
+     *            The Council's identifier.
+     * @param userId
+     *            The user's identifier.
+     * @return
+     */
+    public static boolean HasPermission(PersistenceManager pm,
+            String councilId, PermissionManager p) {
+        long id = Long.parseLong(councilId);
+        List<CouncilPermission> councils = CouncilPermission.GetPermission(pm,
+                p.getUser().getUserId());
+        Boolean haspermission = false;
+        for (int i = 0; i < councils.size(); i++) {
+            if (councils.get(i).getCouncil().getId() == id) {
+                haspermission = true;
+                break;
+            }
+        }
+
+        return haspermission;
     }
 }

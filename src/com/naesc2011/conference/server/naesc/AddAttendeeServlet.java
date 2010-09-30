@@ -18,7 +18,6 @@
 package com.naesc2011.conference.server.naesc;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
@@ -52,18 +51,9 @@ public class AddAttendeeServlet extends HttpServlet {
             String pid = request.getParameter("id");
             request.setAttribute("councilid", pid);
             if (pid != null) {
-                long id = Long.parseLong(pid);
                 PersistenceManager pm = PMF.get().getPersistenceManager();
-
-                List<CouncilPermission> councils = CouncilPermission
-                        .GetPermission(pm, p.getUser().getUserId());
-                Boolean haspermission = false;
-                for (int i = 0; i < councils.size(); i++) {
-                    if (councils.get(i).getCouncil().getId() == id) {
-                        haspermission = true;
-                        break;
-                    }
-                }
+                boolean haspermission = CouncilPermission.HasPermission(pm,
+                        pid, p);
 
                 if (haspermission) {
                     request.setAttribute("tours", Tour.GetAllTours(pm));
