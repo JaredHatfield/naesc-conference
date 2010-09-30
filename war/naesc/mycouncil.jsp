@@ -40,19 +40,19 @@
 	<a href="/editcouncil?id=<%= council.getKey().getId() %>">Edit</a><br />
 	<table class="infotable">
 		<tr>
-			<td class="titlecol">Name:</td>
-			<td><%= council.getName() %></td>
+			<td class="titlecol">Name</td>
+			<td class="extralargecell"><%= council.getName() %></td>
 		</tr>
 		<tr>
-			<td class="titlecol">University:</td>
+			<td class="titlecol">University</td>
 			<td><%= council.getUniversity() %></td>
 		</tr>
 		<tr>
-			<td class="titlecol">Location:</td>
+			<td class="titlecol">Location</td>
 			<td><%= council.getLocation() %></td>
 		</tr>
 		<tr>
-			<td class="titlecol">Website:</td>
+			<td class="titlecol">Website</td>
 			<td><%= council.getWebsite() %></td>
 		</tr>
 	</table>
@@ -66,11 +66,11 @@
 		</tr>
 		<% for(int i = 0; i < awards.size(); i++) { %>
 			<tr>
-				<td>
+				<td class="largecell">
 					<% Award a = awards.get(i); %>
 				<a href="/editaward?id=<%= council.getKey().getId() %>&a=<%= a.getKey().getId() %>"><%= a.getName() %></a>
 				</td>
-				<td>
+				<td class="smallcell">
 					<% for(int j = 0; submitted != null && j < submitted.size(); j++) { %>
 						<% if(submitted.get(j).getAward().equals(a.getKey())) { %>
 							<% if(submitted.get(j).getSubmitted()){ %>
@@ -90,14 +90,16 @@
 	<% if(council.getAttendees() != null && council.getAttendees().size() > 0) { %>
 		<table class="infotable">
 			<tr class="titlerow">
-				<td><a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a></td>
-				<td>Name</td>
-				<td>Email</td>
-				<td>Tour</td>
-				<td>Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>">(Manage)</a></td>
-				<td>Information</td>
-				<td>Resume</td>
-				<td>Complete</td>
+				<td class="minicell">
+					<a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a>
+				</td>
+				<td class="mediumcell">Name</td>
+				<td class="mediumcell">Email</td>
+				<td class="mediumcell">Tour</td>
+				<td class="smallcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>">(Manage)</a></td>
+				<td class="smallcell">Information</td>
+				<td class="minicell">Resume</td>
+				<td class="minicell">Complete</td>
 			</tr>
 		<% for(int i = 0; i < council.getAttendees().size(); i++) { %>
 			<tr>

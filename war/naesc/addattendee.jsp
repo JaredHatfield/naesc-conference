@@ -75,8 +75,8 @@
 		
 		<input type="hidden" name="councilid" value="<%= request.getAttribute("councilid") %>">
 		<p class="submit">
-		<input type="hidden" name="id">
-		<input type="submit" value="Add" />
+			<input type="hidden" name="id">
+			<input type="submit" value="Add" />
 		</p>
 		</fieldset>
 	</form>
