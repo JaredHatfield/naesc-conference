@@ -97,9 +97,9 @@
 		<p><label>Allergies:</label><input type="text" name="allergies" value="<%= a.getAllergies() %>" /></p>
 		
 		<p class="submit">
-		<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
-		<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
-		<input type="submit" value="Update" />
+			<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
+			<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
+			<input type="submit" value="Update" />
 		</p>
 		</fieldset>
 	</form>
@@ -108,13 +108,22 @@
 		<fieldset> 
 		<legend>Resume</legend>
 			<% if(a.getResume() == null) { %>
-				<a href="/uploadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Upload Resume</a>
+				<p>
+					<label class="widelabel">
+						<a href="/uploadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Upload Resume</a>
+					</label>
+				</p>
 			<% } else { %>
-				<a href="/downloadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Download Resume</a>
+				<p>
+					<label class="widelabel">
+						<a href="/downloadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Download Resume</a>
+					</label>
+				</p>
+				<br />
 				<p class="submit">
-				<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
-				<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
-				<input type="submit" value="Delete Resume" />
+					<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
+					<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
+					<input type="submit" value="Delete Resume" />
 				</p>
 				
 			<% } %>

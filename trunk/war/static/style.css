@@ -28,6 +28,22 @@ table.infotable tr.titlerow {
 table.infotable td.titlecol {
 	background-color: lightgray;
 	font-weight: bold;
+	width: 10em;
+}
+table.infotable td.minicell {
+	width: 3em;
+}
+table.infotable td.smallcell {
+	width: 6em;
+}
+table.infotable td.mediumcell {
+	width: 10em;
+}
+table.infotable td.largecell {
+	width: 14em;
+}
+table.infotable td.extralargecell {
+	width: 22em;
 }
 
 /* Format the HTML form */
@@ -55,7 +71,7 @@ input.text {
 	width: 80em;
 }
 .submit input {
-	margin-left: 10em;
+	margin-left: 12em;
 	color: #000;
 	background: lightgrey;
 	border: 2px outset #556644;
