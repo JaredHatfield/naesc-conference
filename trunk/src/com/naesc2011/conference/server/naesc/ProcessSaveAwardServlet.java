@@ -52,18 +52,9 @@ public class ProcessSaveAwardServlet extends HttpServlet {
             String pid = request.getParameter("id");
             String aid = request.getParameter("a");
             if (pid != null && aid != null) {
-                long id = Long.parseLong(pid);
                 PersistenceManager pm = PMF.get().getPersistenceManager();
-
-                List<CouncilPermission> councils = CouncilPermission
-                        .GetPermission(pm, p.getUser().getUserId());
-                Boolean haspermission = false;
-                for (int i = 0; i < councils.size(); i++) {
-                    if (councils.get(i).getCouncil().getId() == id) {
-                        haspermission = true;
-                        break;
-                    }
-                }
+                boolean haspermission = CouncilPermission.HasPermission(pm,
+                        pid, p);
 
                 if (haspermission) {
                     Award award = Award.GetAward(pm, aid);
