@@ -18,6 +18,7 @@
 package com.naesc2011.conference.server.naesc;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -61,13 +62,14 @@ public class ProcessSaveAwardServlet extends HttpServlet {
                     Council council = Council.GetCouncil(pm, pid);
                     List<AwardSubmission> sub = council.getAwardSubmissions();
                     AwardSubmission csub = null;
-
                     String q1 = request.getParameter("q1");
                     String q2 = request.getParameter("q2");
                     String q3 = request.getParameter("q3");
                     String q4 = request.getParameter("q4");
+                    String submit = request.getParameter("submitbutton");
 
-                    if (q1 != null && q2 != null && q3 != null && q4 != null) {
+                    if (q1 != null && q2 != null && q3 != null && q4 != null
+                            && submit != null) {
                         for (int i = 0; i < sub.size(); i++) {
                             if (sub.get(i).getAward().equals(award.getKey())) {
                                 // Located the submision
@@ -78,12 +80,28 @@ public class ProcessSaveAwardServlet extends HttpServlet {
 
                         if (csub != null) {
                             // Retrieve the application and update it
-                            AwardApplication app = AwardApplication.GetAward(
-                                    pm, csub.getApplication());
-                            app.setQuestion1(q1);
-                            app.setQuestion2(q2);
-                            app.setQuestion3(q3);
-                            app.setQuestion4(q4);
+                            if (csub.getSubmitted()) {
+                                // The application was already submitted, so we
+                                // don't do
+                                // anything.
+                            } else {
+                                // The application wasn't submitted yet so we
+                                // update.
+                                AwardApplication app = AwardApplication
+                                        .GetAward(pm, csub.getApplication());
+                                app.setQuestion1(q1);
+                                app.setQuestion2(q2);
+                                app.setQuestion3(q3);
+                                app.setQuestion4(q4);
+                                if (submit.equals("Submit")) {
+                                    // The application was submitted so mark
+                                    // that flag.
+                                    csub.setSubmitted(true);
+                                    csub.setSubmittedOn(new Date());
+
+                                }
+                            }
+
                         } else {
                             // There was no submission so we need to add one
                             AwardApplication app = new AwardApplication(q1, q2,
@@ -92,6 +110,13 @@ public class ProcessSaveAwardServlet extends HttpServlet {
                             AwardSubmission submission = new AwardSubmission(
                                     award.getKey(), app.getKey());
                             council.getAwardSubmissions().add(submission);
+                            if (submit.equals("Submit")) {
+                                // The application was submitted so mark
+                                // that flag.
+                                submission.setSubmitted(true);
+                                submission.setSubmittedOn(new Date());
+
+                            }
                         }
 
                         pm.close();

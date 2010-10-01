@@ -96,7 +96,8 @@ public class Tour {
      *            the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
@@ -111,7 +112,8 @@ public class Tour {
      *            the description to set
      */
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**

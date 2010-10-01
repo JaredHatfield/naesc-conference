@@ -149,7 +149,7 @@ public class Council {
      *            the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.replaceAll("\\<.*?>", "");
     }
 
     /**
@@ -164,7 +164,7 @@ public class Council {
      *            the university to set
      */
     public void setUniversity(String university) {
-        this.university = university;
+        this.university = university.replaceAll("\\<.*?>", "");
     }
 
     /**
@@ -179,7 +179,7 @@ public class Council {
      *            the location to set
      */
     public void setLocation(String location) {
-        this.location = location;
+        this.location = location.replaceAll("\\<.*?>", "");
     }
 
     /**
@@ -209,7 +209,7 @@ public class Council {
      *            the website to set
      */
     public void setWebsite(String website) {
-        this.website = website;
+        this.website = website.replaceAll("\\<.*?>", "");
     }
 
     /**
