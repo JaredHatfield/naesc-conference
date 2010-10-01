@@ -76,8 +76,7 @@
 							<% if(submitted.get(j).getSubmitted()){ %>
 								<img src="/static/check.png" alt="Submitted" title="Submitted" class="center">
 							<% } else { %>
-								<!-- TODO: This should be an image. -->
-								In Progress!
+								<img src="/static/progress.png" alt="In Progress" title="In Progress" class="center">
 							<% } %>
 						<% break; } %>
 					<% } %>

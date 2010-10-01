@@ -17,6 +17,7 @@
  */
 package com.naesc2011.conference.shared;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -54,6 +55,12 @@ public class AwardSubmission {
      */
     @Persistent
     private Boolean submitted;
+
+    /**
+     * The time when the application was submitted.
+     */
+    @Persistent
+    private Date submittedOn;
 
     /**
      * 
@@ -124,6 +131,21 @@ public class AwardSubmission {
      */
     public void setSubmitted(Boolean submitted) {
         this.submitted = submitted;
+    }
+
+    /**
+     * @param submittedOn
+     *            the submittedOn to set
+     */
+    public void setSubmittedOn(Date submittedOn) {
+        this.submittedOn = submittedOn;
+    }
+
+    /**
+     * @return the submittedOn
+     */
+    public Date getSubmittedOn() {
+        return submittedOn;
     }
 
     /**

@@ -59,6 +59,7 @@ public class ProcessRegisterServlet extends HttpServlet {
                     Council c = new Council(name);
                     c.setUniversity(university);
                     c.setLocation(location);
+                    c.setWebsite("");
                     try {
                         Council.InsertCouncil(pm, c);
                         CouncilPermission cp = new CouncilPermission(p

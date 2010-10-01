@@ -116,7 +116,8 @@ public class Award {
      *            the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
@@ -131,7 +132,8 @@ public class Award {
      *            the question1 to set
      */
     public void setQuestion1(String question1) {
-        this.question1 = question1;
+        this.question1 = question1.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
@@ -146,7 +148,8 @@ public class Award {
      *            the question2 to set
      */
     public void setQuestion2(String question2) {
-        this.question2 = question2;
+        this.question2 = question2.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
@@ -161,7 +164,8 @@ public class Award {
      *            the question3 to set
      */
     public void setQuestion3(String question3) {
-        this.question3 = question3;
+        this.question3 = question3.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
@@ -176,7 +180,8 @@ public class Award {
      *            the question4 to set
      */
     public void setQuestion4(String question4) {
-        this.question4 = question4;
+        this.question4 = question4.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**

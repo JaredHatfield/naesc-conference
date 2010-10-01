@@ -74,6 +74,7 @@ public class EditAwardServlet extends HttpServlet {
                         Key k2 = award.getKey();
                         if (k1.equals(k2)) {
                             AwardSubmission sub = las.get(i);
+                            request.setAttribute("submission", sub);
                             AwardApplication aa = AwardApplication.GetAward(pm,
                                     sub.getApplication());
                             request.setAttribute("application", aa);

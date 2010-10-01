@@ -31,6 +31,7 @@
 	<%@ include file="../header.jsp" %>
 	<% Award a = (Award)request.getAttribute("award"); %>
 	<% AwardApplication app = (AwardApplication)request.getAttribute("application"); %>
+	<% AwardSubmission sub = (AwardSubmission)request.getAttribute("submission"); %>
 	<h1>Edit Award</h1>
 	<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">Back</a><br />
 	<br />
@@ -47,23 +48,40 @@
 				<p><textarea cols="70" rows="8" name="q3"></textarea></p>
 				<p><label class="widelabel"><%= a.getQuestion4() %></label></p>
 				<p><textarea cols="70" rows="8" name="q4"></textarea></p>
+			<% } else if(sub != null && sub.getSubmitted()) { %>
+				<p style="font-weight: bold; text-align: center;">Submitted on <%= sub.getSubmittedOn() %></p>
+				<p><label class="widelabel"><%= a.getQuestion1() %></label></p><br />
+				<p style="font-size: 70%"><%= app.getQuestion1().getValue().replace("\n", "<br />") %></p>
+				<p><label class="widelabel"><%= a.getQuestion2() %></label></p><br />
+				<p style="font-size: 70%"><%= app.getQuestion2().getValue().replace("\n", "<br />") %></p>
+				<p><label class="widelabel"><%= a.getQuestion3() %></label></p><br />
+				<p style="font-size: 70%"><%= app.getQuestion3().getValue().replace("\n", "<br />") %></p>
+				<p><label class="widelabel"><%= a.getQuestion4() %></label></p><br />
+				<p style="font-size: 70%"><%= app.getQuestion4().getValue().replace("\n", "<br />") %></p>
 			<% } else { %>
 				<p><label class="widelabel"><%= a.getQuestion1() %></label></p>
-				<p><textarea cols="70" rows="8" name="q1"><%= app.getQuestion1() %></textarea></p>
+				<p><textarea cols="70" rows="8" name="q1"><%= app.getQuestion1().getValue() %></textarea></p>
 				<p><label class="widelabel"><%= a.getQuestion2() %></label></p>
-				<p><textarea cols="70" rows="8" name="q2"><%= app.getQuestion2() %></textarea></p>
+				<p><textarea cols="70" rows="8" name="q2"><%= app.getQuestion2().getValue() %></textarea></p>
 				<p><label class="widelabel"><%= a.getQuestion3() %></label></p>
-				<p><textarea cols="70" rows="8" name="q3"><%= app.getQuestion3() %></textarea></p>
+				<p><textarea cols="70" rows="8" name="q3"><%= app.getQuestion3().getValue() %></textarea></p>
 				<p><label class="widelabel"><%= a.getQuestion4() %></label></p>
-				<p><textarea cols="70" rows="8" name="q4"><%= app.getQuestion4() %></textarea></p>
+				<p><textarea cols="70" rows="8" name="q4"><%= app.getQuestion4().getValue() %></textarea></p>
 			<% } %>
-			<br />
-			<input type="hidden" name="id" value="<%= request.getAttribute("councilid") %>" />
-			<input type="hidden" name="a" value="<%= a.getKey().getId() %>" />
-			<p class="submit">
-				<label>Save Current Responses</label>
-				<input type="submit" value="Save Progress" />
-			</p>
+			<% if(sub == null || !sub.getSubmitted()) { %>
+				<br />
+				<input type="hidden" name="id" value="<%= request.getAttribute("councilid") %>" />
+				<input type="hidden" name="a" value="<%= a.getKey().getId() %>" />
+				<p>
+					<label style="width: 20em;">Save your responses.<br />You will be able to edit your responses.</label>
+					<input type="submit" name="submitbutton" value="Save" />
+				</p>
+				<br />
+				<p>
+					<label style="width: 20em;">Submit application for consideration.<br />You will not be able to edit your responses.</label>
+					<input type="submit" name="submitbutton" value="Submit" />
+				</p>
+			<% } %>
 		</fieldset> 
 	</form>
 	

@@ -27,6 +27,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.Text;
 
 @PersistenceCapable
 public class AwardApplication {
@@ -41,25 +42,25 @@ public class AwardApplication {
      * The first question.
      */
     @Persistent
-    private String question1;
+    private Text question1;
 
     /**
      * The second question.
      */
     @Persistent
-    private String question2;
+    private Text question2;
 
     /**
      * The third question.
      */
     @Persistent
-    private String question3;
+    private Text question3;
 
     /**
      * The forth question.
      */
     @Persistent
-    private String question4;
+    private Text question4;
 
     /**
      * Initializes a new instance of an AwardApplication.
@@ -74,10 +75,10 @@ public class AwardApplication {
      *            The forth question.
      */
     public AwardApplication(String one, String two, String three, String four) {
-        this.question1 = one;
-        this.question2 = two;
-        this.question3 = three;
-        this.question4 = four;
+        this.setQuestion1(one);
+        this.setQuestion2(two);
+        this.setQuestion3(three);
+        this.setQuestion4(four);
     }
 
     /**
@@ -98,7 +99,7 @@ public class AwardApplication {
     /**
      * @return the question1
      */
-    public String getQuestion1() {
+    public Text getQuestion1() {
         return question1;
     }
 
@@ -107,13 +108,13 @@ public class AwardApplication {
      *            the question1 to set
      */
     public void setQuestion1(String question1) {
-        this.question1 = question1;
+        this.question1 = new Text(question1.replaceAll("\\<.*?>", ""));
     }
 
     /**
      * @return the question2
      */
-    public String getQuestion2() {
+    public Text getQuestion2() {
         return question2;
     }
 
@@ -122,13 +123,13 @@ public class AwardApplication {
      *            the question2 to set
      */
     public void setQuestion2(String question2) {
-        this.question2 = question2;
+        this.question2 = new Text(question2.replaceAll("\\<.*?>", ""));
     }
 
     /**
      * @return the question3
      */
-    public String getQuestion3() {
+    public Text getQuestion3() {
         return question3;
     }
 
@@ -137,13 +138,13 @@ public class AwardApplication {
      *            the question3 to set
      */
     public void setQuestion3(String question3) {
-        this.question3 = question3;
+        this.question3 = new Text(question3.replaceAll("\\<.*?>", ""));
     }
 
     /**
      * @return the question4
      */
-    public String getQuestion4() {
+    public Text getQuestion4() {
         return question4;
     }
 
@@ -152,7 +153,7 @@ public class AwardApplication {
      *            the question4 to set
      */
     public void setQuestion4(String question4) {
-        this.question4 = question4;
+        this.question4 = new Text(question4.replaceAll("\\<.*?>", ""));
     }
 
     /**

@@ -184,7 +184,8 @@ public class ConferenceAttendee {
      *            the firstName to set
      */
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = firstName.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
@@ -199,7 +200,8 @@ public class ConferenceAttendee {
      *            the middleName to set
      */
     public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+        this.middleName = middleName.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
@@ -214,7 +216,8 @@ public class ConferenceAttendee {
      *            the lastName to set
      */
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
@@ -236,7 +239,8 @@ public class ConferenceAttendee {
      *            the major to set
      */
     public void setMajor(String major) {
-        this.major = major;
+        this.major = major.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
@@ -251,7 +255,8 @@ public class ConferenceAttendee {
      *            the email to set
      */
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
@@ -296,7 +301,8 @@ public class ConferenceAttendee {
      *            the emergencyContactName to set
      */
     public void setEmergencyContactName(String emergencyContactName) {
-        this.emergencyContactName = emergencyContactName;
+        this.emergencyContactName = emergencyContactName.replaceAll("\\<.*?>",
+                "");
     }
 
     /**
@@ -311,7 +317,8 @@ public class ConferenceAttendee {
      *            the emergencyContactPhone to set
      */
     public void setEmergencyContactPhone(String emergencyContactPhone) {
-        this.emergencyContactPhone = emergencyContactPhone;
+        this.emergencyContactPhone = emergencyContactPhone.replaceAll(
+                "\\<.*?>", "");
     }
 
     /**
@@ -326,7 +333,8 @@ public class ConferenceAttendee {
      *            the arrivalInformation to set
      */
     public void setArrivalInformation(String arrivalInformation) {
-        this.arrivalInformation = arrivalInformation;
+        this.arrivalInformation = arrivalInformation.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
@@ -356,7 +364,8 @@ public class ConferenceAttendee {
      *            the allergies to set
      */
     public void setAllergies(String allergies) {
-        this.allergies = allergies;
+        this.allergies = allergies.replaceAll("\\<.*?>", "");
+        ;
     }
 
     /**
