@@ -34,6 +34,7 @@
 			<legend>Add Tour</legend> 
 			<p><label>Tour Name:</label><input class="insmall" type="text" name="name" /></p>
 			<p><label>Tour Description:</label><input class="insmall" type="text" name="description" /></p>
+			<p><label>Maximum Attendees:</label><input class="insmall" type="text" name="maximum" /></p>
 			<p class="submit"><input type="submit" value="Add" /></p>
 		</fieldset> 
 	</form>
@@ -45,6 +46,7 @@
 					<legend>Update Tour</legend> 
 					<p><label>Tour Name:</label><input class="insmall" type="text" name="name" value="<%= tours.get(i).getName() %>" /></p>
 					<p><label>Tour Description:</label><input class="insmall" type="text" name="description" value="<%= tours.get(i).getDescription() %>" /></p>
+					<p><label>Maximum Attendees:</label><input class="insmall" type="text" name="maximum" value="<%= tours.get(i).getMaximum() %>" /></p>
 					<p><label>Attending:</label><%= tours.get(i).getTourMembers().size() %></p>
 					<p class="submit">
 						<input type="hidden" name="id" value="<%= tours.get(i).getKey().getId() %>" />

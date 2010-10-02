@@ -75,7 +75,7 @@
 			<% for(Tour t : tours) { %>
 				<% if(a.getTour() != null && t.getKey().equals(a.getTour())) { %>
 					<option value="<%= t.getKey().getId() %>" selected="selected"><%= t.getName() %></option>
-				<% } else { %>
+				<% } else if(t.hasRoom()) { %>
 					<option value="<%= t.getKey().getId() %>"><%= t.getName() %></option>
 				<% } %>
 				

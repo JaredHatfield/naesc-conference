@@ -112,7 +112,9 @@ public class ProcessSaveAttendeeServlet extends HttpServlet {
 
                                     // Set the new tour as selected
                                     Tour t = Tour.GetTour(pm, tourid);
-                                    t.addAttendee(council.getKey(), ca);
+                                    if (t.hasRoom()) {
+                                        t.addAttendee(council.getKey(), ca);
+                                    }
                                 }
                             }
 

@@ -50,10 +50,13 @@ public class AdminProcessSaveTourServlet extends HttpServlet {
             String id = request.getParameter("id");
             String name = request.getParameter("name");
             String description = request.getParameter("description");
+            int maximum = Integer.parseInt(request.getParameter("maximum"));
+
             if (id != null && name != null && description != null) {
                 Tour t = Tour.GetTour(pm, id);
                 t.setName(name);
                 t.setDescription(description);
+                t.setMaximum(maximum);
                 pm.close();
             }
 
