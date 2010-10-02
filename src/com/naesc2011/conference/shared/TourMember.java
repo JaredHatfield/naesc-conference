@@ -73,25 +73,9 @@ public class TourMember {
     }
 
     /**
-     * @param council
-     *            the council to set
-     */
-    public void setCouncil(Key council) {
-        this.council = council;
-    }
-
-    /**
      * @return the attendee
      */
     public Key getAttendee() {
         return attendee;
-    }
-
-    /**
-     * @param attendee
-     *            the attendee to set
-     */
-    public void setAttendee(Key attendee) {
-        this.attendee = attendee;
     }
 }

@@ -55,6 +55,12 @@ public class Tour {
      * 
      */
     @Persistent
+    private int maximum;
+
+    /**
+     * 
+     */
+    @Persistent
     @Element(dependent = "true")
     private List<TourMember> tourMembers;
 
@@ -63,9 +69,10 @@ public class Tour {
      * @param name
      * @param description
      */
-    public Tour(String name, String description) {
+    public Tour(String name, String description, int maximum) {
         this.name = name;
         this.description = description;
+        this.maximum = maximum;
         this.setTourMembers(new ArrayList<TourMember>());
     }
 
@@ -129,6 +136,35 @@ public class Tour {
      */
     public List<TourMember> getTourMembers() {
         return tourMembers;
+    }
+
+    /**
+     * @param maximum
+     *            the maximum to set
+     */
+    public void setMaximum(int maximum) {
+        this.maximum = maximum;
+    }
+
+    /**
+     * @return the maximum
+     */
+    public int getMaximum() {
+        return maximum;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public boolean hasRoom() {
+        if (this.maximum <= 0) {
+            return true;
+        } else if (this.maximum > this.tourMembers.size()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

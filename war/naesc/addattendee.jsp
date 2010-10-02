@@ -62,7 +62,9 @@
 			<select name="tour">
 				<option value="-1">Select a Tour From the Following</option>
 			<% for(Tour t : tours) { %>
-				<option value="<%= t.getKey().getId() %>"><%= t.getName() %></option>
+				<% if(t.hasRoom()) { %>
+					<option value="<%= t.getKey().getId() %>"><%= t.getName() %></option>
+				<% } %>
 			<% } %>
 			</select>
 		</p>

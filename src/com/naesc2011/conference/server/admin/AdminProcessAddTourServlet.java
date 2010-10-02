@@ -49,8 +49,10 @@ public class AdminProcessAddTourServlet extends HttpServlet {
 
             String name = request.getParameter("name");
             String description = request.getParameter("description");
+            int maximum = Integer.parseInt(request.getParameter("maximum"));
+
             if (name != null && description != null) {
-                Tour t = new Tour(name, description);
+                Tour t = new Tour(name, description, maximum);
                 try {
                     Tour.InsertTour(pm, t);
                 } finally {

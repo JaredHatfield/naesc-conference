@@ -74,20 +74,23 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
                     ca.setVegetarian(request.getParameter("vegetarian") != null);
                     ca.setAllergies(request.getParameter("allergies"));
 
-                    // Save the tour selection
-                    String tourid = request.getParameter("tour");
-                    if (tourid != null && !tourid.equals("-1")) {
-                        Tour t = Tour.GetTour(pm, tourid);
-                        t.addAttendee(council.getKey(), ca);
-                    }
-
                     // Make the object persistent
                     try {
                         council.getAttendees().add(ca);
                         pm.makePersistent(ca);
                     } finally {
-                        pm.close();
                     }
+
+                    // Save the tour selection
+                    String tourid = request.getParameter("tour");
+                    if (tourid != null && !tourid.equals("-1")) {
+                        Tour t = Tour.GetTour(pm, tourid);
+                        if (t.hasRoom()) {
+                            t.addAttendee(council.getKey(), ca);
+                        }
+                    }
+
+                    pm.close();
 
                     response.sendRedirect("/mycouncil?id=" + pid);
                 } else {
