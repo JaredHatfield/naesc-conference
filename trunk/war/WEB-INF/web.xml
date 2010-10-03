@@ -69,6 +69,10 @@
         <servlet-class>com.naesc2011.conference.server.admin.AdminAwardServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>adminconferencesettings</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.admin.AdminConferenceSettingsServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>adminprocessaddtour</servlet-name>
         <servlet-class>com.naesc2011.conference.server.admin.AdminProcessAddTourServlet</servlet-class>
     </servlet>
@@ -83,6 +87,10 @@
     <servlet>
         <servlet-name>adminprocesssaveaward</servlet-name>
         <servlet-class>com.naesc2011.conference.server.admin.AdminProcessSaveAwardServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminprocesssaveconferencesettings</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.admin.AdminProcessSaveConferenceSettingsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>processregister</servlet-name>
@@ -183,6 +191,10 @@
         <url-pattern>/admin/award</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>adminconferencesettings</servlet-name>
+        <url-pattern>/admin/conferencesettings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>adminprocessaddtour</servlet-name>
         <url-pattern>/admin/process/addtour</url-pattern>
     </servlet-mapping>
@@ -197,6 +209,10 @@
     <servlet-mapping>
         <servlet-name>adminprocesssaveaward</servlet-name>
         <url-pattern>/admin/process/saveaward</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminprocesssaveconferencesettings</servlet-name>
+        <url-pattern>/admin/process/saveconferencesettings</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>processregister</servlet-name>
