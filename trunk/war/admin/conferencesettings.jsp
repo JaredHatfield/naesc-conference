@@ -28,6 +28,8 @@
 	<%@ include file="../header.jsp" %>
 	<h1>Conference Settings</h1>
 	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
+	<a href="/admin/">Back</a><br />
+	
 	<form action="/admin/process/saveconferencesettings" method="post"> 
 		<fieldset> 
 			<legend>Conference Settings</legend> 

@@ -28,7 +28,8 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	<h1>Award</h1>
-	<!-- TODO: Display the admin interface for award application. -->
+	<a href="/admin/">Back</a><br />
+	
 	<form action="/admin/process/addaward" method="post"> 
 		<fieldset> 
 			<legend>Add Award</legend> 

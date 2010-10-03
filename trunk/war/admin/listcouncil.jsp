@@ -26,6 +26,8 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	<h1>List of Registered Councils</h1>
+	<a href="/admin/">Back</a><br />
+	
 	<!-- TODO: Display all of the councils here with appropriate information and links. -->
 </body>
 </html>
