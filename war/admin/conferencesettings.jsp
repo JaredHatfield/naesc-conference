@@ -17,27 +17,27 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="com.naesc2011.conference.shared.ConferenceSettings" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<%@ include file="../htmlhead.jsp" %>
-	<title>Admin: Home</title>
+	<title>Admin: Conference Settings</title>
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
-	<h1>Admin</h1>
-	
-	<h2><a href="/admin/conferencesettings">Conference Settings</a></h2>
-	
-	<h2><a href="/admin/managetour">Manage Tours</a></h2>
-	
-	<h2><a href="/admin/award">Manage Awards</a></h2>
-	
-	<h2><a href="/admin/listcouncil">List All Councils</a></h2>
-	
-	<h2><a href="/admin/council.csv">Export Councils</a></h2>
-	
-	<h2><a href="/admin/attendee.csv">Export Attendees</a></h2>
-	
+	<h1>Conference Settings</h1>
+	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
+	<form action="/admin/process/saveconferencesettings" method="post"> 
+		<fieldset> 
+			<legend>Conference Settings</legend> 
+			<p><label>Early Registration Date:</label><input class="insmall" type="text" name="earlyDate" value="<%= cs.getEarlyRegistrationDateString() %>" /></p>
+			<p><label>Early Registration Fee:</label><input class="insmall" type="text" name="earlyFee" value="<%= cs.getEarlyRegistrationFee() %>" /></p>
+			<br />
+			<p><label>Late Registration Date:</label><input class="insmall" type="text" name="lateDate" value="<%= cs.getLateRegistrationDateString() %>" /></p>
+			<p><label>Late Registration Fee:</label><input class="insmall" type="text" name="lateFee" value="<%= cs.getLateRegistrationFee() %>" /></p>
+			<p class="submit"><input type="submit" value="Update" /></p>
+		</fieldset> 
+	</form>
 </body>
 </html>
