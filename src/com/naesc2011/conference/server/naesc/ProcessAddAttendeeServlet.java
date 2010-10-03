@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.ConferenceAttendee;
+import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
@@ -53,8 +54,12 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
                 boolean haspermission = CouncilPermission.HasPermission(pm,
                         pid, p);
 
-                if (haspermission) {
-                    Council council = Council.GetCouncil(pm, pid);
+                ConferenceSettings cs = ConferenceSettings
+                        .GetConferenceSettings(pm);
+                Council council = Council.GetCouncil(pm, pid);
+
+                if (haspermission
+                        && cs.getMaxAttendees() > council.getAttendees().size()) {
                     ConferenceAttendee ca = new ConferenceAttendee();
 
                     // Set all of the parameters that were passed in

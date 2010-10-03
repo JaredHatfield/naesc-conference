@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.ConferenceSettings;
+import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
 import com.naesc2011.conference.shared.Tour;
@@ -55,7 +57,14 @@ public class AddAttendeeServlet extends HttpServlet {
                 boolean haspermission = CouncilPermission.HasPermission(pm,
                         pid, p);
 
-                if (haspermission) {
+                ConferenceSettings cs = ConferenceSettings
+                        .GetConferenceSettings(pm);
+                request.setAttribute("conferencesettings", cs);
+                Council council = Council.GetCouncil(pm, pid);
+                request.setAttribute("council", council);
+
+                if (haspermission
+                        && cs.getMaxAttendees() > council.getAttendees().size()) {
                     request.setAttribute("tours", Tour.GetAllTours(pm));
                     String url = "/naesc/addattendee.jsp";
                     ServletContext context = getServletContext();

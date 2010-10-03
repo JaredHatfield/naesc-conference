@@ -65,6 +65,12 @@ public class ConferenceSettings {
     private Date lateRegistrationDate;
 
     /**
+     * The maximum number of attendees per council.
+     */
+    @Persistent
+    private int maxAttendees;
+
+    /**
      * The formatter for reading and writing the date
      */
     private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
@@ -77,11 +83,12 @@ public class ConferenceSettings {
      * @param lateDate
      */
     private ConferenceSettings(double earlyFee, double lateFee, Date earlyDate,
-            Date lateDate) {
+            Date lateDate, int maxAttendees) {
         this.earlyRegistrationFee = earlyFee;
         this.lateRegistrationFee = lateFee;
         this.earlyRegistrationDate = earlyDate;
         this.lateRegistrationDate = lateDate;
+        this.maxAttendees = maxAttendees;
     }
 
     /**
@@ -198,6 +205,21 @@ public class ConferenceSettings {
     }
 
     /**
+     * @return the maxAttendees
+     */
+    public int getMaxAttendees() {
+        return maxAttendees;
+    }
+
+    /**
+     * @param maxAttendees
+     *            the maxAttendees to set
+     */
+    public void setMaxAttendees(int maxAttendees) {
+        this.maxAttendees = maxAttendees;
+    }
+
+    /**
      * Gets the conference settings
      */
     @SuppressWarnings("unchecked")
@@ -209,7 +231,7 @@ public class ConferenceSettings {
             return cs.get(0);
         } else if (cs.size() == 0) {
             ConferenceSettings c = new ConferenceSettings(10, 20, new Date(),
-                    new Date());
+                    new Date(), 1);
             pm.makePersistent(c);
             return c;
         } else {

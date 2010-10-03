@@ -20,6 +20,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.naesc2011.conference.shared.Tour" %>
 <%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
+<%@ page import="com.naesc2011.conference.shared.Council" %>
+<%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
+<%@ page import="com.naesc2011.conference.shared.ConferenceSettings" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,6 +32,8 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
+	<% Council council = (Council)request.getAttribute("council"); %>
+	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 	
 	<h1>Add Attendee</h1>
 		<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">Back</a>
@@ -77,8 +82,14 @@
 		
 		<input type="hidden" name="councilid" value="<%= request.getAttribute("councilid") %>">
 		<p class="submit">
+			
 			<input type="hidden" name="id">
 			<input type="submit" value="Add" />
+		</p>
+		<hr />
+		<p>
+			<% int additional = cs.getMaxAttendees() - council.getAttendees().size(); %>
+			<label class="widelabel">Note: <%= additional %> additional attendees can be added.</label>
 		</p>
 		</fieldset>
 	</form>

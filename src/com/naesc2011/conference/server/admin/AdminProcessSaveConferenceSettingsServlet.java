@@ -71,6 +71,10 @@ public class AdminProcessSaveConferenceSettingsServlet extends HttpServlet {
             } catch (ParseException e) {
             }
 
+            String maxAttendeesStr = request.getParameter("maxattendees");
+            int max = Integer.parseInt(maxAttendeesStr);
+            cs.setMaxAttendees(max);
+
             pm.close();
 
             response.sendRedirect("/admin/conferencesettings");
