@@ -28,7 +28,8 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	<h1>Add New Tour</h1>
-	<!-- TODO: Display all of the tours so we can add and edit existing tours. -->
+	<a href="/admin/">Back</a><br />
+	
 	<form action="/admin/process/addtour" method="post"> 
 		<fieldset> 
 			<legend>Add Tour</legend> 
