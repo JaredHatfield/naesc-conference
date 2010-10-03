@@ -36,6 +36,8 @@
 			<br />
 			<p><label>Late Registration Date:</label><input class="insmall" type="text" name="lateDate" value="<%= cs.getLateRegistrationDateString() %>" /></p>
 			<p><label>Late Registration Fee:</label><input class="insmall" type="text" name="lateFee" value="<%= cs.getLateRegistrationFee() %>" /></p>
+			<br />
+			<p><label>Maximum Attendees Per Council:</label><input class="insmall" type="text" name="maxattendees" value="<%= cs.getMaxAttendees() %>" /></p>
 			<p class="submit"><input type="submit" value="Update" /></p>
 		</fieldset> 
 	</form>

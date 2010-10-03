@@ -23,6 +23,7 @@
 <%@ page import="com.naesc2011.conference.shared.Tour" %>
 <%@ page import="com.naesc2011.conference.shared.Council" %>
 <%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
+<%@ page import="com.naesc2011.conference.shared.ConferenceSettings" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,6 +37,7 @@
 	<% Council council = (Council)request.getAttribute("council"); %>
 	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
 	<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards"); %>
+	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 	
 	<a href="/editcouncil?id=<%= council.getKey().getId() %>">Edit</a><br />
 	<table class="infotable">
@@ -86,20 +88,22 @@
 	</table>
 	
 	<h2>Attending Members</h2>
-	<% if(council.getAttendees() != null && council.getAttendees().size() > 0) { %>
-		<table class="infotable">
-			<tr class="titlerow">
-				<td class="minicell">
+	<table class="infotable">
+		<tr class="titlerow">
+			<td class="minicell">
+				<% if(council.getAttendees().size() < cs.getMaxAttendees()) { %>
 					<a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a>
-				</td>
-				<td class="mediumcell">Name</td>
-				<td class="mediumcell">Email</td>
-				<td class="mediumcell">Tour</td>
-				<td class="smallcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>">(Manage)</a></td>
-				<td class="smallcell">Information</td>
-				<td class="minicell">Resume</td>
-				<td class="minicell">Complete</td>
-			</tr>
+				<% } %>
+				(<%= council.getAttendees().size() %> of <%= cs.getMaxAttendees() %>)
+			</td>
+			<td class="mediumcell">Name</td>
+			<td class="mediumcell">Email</td>
+			<td class="mediumcell">Tour</td>
+			<td class="smallcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>">(Manage)</a></td>
+			<td class="smallcell">Information</td>
+			<td class="minicell">Resume</td>
+			<td class="minicell">Complete</td>
+		</tr>
 		<% for(int i = 0; i < council.getAttendees().size(); i++) { %>
 			<tr>
 				<% ConferenceAttendee att = council.getAttendees().get(i); %>
@@ -132,10 +136,8 @@
 						<img src="/static/check.png" alt="Complete" title="Complete" class="center">
 					<% } %>
 				</td>
+			</tr>
 		<% } %>
-		</table>
-	<% } else { %>
-		<a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a>
-	<% } %>
+	</table>
 </body>
 </html>
