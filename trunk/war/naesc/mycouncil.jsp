@@ -98,7 +98,7 @@
 			</td>
 			<td class="mediumcell">Name</td>
 			<td class="mediumcell">Email</td>
-			<td class="mediumcell">Tour</td>
+			<td class="mediumcell">Tour <a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a></td>
 			<td class="smallcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>">(Manage)</a></td>
 			<td class="smallcell">Information</td>
 			<td class="minicell">Resume</td>
