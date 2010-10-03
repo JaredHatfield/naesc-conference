@@ -81,6 +81,7 @@
 				
 			<% } %>
 			</select>
+			<a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a>
 		</p>
 		
 		<p><label>Emergency Contact Name:</label><input type="text" name="ecName" value="<%= a.getEmergencyContactName() %>" /></p>

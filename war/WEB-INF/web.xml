@@ -8,6 +8,10 @@
         <servlet-class>com.naesc2011.conference.server.naesc.EditAttendeeServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>tourlist</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.TourListServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>uploadresume</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.UploadResumeServlet</servlet-class>
     </servlet>
@@ -129,6 +133,10 @@
     <servlet-mapping>
         <servlet-name>editattendee</servlet-name>
         <url-pattern>/editattendee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>tourlist</servlet-name>
+        <url-pattern>/tourlist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>uploadresume</servlet-name>
