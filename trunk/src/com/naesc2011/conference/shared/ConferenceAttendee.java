@@ -19,6 +19,7 @@ package com.naesc2011.conference.shared;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -39,6 +40,18 @@ public class ConferenceAttendee {
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
+
+    /**
+     * 
+     */
+    @Persistent
+    private Date added;
+
+    /**
+     * 
+     */
+    @Persistent
+    private Date updated;
 
     /**
      * The attendee's first name.
@@ -131,6 +144,12 @@ public class ConferenceAttendee {
     private BlobKey resume;
 
     /**
+     * The registration fee.
+     */
+    @Persistent
+    private double registartionFee;
+
+    /**
      *
      */
     public enum VoteStatus {
@@ -154,7 +173,11 @@ public class ConferenceAttendee {
     /**
      * Creates a new instance of ConferenceAttendee.
      */
-    public ConferenceAttendee() {
+    public ConferenceAttendee(double registrationFee) {
+        Date now = new Date();
+        this.added = now;
+        this.updated = now;
+        this.setRegistartionFee(registrationFee);
     }
 
     /**
@@ -170,6 +193,27 @@ public class ConferenceAttendee {
      */
     public void setKey(Key key) {
         this.key = key;
+    }
+
+    /**
+     * @return the added
+     */
+    public Date getAdded() {
+        return added;
+    }
+
+    /**
+     * @return the updated
+     */
+    public Date getUpdated() {
+        return updated;
+    }
+
+    /**
+     * Mark down that the attendee was updated.
+     */
+    public void update() {
+        this.updated = new Date();
     }
 
     /**
@@ -431,6 +475,21 @@ public class ConferenceAttendee {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    /**
+     * @return the registartionFee
+     */
+    public double getRegistartionFee() {
+        return registartionFee;
+    }
+
+    /**
+     * @param registartionFee
+     *            the registartionFee to set
+     */
+    public void setRegistartionFee(double registartionFee) {
+        this.registartionFee = registartionFee;
     }
 
     /**

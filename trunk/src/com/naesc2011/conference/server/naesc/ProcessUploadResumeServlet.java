@@ -88,6 +88,7 @@ public class ProcessUploadResumeServlet extends HttpServlet {
                             } else {
                                 // It was uploaded, so save the key.
                                 ca.setResume(blobKey);
+                                ca.update();
                             }
 
                             pm.close();

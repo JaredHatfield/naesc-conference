@@ -224,6 +224,19 @@ public class Council {
     }
 
     /**
+     * 
+     * @return
+     */
+    public double getAttendeeCost() {
+        double total = 0;
+        for (int i = 0; i < this.attendees.size(); i++) {
+            total += this.attendees.get(i).getRegistartionFee();
+        }
+
+        return total;
+    }
+
+    /**
      * @return the website
      */
     public String getWebsite() {

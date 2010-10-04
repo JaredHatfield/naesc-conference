@@ -60,7 +60,8 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
 
                 if (haspermission
                         && cs.getMaxAttendees() > council.getAttendees().size()) {
-                    ConferenceAttendee ca = new ConferenceAttendee();
+                    ConferenceAttendee ca = new ConferenceAttendee(
+                            cs.getRegistrationFee());
 
                     // Set all of the parameters that were passed in
                     ca.setFirstName(request.getParameter("firstName"));

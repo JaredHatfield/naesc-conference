@@ -33,6 +33,7 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class ConferenceSettings {
+
     /**
      * 
      */
@@ -217,6 +218,22 @@ public class ConferenceSettings {
      */
     public void setMaxAttendees(int maxAttendees) {
         this.maxAttendees = maxAttendees;
+    }
+
+    /**
+     * 
+     * @return
+     * @throws Exception
+     */
+    public double getRegistrationFee() {
+        Date today = new Date();
+        if (today.before(this.earlyRegistrationDate)) {
+            return this.earlyRegistrationFee;
+        } else if (today.before(this.lateRegistrationDate)) {
+            return this.lateRegistrationFee;
+        } else {
+            return this.lateRegistrationFee;
+        }
     }
 
     /**
