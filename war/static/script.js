@@ -14,3 +14,10 @@ function popup(mylink, windowname) {
 	window.open(href, windowname, 'width=400,height=400,scrollbars=yes');
 	return false;
 }
+
+function disableForms() {
+	var limit = document.forms[0].elements.length;
+	for (i=0;i<limit;i++) {
+		document.forms[0].elements[i].disabled = true;
+	}
+}

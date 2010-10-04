@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
@@ -52,7 +53,10 @@ public class ProcessSaveCouncilServlet extends HttpServlet {
                 boolean haspermission = CouncilPermission.HasPermission(pm,
                         pid, p);
 
-                if (haspermission) {
+                ConferenceSettings cs = ConferenceSettings
+                        .GetConferenceSettings(pm);
+
+                if (haspermission && cs.isRegistrationOpen()) {
                     Council council = Council.GetCouncil(pm, pid);
                     council.setName(request.getParameter("name"));
                     council.setUniversity(request.getParameter("university"));

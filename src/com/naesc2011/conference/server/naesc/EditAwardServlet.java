@@ -33,6 +33,7 @@ import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.Award;
 import com.naesc2011.conference.shared.AwardApplication;
 import com.naesc2011.conference.shared.AwardSubmission;
+import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
@@ -64,6 +65,10 @@ public class EditAwardServlet extends HttpServlet {
                     // Set the award
                     Award award = Award.GetAward(pm, aid);
                     request.setAttribute("award", award);
+
+                    ConferenceSettings cs = ConferenceSettings
+                            .GetConferenceSettings(pm);
+                    request.setAttribute("conferencesettings", cs);
 
                     Council council = Council.GetCouncil(pm, pid);
                     request.setAttribute("councilid", council.getKey().getId());

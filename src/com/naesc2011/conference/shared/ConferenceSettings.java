@@ -237,6 +237,24 @@ public class ConferenceSettings {
     }
 
     /**
+     * 
+     * @return
+     */
+    public boolean isRegistrationOpen() {
+        Date today = new Date();
+        return today.before(lateRegistrationDate);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public boolean isEarlyRegistrationOpen() {
+        Date today = new Date();
+        return today.before(earlyRegistrationDate);
+    }
+
+    /**
      * Gets the conference settings
      */
     @SuppressWarnings("unchecked")

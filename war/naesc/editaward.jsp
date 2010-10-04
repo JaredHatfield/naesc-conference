@@ -21,13 +21,24 @@
 <%@ page import="com.naesc2011.conference.shared.Award" %>
 <%@ page import="com.naesc2011.conference.shared.AwardSubmission" %>
 <%@ page import="com.naesc2011.conference.shared.AwardApplication" %>
+<%@ page import="com.naesc2011.conference.shared.ConferenceSettings" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<%@ include file="../htmlhead.jsp" %>
 	<title>NAESC 2011 National Conference: Edit Award</title>
+	<script language="javascript" type="text/javascript">
+	<!--
+	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
+	function update(){
+		<% if(!cs.isRegistrationOpen()) { %>
+			disableForms();
+		<% } %>
+	}
+	// -->
+	</script>
 </head>
-<body>
+<body onLoad="update();">
 	<%@ include file="../header.jsp" %>
 	<% Award a = (Award)request.getAttribute("award"); %>
 	<% AwardApplication app = (AwardApplication)request.getAttribute("application"); %>
@@ -68,7 +79,7 @@
 				<p><label class="widelabel"><%= a.getQuestion4() %></label></p>
 				<p><textarea cols="70" rows="8" name="q4"><%= app.getQuestion4().getValue() %></textarea></p>
 			<% } %>
-			<% if(sub == null || !sub.getSubmitted()) { %>
+			<% if((sub == null || !sub.getSubmitted()) && cs.isRegistrationOpen()) { %>
 				<br />
 				<input type="hidden" name="id" value="<%= request.getAttribute("councilid") %>" />
 				<input type="hidden" name="a" value="<%= a.getKey().getId() %>" />

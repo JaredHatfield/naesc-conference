@@ -31,6 +31,7 @@ import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.Award;
 import com.naesc2011.conference.shared.AwardApplication;
 import com.naesc2011.conference.shared.AwardSubmission;
+import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
@@ -57,7 +58,10 @@ public class ProcessSaveAwardServlet extends HttpServlet {
                 boolean haspermission = CouncilPermission.HasPermission(pm,
                         pid, p);
 
-                if (haspermission) {
+                ConferenceSettings cs = ConferenceSettings
+                        .GetConferenceSettings(pm);
+
+                if (haspermission && cs.isRegistrationOpen()) {
                     Award award = Award.GetAward(pm, aid);
                     Council council = Council.GetCouncil(pm, pid);
                     List<AwardSubmission> sub = council.getAwardSubmissions();

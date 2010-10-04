@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
@@ -52,6 +53,10 @@ public class HomeServlet extends HttpServlet {
         if (authenticated) {
             // We are authenticated, determine if the user is a council admin
             PersistenceManager pm = PMF.get().getPersistenceManager();
+            ConferenceSettings cs = ConferenceSettings
+                    .GetConferenceSettings(pm);
+            request.setAttribute("conferencesettings", cs);
+
             List<CouncilPermission> councils = CouncilPermission.GetPermission(
                     pm, p.getUser().getUserId());
 

@@ -19,6 +19,7 @@ package com.naesc2011.conference.server.naesc;
 
 import java.io.IOException;
 
+import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -27,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.ConferenceSettings;
+import com.naesc2011.conference.shared.PMF;
 
 public class RegisterServlet extends HttpServlet {
 
@@ -42,8 +45,11 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         PermissionManager p = new PermissionManager();
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
 
-        if (authenticated) {
+        ConferenceSettings cs = ConferenceSettings.GetConferenceSettings(pm);
+
+        if (authenticated && cs.isRegistrationOpen()) {
             String url = "/naesc/register.jsp";
             ServletContext context = getServletContext();
             RequestDispatcher dispatcher = context.getRequestDispatcher(url);

@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
@@ -44,11 +45,12 @@ public class ProcessRegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         PermissionManager p = new PermissionManager();
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
 
-        if (authenticated) {
+        ConferenceSettings cs = ConferenceSettings.GetConferenceSettings(pm);
+
+        if (authenticated && cs.isRegistrationOpen()) {
             // Process this form!
-            PersistenceManager pm = PMF.get().getPersistenceManager();
-
             List<CouncilPermission> councils = CouncilPermission.GetPermission(
                     pm, p.getUser().getUserId());
             if (councils.size() == 0) {
