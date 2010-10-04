@@ -20,6 +20,7 @@ package com.naesc2011.conference.server.naesc;
 import java.io.IOException;
 import java.util.List;
 
+import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -61,10 +62,17 @@ public class EditAwardServlet extends HttpServlet {
                 boolean haspermission = CouncilPermission.HasPermission(pm,
                         pid, p);
 
-                if (haspermission) {
+                Award award = null;
+                try {
                     // Set the award
-                    Award award = Award.GetAward(pm, aid);
+                    award = Award.GetAward(pm, aid);
                     request.setAttribute("award", award);
+                } catch (JDOObjectNotFoundException e) {
+                    // The object was not found in the data store so we treat
+                    // the page as unauthorized.
+                }
+
+                if (haspermission && award != null) {
 
                     ConferenceSettings cs = ConferenceSettings
                             .GetConferenceSettings(pm);
