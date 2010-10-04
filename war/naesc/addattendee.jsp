@@ -40,11 +40,11 @@
 		<form method="post" action="/process/addattendee">
 		<fieldset> 
 		<legend>Edit Attendee</legend>
-		<p><label>First Name:</label><input type="text" name="firstName" /></p>
-		<p><label>Middle Name:</label><input type="text" name="middleName" /></p>
-		<p><label>Last Name:</label><input type="text" name="lastName" /></p>
-		<p><label>Major:</label><input type="text" name="major" /></p>
-		<p><label>Email:</label><input type="text" name="email" /></p>
+		<p><label>First Name:</label><input class="insmall" type="text" name="firstName" /></p>
+		<p><label>Middle Name:</label><input class="insmall" type="text" name="middleName" /></p>
+		<p><label>Last Name:</label><input class="insmall" type="text" name="lastName" /></p>
+		<p><label>Major:</label><input class="insmall" type="text" name="major" /></p>
+		<p><label>Email:</label><input class="insmall" type="text" name="email" /></p>
 		<p>
 			<label>Gender:</label>
 			<select name="gender">
@@ -75,11 +75,11 @@
 			<a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a>
 		</p>
 		
-		<p><label>Emergency Contact Name:</label><input type="text" name="ecName" /></p>
-		<p><label>Emergency Contact Phone:</label><input type="text" name="ecPhone" /></p>
-		<p><label>Arrival Information:</label><input type="text" name="arrivalInformation" /></p>
+		<p><label>Emergency Contact Name:</label><input class="insmall" type="text" name="ecName" /></p>
+		<p><label>Emergency Contact Phone:</label><input class="insmall" type="text" name="ecPhone" /></p>
+		<p><label>Arrival Information:</label><input class="insmall" type="text" name="arrivalInformation" /></p>
 		<p><label>Vegetarian:</label><input type="checkbox" name="vegetarian" /></p>
-		<p><label>Allergies:</label><input type="text" name="allergies" /></p>
+		<p><label>Allergies:</label><input class="insmall" type="text" name="allergies" /></p>
 		
 		<input type="hidden" name="councilid" value="<%= request.getAttribute("councilid") %>">
 		<p class="submit">
