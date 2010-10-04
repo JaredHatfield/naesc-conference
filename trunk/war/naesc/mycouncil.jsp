@@ -54,6 +54,10 @@
 			<td><%= council.getLocation() %></td>
 		</tr>
 		<tr>
+			<td class="titlecol">Contact</td>
+			<td><%= council.getContact() %></td>
+		</tr>
+		<tr>
 			<td class="titlecol">Website</td>
 			<td><%= council.getWebsite() %></td>
 		</tr>

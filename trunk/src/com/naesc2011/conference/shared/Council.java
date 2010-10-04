@@ -62,6 +62,12 @@ public class Council {
      * 
      */
     @Persistent
+    private String contact;
+
+    /**
+     * 
+     */
+    @Persistent
     @Element(dependent = "true")
     private List<ConferenceAttendee> attendees;
 
@@ -82,9 +88,14 @@ public class Council {
      * 
      * @param name
      */
-    public Council(String name) {
-        this.name = name;
-        this.attendees = new ArrayList<ConferenceAttendee>();
+    public Council(String name, String university, String location,
+            String contact) {
+        this.setName(name);
+        this.setUniversity(university);
+        this.setLocation(location);
+        this.setContact(contact);
+        this.setWebsite("");
+        this.setAttendees(new ArrayList<ConferenceAttendee>());
         this.setAwardSubmissions(new ArrayList<AwardSubmission>());
     }
 
@@ -180,6 +191,21 @@ public class Council {
      */
     public void setLocation(String location) {
         this.location = location.replaceAll("\\<.*?>", "");
+    }
+
+    /**
+     * @return the contact
+     */
+    public String getContact() {
+        return contact;
+    }
+
+    /**
+     * @param contact
+     *            the contact to set
+     */
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     /**
