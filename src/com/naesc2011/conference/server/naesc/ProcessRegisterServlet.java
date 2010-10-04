@@ -56,10 +56,8 @@ public class ProcessRegisterServlet extends HttpServlet {
                 String university = request.getParameter("university");
                 String location = request.getParameter("location");
                 if (name != null) {
-                    Council c = new Council(name);
-                    c.setUniversity(university);
-                    c.setLocation(location);
-                    c.setWebsite("");
+                    Council c = new Council(name, university, location, p
+                            .getUser().getEmail());
                     try {
                         Council.InsertCouncil(pm, c);
                         CouncilPermission cp = new CouncilPermission(p
