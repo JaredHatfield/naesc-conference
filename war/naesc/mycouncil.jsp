@@ -32,15 +32,19 @@
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
-	<h1>My Council</h1>
-	<h2>Information</h2>
+	<h2>My Council</h2>
+	<h3>Information</h3>
 	<% Council council = (Council)request.getAttribute("council"); %>
 	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
 	<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards"); %>
 	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 	
-	<a href="/editcouncil?id=<%= council.getKey().getId() %>">Edit</a><br />
 	<table class="infotable">
+		<tr>
+			<td colspan="2" style="border-width: 0px; text-align: right;">
+				<a href="/editcouncil?id=<%= council.getKey().getId() %>">Edit</a>
+			</td>
+		</tr>
 		<tr>
 			<td class="titlecol">Name</td>
 			<td class="extralargecell"><%= council.getName() %></td>
@@ -67,7 +71,7 @@
 		</tr>
 	</table>
 	
-	<h2>Award Applications</h2>
+	<h3>Award Applications</h3>
 	<% List<AwardSubmission> submitted = council.getAwardSubmissions(); %>
 	<table class="infotable">
 		<tr class="titlerow">
@@ -95,7 +99,7 @@
 		<% } %>
 	</table>
 	
-	<h2>Attending Members</h2>
+	<h3>Attending Members</h3>
 	<table class="infotable">
 		<tr class="titlerow">
 			<td class="minicell">

@@ -26,7 +26,7 @@
 	<title>Tour List</title>
 </head>
 <body>
-	<h1>Tour List</h1>
+	<h2>Tour List</h2>
 	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
 	<% for(int i = 0; i < tours.size(); i++) { %>
 		<% Tour t = tours.get(i); %>

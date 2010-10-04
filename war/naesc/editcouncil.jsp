@@ -38,12 +38,12 @@
 </head>
 <body onLoad="update();">
 	<%@ include file="../header.jsp" %>
-	<h1>Edit Council</h1>
+	<h2>Edit Council</h2>
 	<% Council council = (Council)request.getAttribute("council"); %>
-	<a href="/mycouncil?id=<%= council.getKey().getId() %>">Back</a><br />
+	<a href="/mycouncil?id=<%= council.getKey().getId() %>">Back</a><br /><br />
 	<form action="/process/savecouncil" method="post"> 
 		<fieldset> 
-			<legend>Register Council</legend> 
+			<legend>Edit Council</legend> 
 			<p><label>Council Name:</label><input class="insmall" type="text" maxlength="500" name="name" value="<%= council.getName() %>" /></p>
 			<p><label>University:</label><input class="insmall" type="text" maxlength="500" name="university" value="<%= council.getUniversity() %>" /></p>
 			<p><label>Location:</label><input class="insmall" type="text" maxlength="500" name="location" value="<%= council.getLocation() %>" /></p>

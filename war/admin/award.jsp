@@ -27,8 +27,8 @@
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
-	<h1>Award</h1>
-	<a href="/admin/">Back</a><br />
+	<h2>Award</h2>
+	<a href="/admin/">Back</a><br /><br />
 	
 	<form action="/admin/process/addaward" method="post"> 
 		<fieldset> 
@@ -41,7 +41,8 @@
 			<p class="submit"><input type="submit" value="Add" /></p>
 		</fieldset> 
 	</form>
-	<h1>Manage Awards</h1>
+	
+	<h2>Manage Awards</h2>
 	<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards");
 	   for(int i = 0; i < awards.size(); i++){ %>
 		   <form action="/admin/process/saveaward" method="post"> 

@@ -15,11 +15,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  --%>
+
+<div id="headbar">
+	<div style="text-align: left; float: left;">
+		<a href="/">Home</a>
+	</div>
+	<div style="text-align: right; float: right;">
+		<% if((Boolean)request.getAttribute("authenticated")){ %>
+			<%= request.getAttribute("username") %> | 
+			<% if((Boolean)request.getAttribute("isadmin")) { %>
+				<a href="/admin/">Admin</a> | 
+			<% } %>
+			<a href="<%= request.getAttribute("logouturl") %>">Logout</a>
+		<% } else { %>
+			<a href="<%= request.getAttribute("loginurl") %>">Login</a>
+		<% } %>
+	</div>
+</div>
+
+
+
 <h1>NAESC 2011 National Conference Registration</h1>
-<a href="/">Home</a><br />
-<% if((Boolean)request.getAttribute("authenticated")){ %>
-	Hello, <%= request.getAttribute("username") %>.
-	<a href="<%= request.getAttribute("logouturl") %>">Logout</a>
-<% } else { %>
-	<a href="<%= request.getAttribute("loginurl") %>">Login</a>
-<% } %>
+

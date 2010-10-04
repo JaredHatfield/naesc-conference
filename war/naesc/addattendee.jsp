@@ -35,8 +35,8 @@
 	<% Council council = (Council)request.getAttribute("council"); %>
 	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 	
-	<h1>Add Attendee</h1>
-		<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">Back</a>
+	<h2>Add Attendee</h2>
+		<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">Back</a><br /><br />
 		<form method="post" action="/process/addattendee">
 		<fieldset> 
 		<legend>Edit Attendee</legend>

@@ -26,13 +26,15 @@
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
-	<h1>Conference Settings</h1>
+	<h2>Conference Settings</h2>
 	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
-	<a href="/admin/">Back</a><br />
+	<a href="/admin/">Back</a><br /><br />
 	
 	<form action="/admin/process/saveconferencesettings" method="post"> 
 		<fieldset> 
 			<legend>Conference Settings</legend> 
+			<p><label>Conference Name:</label><input class="insmall" type="text" maxlength="500" name="conferenceName" value="<%= cs.getConferenceName() %>" /></p>
+			<br />
 			<p><label>Early Registration Date:</label><input class="insmall" type="text" maxlength="500" name="earlyDate" value="<%= cs.getEarlyRegistrationDateString() %>" /></p>
 			<p><label>Early Registration Fee:</label><input class="insmall" type="text" maxlength="500" name="earlyFee" value="<%= cs.getEarlyRegistrationFee() %>" /></p>
 			<br />

@@ -43,7 +43,7 @@
 	<% Award a = (Award)request.getAttribute("award"); %>
 	<% AwardApplication app = (AwardApplication)request.getAttribute("application"); %>
 	<% AwardSubmission sub = (AwardSubmission)request.getAttribute("submission"); %>
-	<h1>Edit Award</h1>
+	<h2>Edit Award</h2>
 	<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">Back</a><br />
 	<br />
 	
