@@ -36,11 +36,11 @@
 		<form method="post" action="/process/saveattendee">
 		<fieldset> 
 		<legend>Edit Attendee</legend>
-		<p><label>First Name:</label><input class="insmall" type="text" name="firstName" value="<%= a.getFirstName() %>" /></p>
-		<p><label>Middle Name:</label><input class="insmall" type="text" name="middleName" value="<%= a.getMiddleName() %>" /></p>
-		<p><label>Last Name:</label><input class="insmall" type="text" name="lastName" value="<%= a.getLastName() %>" /></p>
-		<p><label>Major:</label><input class="insmall" type="text" name="major" value="<%= a.getMajor() %>" /></p>
-		<p><label>Email:</label><input class="insmall" type="text" name="email" value="<%= a.getEmail() %>" /></p>
+		<p><label>First Name:</label><input class="insmall" type="text" maxlength="500" name="firstName" value="<%= a.getFirstName() %>" /></p>
+		<p><label>Middle Name:</label><input class="insmall" type="text" maxlength="500" name="middleName" value="<%= a.getMiddleName() %>" /></p>
+		<p><label>Last Name:</label><input class="insmall" type="text" maxlength="500" name="lastName" value="<%= a.getLastName() %>" /></p>
+		<p><label>Major:</label><input class="insmall" type="text" maxlength="500" name="major" value="<%= a.getMajor() %>" /></p>
+		<p><label>Email:</label><input class="insmall" type="text" maxlength="500" name="email" value="<%= a.getEmail() %>" /></p>
 		<p>
 			<label>Gender:</label>
 			<select name="gender">
@@ -84,9 +84,9 @@
 			<a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a>
 		</p>
 		
-		<p><label>Emergency Contact Name:</label><input class="insmall" type="text" name="ecName" value="<%= a.getEmergencyContactName() %>" /></p>
-		<p><label>Emergency Contact Phone:</label><input class="insmall" type="text" name="ecPhone" value="<%= a.getEmergencyContactPhone() %>" /></p>
-		<p><label>Arrival Information:</label><input class="insmall" type="text" name="arrivalInformation" value="<%= a.getArrivalInformation() %>" /></p>
+		<p><label>Emergency Contact Name:</label><input class="insmall" type="text" maxlength="500" name="ecName" value="<%= a.getEmergencyContactName() %>" /></p>
+		<p><label>Emergency Contact Phone:</label><input class="insmall" type="text" maxlength="500" name="ecPhone" value="<%= a.getEmergencyContactPhone() %>" /></p>
+		<p><label>Arrival Information:</label><input class="insmall" type="text" maxlength="500" name="arrivalInformation" value="<%= a.getArrivalInformation() %>" /></p>
 		<p>
 			<label>Vegetarian:</label>
 				<% if(a.getVegetarian()) { %>
@@ -95,7 +95,7 @@
 					<input type="checkbox" name="vegetarian" />
 				<% } %>
 		</p>
-		<p><label>Allergies:</label><input class="insmall" type="text" name="allergies" value="<%= a.getAllergies() %>" /></p>
+		<p><label>Allergies:</label><input class="insmall" type="text" maxlength="500" name="allergies" value="<%= a.getAllergies() %>" /></p>
 		
 		<p class="submit">
 			<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />

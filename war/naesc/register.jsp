@@ -29,9 +29,9 @@
 	<form action="/process/register" method="post"> 
 		<fieldset> 
 			<legend>Register Council</legend> 
-			<p><label>Council Name:</label><input class="insmall" type="text" name="name" /></p>
-			<p><label>University:</label><input class="insmall" type="text" name="university" /></p>
-			<p><label>Location:</label><input class="insmall" type="text" name="location" /></p>
+			<p><label>Council Name:</label><input class="insmall" type="text" maxlength="500" name="name" /></p>
+			<p><label>University:</label><input class="insmall" type="text" maxlength="500" name="university" /></p>
+			<p><label>Location:</label><input class="insmall" type="text" maxlength="500" name="location" /></p>
 			<p class="submit"><input type="submit" value="Submit" /></p>
 		</fieldset> 
 	</form>
