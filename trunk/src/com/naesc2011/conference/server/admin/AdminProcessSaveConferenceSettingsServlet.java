@@ -51,6 +51,9 @@ public class AdminProcessSaveConferenceSettingsServlet extends HttpServlet {
             ConferenceSettings cs = ConferenceSettings
                     .GetConferenceSettings(pm);
 
+            String conferenceName = request.getParameter("conferenceName");
+            cs.setConferenceName(conferenceName);
+
             String earlyFeeStr = request.getParameter("earlyFee");
             double earlyFee = Double.parseDouble(earlyFeeStr);
             cs.setEarlyRegistrationFee(earlyFee);

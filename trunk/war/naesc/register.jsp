@@ -25,7 +25,7 @@
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
-	<h1>Register</h1>
+	<h2>Register</h2>
 	<form action="/process/register" method="post"> 
 		<fieldset> 
 			<legend>Register Council</legend> 

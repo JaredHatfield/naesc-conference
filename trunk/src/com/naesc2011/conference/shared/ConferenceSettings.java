@@ -42,6 +42,11 @@ public class ConferenceSettings {
     private Key key;
 
     /**
+     * The name of the conference.
+     */
+    private String conferenceName;
+
+    /**
      * The amount of to pay per attendee for early registration.
      */
     @Persistent
@@ -83,8 +88,9 @@ public class ConferenceSettings {
      * @param earlyDate
      * @param lateDate
      */
-    private ConferenceSettings(double earlyFee, double lateFee, Date earlyDate,
-            Date lateDate, int maxAttendees) {
+    private ConferenceSettings(String conferenceName, double earlyFee,
+            double lateFee, Date earlyDate, Date lateDate, int maxAttendees) {
+        this.conferenceName = conferenceName;
         this.earlyRegistrationFee = earlyFee;
         this.lateRegistrationFee = lateFee;
         this.earlyRegistrationDate = earlyDate;
@@ -105,6 +111,21 @@ public class ConferenceSettings {
      */
     public void setKey(Key key) {
         this.key = key;
+    }
+
+    /**
+     * @return the conferenceName
+     */
+    public String getConferenceName() {
+        return conferenceName;
+    }
+
+    /**
+     * @param conferenceName
+     *            the conferenceName to set
+     */
+    public void setConferenceName(String conferenceName) {
+        this.conferenceName = conferenceName;
     }
 
     /**
@@ -265,8 +286,8 @@ public class ConferenceSettings {
         if (cs.size() == 1) {
             return cs.get(0);
         } else if (cs.size() == 0) {
-            ConferenceSettings c = new ConferenceSettings(10, 20, new Date(),
-                    new Date(), 1);
+            ConferenceSettings c = new ConferenceSettings("My Conference", 10,
+                    20, new Date(), new Date(), 1);
             pm.makePersistent(c);
             return c;
         } else {

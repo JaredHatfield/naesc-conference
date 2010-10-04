@@ -28,7 +28,7 @@
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
-	<h1>Home</h1>
+	<h2>Home</h2>
 	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 	
 	<% if(!(Boolean)request.getAttribute("authenticated")){ %>

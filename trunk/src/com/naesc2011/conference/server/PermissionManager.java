@@ -52,14 +52,26 @@ public class PermissionManager {
     private PermissionUserInstance currentPermissions;
 
     /**
+     * A flag that indicates that the user is an app engine admin.
+     */
+    private boolean appEngineAdmin;
+
+    /**
 	 * 
 	 */
     public PermissionManager() {
         this.userService = UserServiceFactory.getUserService();
         this.currentUser = userService.getCurrentUser();
 
+        // Set the admin flag
+        this.appEngineAdmin = false;
+        if (this.userService.isUserLoggedIn()) {
+            this.appEngineAdmin = this.userService.isUserAdmin();
+        }
+
         // Get the user permissions from the datastore.
         if (this.currentUser != null) {
+            // Do some other stuff...
             PersistenceManager pm = PMF.get().getPersistenceManager();
             Query query = pm.newQuery(PermissionUserInstance.class);
             query.setFilter("userId == userIdParam");
@@ -73,6 +85,7 @@ public class PermissionManager {
                     this.currentPermissions.setUser(this.currentUser);
                     this.currentPermissions.setEmail(this.currentUser
                             .getEmail());
+
                     log.info("Located the user's permissions."
                             + this.currentPermissions.getUserPermission());
                 } else if (results.size() == 0) {
@@ -105,6 +118,14 @@ public class PermissionManager {
         } else {
             return true;
         }
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public Boolean IsUserAdmin() {
+        return this.appEngineAdmin;
     }
 
     /**
@@ -186,12 +207,15 @@ public class PermissionManager {
             request.setAttribute("username", p.getUser().getNickname());
             request.setAttribute("logouturl", p.getUserService()
                     .createLogoutURL("/home"));
+            request.setAttribute("isadmin", p.IsUserAdmin());
+
             return true;
         } else {
             // The user is NOT logged in
             request.setAttribute("authenticated", false);
             request.setAttribute("loginurl",
                     p.getUserService().createLoginURL(request.getRequestURI()));
+            request.setAttribute("isadmin", false);
             return false;
         }
     }

@@ -40,11 +40,8 @@
 	<%@ include file="../header.jsp" %>
 	<% Council council = (Council)request.getAttribute("council"); %>
 	
-		
-	
-	
-	<h1><%= council.getName() %> Delegates</h1>
-	<a href="/mycouncil?id=<%= council.getKey().getId() %>">Back</a><br />
+	<h2><%= council.getName() %> Delegates</h2>
+	<a href="/mycouncil?id=<%= council.getKey().getId() %>">Back</a><br /><br />
 	<form action="/process/savedelegate" method="post"> 
 		<fieldset> 
 			<legend>Select Delegates</legend>

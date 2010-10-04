@@ -25,19 +25,14 @@
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
-	<h1>Admin</h1>
-	
-	<h2><a href="/admin/conferencesettings">Conference Settings</a></h2>
-	
-	<h2><a href="/admin/managetour">Manage Tours</a></h2>
-	
-	<h2><a href="/admin/award">Manage Awards</a></h2>
-	
-	<h2><a href="/admin/listcouncil">List All Councils</a></h2>
-	
-	<h2><a href="/admin/council.csv">Export Councils</a></h2>
-	
-	<h2><a href="/admin/attendee.csv">Export Attendees</a></h2>
-	
+	<h2>Admin</h2>
+	<ul>
+		<li><a href="/admin/conferencesettings">Conference Settings</a></li>
+		<li><a href="/admin/managetour">Manage Tours</a></li>
+		<li><a href="/admin/award">Manage Awards</a></li>
+		<li><a href="/admin/listcouncil">List All Councils</a></li>
+		<li><a href="/admin/council.csv">Export Councils</a></li>
+		<li><a href="/admin/attendee.csv">Export Attendees</a></li>
+	</ul>
 </body>
 </html>

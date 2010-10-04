@@ -27,8 +27,8 @@
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
-	<h1>Add New Tour</h1>
-	<a href="/admin/">Back</a><br />
+	<h2>Add New Tour</h2>
+	<a href="/admin/">Back</a><br /><br />
 	
 	<form action="/admin/process/addtour" method="post"> 
 		<fieldset> 
@@ -39,7 +39,7 @@
 			<p class="submit"><input type="submit" value="Add" /></p>
 		</fieldset> 
 	</form>
-	<h1>Manage Tours</h1>
+	<h2>Manage Tours</h2>
 	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours");
 	   for(int i = 0; i < tours.size(); i++){ %>
 		   <form action="/admin/process/savetour" method="post"> 
