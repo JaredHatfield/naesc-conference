@@ -19,6 +19,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.naesc2011.conference.shared.Council" %>
+<%@ page import="com.naesc2011.conference.shared.ConferenceSettings" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,12 +29,18 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	<h1>Home</h1>
+	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
+	
 	<% if(!(Boolean)request.getAttribute("authenticated")){ %>
 		You must log in to register or change your registration information.
 	<% } else { %>
 		You are logged in...<br />
-		<% if((Boolean)request.getAttribute("nocouncil")){ %>
-			<a href="/register">Register New Council</a>
+		<% if((Boolean)request.getAttribute("nocouncil") ){ %>
+			<% if(cs.isRegistrationOpen()) { %>
+				<a href="/register">Register New Council</a>
+			<% } else { %>
+				Registration is closed.
+			<% } %>
 		<% } else { %>
 			<% @SuppressWarnings("unchecked") List<Council> councils = (List<Council>)request.getAttribute("councils");
 			   for(int i = 0; i < councils.size(); i++){ %>

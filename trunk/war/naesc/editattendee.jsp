@@ -20,13 +20,24 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.naesc2011.conference.shared.Tour" %>
 <%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
+<%@ page import="com.naesc2011.conference.shared.ConferenceSettings" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<%@ include file="../htmlhead.jsp" %>
 	<title>NAESC 2011 National Conference: Edit Attendee</title>
+	<script language="javascript" type="text/javascript">
+	<!--
+	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
+	function update(){
+		<% if(!cs.isRegistrationOpen()) { %>
+			disableForms();
+		<% } %>
+	}
+	// -->
+	</script>
 </head>
-<body>
+<body onLoad="update();">
 	<%@ include file="../header.jsp" %>
 	<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
 	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
@@ -96,19 +107,34 @@
 				<% } %>
 		</p>
 		<p><label>Allergies:</label><input class="insmall" type="text" maxlength="500" name="allergies" value="<%= a.getAllergies() %>" /></p>
-		
-		<p class="submit">
-			<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
-			<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
-			<input type="submit" value="Update" />
-		</p>
+		<% if(cs.isRegistrationOpen()) { %>
+			<p class="submit">
+				<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
+				<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
+				<input type="submit" value="Update" />
+			</p>
+		<% } %>
 		</fieldset>
 	</form>
 	<br />
 	<form method="post" action="/process/deleteresume">
 		<fieldset> 
 		<legend>Resume</legend>
-			<% if(a.getResume() == null) { %>
+			<% if(!cs.isRegistrationOpen()) { %>
+				<% if(a.getResume() != null) { %>
+					<p>
+						<label class="widelabel">
+							<a href="/downloadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Download Resume</a>
+						</label>
+					</p>
+				<% } else { %>
+					<p>
+						<label class="widelabel">
+							No resume was provided.
+						</label>
+					</p>
+				<% } %>
+			<% } else if(a.getResume() == null) { %>
 				<p>
 					<label class="widelabel">
 						<a href="/uploadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Upload Resume</a>

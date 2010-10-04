@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.ConferenceAttendee;
+import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
@@ -58,6 +59,10 @@ public class EditAttendeeServlet extends HttpServlet {
                         pid, p);
 
                 if (haspermission) {
+                    ConferenceSettings cs = ConferenceSettings
+                            .GetConferenceSettings(pm);
+                    request.setAttribute("conferencesettings", cs);
+
                     Council council = Council.GetCouncil(pm, pid);
                     String mid = request.getParameter("m");
                     boolean found = false;

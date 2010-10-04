@@ -99,7 +99,7 @@
 	<table class="infotable">
 		<tr class="titlerow">
 			<td class="minicell">
-				<% if(council.getAttendees().size() < cs.getMaxAttendees()) { %>
+				<% if(council.getAttendees().size() < cs.getMaxAttendees() && cs.isRegistrationOpen()) { %>
 					<a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a>
 				<% } %>
 				(<%= council.getAttendees().size() %> of <%= cs.getMaxAttendees() %>)

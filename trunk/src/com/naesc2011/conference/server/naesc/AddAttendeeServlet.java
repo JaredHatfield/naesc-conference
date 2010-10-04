@@ -64,7 +64,8 @@ public class AddAttendeeServlet extends HttpServlet {
                 request.setAttribute("council", council);
 
                 if (haspermission
-                        && cs.getMaxAttendees() > council.getAttendees().size()) {
+                        && cs.getMaxAttendees() > council.getAttendees().size()
+                        && cs.isRegistrationOpen()) {
                     request.setAttribute("tours", Tour.GetAllTours(pm));
                     String url = "/naesc/addattendee.jsp";
                     ServletContext context = getServletContext();

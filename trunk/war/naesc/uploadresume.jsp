@@ -20,6 +20,7 @@
 <%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.naesc2011.conference.shared.ConferenceSettings" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,6 +29,7 @@
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
+	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 	<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
 	<h1><%= a.getFirstName() %> <%= a.getMiddleName() %> <%= a.getLastName() %>'s  Resume</h1>
 		<a href="/mycouncil?id=<%= request.getAttribute("id") %>">Back</a>

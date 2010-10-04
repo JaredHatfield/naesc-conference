@@ -19,20 +19,35 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.naesc2011.conference.shared.Council" %>
 <%@ page import="com.naesc2011.conference.shared.ConferenceAttendee" %>
+<%@ page import="com.naesc2011.conference.shared.ConferenceSettings" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<%@ include file="../htmlhead.jsp" %>
 	<title>NAESC 2011 National Conference: Edit Delegate</title>
+	<script language="javascript" type="text/javascript">
+	<!--
+	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
+	function update(){
+		<% if(!cs.isRegistrationOpen()) { %>
+			disableForms();
+		<% } %>
+	}
+	// -->
+	</script>
 </head>
-<body>
+<body onLoad="update();">
 	<%@ include file="../header.jsp" %>
 	<% Council council = (Council)request.getAttribute("council"); %>
+	
+		
+	
+	
 	<h1><%= council.getName() %> Delegates</h1>
 	<a href="/mycouncil?id=<%= council.getKey().getId() %>">Back</a><br />
 	<form action="/process/savedelegate" method="post"> 
 		<fieldset> 
-			<legend>Select Delegates</legend> 
+			<legend>Select Delegates</legend>
 			<p>
 				<label>Voting Delegate</label>
 				<select name="vote">
@@ -67,8 +82,12 @@
 					<% } %>
 				</select>
 			</p>
-			<input type="hidden" name="id" value="<%= council.getKey().getId() %>">
-			<p class="submit"><input type="submit" value="Submit" /></p>
+			<% if(cs.isRegistrationOpen()) { %>
+				<p class="submit">
+					<input type="hidden" name="id" value="<%= council.getKey().getId() %>">
+					<input type="submit" value="Submit" />
+				</p>
+			<% } %>
 		</fieldset> 
 	</form>
 </body>

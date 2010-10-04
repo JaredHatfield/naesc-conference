@@ -30,6 +30,7 @@ import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.ConferenceAttendee;
+import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
@@ -57,7 +58,10 @@ public class ProcessDeleteResumeServlet extends HttpServlet {
                     boolean haspermission = CouncilPermission.HasPermission(pm,
                             pid, p);
 
-                    if (haspermission) {
+                    ConferenceSettings cs = ConferenceSettings
+                            .GetConferenceSettings(pm);
+
+                    if (haspermission && cs.isRegistrationOpen()) {
                         Council council = Council.GetCouncil(pm, pid);
                         String mid = request.getParameter("m");
                         boolean found = false;

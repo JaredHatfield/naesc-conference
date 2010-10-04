@@ -76,6 +76,10 @@ input.insmall {
 	background: lightgrey;
 	border: 2px outset #556644;
 }
+input[disabled], select[disabled], textarea[disabled] {
+	background-color: white;
+	color: black;
+}
 fieldset {
 	border: 1px solid #556644;
 	width: 40em
