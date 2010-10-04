@@ -61,6 +61,10 @@
 			<td class="titlecol">Website</td>
 			<td><%= council.getWebsite() %></td>
 		</tr>
+		<tr>
+			<td class="titlecol">Total Cost</td>
+			<td>$<%= (int)council.getAttendeeCost() %></td>
+		</tr>
 	</table>
 	
 	<h2>Award Applications</h2>
@@ -104,7 +108,7 @@
 			<td class="mediumcell">Email</td>
 			<td class="mediumcell">Tour <a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a></td>
 			<td class="smallcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>">(Manage)</a></td>
-			<td class="smallcell">Information</td>
+			<td class="smallcell">Registration</td>
 			<td class="minicell">Resume</td>
 			<td class="minicell">Complete</td>
 		</tr>
@@ -129,7 +133,9 @@
 						Alternate
 					<% } %>
 				</td>
-				<td><!-- TODO: Add the logic to display if the required fields have been completed --></td>
+				<td>
+					$<%= (int)att.getRegistartionFee() %>
+				</td>
 				<td>
 					<% if(att.getResume() != null) { %>
 						<img src="/static/document.png" alt="Resume Uploaded" title="Resume Uploaded" class="center">

@@ -72,6 +72,8 @@ public class ProcessSaveAttendeeServlet extends HttpServlet {
                         }
 
                         if (found) {
+                            // Mark the time that the attendee was updated
+                            ca.update();
 
                             // Set all of the parameters that were passed in
                             ca.setFirstName(request.getParameter("firstName"));
