@@ -32,10 +32,10 @@
 	<form action="/process/savecouncil" method="post"> 
 		<fieldset> 
 			<legend>Register Council</legend> 
-			<p><label>Council Name:</label><input class="insmall" type="text" name="name" value="<%= council.getName() %>" /></p>
-			<p><label>University:</label><input class="insmall" type="text" name="university" value="<%= council.getUniversity() %>" /></p>
-			<p><label>Location:</label><input class="insmall" type="text" name="location" value="<%= council.getLocation() %>" /></p>
-			<p><label>Website:</label><input class="insmall" type="text" name="website" value="<%= council.getWebsite() %>" /></p>
+			<p><label>Council Name:</label><input class="insmall" type="text" maxlength="500" name="name" value="<%= council.getName() %>" /></p>
+			<p><label>University:</label><input class="insmall" type="text" maxlength="500" name="university" value="<%= council.getUniversity() %>" /></p>
+			<p><label>Location:</label><input class="insmall" type="text" maxlength="500" name="location" value="<%= council.getLocation() %>" /></p>
+			<p><label>Website:</label><input class="insmall" type="text" maxlength="500" name="website" value="<%= council.getWebsite() %>" /></p>
 			<input type="hidden" name="id" value="<%= council.getKey().getId() %>">
 			<p class="submit"><input type="submit" value="Submit" /></p>
 		</fieldset> 

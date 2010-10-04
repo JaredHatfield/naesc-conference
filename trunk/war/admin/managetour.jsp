@@ -33,9 +33,9 @@
 	<form action="/admin/process/addtour" method="post"> 
 		<fieldset> 
 			<legend>Add Tour</legend> 
-			<p><label>Tour Name:</label><input class="insmall" type="text" name="name" /></p>
-			<p><label>Tour Description:</label><input class="insmall" type="text" name="description" /></p>
-			<p><label>Maximum Attendees:</label><input class="insmall" type="text" name="maximum" /></p>
+			<p><label>Tour Name:</label><input class="insmall" type="text" maxlength="500" name="name" /></p>
+			<p><label>Tour Description:</label><input class="insmall" type="text" maxlength="500" name="description" /></p>
+			<p><label>Maximum Attendees:</label><input class="insmall" type="text" maxlength="500" name="maximum" /></p>
 			<p class="submit"><input type="submit" value="Add" /></p>
 		</fieldset> 
 	</form>
@@ -45,9 +45,9 @@
 		   <form action="/admin/process/savetour" method="post"> 
 				<fieldset> 
 					<legend>Update Tour</legend> 
-					<p><label>Tour Name:</label><input class="insmall" type="text" name="name" value="<%= tours.get(i).getName() %>" /></p>
-					<p><label>Tour Description:</label><input class="insmall" type="text" name="description" value="<%= tours.get(i).getDescription() %>" /></p>
-					<p><label>Maximum Attendees:</label><input class="insmall" type="text" name="maximum" value="<%= tours.get(i).getMaximum() %>" /></p>
+					<p><label>Tour Name:</label><input class="insmall" type="text" maxlength="500" name="name" value="<%= tours.get(i).getName() %>" /></p>
+					<p><label>Tour Description:</label><input class="insmall" type="text" maxlength="500" name="description" value="<%= tours.get(i).getDescription() %>" /></p>
+					<p><label>Maximum Attendees:</label><input class="insmall" type="text" maxlength="500" name="maximum" value="<%= tours.get(i).getMaximum() %>" /></p>
 					<p><label>Attending:</label><%= tours.get(i).getTourMembers().size() %></p>
 					<p class="submit">
 						<input type="hidden" name="id" value="<%= tours.get(i).getKey().getId() %>" />
