@@ -44,7 +44,7 @@
 	<% AwardApplication app = (AwardApplication)request.getAttribute("application"); %>
 	<% AwardSubmission sub = (AwardSubmission)request.getAttribute("submission"); %>
 	<h2>Edit Award</h2>
-	<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">Back</a><br />
+	<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>"><img src="/static/back.png" /></a><br />
 	<br />
 	
 	<form action="/process/saveaward" method="post"> 
