@@ -36,7 +36,7 @@
 	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 	
 	<h2>Add Attendee</h2>
-		<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">Back</a><br /><br />
+		<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>"><img src="/static/back.png" /></a><br /><br />
 		<form method="post" action="/process/addattendee">
 		<fieldset> 
 		<legend>Edit Attendee</legend>

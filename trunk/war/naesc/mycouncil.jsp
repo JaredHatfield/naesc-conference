@@ -42,7 +42,7 @@
 	<table class="infotable">
 		<tr>
 			<td colspan="2" style="border-width: 0px; text-align: right;">
-				<a href="/editcouncil?id=<%= council.getKey().getId() %>">Edit</a>
+				<a href="/editcouncil?id=<%= council.getKey().getId() %>"><img src="/static/edit.png" /></a>
 			</td>
 		</tr>
 		<tr>
@@ -104,14 +104,14 @@
 		<tr class="titlerow">
 			<td class="minicell">
 				<% if(council.getAttendees().size() < cs.getMaxAttendees() && cs.isRegistrationOpen()) { %>
-					<a href="/addattendee?id=<%= council.getKey().getId() %>">Add Attendee</a>
+					<a href="/addattendee?id=<%= council.getKey().getId() %>"><img src="/static/add.png" class="center" /></a>
 				<% } %>
 				(<%= council.getAttendees().size() %> of <%= cs.getMaxAttendees() %>)
 			</td>
 			<td class="mediumcell">Name</td>
 			<td class="mediumcell">Email</td>
 			<td class="mediumcell">Tour <a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a></td>
-			<td class="smallcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>">(Manage)</a></td>
+			<td class="smallcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>"><img src="/static/edit.png" /></a></td>
 			<td class="smallcell">Registration</td>
 			<td class="minicell">Resume</td>
 			<td class="minicell">Complete</td>
@@ -119,7 +119,7 @@
 		<% for(int i = 0; i < council.getAttendees().size(); i++) { %>
 			<tr>
 				<% ConferenceAttendee att = council.getAttendees().get(i); %>
-				<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= att.getKey().getId() %>">Edit</a></td>
+				<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= att.getKey().getId() %>"><img src="/static/edit.png" class="center" /></a></td>
 				<td><%= att.getFirstName() %> <%= council.getAttendees().get(i).getLastName() %></td>
 				<td><%= att.getEmail() %></td>
 				<td>

@@ -28,7 +28,7 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	<h2>Award</h2>
-	<a href="/admin/">Back</a><br /><br />
+	<a href="/admin/"><img src="/static/back.png" /></a><br /><br />
 	
 	<form action="/admin/process/addaward" method="post"> 
 		<fieldset> 
@@ -59,6 +59,7 @@
 					</p>
 				</fieldset> 
 			</form>
+			<br />
 	<% } %>
 </body>
 </html>

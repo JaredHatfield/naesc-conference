@@ -40,7 +40,7 @@
 	<%@ include file="../header.jsp" %>
 	<h2>Edit Council</h2>
 	<% Council council = (Council)request.getAttribute("council"); %>
-	<a href="/mycouncil?id=<%= council.getKey().getId() %>">Back</a><br /><br />
+	<a href="/mycouncil?id=<%= council.getKey().getId() %>"><img src="/static/back.png" /></a><br /><br />
 	<form action="/process/savecouncil" method="post"> 
 		<fieldset> 
 			<legend>Edit Council</legend> 

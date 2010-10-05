@@ -30,7 +30,7 @@
 	<%@ include file="../header.jsp" %>
 	<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
 	<h2><%= a.getFirstName() %> <%= a.getMiddleName() %> <%= a.getLastName() %>'s  Resume</h2>
-		<a href="/mycouncil?id=<%= request.getAttribute("id") %>">Back</a><br /><br />
+		<a href="/mycouncil?id=<%= request.getAttribute("id") %>"><img src="/static/back.png" /></a><br /><br />
 		<% BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();  %>
 		<form action="<%= blobstoreService.createUploadUrl("/process/uploadresume") %>" method="post" enctype="multipart/form-data">
 		<fieldset> 
