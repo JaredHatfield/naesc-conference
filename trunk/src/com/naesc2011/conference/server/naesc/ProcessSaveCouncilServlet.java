@@ -56,7 +56,8 @@ public class ProcessSaveCouncilServlet extends HttpServlet {
                 ConferenceSettings cs = ConferenceSettings
                         .GetConferenceSettings(pm);
 
-                if (haspermission && cs.isRegistrationOpen()) {
+                if ((haspermission && cs.isRegistrationOpen())
+                        || p.IsUserAdmin()) {
                     Council council = Council.GetCouncil(pm, pid);
                     council.setName(request.getParameter("name"));
                     council.setUniversity(request.getParameter("university"));

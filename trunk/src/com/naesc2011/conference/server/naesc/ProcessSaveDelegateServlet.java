@@ -58,7 +58,8 @@ public class ProcessSaveDelegateServlet extends HttpServlet {
                 ConferenceSettings cs = ConferenceSettings
                         .GetConferenceSettings(pm);
 
-                if (haspermission && cs.isRegistrationOpen()) {
+                if ((haspermission && cs.isRegistrationOpen())
+                        || p.IsUserAdmin()) {
                     Council council = Council.GetCouncil(pm, pid);
                     council.SetAlternateDeleaget(alternate);
                     council.SetVotingDelegate(vote);

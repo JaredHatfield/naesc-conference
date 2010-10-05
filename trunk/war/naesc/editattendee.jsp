@@ -30,7 +30,7 @@
 	<!--
 	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 	function update(){
-		<% if(!cs.isRegistrationOpen()) { %>
+		<% if(!cs.isRegistrationOpen() && !(Boolean)request.getAttribute("isadmin")) { %>
 			disableForms();
 		<% } %>
 	}
@@ -107,7 +107,7 @@
 				<% } %>
 		</p>
 		<p><label>Allergies:</label><input class="insmall" type="text" maxlength="500" name="allergies" value="<%= a.getAllergies() %>" /></p>
-		<% if(cs.isRegistrationOpen()) { %>
+		<% if(cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin")) { %>
 			<p class="submit">
 				<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
 				<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
@@ -120,7 +120,7 @@
 	<form method="post" action="/process/deleteresume">
 		<fieldset> 
 		<legend>Resume</legend>
-			<% if(!cs.isRegistrationOpen()) { %>
+			<% if(!cs.isRegistrationOpen() && !(Boolean)request.getAttribute("isadmin")) { %>
 				<% if(a.getResume() != null) { %>
 					<p>
 						<label class="widelabel">
