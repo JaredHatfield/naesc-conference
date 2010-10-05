@@ -56,7 +56,12 @@ public class AdminProcessSaveTourServlet extends HttpServlet {
                 Tour t = Tour.GetTour(pm, id);
                 t.setName(name);
                 t.setDescription(description);
-                t.setMaximum(maximum);
+                if (maximum >= t.getTourMembers().size()) {
+                    // We can only update the count to a number less than or
+                    // equal to the number of people already attending the tour
+                    t.setMaximum(maximum);
+                }
+
                 pm.close();
             }
 
