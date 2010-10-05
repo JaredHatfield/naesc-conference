@@ -18,7 +18,9 @@
 package com.naesc2011.conference.server.admin;
 
 import java.io.IOException;
+import java.util.List;
 
+import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -27,6 +29,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.Council;
+import com.naesc2011.conference.shared.PMF;
 
 public class AdminListCouncilServlet extends HttpServlet {
 
@@ -44,7 +48,11 @@ public class AdminListCouncilServlet extends HttpServlet {
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
 
         if (authenticated) {
-            // TODO: Implement the logic for retrieving all of the councils.
+            PersistenceManager pm = PMF.get().getPersistenceManager();
+
+            List<Council> councils = Council.GetAllCouncils(pm);
+            request.setAttribute("councils", councils);
+
             String url = "/admin/listcouncil.jsp";
             ServletContext context = getServletContext();
             RequestDispatcher dispatcher = context.getRequestDispatcher(url);
