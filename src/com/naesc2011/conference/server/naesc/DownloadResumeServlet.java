@@ -56,7 +56,7 @@ public class DownloadResumeServlet extends HttpServlet {
                 boolean haspermission = CouncilPermission.HasPermission(pm,
                         pid, p);
 
-                if (haspermission) {
+                if (haspermission || p.IsUserAdmin()) {
                     Council council = Council.GetCouncil(pm, pid);
                     String mid = request.getParameter("m");
                     boolean found = false;

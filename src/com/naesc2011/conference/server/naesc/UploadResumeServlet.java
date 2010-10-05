@@ -59,7 +59,8 @@ public class UploadResumeServlet extends HttpServlet {
                 ConferenceSettings cs = ConferenceSettings
                         .GetConferenceSettings(pm);
 
-                if (haspermission && cs.isRegistrationOpen()) {
+                if ((haspermission && cs.isRegistrationOpen())
+                        || p.IsUserAdmin()) {
                     Council council = Council.GetCouncil(pm, pid);
                     String mid = request.getParameter("m");
                     boolean found = false;

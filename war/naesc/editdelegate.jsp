@@ -29,7 +29,7 @@
 	<!--
 	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 	function update(){
-		<% if(!cs.isRegistrationOpen()) { %>
+		<% if(!cs.isRegistrationOpen() && !(Boolean)request.getAttribute("isadmin")) { %>
 			disableForms();
 		<% } %>
 	}
@@ -79,7 +79,7 @@
 					<% } %>
 				</select>
 			</p>
-			<% if(cs.isRegistrationOpen()) { %>
+			<% if(cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin")) { %>
 				<p class="submit">
 					<input type="hidden" name="id" value="<%= council.getKey().getId() %>">
 					<input type="submit" value="Submit" />

@@ -31,7 +31,7 @@
 	<!--
 	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 	function update(){
-		<% if(!cs.isRegistrationOpen()) { %>
+		<% if(!cs.isRegistrationOpen() && !(Boolean)request.getAttribute("isadmin")) { %>
 			disableForms();
 		<% } %>
 	}
@@ -79,7 +79,7 @@
 				<p><label class="widelabel"><%= a.getQuestion4() %></label></p>
 				<p><textarea cols="70" rows="8" name="q4"><%= app.getQuestion4().getValue() %></textarea></p>
 			<% } %>
-			<% if((sub == null || !sub.getSubmitted()) && cs.isRegistrationOpen()) { %>
+			<% if((sub == null || !sub.getSubmitted()) && (cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin"))) { %>
 				<br />
 				<input type="hidden" name="id" value="<%= request.getAttribute("councilid") %>" />
 				<input type="hidden" name="a" value="<%= a.getKey().getId() %>" />

@@ -72,7 +72,7 @@ public class EditAwardServlet extends HttpServlet {
                     // the page as unauthorized.
                 }
 
-                if (haspermission && award != null) {
+                if ((haspermission || p.IsUserAdmin()) && award != null) {
 
                     ConferenceSettings cs = ConferenceSettings
                             .GetConferenceSettings(pm);

@@ -58,9 +58,9 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
                         .GetConferenceSettings(pm);
                 Council council = Council.GetCouncil(pm, pid);
 
-                if (haspermission
-                        && cs.getMaxAttendees() > council.getAttendees().size()
-                        && cs.isRegistrationOpen()) {
+                if ((haspermission
+                        && cs.getMaxAttendees() > council.getAttendees().size() && cs
+                        .isRegistrationOpen()) || p.IsUserAdmin()) {
                     ConferenceAttendee ca = new ConferenceAttendee(
                             cs.getRegistrationFee());
 

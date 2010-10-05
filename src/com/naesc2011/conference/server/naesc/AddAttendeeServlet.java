@@ -63,9 +63,9 @@ public class AddAttendeeServlet extends HttpServlet {
                 Council council = Council.GetCouncil(pm, pid);
                 request.setAttribute("council", council);
 
-                if (haspermission
-                        && cs.getMaxAttendees() > council.getAttendees().size()
-                        && cs.isRegistrationOpen()) {
+                if ((haspermission
+                        && cs.getMaxAttendees() > council.getAttendees().size() && cs
+                        .isRegistrationOpen()) || p.IsUserAdmin()) {
                     request.setAttribute("tours", Tour.GetAllTours(pm));
                     String url = "/naesc/addattendee.jsp";
                     ServletContext context = getServletContext();

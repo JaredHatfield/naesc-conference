@@ -103,7 +103,7 @@
 	<table class="infotable">
 		<tr class="titlerow">
 			<td class="minicell">
-				<% if(council.getAttendees().size() < cs.getMaxAttendees() && cs.isRegistrationOpen()) { %>
+				<% if(council.getAttendees().size() < cs.getMaxAttendees() && (cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin"))) { %>
 					<a href="/addattendee?id=<%= council.getKey().getId() %>"><img src="/static/add.png" class="center" /></a>
 				<% } %>
 				(<%= council.getAttendees().size() %> of <%= cs.getMaxAttendees() %>)

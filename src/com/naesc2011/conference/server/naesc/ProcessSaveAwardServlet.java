@@ -61,7 +61,8 @@ public class ProcessSaveAwardServlet extends HttpServlet {
                 ConferenceSettings cs = ConferenceSettings
                         .GetConferenceSettings(pm);
 
-                if (haspermission && cs.isRegistrationOpen()) {
+                if ((haspermission && cs.isRegistrationOpen())
+                        || p.IsUserAdmin()) {
                     Award award = Award.GetAward(pm, aid);
                     Council council = Council.GetCouncil(pm, pid);
                     List<AwardSubmission> sub = council.getAwardSubmissions();

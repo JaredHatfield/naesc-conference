@@ -58,7 +58,7 @@ public class MyCouncilServlet extends HttpServlet {
                 boolean haspermission = CouncilPermission.HasPermission(pm,
                         pid, p);
 
-                if (haspermission) {
+                if (haspermission || p.IsUserAdmin()) {
                     ConferenceSettings cs = ConferenceSettings
                             .GetConferenceSettings(pm);
                     request.setAttribute("conferencesettings", cs);
