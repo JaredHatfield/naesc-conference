@@ -575,7 +575,7 @@ public class ConferenceAttendee {
     /**
      * Gets the registration fee.
      * 
-     * @return The registartion Fee.
+     * @return The registration Fee.
      */
     public double getRegistartionFee() {
         return registartionFee;
@@ -585,7 +585,7 @@ public class ConferenceAttendee {
      * Sets the registration fee.
      * 
      * @param registartionFee
-     *            The registartion Fee to set.
+     *            The registration Fee to set.
      */
     public void setRegistartionFee(double registartionFee) {
         this.registartionFee = registartionFee;
@@ -597,9 +597,17 @@ public class ConferenceAttendee {
      * 
      * @return True if the attendee record has all of the required fields.
      */
-    public boolean isAttendeeComplete() {
-        // TODO: Implement the logic to check if an attendee has all of the
-        // required fields.
-        return false;
+    public boolean isAttendeeComplete()
+    {
+        return ((major.length() > 0)
+        		&& (email.length() > 6)
+        		&& (gender != null)
+        		&& (shirtSize != null)
+        		&& (emergencyContactName.length() > 0)
+        		&& (emergencyContactPhone.length() > 6)
+        		&& (arrivalInformation.length() > 0)
+        		&& (voteStatus != null)
+        		&& (tour != null)
+        		&& (resume != null));
     }
 }
