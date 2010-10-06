@@ -108,7 +108,10 @@ public class AwardApplication {
      *            the question1 to set
      */
     public void setQuestion1(String question1) {
-        this.question1 = new Text(question1.replaceAll("\\<.*?>", ""));
+        String s = question1.replaceAll("\\<.*?>", "");
+        if (!this.question1.getValue().equals(s)) {
+            this.question1 = new Text(s);
+        }
     }
 
     /**
@@ -123,7 +126,10 @@ public class AwardApplication {
      *            the question2 to set
      */
     public void setQuestion2(String question2) {
-        this.question2 = new Text(question2.replaceAll("\\<.*?>", ""));
+        String s = question2.replaceAll("\\<.*?>", "");
+        if (!this.question2.getValue().equals(s)) {
+            this.question2 = new Text(s);
+        }
     }
 
     /**
@@ -138,7 +144,10 @@ public class AwardApplication {
      *            the question3 to set
      */
     public void setQuestion3(String question3) {
-        this.question3 = new Text(question3.replaceAll("\\<.*?>", ""));
+        String s = question3.replaceAll("\\<.*?>", "");
+        if (!this.question3.getValue().equals(s)) {
+            this.question3 = new Text(s);
+        }
     }
 
     /**
@@ -153,7 +162,10 @@ public class AwardApplication {
      *            the question4 to set
      */
     public void setQuestion4(String question4) {
-        this.question4 = new Text(question4.replaceAll("\\<.*?>", ""));
+        String s = question4.replaceAll("\\<.*?>", "");
+        if (!this.question4.getValue().equals(s)) {
+            this.question4 = new Text(s);
+        }
     }
 
     /**

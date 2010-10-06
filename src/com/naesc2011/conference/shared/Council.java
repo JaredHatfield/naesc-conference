@@ -174,7 +174,10 @@ public class Council {
      *            the name to set
      */
     public void setName(String name) {
-        this.name = name.replaceAll("\\<.*?>", "");
+        String s = name.replaceAll("\\<.*?>", "");
+        if (!this.name.equals(s)) {
+            this.name = s;
+        }
     }
 
     /**
@@ -189,7 +192,10 @@ public class Council {
      *            the university to set
      */
     public void setUniversity(String university) {
-        this.university = university.replaceAll("\\<.*?>", "");
+        String s = university.replaceAll("\\<.*?>", "");
+        if (!this.university.equals(s)) {
+            this.university = s;
+        }
     }
 
     /**
@@ -204,7 +210,10 @@ public class Council {
      *            the location to set
      */
     public void setLocation(String location) {
-        this.location = location.replaceAll("\\<.*?>", "");
+        String s = location.replaceAll("\\<.*?>", "");
+        if (!this.location.equals(s)) {
+            this.location = s;
+        }
     }
 
     /**
@@ -219,7 +228,10 @@ public class Council {
      *            the contact to set
      */
     public void setContact(String contact) {
-        this.contact = contact;
+        String s = contact.replaceAll("\\<.*?>", "");
+        if (!this.contact.equals(s)) {
+            this.contact = s;
+        }
     }
 
     /**
@@ -262,7 +274,10 @@ public class Council {
      *            the website to set
      */
     public void setWebsite(String website) {
-        this.website = website.replaceAll("\\<.*?>", "");
+        String s = website.replaceAll("\\<.*?>", "");
+        if (!this.website.equals(s)) {
+            this.website = s;
+        }
     }
 
     /**
@@ -292,7 +307,10 @@ public class Council {
      *            the paymentNotes to set
      */
     public void setPaymentNotes(String paymentNotes) {
-        this.paymentNotes = paymentNotes;
+        String s = paymentNotes.replaceAll("\\<.*?>", "");
+        if (!this.paymentNotes.equals(s)) {
+            this.paymentNotes = s;
+        }
     }
 
     /**

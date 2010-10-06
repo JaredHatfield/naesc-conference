@@ -45,6 +45,11 @@ public class TourMember {
     @Persistent
     private Key attendee;
 
+    /**
+     * 
+     * @param council
+     * @param attendee
+     */
     public TourMember(Key council, Key attendee) {
         this.council = council;
         this.attendee = attendee;

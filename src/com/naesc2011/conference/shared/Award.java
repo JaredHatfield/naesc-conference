@@ -116,8 +116,10 @@ public class Award {
      *            the name to set
      */
     public void setName(String name) {
-        this.name = name.replaceAll("\\<.*?>", "");
-        ;
+        String s = name.replaceAll("\\<.*?>", "");
+        if (!this.name.equals(s)) {
+            this.name = s;
+        }
     }
 
     /**
@@ -132,8 +134,10 @@ public class Award {
      *            the question1 to set
      */
     public void setQuestion1(String question1) {
-        this.question1 = question1.replaceAll("\\<.*?>", "");
-        ;
+        String s = question1.replaceAll("\\<.*?>", "");
+        if (!this.question1.equals(s)) {
+            this.question1 = s;
+        }
     }
 
     /**
@@ -148,8 +152,10 @@ public class Award {
      *            the question2 to set
      */
     public void setQuestion2(String question2) {
-        this.question2 = question2.replaceAll("\\<.*?>", "");
-        ;
+        String s = question2.replaceAll("\\<.*?>", "");
+        if (!this.question2.equals(s)) {
+            this.question2 = s;
+        }
     }
 
     /**
@@ -164,8 +170,10 @@ public class Award {
      *            the question3 to set
      */
     public void setQuestion3(String question3) {
-        this.question3 = question3.replaceAll("\\<.*?>", "");
-        ;
+        String s = question3.replaceAll("\\<.*?>", "");
+        if (!this.question3.equals(s)) {
+            this.question3 = s;
+        }
     }
 
     /**
@@ -180,8 +188,10 @@ public class Award {
      *            the question4 to set
      */
     public void setQuestion4(String question4) {
-        this.question4 = question4.replaceAll("\\<.*?>", "");
-        ;
+        String s = question4.replaceAll("\\<.*?>", "");
+        if (!this.question4.equals(s)) {
+            this.question4 = s;
+        }
     }
 
     /**

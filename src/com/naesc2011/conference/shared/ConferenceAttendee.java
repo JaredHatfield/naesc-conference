@@ -174,6 +174,16 @@ public class ConferenceAttendee {
      * Creates a new instance of ConferenceAttendee.
      */
     public ConferenceAttendee(double registrationFee) {
+        this.firstName = "";
+        this.middleName = "";
+        this.lastName = "";
+        this.major = "";
+        this.email = "";
+        this.emergencyContactName = "";
+        this.emergencyContactPhone = "";
+        this.arrivalInformation = "";
+        this.allergies = "";
+        this.vegetarian = false;
         Date now = new Date();
         this.added = now;
         this.updated = now;
@@ -228,8 +238,10 @@ public class ConferenceAttendee {
      *            the firstName to set
      */
     public void setFirstName(String firstName) {
-        this.firstName = firstName.replaceAll("\\<.*?>", "");
-        ;
+        String s = firstName.replaceAll("\\<.*?>", "");
+        if (!this.firstName.equals(s)) {
+            this.firstName = s;
+        }
     }
 
     /**
@@ -244,8 +256,10 @@ public class ConferenceAttendee {
      *            the middleName to set
      */
     public void setMiddleName(String middleName) {
-        this.middleName = middleName.replaceAll("\\<.*?>", "");
-        ;
+        String s = middleName.replaceAll("\\<.*?>", "");
+        if (!this.middleName.equals(s)) {
+            this.middleName = s;
+        }
     }
 
     /**
@@ -260,8 +274,10 @@ public class ConferenceAttendee {
      *            the lastName to set
      */
     public void setLastName(String lastName) {
-        this.lastName = lastName.replaceAll("\\<.*?>", "");
-        ;
+        String s = lastName.replaceAll("\\<.*?>", "");
+        if (!this.lastName.equals(s)) {
+            this.lastName = s;
+        }
     }
 
     /**
@@ -283,8 +299,10 @@ public class ConferenceAttendee {
      *            the major to set
      */
     public void setMajor(String major) {
-        this.major = major.replaceAll("\\<.*?>", "");
-        ;
+        String s = major.replaceAll("\\<.*?>", "");
+        if (!this.major.equals(s)) {
+            this.major = s;
+        }
     }
 
     /**
@@ -299,8 +317,10 @@ public class ConferenceAttendee {
      *            the email to set
      */
     public void setEmail(String email) {
-        this.email = email.replaceAll("\\<.*?>", "");
-        ;
+        String s = email.replaceAll("\\<.*?>", "");
+        if (!this.email.equals(s)) {
+            this.email = s;
+        }
     }
 
     /**
@@ -345,8 +365,10 @@ public class ConferenceAttendee {
      *            the emergencyContactName to set
      */
     public void setEmergencyContactName(String emergencyContactName) {
-        this.emergencyContactName = emergencyContactName.replaceAll("\\<.*?>",
-                "");
+        String s = emergencyContactName.replaceAll("\\<.*?>", "");
+        if (!this.emergencyContactName.equals(s)) {
+            this.emergencyContactName = s;
+        }
     }
 
     /**
@@ -361,8 +383,10 @@ public class ConferenceAttendee {
      *            the emergencyContactPhone to set
      */
     public void setEmergencyContactPhone(String emergencyContactPhone) {
-        this.emergencyContactPhone = emergencyContactPhone.replaceAll(
-                "\\<.*?>", "");
+        String s = emergencyContactPhone.replaceAll("\\<.*?>", "");
+        if (!this.emergencyContactPhone.equals(s)) {
+            this.emergencyContactPhone = s;
+        }
     }
 
     /**
@@ -377,8 +401,10 @@ public class ConferenceAttendee {
      *            the arrivalInformation to set
      */
     public void setArrivalInformation(String arrivalInformation) {
-        this.arrivalInformation = arrivalInformation.replaceAll("\\<.*?>", "");
-        ;
+        String s = arrivalInformation.replaceAll("\\<.*?>", "");
+        if (!this.arrivalInformation.equals(s)) {
+            this.arrivalInformation = s;
+        }
     }
 
     /**
@@ -408,8 +434,10 @@ public class ConferenceAttendee {
      *            the allergies to set
      */
     public void setAllergies(String allergies) {
-        this.allergies = allergies.replaceAll("\\<.*?>", "");
-        ;
+        String s = allergies.replaceAll("\\<.*?>", "");
+        if (!this.allergies.equals(s)) {
+            this.allergies = s;
+        }
     }
 
     /**

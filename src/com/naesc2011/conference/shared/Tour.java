@@ -103,8 +103,10 @@ public class Tour {
      *            the name to set
      */
     public void setName(String name) {
-        this.name = name.replaceAll("\\<.*?>", "");
-        ;
+        String s = name.replaceAll("\\<.*?>", "");
+        if (!this.name.equals(s)) {
+            this.name = s;
+        }
     }
 
     /**
@@ -119,8 +121,10 @@ public class Tour {
      *            the description to set
      */
     public void setDescription(String description) {
-        this.description = description.replaceAll("\\<.*?>", "");
-        ;
+        String s = description.replaceAll("\\<.*?>", "");
+        if (!this.description.equals(s)) {
+            this.description = s;
+        }
     }
 
     /**
