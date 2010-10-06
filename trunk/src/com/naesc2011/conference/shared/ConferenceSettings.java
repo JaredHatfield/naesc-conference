@@ -125,7 +125,10 @@ public class ConferenceSettings {
      *            the conferenceName to set
      */
     public void setConferenceName(String conferenceName) {
-        this.conferenceName = conferenceName;
+        String s = conferenceName.replaceAll("\\<.*?>", "");
+        if (!this.conferenceName.equals(s)) {
+            this.conferenceName = s;
+        }
     }
 
     /**
