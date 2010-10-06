@@ -111,6 +111,12 @@ public class Council {
      */
     public Council(String name, String university, String location,
             String contact) {
+        this.name = "";
+        this.university = "";
+        this.location = "";
+        this.website = "";
+        this.contact = "";
+        this.paymentNotes = "";
         this.setName(name);
         this.setUniversity(university);
         this.setLocation(location);
