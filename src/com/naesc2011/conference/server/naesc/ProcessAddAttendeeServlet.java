@@ -65,42 +65,50 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
                     ConferenceAttendee ca = new ConferenceAttendee(
                             cs.getRegistrationFee());
 
-                    // Set all of the parameters that were passed in
-                    ca.setFirstName(request.getParameter("firstName"));
-                    ca.setMiddleName(request.getParameter("middleName"));
-                    ca.setLastName(request.getParameter("lastName"));
-                    ca.setMajor(request.getParameter("major"));
-                    ca.setEmail(request.getParameter("email"));
-                    ca.setGender(ConferenceAttendee.Gender.valueOf(request
-                            .getParameter("gender")));
-                    ca.setShirtSize(ConferenceAttendee.ShirtSize
-                            .valueOf(request.getParameter("shirtSize")));
-                    ca.setEmergencyContactName(request.getParameter("ecName"));
-                    ca.setEmergencyContactPhone(request.getParameter("ecPhone"));
-                    ca.setArrivalInformation(request
-                            .getParameter("arrivalInformation"));
-                    ca.setVegetarian(request.getParameter("vegetarian") != null);
-                    ca.setAllergies(request.getParameter("allergies"));
+                    // We only add the member if they check the authorization
+                    // box and agreed to the payment terms.
+                    if (request.getParameter("authorization") != null) {
+                        // Set all of the parameters that were passed in
+                        ca.setFirstName(request.getParameter("firstName"));
+                        ca.setMiddleName(request.getParameter("middleName"));
+                        ca.setLastName(request.getParameter("lastName"));
+                        ca.setMajor(request.getParameter("major"));
+                        ca.setEmail(request.getParameter("email"));
+                        ca.setGender(ConferenceAttendee.Gender.valueOf(request
+                                .getParameter("gender")));
+                        ca.setShirtSize(ConferenceAttendee.ShirtSize
+                                .valueOf(request.getParameter("shirtSize")));
+                        ca.setEmergencyContactName(request
+                                .getParameter("ecName"));
+                        ca.setEmergencyContactPhone(request
+                                .getParameter("ecPhone"));
+                        ca.setArrivalInformation(request
+                                .getParameter("arrivalInformation"));
+                        ca.setVegetarian(request.getParameter("vegetarian") != null);
+                        ca.setAllergies(request.getParameter("allergies"));
 
-                    // Make the object persistent
-                    try {
-                        council.getAttendees().add(ca);
-                        pm.makePersistent(ca);
-                    } finally {
-                    }
-
-                    // Save the tour selection
-                    String tourid = request.getParameter("tour");
-                    if (tourid != null && !tourid.equals("-1")) {
-                        Tour t = Tour.GetTour(pm, tourid);
-                        if (t.hasRoom()) {
-                            t.addAttendee(council.getKey(), ca);
+                        // Make the object persistent
+                        try {
+                            council.getAttendees().add(ca);
+                            pm.makePersistent(ca);
+                        } finally {
                         }
+
+                        // Save the tour selection
+                        String tourid = request.getParameter("tour");
+                        if (tourid != null && !tourid.equals("-1")) {
+                            Tour t = Tour.GetTour(pm, tourid);
+                            if (t.hasRoom()) {
+                                t.addAttendee(council.getKey(), ca);
+                            }
+                        }
+
+                        pm.close();
+
+                        response.sendRedirect("/mycouncil?id=" + pid);
+                    } else {
+                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                     }
-
-                    pm.close();
-
-                    response.sendRedirect("/mycouncil?id=" + pid);
                 } else {
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 }
