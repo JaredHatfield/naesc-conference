@@ -110,17 +110,26 @@ public class ProcessSaveAttendeeServlet extends HttpServlet {
                                         t.removeAttendee(council.getKey(), ca);
                                     }
                                 } else {
-                                    // Remove the previously selected tour
-                                    if (ca.getTour() != null) {
-                                        // Remove the previously selected tour
-                                        Tour t = Tour.GetTour(pm, ca.getTour());
-                                        t.removeAttendee(council.getKey(), ca);
-                                    }
+                                    if (ca.getTour() == null
+                                            || !(ca.getTour().getId() + "")
+                                                    .equals(tourid)) {
+                                        // We only process changes if it was
+                                        // actually changed
 
-                                    // Set the new tour as selected
-                                    Tour t = Tour.GetTour(pm, tourid);
-                                    if (t.hasRoom()) {
-                                        t.addAttendee(council.getKey(), ca);
+                                        if (ca.getTour() != null) {
+                                            // Remove the previously selected
+                                            // tour
+                                            Tour t = Tour.GetTour(pm,
+                                                    ca.getTour());
+                                            t.removeAttendee(council.getKey(),
+                                                    ca);
+                                        }
+
+                                        // Set the new tour as selected
+                                        Tour t = Tour.GetTour(pm, tourid);
+                                        if (t.hasRoom()) {
+                                            t.addAttendee(council.getKey(), ca);
+                                        }
                                     }
                                 }
                             }
