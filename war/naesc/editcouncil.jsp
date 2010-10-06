@@ -49,6 +49,10 @@
 			<p><label>Location:</label><input class="insmall" type="text" maxlength="500" name="location" value="<%= council.getLocation() %>" /></p>
 			<p><label>Contact:</label><input class="insmall" type="text" maxlength="500" name="contact" value="<%= council.getContact() %>" /></p>
 			<p><label>Website:</label><input class="insmall" type="text" maxlength="500" name="website" value="<%= council.getWebsite() %>" /></p>
+			<% if((Boolean)request.getAttribute("isadmin")) { %>
+				<p><label>Amount Paid:</label><input class="insmall" type="text" maxlength="500" name="amountpaid" value="<%= council.getAmountPaid() %>" /></p>
+				<p><label>Payment Notes:</label><input class="insmall" type="text" maxlength="500" name="paymentnotes" value="<%= council.getPaymentNotes() %>" /></p>
+			<% } %>
 			<% if(cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin")) { %>
 				<p class="submit">
 					<input type="hidden" name="id" value="<%= council.getKey().getId() %>">

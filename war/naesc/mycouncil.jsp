@@ -66,8 +66,16 @@
 			<td><%= council.getWebsite() %></td>
 		</tr>
 		<tr>
-			<td class="titlecol">Total Cost</td>
+			<td class="titlecol">Amount Due</td>
 			<td>$<%= (int)council.getAttendeeCost() %></td>
+		</tr>
+		<tr>
+			<td class="titlecol">Amount Paid</td>
+			<td>$<%= (int)council.getAmountPaid() %></td>
+		</tr>
+		<tr>
+			<td class="titlecol">Payment Notes</td>
+			<td><%= council.getPaymentNotes() %></td>
 		</tr>
 	</table>
 	
