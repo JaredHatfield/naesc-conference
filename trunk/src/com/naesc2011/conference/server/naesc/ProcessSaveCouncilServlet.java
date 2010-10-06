@@ -65,6 +65,13 @@ public class ProcessSaveCouncilServlet extends HttpServlet {
                     council.setContact(request.getParameter("contact"));
                     council.setWebsite(request.getParameter("website"));
 
+                    if (p.IsUserAdmin()) {
+                        council.setAmountPaid(Double.parseDouble(request
+                                .getParameter("amountpaid")));
+                        council.setPaymentNotes(request
+                                .getParameter("paymentnotes"));
+                    }
+
                     pm.close();
 
                     response.sendRedirect("/mycouncil?id=" + pid);

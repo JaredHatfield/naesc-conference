@@ -78,6 +78,18 @@ public class Council {
     private String website;
 
     /**
+     * The amount of money the council has Paid
+     */
+    @Persistent
+    private double amountPaid;
+
+    /**
+     * The notes about the payment.
+     */
+    @Persistent
+    private String paymentNotes;
+
+    /**
      * 
      */
     @Persistent
@@ -95,6 +107,8 @@ public class Council {
         this.setLocation(location);
         this.setContact(contact);
         this.setWebsite("");
+        this.setAmountPaid(0);
+        this.setPaymentNotes("");
         this.setAttendees(new ArrayList<ConferenceAttendee>());
         this.setAwardSubmissions(new ArrayList<AwardSubmission>());
     }
@@ -249,6 +263,36 @@ public class Council {
      */
     public void setWebsite(String website) {
         this.website = website.replaceAll("\\<.*?>", "");
+    }
+
+    /**
+     * @return the amountPaid
+     */
+    public double getAmountPaid() {
+        return amountPaid;
+    }
+
+    /**
+     * @param amountPaid
+     *            the amountPaid to set
+     */
+    public void setAmountPaid(double amountPaid) {
+        this.amountPaid = amountPaid;
+    }
+
+    /**
+     * @return the paymentNotes
+     */
+    public String getPaymentNotes() {
+        return paymentNotes;
+    }
+
+    /**
+     * @param paymentNotes
+     *            the paymentNotes to set
+     */
+    public void setPaymentNotes(String paymentNotes) {
+        this.paymentNotes = paymentNotes;
     }
 
     /**
