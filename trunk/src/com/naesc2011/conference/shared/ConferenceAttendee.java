@@ -183,6 +183,9 @@ public class ConferenceAttendee {
         this.allergies = "";
         this.vegetarian = false;
         Date now = new Date();
+        this.voteStatus = VoteStatus.NONE;
+        this.gender = Gender.MALE;
+        this.shirtSize = ShirtSize.S;
         this.added = now;
         this.updated = now;
         this.setRegistartionFee(registrationFee);
@@ -597,17 +600,12 @@ public class ConferenceAttendee {
      * 
      * @return True if the attendee record has all of the required fields.
      */
-    public boolean isAttendeeComplete()
-    {
-        return ((major.length() > 0)
-        		&& (email.length() > 6)
-        		&& (gender != null)
-        		&& (shirtSize != null)
-        		&& (emergencyContactName.length() > 0)
-        		&& (emergencyContactPhone.length() > 6)
-        		&& (arrivalInformation.length() > 0)
-        		&& (voteStatus != null)
-        		&& (tour != null)
-        		&& (resume != null));
+    public boolean isAttendeeComplete() {
+        return ((major.length() > 0) && (email.length() > 6)
+                && (gender != null) && (shirtSize != null)
+                && (emergencyContactName.length() > 0)
+                && (emergencyContactPhone.length() > 6)
+                && (arrivalInformation.length() > 0) && (voteStatus != null)
+                && (tour != null) && (resume != null));
     }
 }
