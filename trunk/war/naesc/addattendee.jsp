@@ -28,6 +28,20 @@
 <head>
 	<%@ include file="../htmlhead.jsp" %>
 	<title>NAESC 2011 National Conference: Add Attendee</title>
+	<script language="JavaScript" type="text/JavaScript">
+	<!--//
+	function checkme() {
+		if (!document.addattendee.authorization.checked) {
+			missinginfo = "You must agree to the payment terms before adding an attendee.";
+			alert(missinginfo);
+			return false;
+		}
+		else { 
+			return true;
+		}
+	}
+	// --->
+	</script>
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
@@ -37,9 +51,9 @@
 	
 	<h2>Add Attendee</h2>
 		<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>"><img src="/static/back.png" /></a><br /><br />
-		<form method="post" action="/process/addattendee">
+		<form name="addattendee" method="post" action="/process/addattendee" onSubmit="return checkme();">
 		<fieldset> 
-		<legend>Edit Attendee</legend>
+		<legend>Add Attendee</legend>
 		<p><label>First Name:</label><input class="insmall" type="text" maxlength="500" name="firstName" /></p>
 		<p><label>Middle Name:</label><input class="insmall" type="text" maxlength="500" name="middleName" /></p>
 		<p><label>Last Name:</label><input class="insmall" type="text" maxlength="500" name="lastName" /></p>
@@ -80,10 +94,13 @@
 		<p><label>Arrival Information:</label><input class="insmall" type="text" maxlength="500" name="arrivalInformation" /></p>
 		<p><label>Vegetarian:</label><input type="checkbox" name="vegetarian" /></p>
 		<p><label>Allergies:</label><input class="insmall" type="text" maxlength="500" name="allergies" /></p>
-		
-		<input type="hidden" name="councilid" value="<%= request.getAttribute("councilid") %>">
+		<p style="margin-left: 10em; margin-top: 2em; margin-bottom: 6em;">
+			<label style="margin-left: 0em; color: red;" class="widelabel">
+				<input type="checkbox" name="authorization" />By checking this box, your council and/or the member attending agrees to and is obligated to pay the $<%= (int)cs.getRegistrationFee() %> registration fee.
+			</label>
+		</p>
 		<p class="submit">
-			
+			<input type="hidden" name="councilid" value="<%= request.getAttribute("councilid") %>">
 			<input type="hidden" name="id">
 			<input type="submit" value="Add" />
 		</p>
