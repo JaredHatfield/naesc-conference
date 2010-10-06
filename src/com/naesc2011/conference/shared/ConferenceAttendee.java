@@ -20,9 +20,7 @@ package com.naesc2011.conference.shared;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.Date;
-import java.util.List;
 
-import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -30,10 +28,10 @@ import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 
 @PersistenceCapable
 public class ConferenceAttendee {
+
     /**
      * The key.
      */
@@ -42,13 +40,13 @@ public class ConferenceAttendee {
     private Key key;
 
     /**
-     * 
+     * The date the attendee was added.
      */
     @Persistent
     private Date added;
 
     /**
-     * 
+     * The date the attendee was updated.
      */
     @Persistent
     private Date updated;
@@ -191,51 +189,63 @@ public class ConferenceAttendee {
     }
 
     /**
-     * @return the key
+     * Gets the key.
+     * 
+     * @return The key.
      */
     public Key getKey() {
         return key;
     }
 
     /**
+     * Sets the key.
+     * 
      * @param key
-     *            the key to set
+     *            The key to set.
      */
     public void setKey(Key key) {
         this.key = key;
     }
 
     /**
-     * @return the added
+     * Gets the added date.
+     * 
+     * @return The added date.
      */
     public Date getAdded() {
         return added;
     }
 
     /**
-     * @return the updated
+     * Gets the updated date.
+     * 
+     * @return The updated date.
      */
     public Date getUpdated() {
         return updated;
     }
 
     /**
-     * Mark down that the attendee was updated.
+     * Set the new updated time to now.
      */
     public void update() {
         this.updated = new Date();
     }
 
     /**
-     * @return the firstName
+     * Gets the first name.
+     * 
+     * @return The first Name.
      */
     public String getFirstName() {
         return firstName;
     }
 
     /**
+     * Sets the first name.
+     * 
      * @param firstName
-     *            the firstName to set
+     *            The first Name to set.
      */
     public void setFirstName(String firstName) {
         String s = firstName.replaceAll("\\<.*?>", "");
@@ -245,15 +255,19 @@ public class ConferenceAttendee {
     }
 
     /**
-     * @return the middleName
+     * Gets the middle name.
+     * 
+     * @return The middleName.
      */
     public String getMiddleName() {
         return middleName;
     }
 
     /**
+     * Sets the middle name.
+     * 
      * @param middleName
-     *            the middleName to set
+     *            The middle Name to set.
      */
     public void setMiddleName(String middleName) {
         String s = middleName.replaceAll("\\<.*?>", "");
@@ -263,15 +277,19 @@ public class ConferenceAttendee {
     }
 
     /**
-     * @return the lastName
+     * Gets the last name.
+     * 
+     * @return The last Name.
      */
     public String getLastName() {
         return lastName;
     }
 
     /**
+     * Sets the last name.
+     * 
      * @param lastName
-     *            the lastName to set
+     *            The last Name to set.
      */
     public void setLastName(String lastName) {
         String s = lastName.replaceAll("\\<.*?>", "");
@@ -281,22 +299,26 @@ public class ConferenceAttendee {
     }
 
     /**
-     * 
+     * Gets the attendee's full name.
      */
     public String getFullName() {
         return this.firstName + " " + this.lastName;
     }
 
     /**
-     * @return the major
+     * Gets the major.
+     * 
+     * @return The major.
      */
     public String getMajor() {
         return major;
     }
 
     /**
+     * Sets the major.
+     * 
      * @param major
-     *            the major to set
+     *            The major to set.
      */
     public void setMajor(String major) {
         String s = major.replaceAll("\\<.*?>", "");
@@ -306,15 +328,19 @@ public class ConferenceAttendee {
     }
 
     /**
-     * @return the email
+     * Gets the email.
+     * 
+     * @return The email.
      */
     public String getEmail() {
         return email;
     }
 
     /**
+     * Sets the email.
+     * 
      * @param email
-     *            the email to set
+     *            The email to set.
      */
     public void setEmail(String email) {
         String s = email.replaceAll("\\<.*?>", "");
@@ -324,45 +350,57 @@ public class ConferenceAttendee {
     }
 
     /**
-     * @return the gender
+     * Gets the gender.
+     * 
+     * @return The gender.
      */
     public Gender getGender() {
         return gender;
     }
 
     /**
+     * Sets the gender.
+     * 
      * @param gender
-     *            the gender to set
+     *            The gender to set.
      */
     public void setGender(Gender gender) {
         this.gender = gender;
     }
 
     /**
-     * @return the shirtSize
+     * Gets the shirt size.
+     * 
+     * @return The shirt Size.
      */
     public ShirtSize getShirtSize() {
         return shirtSize;
     }
 
     /**
+     * Sets the shirt size.
+     * 
      * @param shirtSize
-     *            the shirtSize to set
+     *            The shirt Size to set.
      */
     public void setShirtSize(ShirtSize shirtSize) {
         this.shirtSize = shirtSize;
     }
 
     /**
-     * @return the emergencyContactName
+     * Gets the emergency contact name.
+     * 
+     * @return The emergency Contact Name.
      */
     public String getEmergencyContactName() {
         return emergencyContactName;
     }
 
     /**
+     * Sets the emergencyContactName.
+     * 
      * @param emergencyContactName
-     *            the emergencyContactName to set
+     *            The emergency Contact Name to set.
      */
     public void setEmergencyContactName(String emergencyContactName) {
         String s = emergencyContactName.replaceAll("\\<.*?>", "");
@@ -372,15 +410,19 @@ public class ConferenceAttendee {
     }
 
     /**
-     * @return the emergencyContactPhone
+     * Gets the emergency contact phone.
+     * 
+     * @return The emergency Contact Phone.
      */
     public String getEmergencyContactPhone() {
         return emergencyContactPhone;
     }
 
     /**
+     * Sets the emergency contact phone.
+     * 
      * @param emergencyContactPhone
-     *            the emergencyContactPhone to set
+     *            The emergency Contact Phone to set.
      */
     public void setEmergencyContactPhone(String emergencyContactPhone) {
         String s = emergencyContactPhone.replaceAll("\\<.*?>", "");
@@ -390,15 +432,19 @@ public class ConferenceAttendee {
     }
 
     /**
-     * @return the arrivalInformation
+     * Gets the arrival information.
+     * 
+     * @return The arrival Information.
      */
     public String getArrivalInformation() {
         return arrivalInformation;
     }
 
     /**
+     * Sets the arrival information.
+     * 
      * @param arrivalInformation
-     *            the arrivalInformation to set
+     *            The arrival Information to set.
      */
     public void setArrivalInformation(String arrivalInformation) {
         String s = arrivalInformation.replaceAll("\\<.*?>", "");
@@ -408,30 +454,38 @@ public class ConferenceAttendee {
     }
 
     /**
-     * @return the vegetarian option
+     * Gets the vegetarian flag.
+     * 
+     * @return The vegetarian flag.
      */
     public boolean getVegetarian() {
         return vegetarian;
     }
 
     /**
+     * Sets the vegetarian flag.
+     * 
      * @param vegetarian
-     *            the vegetarian to set
+     *            The vegetarian flag to set.
      */
     public void setVegetarian(boolean vegetarian) {
         this.vegetarian = vegetarian;
     }
 
     /**
-     * @return the allergies
+     * Gets the allergies.
+     * 
+     * @return The allergies.
      */
     public String getAllergies() {
         return allergies;
     }
 
     /**
+     * Sets the allergies.
+     * 
      * @param allergies
-     *            the allergies to set
+     *            The allergies to set.
      */
     public void setAllergies(String allergies) {
         String s = allergies.replaceAll("\\<.*?>", "");
@@ -441,7 +495,9 @@ public class ConferenceAttendee {
     }
 
     /**
-     * @return the voteStatus
+     * Gets the vote status.
+     * 
+     * @return The vote Status.
      */
     public VoteStatus getVoteStatus() {
         if (voteStatus == null) {
@@ -452,46 +508,57 @@ public class ConferenceAttendee {
     }
 
     /**
+     * Sets the vote status.
+     * 
      * @param voteStatus
-     *            the voteStatus to set
+     *            The vote Status to set.
      */
     public void setVoteStatus(VoteStatus voteStatus) {
         this.voteStatus = voteStatus;
     }
 
     /**
-     * @param tour
-     *            the tour to set
-     */
-    public void setTour(Key tour) {
-        this.tour = tour;
-    }
-
-    /**
-     * @return the tour
+     * Gets the tour.
+     * 
+     * @return The tour.
      */
     public Key getTour() {
         return tour;
     }
 
     /**
-     * @return the resume
+     * Sets the tour.
+     * 
+     * @param tour
+     *            The tour to set.
+     */
+    public void setTour(Key tour) {
+        this.tour = tour;
+    }
+
+    /**
+     * Gets the resume.
+     * 
+     * @return The resume.
      */
     public BlobKey getResume() {
         return resume;
     }
 
     /**
+     * Sets the resume.
+     * 
      * @param resume
-     *            the resume to set
+     *            The resume to set.
      */
     public void setResume(BlobKey resume) {
         this.resume = resume;
     }
 
     /**
+     * Gets the resume key.
      * 
-     * @return
+     * @return The resume key.
      */
     public String getResumeKey() {
         String s = this.key.toString();
@@ -506,15 +573,19 @@ public class ConferenceAttendee {
     }
 
     /**
-     * @return the registartionFee
+     * Gets the registration fee.
+     * 
+     * @return The registartion Fee.
      */
     public double getRegistartionFee() {
         return registartionFee;
     }
 
     /**
+     * Sets the registration fee.
+     * 
      * @param registartionFee
-     *            the registartionFee to set
+     *            The registartion Fee to set.
      */
     public void setRegistartionFee(double registartionFee) {
         this.registartionFee = registartionFee;
@@ -530,41 +601,5 @@ public class ConferenceAttendee {
         // TODO: Implement the logic to check if an attendee has all of the
         // required fields.
         return false;
-    }
-
-    /**
-     * 
-     * @param pm
-     * @param attendee
-     */
-    public static void InsertAttendee(PersistenceManager pm,
-            ConferenceAttendee attendee) {
-        pm.makePersistent(attendee);
-    }
-
-    /**
-     * 
-     * @param pm
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    public static List<ConferenceAttendee> GetAllAttendees(PersistenceManager pm) {
-        String query = "select from " + ConferenceAttendee.class.getName();
-        return (List<ConferenceAttendee>) pm.newQuery(query).execute();
-    }
-
-    /**
-     * 
-     * @param pm
-     * @param i
-     * @return
-     */
-    public static ConferenceAttendee GetAttendee(PersistenceManager pm,
-            String id) {
-        int i = Integer.parseInt(id);
-        Key key = KeyFactory.createKey(
-                ConferenceAttendee.class.getSimpleName(), i);
-        ConferenceAttendee a = pm.getObjectById(ConferenceAttendee.class, key);
-        return a;
     }
 }

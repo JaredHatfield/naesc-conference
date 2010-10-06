@@ -26,29 +26,33 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class TourMember {
+
     /**
-     * 
+     * The key.
      */
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
 
     /**
-     * 
+     * The council key.
      */
     @Persistent
     private Key council;
 
     /**
-     * 
+     * The attendee key.
      */
     @Persistent
     private Key attendee;
 
     /**
+     * Creates a new instance of the TourMember class.
      * 
      * @param council
+     *            The council key.
      * @param attendee
+     *            The attendee key.
      */
     public TourMember(Key council, Key attendee) {
         this.council = council;
@@ -56,29 +60,37 @@ public class TourMember {
     }
 
     /**
-     * @return the key
+     * Gets the key.
+     * 
+     * @return The key.
      */
     public Key getKey() {
         return key;
     }
 
     /**
+     * Sets the key.
+     * 
      * @param key
-     *            the key to set
+     *            The key to set.
      */
     public void setKey(Key key) {
         this.key = key;
     }
 
     /**
-     * @return the council
+     * Gets the council.
+     * 
+     * @return The council.
      */
     public Key getCouncil() {
         return council;
     }
 
     /**
-     * @return the attendee
+     * Gets the attendee.
+     * 
+     * @return The attendee.
      */
     public Key getAttendee() {
         return attendee;

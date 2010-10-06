@@ -30,6 +30,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 
 @PersistenceCapable
 public class Award {
+
     /**
      * The key.
      */
@@ -90,30 +91,38 @@ public class Award {
     }
 
     /**
-     * @return the key
+     * Gets the key.
+     * 
+     * @return The key.
      */
     public Key getKey() {
         return key;
     }
 
     /**
+     * Sets the key.
+     * 
      * @param key
-     *            the key to set
+     *            The key to set.
      */
     public void setKey(Key key) {
         this.key = key;
     }
 
     /**
-     * @return the name
+     * Gets the name.
+     * 
+     * @return The name.
      */
     public String getName() {
         return name;
     }
 
     /**
+     * Sets the name.
+     * 
      * @param name
-     *            the name to set
+     *            The name to set.
      */
     public void setName(String name) {
         String s = name.replaceAll("\\<.*?>", "");
@@ -123,15 +132,19 @@ public class Award {
     }
 
     /**
-     * @return the question1
+     * Gets question 1.
+     * 
+     * @return The question 1.
      */
     public String getQuestion1() {
         return question1;
     }
 
     /**
+     * Sets the question 1.
+     * 
      * @param question1
-     *            the question1 to set
+     *            The question 1 to set.
      */
     public void setQuestion1(String question1) {
         String s = question1.replaceAll("\\<.*?>", "");
@@ -141,15 +154,19 @@ public class Award {
     }
 
     /**
-     * @return the question2
+     * Gets the question 2.
+     * 
+     * @return The question 2.
      */
     public String getQuestion2() {
         return question2;
     }
 
     /**
+     * Sets the question 2.
+     * 
      * @param question2
-     *            the question2 to set
+     *            The question 2 to set.
      */
     public void setQuestion2(String question2) {
         String s = question2.replaceAll("\\<.*?>", "");
@@ -159,15 +176,19 @@ public class Award {
     }
 
     /**
-     * @return the question3
+     * Gets the question 3.
+     * 
+     * @return The question 3.
      */
     public String getQuestion3() {
         return question3;
     }
 
     /**
+     * Sets the question 3.
+     * 
      * @param question3
-     *            the question3 to set
+     *            The question 3 to set.
      */
     public void setQuestion3(String question3) {
         String s = question3.replaceAll("\\<.*?>", "");
@@ -177,15 +198,19 @@ public class Award {
     }
 
     /**
-     * @return the question4
+     * Gets the question 4.
+     * 
+     * @return The question 4.
      */
     public String getQuestion4() {
         return question4;
     }
 
     /**
+     * Sets the question 4.
+     * 
      * @param question4
-     *            the question4 to set
+     *            The question 4 to set.
      */
     public void setQuestion4(String question4) {
         String s = question4.replaceAll("\\<.*?>", "");
@@ -195,18 +220,23 @@ public class Award {
     }
 
     /**
+     * Inserts a new Award into the datastore.
      * 
      * @param pm
+     *            The PersistenceManager.
      * @param award
+     *            The award to store.
      */
     public static void InsertAward(PersistenceManager pm, Award award) {
         pm.makePersistent(award);
     }
 
     /**
+     * Gets all of the awards.
      * 
      * @param pm
-     * @return
+     *            The PersistenceManager.
+     * @return The list of awards.
      */
     @SuppressWarnings("unchecked")
     public static List<Award> GetAllAwards(PersistenceManager pm) {
@@ -215,10 +245,13 @@ public class Award {
     }
 
     /**
+     * Gets the specified award.
      * 
      * @param pm
+     *            The PersistenceManager.
      * @param id
-     * @return
+     *            The id of the Award to locate.
+     * @return The requested Award.
      */
     public static Award GetAward(PersistenceManager pm, String id) {
         int i = Integer.parseInt(id);
@@ -228,10 +261,13 @@ public class Award {
     }
 
     /**
+     * Gets the specified award.
      * 
      * @param pm
+     *            The PersistenceManager.
      * @param key
-     * @return
+     *            The key of the award to locate.
+     * @return The requested Award.
      */
     public static Award GetAward(PersistenceManager pm, Key key) {
         Award a = pm.getObjectById(Award.class, key);

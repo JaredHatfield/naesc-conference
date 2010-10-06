@@ -30,15 +30,16 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.naesc2011.conference.shared.PMF;
 
 public class PermissionManager {
+
     /**
-	 * 
-	 */
+     * The logger.
+     */
     private static final Logger log = Logger.getLogger(PermissionManager.class
             .getName());
 
     /**
-	 * 
-	 */
+     * The user service.
+     */
     UserService userService;
 
     /**
@@ -47,8 +48,8 @@ public class PermissionManager {
     private User currentUser;
 
     /**
-	 * 
-	 */
+     * The user's current permission.
+     */
     private PermissionUserInstance currentPermissions;
 
     /**
@@ -57,8 +58,8 @@ public class PermissionManager {
     private boolean appEngineAdmin;
 
     /**
-	 * 
-	 */
+     * Creates a new instance of the PermissionManager class.
+     */
     public PermissionManager() {
         this.userService = UserServiceFactory.getUserService();
         this.currentUser = userService.getCurrentUser();
@@ -109,8 +110,9 @@ public class PermissionManager {
     }
 
     /**
+     * Checks if the user is logged in.
      * 
-     * @return
+     * @return True if the user is logged in; otherwise false.
      */
     public Boolean IsUserLoggedIn() {
         if (currentUser == null) {
@@ -121,32 +123,36 @@ public class PermissionManager {
     }
 
     /**
+     * Checks if the user is logged in as an administrator.
      * 
-     * @return
+     * @return True if the user is an administrator; otherwise false.
      */
     public Boolean IsUserAdmin() {
         return this.appEngineAdmin;
     }
 
     /**
+     * Gets the user object.
      * 
-     * @return
+     * @return The user objects.
      */
     public User getUser() {
         return this.currentUser;
     }
 
     /**
+     * Gets the user service.
      * 
-     * @return
+     * @return The user service
      */
     public UserService getUserService() {
         return this.userService;
     }
 
     /**
+     * Gets the user's permission level.
      * 
-     * @return
+     * @return The user's permission level.
      */
     public PermissionUserInstance.Permission GetPermissionLevel() {
         if (this.currentPermissions != null) {
@@ -157,9 +163,11 @@ public class PermissionManager {
     }
 
     /**
+     * Gets all of the user permissions that have logged in.
      * 
      * @param pm
-     * @return
+     *            The PersistenceManager.
+     * @return The list of user permissions.
      */
     @SuppressWarnings("unchecked")
     public static List<PermissionUserInstance> GetAllUsers(PersistenceManager pm) {
@@ -168,9 +176,12 @@ public class PermissionManager {
     }
 
     /**
+     * Sets the permission level for a specific user.
      * 
      * @param userId
+     *            The userId to set.
      * @param permission
+     *            The permission level to set.
      */
     @SuppressWarnings("unchecked")
     public static void SetPermission(String userId,
@@ -196,8 +207,10 @@ public class PermissionManager {
      * Set up the information that is required to log in a user.
      * 
      * @param p
+     *            The PermissionManager.
      * @param request
-     * @return
+     *            The HttpServletRequest.
+     * @return True if the user is logged in; otherwise false.
      */
     public static boolean SetUpPermissions(PermissionManager p,
             HttpServletRequest request) {

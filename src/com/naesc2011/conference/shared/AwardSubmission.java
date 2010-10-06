@@ -18,19 +18,17 @@
 package com.naesc2011.conference.shared;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 
 @PersistenceCapable
 public class AwardSubmission {
+
     /**
      * The key.
      */
@@ -63,9 +61,12 @@ public class AwardSubmission {
     private Date submittedOn;
 
     /**
+     * Creates a new instance of the AwardSubmission class.
      * 
      * @param award
+     *            The referenced award.
      * @param application
+     *            The referenced application.
      */
     public AwardSubmission(Key award, Key application) {
         this.award = award;
@@ -74,123 +75,77 @@ public class AwardSubmission {
     }
 
     /**
-     * @return the key
+     * Gets the key.
+     * 
+     * @return The key.
      */
     public Key getKey() {
         return key;
     }
 
     /**
+     * Sets the key.
+     * 
      * @param key
-     *            the key to set
+     *            The key to set.
      */
     public void setKey(Key key) {
         this.key = key;
     }
 
     /**
-     * @return the award
+     * Gets the award.
+     * 
+     * @return The award.
      */
     public Key getAward() {
         return award;
     }
 
     /**
-     * @param award
-     *            the award to set
-     */
-    public void setAward(Key award) {
-        this.award = award;
-    }
-
-    /**
-     * @return the application
+     * Gets the application.
+     * 
+     * @return The application.
      */
     public Key getApplication() {
         return application;
     }
 
     /**
-     * @param application
-     *            the application to set
-     */
-    public void setApplication(Key application) {
-        this.application = application;
-    }
-
-    /**
-     * @return the submitted
+     * Gets the submitted flag.
+     * 
+     * @return The submitted flag.
      */
     public Boolean getSubmitted() {
         return submitted;
     }
 
     /**
+     * Sets the submitted flag.
+     * 
      * @param submitted
-     *            the submitted to set
+     *            The submitted flag value.
      */
     public void setSubmitted(Boolean submitted) {
         this.submitted = submitted;
     }
 
     /**
-     * @param submittedOn
-     *            the submittedOn to set
-     */
-    public void setSubmittedOn(Date submittedOn) {
-        this.submittedOn = submittedOn;
-    }
-
-    /**
-     * @return the submittedOn
+     * Gets the submittedOn date.
+     * 
+     * @return The submittedOn date.
      */
     public Date getSubmittedOn() {
         return submittedOn;
     }
 
     /**
+     * Sets the submitted on date.
      * 
-     * @param pm
-     * @param AwardSubmission
+     * @param submittedOn
+     *            The submittedOn date.
      */
-    public static void InsertAward(PersistenceManager pm,
-            AwardSubmission AwardSubmission) {
-        pm.makePersistent(AwardSubmission);
-    }
-
-    /**
-     * 
-     * @param pm
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    public static List<AwardSubmission> GetAllAwards(PersistenceManager pm) {
-        String query = "select from " + AwardSubmission.class.getName();
-        return (List<AwardSubmission>) pm.newQuery(query).execute();
-    }
-
-    /**
-     * 
-     * @param pm
-     * @param id
-     * @return
-     */
-    public static AwardSubmission GetAward(PersistenceManager pm, String id) {
-        int i = Integer.parseInt(id);
-        Key key = KeyFactory
-                .createKey(AwardSubmission.class.getSimpleName(), i);
-        AwardSubmission a = pm.getObjectById(AwardSubmission.class, key);
-        return a;
-    }
-
-    /**
-     * 
-     * @param pm
-     * @param key
-     * @return
-     */
-    public static AwardSubmission GetAward(PersistenceManager pm, Key key) {
-        AwardSubmission a = pm.getObjectById(AwardSubmission.class, key);
-        return a;
+    public void setSubmittedOn(Date submittedOn) {
+        this.submittedOn = submittedOn;
     }
 }

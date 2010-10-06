@@ -32,75 +32,89 @@ import com.google.appengine.api.datastore.KeyFactory;
 
 @PersistenceCapable
 public class Tour {
+
     /**
-     * 
+     * The key.
      */
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
 
     /**
-     * 
+     * The tour name.
      */
     @Persistent
     private String name;
 
     /**
-     * 
+     * The tour description.
      */
     @Persistent
     private String description;
 
     /**
-     * 
+     * The maximum number of people that can go on the tour.
      */
     @Persistent
     private int maximum;
 
     /**
-     * 
+     * The list of tour members.
      */
     @Persistent
     @Element(dependent = "true")
     private List<TourMember> tourMembers;
 
     /**
+     * Creates a new instance of the Tour class.
      * 
      * @param name
+     *            The tour name.
      * @param description
+     *            The tour description
+     * @param maximum
+     *            The max number of people for the tour.
      */
     public Tour(String name, String description, int maximum) {
         this.name = name;
         this.description = description;
         this.maximum = maximum;
-        this.setTourMembers(new ArrayList<TourMember>());
+        this.tourMembers = new ArrayList<TourMember>();
     }
 
     /**
-     * @return the key
+     * Gets the key.
+     * 
+     * @return The key.
      */
     public Key getKey() {
         return key;
     }
 
     /**
+     * Sets the key.
+     * 
      * @param key
-     *            the key to set
+     *            The key to set.
      */
     public void setKey(Key key) {
         this.key = key;
     }
 
     /**
-     * @return the name
+     * Gets the name.
+     * 
+     * @return The name.
      */
     public String getName() {
         return name;
     }
 
     /**
+     * Sets the name.
+     * 
      * @param name
-     *            the name to set
+     *            The name to set.
      */
     public void setName(String name) {
         String s = name.replaceAll("\\<.*?>", "");
@@ -110,15 +124,19 @@ public class Tour {
     }
 
     /**
-     * @return the description
+     * Gets the description.
+     * 
+     * @return The description.
      */
     public String getDescription() {
         return description;
     }
 
     /**
+     * Sets the description.
+     * 
      * @param description
-     *            the description to set
+     *            The description to set.
      */
     public void setDescription(String description) {
         String s = description.replaceAll("\\<.*?>", "");
@@ -128,38 +146,37 @@ public class Tour {
     }
 
     /**
-     * @param tourMembers
-     *            the tourMembers to set
-     */
-    public void setTourMembers(List<TourMember> tourMembers) {
-        this.tourMembers = tourMembers;
-    }
-
-    /**
-     * @return the tourMembers
+     * Gets the tour members.
+     * 
+     * @return The tour Members.
      */
     public List<TourMember> getTourMembers() {
         return tourMembers;
     }
 
     /**
-     * @param maximum
-     *            the maximum to set
-     */
-    public void setMaximum(int maximum) {
-        this.maximum = maximum;
-    }
-
-    /**
-     * @return the maximum
+     * Gets the maximum.
+     * 
+     * @return The maximum.
      */
     public int getMaximum() {
         return maximum;
     }
 
     /**
+     * Sets the maximum.
      * 
-     * @return
+     * @param maximum
+     *            The maximum to set.
+     */
+    public void setMaximum(int maximum) {
+        this.maximum = maximum;
+    }
+
+    /**
+     * Test is the tour has room for more people.
+     * 
+     * @return True if there are open spots; otherwise false.
      */
     public boolean hasRoom() {
         if (this.maximum <= 0) {
@@ -206,18 +223,23 @@ public class Tour {
     }
 
     /**
+     * Inserts a Tour into the datastore.
      * 
      * @param pm
-     * @param company
+     *            The PersistenceManager.
+     * @param tour
+     *            The Tour to insert.
      */
     public static void InsertTour(PersistenceManager pm, Tour tour) {
         pm.makePersistent(tour);
     }
 
     /**
+     * Gets all of the Tours.
      * 
      * @param pm
-     * @return
+     *            The PersistenceManager.
+     * @return A list of all of the tours.
      */
     @SuppressWarnings("unchecked")
     public static List<Tour> GetAllTours(PersistenceManager pm) {
@@ -226,10 +248,13 @@ public class Tour {
     }
 
     /**
+     * Gets the specified tour.
      * 
      * @param pm
-     * @param i
-     * @return
+     *            The PersistenceManager.
+     * @param id
+     *            The identifier for the tour.
+     * @return The requested tour object.
      */
     public static Tour GetTour(PersistenceManager pm, String id) {
         int i = Integer.parseInt(id);
@@ -239,10 +264,13 @@ public class Tour {
     }
 
     /**
+     * Gets the specified tour.
      * 
      * @param pm
+     *            The PersistenceManager.
      * @param key
-     * @return
+     *            The key for the tour.
+     * @return The requested object.
      */
     public static Tour GetTour(PersistenceManager pm, Key key) {
         Tour t = pm.getObjectById(Tour.class, key);

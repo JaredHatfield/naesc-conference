@@ -35,7 +35,7 @@ import com.google.appengine.api.datastore.Key;
 public class ConferenceSettings {
 
     /**
-     * 
+     * The key.
      */
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -82,11 +82,16 @@ public class ConferenceSettings {
     private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
 
     /**
+     * Create a new instance of the ConferenceSettings class.
      * 
      * @param earlyFee
+     *            The early registration fee.
      * @param lateFee
+     *            The late registration fee.
      * @param earlyDate
+     *            The early registration date.
      * @param lateDate
+     *            The late registration date.
      */
     private ConferenceSettings(String conferenceName, double earlyFee,
             double lateFee, Date earlyDate, Date lateDate, int maxAttendees) {
@@ -99,30 +104,38 @@ public class ConferenceSettings {
     }
 
     /**
-     * @return the key
+     * Gets the key.
+     * 
+     * @return The key.
      */
     public Key getKey() {
         return key;
     }
 
     /**
+     * Sets the key.
+     * 
      * @param key
-     *            the key to set
+     *            The key to set.
      */
     public void setKey(Key key) {
         this.key = key;
     }
 
     /**
-     * @return the conferenceName
+     * Gets the conference name.
+     * 
+     * @return The conference Name.
      */
     public String getConferenceName() {
         return conferenceName;
     }
 
     /**
+     * Sets the conference name.
+     * 
      * @param conferenceName
-     *            the conferenceName to set
+     *            The conference Name to set.
      */
     public void setConferenceName(String conferenceName) {
         String s = conferenceName.replaceAll("\\<.*?>", "");
@@ -132,79 +145,76 @@ public class ConferenceSettings {
     }
 
     /**
-     * @return the earlyRegistrationFee
+     * Gets the early registration fee.
+     * 
+     * @return The early Registration Fee.
      */
     public double getEarlyRegistrationFee() {
         return earlyRegistrationFee;
     }
 
     /**
+     * Sets the early registration fee.
+     * 
      * @param earlyRegistrationFee
-     *            the earlyRegistrationFee to set
+     *            The early Registration Fee to set.
      */
     public void setEarlyRegistrationFee(double earlyRegistrationFee) {
         this.earlyRegistrationFee = earlyRegistrationFee;
     }
 
     /**
-     * @return the lateRegistrationFee
+     * Gets the late registration fee.
+     * 
+     * @return The late Registration Fee.
      */
     public double getLateRegistrationFee() {
         return lateRegistrationFee;
     }
 
     /**
+     * Sets the late registration fee.
+     * 
      * @param lateRegistrationFee
-     *            the lateRegistrationFee to set
+     *            The late Registration Fee to set.
      */
     public void setLateRegistrationFee(double lateRegistrationFee) {
         this.lateRegistrationFee = lateRegistrationFee;
     }
 
     /**
-     * @return the earlyRegistrationDate
+     * Gets the early registration date.
+     * 
+     * @return The early Registration Date.
      */
     public Date getEarlyRegistrationDate() {
         return earlyRegistrationDate;
     }
 
     /**
+     * Sets the early registration date.
      * 
-     * @param lateRegistrationDate
-     * @throws ParseException
-     */
-    public void setLateRegistrationDate(String lateRegistrationDate)
-            throws ParseException {
-        this.lateRegistrationDate = ConferenceSettings.df
-                .parse(lateRegistrationDate);
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public String getEarlyRegistrationDateString() {
-        return ConferenceSettings.df.format(this.earlyRegistrationDate);
-    }
-
-    /**
      * @param earlyRegistrationDate
-     *            the earlyRegistrationDate to set
+     *            The early Registration Date to set.
      */
     public void setEarlyRegistrationDate(Date earlyRegistrationDate) {
         this.earlyRegistrationDate = earlyRegistrationDate;
     }
 
     /**
-     * @return the lateRegistrationDate
+     * Gets the early registration date in string form.
+     * 
+     * @return The early registration date string.
      */
-    public Date getLateRegistrationDate() {
-        return lateRegistrationDate;
+    public String getEarlyRegistrationDateString() {
+        return ConferenceSettings.df.format(this.earlyRegistrationDate);
     }
 
     /**
+     * Sets the early registration date.
      * 
      * @param earlyRegistrationDate
+     *            The early registration date in string form.
      * @throws ParseException
      */
     public void setEarlyRegistrationDate(String earlyRegistrationDate)
@@ -214,40 +224,69 @@ public class ConferenceSettings {
     }
 
     /**
+     * Gets the late registration date.
      * 
-     * @return
+     * @return The late Registration Date.
      */
-    public String getLateRegistrationDateString() {
-        return ConferenceSettings.df.format(this.lateRegistrationDate);
+    public Date getLateRegistrationDate() {
+        return lateRegistrationDate;
     }
 
     /**
+     * Sets the late registration date.
+     * 
      * @param lateRegistrationDate
-     *            the lateRegistrationDate to set
+     *            The late Registration Date to set.
      */
     public void setLateRegistrationDate(Date lateRegistrationDate) {
         this.lateRegistrationDate = lateRegistrationDate;
     }
 
     /**
-     * @return the maxAttendees
+     * Gets the late registration date in string form.
+     * 
+     * @return The late registration date string.
+     */
+    public String getLateRegistrationDateString() {
+        return ConferenceSettings.df.format(this.lateRegistrationDate);
+    }
+
+    /**
+     * Sets the late registration date.
+     * 
+     * @param lateRegistrationDate
+     *            The late registration date in string form.
+     * @throws ParseException
+     */
+    public void setLateRegistrationDate(String lateRegistrationDate)
+            throws ParseException {
+        this.lateRegistrationDate = ConferenceSettings.df
+                .parse(lateRegistrationDate);
+    }
+
+    /**
+     * Gets the max attendees per council.
+     * 
+     * @return The maximum number of attendees per council.
      */
     public int getMaxAttendees() {
         return maxAttendees;
     }
 
     /**
+     * Sets the max attendees per council.
+     * 
      * @param maxAttendees
-     *            the maxAttendees to set
+     *            The maximum attendees to set.
      */
     public void setMaxAttendees(int maxAttendees) {
         this.maxAttendees = maxAttendees;
     }
 
     /**
+     * Gets the current registration fee.
      * 
-     * @return
-     * @throws Exception
+     * @return The current registration fee.
      */
     public double getRegistrationFee() {
         Date today = new Date();
@@ -261,8 +300,9 @@ public class ConferenceSettings {
     }
 
     /**
+     * Is registration open.
      * 
-     * @return
+     * @return True if registration is open; otherwise false.
      */
     public boolean isRegistrationOpen() {
         Date today = new Date();
@@ -270,8 +310,9 @@ public class ConferenceSettings {
     }
 
     /**
+     * Is early registration open.
      * 
-     * @return
+     * @return True if early registration is open; otherwise false.
      */
     public boolean isEarlyRegistrationOpen() {
         Date today = new Date();
@@ -279,7 +320,7 @@ public class ConferenceSettings {
     }
 
     /**
-     * Gets the conference settings
+     * Gets the instance of the ConferenceSettings object.
      */
     @SuppressWarnings("unchecked")
     public static ConferenceSettings GetConferenceSettings(PersistenceManager pm) {
