@@ -33,46 +33,47 @@ import com.naesc2011.conference.shared.ConferenceAttendee.VoteStatus;
 
 @PersistenceCapable
 public class Council {
+
     /**
-     * 
+     * The key.
      */
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
 
     /**
-     * 
+     * The council name.
      */
     @Persistent
     private String name;
 
     /**
-     * 
+     * The university.
      */
     @Persistent
     private String university;
 
     /**
-     * 
+     * The location.
      */
     @Persistent
     private String location;
 
     /**
-     * 
+     * The contact.
      */
     @Persistent
     private String contact;
 
     /**
-     * 
+     * The list of attendees.
      */
     @Persistent
     @Element(dependent = "true")
     private List<ConferenceAttendee> attendees;
 
     /**
-     * 
+     * The website.
      */
     @Persistent
     private String website;
@@ -90,15 +91,23 @@ public class Council {
     private String paymentNotes;
 
     /**
-     * 
+     * The list of award submissions.
      */
     @Persistent
     @Element(dependent = "true")
     private List<AwardSubmission> awardSubmissions;
 
     /**
+     * Creates a new instance of the Council class.
      * 
      * @param name
+     *            The council name.
+     * @param university
+     *            The university.
+     * @param location
+     *            The location.
+     * @param contact
+     *            The contact.
      */
     public Council(String name, String university, String location,
             String contact) {
@@ -109,13 +118,15 @@ public class Council {
         this.setWebsite("");
         this.setAmountPaid(0);
         this.setPaymentNotes("");
-        this.setAttendees(new ArrayList<ConferenceAttendee>());
-        this.setAwardSubmissions(new ArrayList<AwardSubmission>());
+        this.attendees = new ArrayList<ConferenceAttendee>();
+        this.awardSubmissions = new ArrayList<AwardSubmission>();
     }
 
     /**
+     * Sets the voting delegate to the specified attendee id.
      * 
      * @param id
+     *            The id of the attendee to designate as the voting delegate.
      */
     public void SetVotingDelegate(String id) {
         for (int i = 0; i < this.attendees.size(); i++) {
@@ -131,8 +142,10 @@ public class Council {
     }
 
     /**
+     * Sets the alternate delegate to the attendee with the specified id.
      * 
      * @param id
+     *            The id of the attendee to designate as an alternate delegate.
      */
     public void SetAlternateDeleaget(String id) {
         for (int i = 0; i < this.attendees.size(); i++) {
@@ -148,30 +161,38 @@ public class Council {
     }
 
     /**
-     * @return the key
+     * Gets the key.
+     * 
+     * @return The key.
      */
     public Key getKey() {
         return key;
     }
 
     /**
+     * Sets the key.
+     * 
      * @param key
-     *            the key to set
+     *            The key to set.
      */
     public void setKey(Key key) {
         this.key = key;
     }
 
     /**
-     * @return the name
+     * Gets the name.
+     * 
+     * @return The name.
      */
     public String getName() {
         return name;
     }
 
     /**
+     * Sets the name.
+     * 
      * @param name
-     *            the name to set
+     *            The name to set.
      */
     public void setName(String name) {
         String s = name.replaceAll("\\<.*?>", "");
@@ -181,15 +202,19 @@ public class Council {
     }
 
     /**
-     * @return the university
+     * Gets the university.
+     * 
+     * @return The university.
      */
     public String getUniversity() {
         return university;
     }
 
     /**
+     * Sets the university.
+     * 
      * @param university
-     *            the university to set
+     *            The university to set.
      */
     public void setUniversity(String university) {
         String s = university.replaceAll("\\<.*?>", "");
@@ -199,15 +224,19 @@ public class Council {
     }
 
     /**
-     * @return the location
+     * Gets the location.
+     * 
+     * @return The location.
      */
     public String getLocation() {
         return location;
     }
 
     /**
+     * Sets the location.
+     * 
      * @param location
-     *            the location to set
+     *            The location to set.
      */
     public void setLocation(String location) {
         String s = location.replaceAll("\\<.*?>", "");
@@ -217,15 +246,19 @@ public class Council {
     }
 
     /**
-     * @return the contact
+     * Gets the contact.
+     * 
+     * @return The contact.
      */
     public String getContact() {
         return contact;
     }
 
     /**
+     * Sets the contact.
+     * 
      * @param contact
-     *            the contact to set
+     *            The contact to set.
      */
     public void setContact(String contact) {
         String s = contact.replaceAll("\\<.*?>", "");
@@ -235,23 +268,18 @@ public class Council {
     }
 
     /**
-     * @return the attendees
+     * Gets the list of attendees.
+     * 
+     * @return The attendee list.
      */
     public List<ConferenceAttendee> getAttendees() {
         return attendees;
     }
 
     /**
-     * @param attendees
-     *            the attendees to set
-     */
-    public void setAttendees(List<ConferenceAttendee> attendees) {
-        this.attendees = attendees;
-    }
-
-    /**
+     * Gets the total cost of all of the attendees.
      * 
-     * @return
+     * @return The total cost.
      */
     public double getAttendeeCost() {
         double total = 0;
@@ -263,15 +291,19 @@ public class Council {
     }
 
     /**
-     * @return the website
+     * Gets the website.
+     * 
+     * @return The website.
      */
     public String getWebsite() {
         return website;
     }
 
     /**
+     * Sets the website.
+     * 
      * @param website
-     *            the website to set
+     *            The website to set.
      */
     public void setWebsite(String website) {
         String s = website.replaceAll("\\<.*?>", "");
@@ -281,30 +313,38 @@ public class Council {
     }
 
     /**
-     * @return the amountPaid
+     * Gets the amount paid.
+     * 
+     * @return The amount Paid.
      */
     public double getAmountPaid() {
         return amountPaid;
     }
 
     /**
+     * Sets the amount paid.
+     * 
      * @param amountPaid
-     *            the amountPaid to set
+     *            The amountPaid to set.
      */
     public void setAmountPaid(double amountPaid) {
         this.amountPaid = amountPaid;
     }
 
     /**
-     * @return the paymentNotes
+     * Gets the payment notes.
+     * 
+     * @return The payment Notes.
      */
     public String getPaymentNotes() {
         return paymentNotes;
     }
 
     /**
+     * Sets the payment notes.
+     * 
      * @param paymentNotes
-     *            the paymentNotes to set
+     *            The paymentNotes to set.
      */
     public void setPaymentNotes(String paymentNotes) {
         String s = paymentNotes.replaceAll("\\<.*?>", "");
@@ -314,33 +354,32 @@ public class Council {
     }
 
     /**
-     * @param awardSubmissions
-     *            the awardSubmissions to set
-     */
-    public void setAwardSubmissions(List<AwardSubmission> awardSubmissions) {
-        this.awardSubmissions = awardSubmissions;
-    }
-
-    /**
-     * @return the awardSubmissions
+     * Gets the award submissions.
+     * 
+     * @return The awardSubmissions.
      */
     public List<AwardSubmission> getAwardSubmissions() {
         return awardSubmissions;
     }
 
     /**
+     * Inserts a new council into the datastore.
      * 
      * @param pm
-     * @param company
+     *            The PersistenceManager.
+     * @param council
+     *            The Council to add.
      */
     public static void InsertCouncil(PersistenceManager pm, Council council) {
         pm.makePersistent(council);
     }
 
     /**
+     * Gets all of the councils.
      * 
      * @param pm
-     * @return
+     *            The PersistenceManager.
+     * @return A list of all of the councils.
      */
     @SuppressWarnings("unchecked")
     public static List<Council> GetAllCouncils(PersistenceManager pm) {
@@ -349,10 +388,13 @@ public class Council {
     }
 
     /**
+     * Gets the specified council.
      * 
      * @param pm
-     * @param i
-     * @return
+     *            The PersistenceManager.
+     * @param id
+     *            The identifier for the council requested.
+     * @return The requested Council.
      */
     public static Council GetCouncil(PersistenceManager pm, String id) {
         int i = Integer.parseInt(id);
@@ -362,10 +404,13 @@ public class Council {
     }
 
     /**
+     * Gets the specified council.
      * 
      * @param pm
+     *            The PersistenceManager.
      * @param key
-     * @return
+     *            The key to identify the council.
+     * @return The requested council.
      */
     public static Council GetCouncil(PersistenceManager pm, Key key) {
         Council c = pm.getObjectById(Council.class, key);

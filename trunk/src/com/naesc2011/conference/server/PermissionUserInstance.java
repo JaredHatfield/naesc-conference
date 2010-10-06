@@ -27,47 +27,48 @@ import com.google.appengine.api.users.User;
 
 @PersistenceCapable
 public class PermissionUserInstance {
+
     /**
-	 * 
-	 */
+     * The key.
+     */
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
 
     /**
-	 * 
-	 */
+     * The user id.
+     */
     @Persistent
     private String userId;
 
     /**
-	 * 
-	 */
+     * The user.
+     */
     @Persistent
     private User user;
 
     /**
-	 * 
-	 */
+     * The user's email.
+     */
     @Persistent
     private String email;
 
     /**
-	 * 
-	 */
+     * The user's permission level.
+     */
     @Persistent
     private Permission userPermission;
 
     /**
-	 * 
-	 */
+     * The possible permission levels.
+     */
     public enum Permission {
         UNAUTHENTICATED, AUTHENTICATED, USER, MANAGER, ADMIN
     }
 
     /**
-	 * 
-	 */
+     * Creates a new instance of the PermissionUserInstance class.
+     */
     public PermissionUserInstance(User user, Permission userPermission) {
         this.userId = user.getUserId();
         this.email = user.getEmail();
@@ -76,21 +77,26 @@ public class PermissionUserInstance {
     }
 
     /**
+     * Gets the key.
      * 
-     * @return
+     * @return The key.
      */
     public Key getKey() {
         return this.key;
     }
 
     /**
-     * @return the userId
+     * Gets the user id.
+     * 
+     * @return The userId.
      */
     public String getUserId() {
         return userId;
     }
 
     /**
+     * Sets the user id.
+     * 
      * @param userId
      *            the userId to set
      */
@@ -99,45 +105,57 @@ public class PermissionUserInstance {
     }
 
     /**
-     * @return the user
+     * Gets the user.
+     * 
+     * @return The user.
      */
     public User getUser() {
         return user;
     }
 
     /**
+     * Sets the user.
+     * 
      * @param user
-     *            the user to set
+     *            The user to set.
      */
     public void setUser(User user) {
         this.user = user;
     }
 
     /**
-     * @return the email
+     * Get the email.
+     * 
+     * @return The email.
      */
     public String getEmail() {
         return email;
     }
 
     /**
+     * Sets the email.
+     * 
      * @param email
-     *            the email to set
+     *            The email to set.
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * @return the userPermission
+     * Gets the user permission.
+     * 
+     * @return The userPermission.
      */
     public Permission getUserPermission() {
         return userPermission;
     }
 
     /**
+     * Sets the user permission.
+     * 
      * @param userPermission
-     *            the userPermission to set
+     *            The userPermission to set.
      */
     public void setUserPermission(Permission userPermission) {
         this.userPermission = userPermission;

@@ -32,13 +32,14 @@ import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.PMF;
 
 public class AdminCouncilCSVServlet extends HttpServlet {
+
     /**
-     * 
+     * The serial version UID.
      */
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     * Processes the request from the client.
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,21 +47,20 @@ public class AdminCouncilCSVServlet extends HttpServlet {
         boolean authenticated = PermissionManager.SetUpPermissions(p, request);
 
         if (authenticated) {
-        	PersistenceManager pm = PMF.get().getPersistenceManager();
-        	
-        	List<Council> councils = Council.GetAllCouncils(pm);
-        	PrintWriter writer = response.getWriter(); 
-        	writer.write("\"Council\",\"University\",\"Location\",\"Website\",\"Attendees\"\n");
-        	
-        	for (int i = 0; i < councils.size(); i++)
-        	{
-        		writer.write('"' + councils.get(i).getName() + '"' + ','
-        				+ '"' + councils.get(i).getUniversity() + '"' + ','
-        				+ '"' + councils.get(i).getLocation() + '"' + ','
-        				+ '"' + councils.get(i).getWebsite() + '"' + ','
-        				+ '"' + councils.get(i).getAttendees().size() + '"' + "\n");
-        	}
-        	
+            PersistenceManager pm = PMF.get().getPersistenceManager();
+
+            List<Council> councils = Council.GetAllCouncils(pm);
+            PrintWriter writer = response.getWriter();
+            writer.write("\"Council\",\"University\",\"Location\",\"Website\",\"Attendees\"\n");
+
+            for (int i = 0; i < councils.size(); i++) {
+                writer.write('"' + councils.get(i).getName() + '"' + ',' + '"'
+                        + councils.get(i).getUniversity() + '"' + ',' + '"'
+                        + councils.get(i).getLocation() + '"' + ',' + '"'
+                        + councils.get(i).getWebsite() + '"' + ',' + '"'
+                        + councils.get(i).getAttendees().size() + '"' + "\n");
+            }
+
         } else {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }

@@ -30,29 +30,33 @@ import com.naesc2011.conference.server.PermissionManager;
 
 @PersistenceCapable
 public class CouncilPermission {
+
     /**
-     * 
+     * The key.
      */
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
 
     /**
-     * 
+     * The user id.
      */
     @Persistent
     private String userId;
 
     /**
-     * 
+     * The council key.
      */
     @Persistent
     private Key council;
 
     /**
+     * Creates a new instance of the CouncilPermission class.
      * 
      * @param userId
+     *            The user id.
      * @param council
+     *            The council key.
      */
     public CouncilPermission(String userId, Key council) {
         this.userId = userId;
@@ -60,54 +64,49 @@ public class CouncilPermission {
     }
 
     /**
-     * @return the key
+     * Gets the key.
+     * 
+     * @return The key.
      */
     public Key getKey() {
         return key;
     }
 
     /**
+     * Sets the key.
+     * 
      * @param key
-     *            the key to set
+     *            The key to set.
      */
     public void setKey(Key key) {
         this.key = key;
     }
 
     /**
-     * @return the userId
+     * Gets the user id.
+     * 
+     * @return The user Id.
      */
     public String getUserId() {
         return userId;
     }
 
     /**
-     * @param userId
-     *            the userId to set
-     */
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    /**
-     * @return the council
+     * Gets the council key.
+     * 
+     * @return The council key.
      */
     public Key getCouncil() {
         return council;
     }
 
     /**
-     * @param council
-     *            the council to set
-     */
-    public void setCouncil(Key council) {
-        this.council = council;
-    }
-
-    /**
+     * Inserts the CouncilPermission into the datastore.
      * 
      * @param pm
-     * @param company
+     *            The PersistenceManager.
+     * @param cp
+     *            the CouncilPermission to insert.
      */
     public static void InserCouncilPermission(PersistenceManager pm,
             CouncilPermission cp) {
@@ -115,9 +114,11 @@ public class CouncilPermission {
     }
 
     /**
+     * Gets all of the CouncilPermission objects.
      * 
      * @param pm
-     * @return
+     *            The PersistenceManager.
+     * @return A list of all of the CouncilPermissions.
      */
     @SuppressWarnings("unchecked")
     public static List<CouncilPermission> GetPermission(PersistenceManager pm,
@@ -137,7 +138,7 @@ public class CouncilPermission {
      *            The Council's identifier.
      * @param userId
      *            The user's identifier.
-     * @return
+     * @return True if the user has permission to modify the council.
      */
     public static boolean HasPermission(PersistenceManager pm,
             String councilId, PermissionManager p) {

@@ -34,13 +34,14 @@ import com.naesc2011.conference.shared.PMF;
 import com.naesc2011.conference.shared.Tour;
 
 public class ProcessAddAttendeeServlet extends HttpServlet {
+
     /**
-     * 
+     * The serial version UID.
      */
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     * Processes the request from the client.
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

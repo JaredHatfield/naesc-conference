@@ -29,13 +29,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.naesc2011.conference.server.PermissionManager;
 
 public class AdminHomeServlet extends HttpServlet {
+
     /**
-     * 
+     * The serial version UID.
      */
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     * Processes the request from the client.
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
