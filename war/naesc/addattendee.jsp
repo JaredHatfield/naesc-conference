@@ -96,7 +96,7 @@
 		<p><label>Allergies:</label><input class="insmall" type="text" maxlength="500" name="allergies" /></p>
 		<p style="margin-left: 10em; margin-top: 2em; margin-bottom: 6em;">
 			<label style="margin-left: 0em; color: red;" class="widelabel">
-				<input type="checkbox" name="authorization" />By checking this box, your council and/or the member attending agrees to and is obligated to pay the $<%= (int)cs.getRegistrationFee() %> registration fee.
+				<input type="checkbox" name="authorization" />By checking this box, your council and/or the member attending agrees to and is obligated to pay the $<%= (int)cs.getRegistrationFee() %> registration fee unless a cancellation request is submitted before <%= cs.getLateRegistrationDateString() %>.
 			</label>
 		</p>
 		<p class="submit">
