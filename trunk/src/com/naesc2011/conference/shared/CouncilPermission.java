@@ -136,8 +136,8 @@ public class CouncilPermission {
      *            The Persistence Manager.
      * @param councilId
      *            The Council's identifier.
-     * @param userId
-     *            The user's identifier.
+     * @param p
+     *            The PermissionManager.
      * @return True if the user has permission to modify the council.
      */
     public static boolean HasPermission(PersistenceManager pm,
