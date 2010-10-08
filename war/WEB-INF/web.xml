@@ -97,6 +97,10 @@
         <servlet-class>com.naesc2011.conference.server.admin.AdminProcessSaveConferenceSettingsServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>adminprocessdeleteattendee</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.admin.AdminProcessDeleteAttendeeServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>processregister</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.ProcessRegisterServlet</servlet-class>
     </servlet>
@@ -221,6 +225,10 @@
     <servlet-mapping>
         <servlet-name>adminprocesssaveconferencesettings</servlet-name>
         <url-pattern>/admin/process/saveconferencesettings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminprocessdeleteattendee</servlet-name>
+        <url-pattern>/admin/process/deleteattendee</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>processregister</servlet-name>
