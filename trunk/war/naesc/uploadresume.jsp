@@ -29,8 +29,8 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
-	<h2><%= a.getFirstName() %> <%= a.getMiddleName() %> <%= a.getLastName() %>'s  Resume</h2>
-		<a href="/mycouncil?id=<%= request.getAttribute("id") %>"><img src="/static/back.png" /></a><br /><br />
+	<h2><a href="/mycouncil?id=<%= request.getAttribute("id") %>">My Council</a> &rarr; <a href="/editattendee?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Edit Attendee</a> &rarr; Upload Resume</h2>
+		
 		<% BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();  %>
 		<form action="<%= blobstoreService.createUploadUrl("/process/uploadresume") %>" method="post" enctype="multipart/form-data">
 		<fieldset> 

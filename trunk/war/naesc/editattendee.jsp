@@ -42,8 +42,8 @@
 	<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
 	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
 	
-	<h2>Edit Attendee</h2>
-		<a href="/mycouncil?id=<%= request.getAttribute("id") %>"><img src="/static/back.png" /></a><br /><br />
+	<h2><a href="/mycouncil?id=<%= request.getAttribute("id") %>">My Council</a> &rarr; Edit Attendee</h2>
+		
 		<form method="post" action="/process/saveattendee">
 		<fieldset> 
 		<legend>Edit Attendee</legend>
