@@ -63,7 +63,7 @@ public class EditDelegateServlet extends HttpServlet {
 
             // Test if the user has permission for this council
             boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
-            if (haspermission || p.IsUserAdmin()) {
+            if (!(haspermission || p.IsUserAdmin())) {
                 throw new PermissionDeniedException();
             }
 
