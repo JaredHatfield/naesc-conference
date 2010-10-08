@@ -117,6 +117,19 @@
 		</fieldset>
 	</form>
 	<br />
+	<% if((Boolean)request.getAttribute("isadmin")) { %>
+	<form method="post" action="/admin/process/deleteattendee">
+		<fieldset> 
+		<legend>Delete Attendee</legend>
+		<p class="submit">
+			<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
+			<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
+			<input type="submit" value="Delete" />
+		</p>
+		</fieldset>
+	</form>
+	<br />
+	<% } %>
 	<form method="post" action="/process/deleteresume">
 		<fieldset> 
 		<legend>Resume</legend>
