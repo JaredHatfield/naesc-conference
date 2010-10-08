@@ -38,9 +38,9 @@
 </head>
 <body onLoad="update();">
 	<%@ include file="../header.jsp" %>
-	<h2>Edit Council</h2>
 	<% Council council = (Council)request.getAttribute("council"); %>
-	<a href="/mycouncil?id=<%= council.getKey().getId() %>"><img src="/static/back.png" /></a><br /><br />
+	<h2><a href="/mycouncil?id=<%= council.getKey().getId() %>">My Council</a> &rarr; Edit Council</h2>
+	
 	<form action="/process/savecouncil" method="post"> 
 		<fieldset> 
 			<legend>Edit Council</legend> 

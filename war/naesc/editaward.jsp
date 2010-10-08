@@ -43,10 +43,8 @@
 	<% Award a = (Award)request.getAttribute("award"); %>
 	<% AwardApplication app = (AwardApplication)request.getAttribute("application"); %>
 	<% AwardSubmission sub = (AwardSubmission)request.getAttribute("submission"); %>
-	<h2>Edit Award</h2>
-	<a href="/mycouncil?id=<%= request.getAttribute("councilid") %>"><img src="/static/back.png" /></a><br />
-	<br />
-	
+	<h2><a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">My Council</a> &rarr; Edit Award</h2>
+		
 	<form action="/process/saveaward" method="post"> 
 		<fieldset> 
 			<legend><%= a.getName() %></legend> 
