@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.PMF;
 import com.naesc2011.conference.shared.Tour;
@@ -43,14 +44,15 @@ public class AdminManageTourServlet extends HttpServlet {
      * Processes the request from the client.
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            // Test if the user is logged in
+            if (!PermissionManager.SetUpPermissions(p, request)) {
+                throw new PermissionDeniedException();
+            }
 
-        if (authenticated) {
-            PersistenceManager pm = PMF.get().getPersistenceManager();
-
-            // TODO: Implement the logic for the tours
             List<Tour> tours = Tour.GetAllTours(pm);
             request.setAttribute("tours", tours);
 
@@ -58,8 +60,14 @@ public class AdminManageTourServlet extends HttpServlet {
             ServletContext context = getServletContext();
             RequestDispatcher dispatcher = context.getRequestDispatcher(url);
             dispatcher.forward(request, response);
-        } else {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } catch (ServletException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } finally {
+            pm.close();
         }
     }
 }

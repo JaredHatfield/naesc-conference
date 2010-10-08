@@ -21,11 +21,11 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.PMF;
@@ -41,12 +41,14 @@ public class AdminProcessSaveConferenceSettingsServlet extends HttpServlet {
      * Processes the request from the client.
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
-
-        if (authenticated) {
-            PersistenceManager pm = PMF.get().getPersistenceManager();
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            // Test if the user is logged in
+            if (!PermissionManager.SetUpPermissions(p, request)) {
+                throw new PermissionDeniedException();
+            }
 
             ConferenceSettings cs = ConferenceSettings
                     .GetConferenceSettings(pm);
@@ -78,11 +80,13 @@ public class AdminProcessSaveConferenceSettingsServlet extends HttpServlet {
             int max = Integer.parseInt(maxAttendeesStr);
             cs.setMaxAttendees(max);
 
-            pm.close();
-
             response.sendRedirect("/admin/conferencesettings");
-        } else {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } finally {
+            pm.close();
         }
     }
 }

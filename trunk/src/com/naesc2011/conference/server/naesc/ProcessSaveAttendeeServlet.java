@@ -20,11 +20,12 @@ package com.naesc2011.conference.server.naesc;
 import java.io.IOException;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.InvalidFormException;
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.ConferenceSettings;
@@ -44,112 +45,108 @@ public class ProcessSaveAttendeeServlet extends HttpServlet {
      * Processes the request from the client.
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            // Test if the user is logged in
+            if (!PermissionManager.SetUpPermissions(p, request)) {
+                throw new PermissionDeniedException();
+            }
 
-        if (authenticated) {
-            if (authenticated) {
-                String pid = request.getParameter("id");
-                request.setAttribute("id", pid);
-                if (pid != null) {
-                    PersistenceManager pm = PMF.get().getPersistenceManager();
-                    boolean haspermission = CouncilPermission.HasPermission(pm,
-                            pid, p);
+            // Test to make sure all of the mandatory parameters were set
+            String pid = request.getParameter("id");
+            request.setAttribute("id", pid);
+            if (pid == null) {
+                throw new InvalidFormException();
+            }
 
-                    ConferenceSettings cs = ConferenceSettings
-                            .GetConferenceSettings(pm);
+            boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
+            ConferenceSettings cs = ConferenceSettings
+                    .GetConferenceSettings(pm);
+            if (!((haspermission && cs.isRegistrationOpen()) || p.IsUserAdmin())) {
+                throw new PermissionDeniedException();
+            }
 
-                    if ((haspermission && cs.isRegistrationOpen())
-                            || p.IsUserAdmin()) {
-                        Council council = Council.GetCouncil(pm, pid);
-                        String mid = request.getParameter("m");
-                        boolean found = false;
-                        ConferenceAttendee ca = null;
-                        for (int i = 0; i < council.getAttendees().size(); i++) {
-                            long cid = council.getAttendees().get(i).getKey()
-                                    .getId();
-                            if ((cid + "").equals(mid)) {
-                                ca = council.getAttendees().get(i);
-                                found = true;
-                                break;
-                            }
-                        }
+            Council council = Council.GetCouncil(pm, pid);
+            String mid = request.getParameter("m");
+            boolean found = false;
+            ConferenceAttendee ca = null;
+            for (int i = 0; i < council.getAttendees().size(); i++) {
+                long cid = council.getAttendees().get(i).getKey().getId();
+                if ((cid + "").equals(mid)) {
+                    ca = council.getAttendees().get(i);
+                    found = true;
+                    break;
+                }
+            }
 
-                        if (found) {
-                            // Mark the time that the attendee was updated
-                            ca.update();
+            if (found) {
+                // Mark the time that the attendee was updated
+                ca.update();
 
-                            // Set all of the parameters that were passed in
-                            ca.setFirstName(request.getParameter("firstName"));
-                            ca.setMiddleName(request.getParameter("middleName"));
-                            ca.setLastName(request.getParameter("lastName"));
-                            ca.setMajor(request.getParameter("major"));
-                            ca.setEmail(request.getParameter("email"));
-                            ca.setGender(ConferenceAttendee.Gender
-                                    .valueOf(request.getParameter("gender")));
-                            ca.setShirtSize(ConferenceAttendee.ShirtSize
-                                    .valueOf(request.getParameter("shirtSize")));
-                            ca.setEmergencyContactName(request
-                                    .getParameter("ecName"));
-                            ca.setEmergencyContactPhone(request
-                                    .getParameter("ecPhone"));
-                            ca.setArrivalInformation(request
-                                    .getParameter("arrivalInformation"));
-                            ca.setVegetarian(request.getParameter("vegetarian") != null);
-                            ca.setAllergies(request.getParameter("allergies"));
+                // Set all of the parameters that were passed in
+                ca.setFirstName(request.getParameter("firstName"));
+                ca.setMiddleName(request.getParameter("middleName"));
+                ca.setLastName(request.getParameter("lastName"));
+                ca.setMajor(request.getParameter("major"));
+                ca.setEmail(request.getParameter("email"));
+                ca.setGender(ConferenceAttendee.Gender.valueOf(request
+                        .getParameter("gender")));
+                ca.setShirtSize(ConferenceAttendee.ShirtSize.valueOf(request
+                        .getParameter("shirtSize")));
+                ca.setEmergencyContactName(request.getParameter("ecName"));
+                ca.setEmergencyContactPhone(request.getParameter("ecPhone"));
+                ca.setArrivalInformation(request
+                        .getParameter("arrivalInformation"));
+                ca.setVegetarian(request.getParameter("vegetarian") != null);
+                ca.setAllergies(request.getParameter("allergies"));
 
-                            // Update the tour selection
-                            String tourid = request.getParameter("tour");
-                            if (tourid != null) {
-                                if (tourid.equals("-1")) {
-                                    // No tour was selected
-                                    if (ca.getTour() != null) {
-                                        // Remove the previously selected tour
-                                        Tour t = Tour.GetTour(pm, ca.getTour());
-                                        t.removeAttendee(council.getKey(), ca);
-                                    }
-                                } else {
-                                    if (ca.getTour() == null
-                                            || !(ca.getTour().getId() + "")
-                                                    .equals(tourid)) {
-                                        // We only process changes if it was
-                                        // actually changed
-
-                                        if (ca.getTour() != null) {
-                                            // Remove the previously selected
-                                            // tour
-                                            Tour t = Tour.GetTour(pm,
-                                                    ca.getTour());
-                                            t.removeAttendee(council.getKey(),
-                                                    ca);
-                                        }
-
-                                        // Set the new tour as selected
-                                        Tour t = Tour.GetTour(pm, tourid);
-                                        if (t.hasRoom()) {
-                                            t.addAttendee(council.getKey(), ca);
-                                        }
-                                    }
-                                }
-                            }
-
-                            // Close the persistence connection
-                            pm.close();
-
-                            response.sendRedirect("/mycouncil?id=" + pid);
-                        } else {
-                            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                // Update the tour selection
+                String tourid = request.getParameter("tour");
+                if (tourid != null) {
+                    if (tourid.equals("-1")) {
+                        // No tour was selected
+                        if (ca.getTour() != null) {
+                            // Remove the previously selected tour
+                            Tour t = Tour.GetTour(pm, ca.getTour());
+                            t.removeAttendee(council.getKey(), ca);
                         }
                     } else {
-                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                        if (ca.getTour() == null
+                                || !(ca.getTour().getId() + "").equals(tourid)) {
+                            // We only process changes if it was
+                            // actually changed
+
+                            if (ca.getTour() != null) {
+                                // Remove the previously selected
+                                // tour
+                                Tour t = Tour.GetTour(pm, ca.getTour());
+                                t.removeAttendee(council.getKey(), ca);
+                            }
+
+                            // Set the new tour as selected
+                            Tour t = Tour.GetTour(pm, tourid);
+                            if (t.hasRoom()) {
+                                t.addAttendee(council.getKey(), ca);
+                            }
+                        }
                     }
-                } else {
-                    response.sendError(HttpServletResponse.SC_NOT_FOUND);
                 }
+
+                response.sendRedirect("/mycouncil?id=" + pid);
             } else {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                throw new PermissionDeniedException();
             }
+
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } catch (InvalidFormException e) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } finally {
+            pm.close();
         }
     }
 }

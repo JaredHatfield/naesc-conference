@@ -20,11 +20,12 @@ package com.naesc2011.conference.server.naesc;
 import java.io.IOException;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.InvalidFormException;
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
@@ -42,47 +43,51 @@ public class ProcessSaveCouncilServlet extends HttpServlet {
      * Processes the request from the client.
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
-
-        if (authenticated) {
-            String pid = request.getParameter("id");
-            if (pid != null) {
-                PersistenceManager pm = PMF.get().getPersistenceManager();
-                boolean haspermission = CouncilPermission.HasPermission(pm,
-                        pid, p);
-
-                ConferenceSettings cs = ConferenceSettings
-                        .GetConferenceSettings(pm);
-
-                if ((haspermission && cs.isRegistrationOpen())
-                        || p.IsUserAdmin()) {
-                    Council council = Council.GetCouncil(pm, pid);
-                    council.setName(request.getParameter("name"));
-                    council.setUniversity(request.getParameter("university"));
-                    council.setLocation(request.getParameter("location"));
-                    council.setContact(request.getParameter("contact"));
-                    council.setWebsite(request.getParameter("website"));
-
-                    if (p.IsUserAdmin()) {
-                        council.setAmountPaid(Double.parseDouble(request
-                                .getParameter("amountpaid")));
-                        council.setPaymentNotes(request
-                                .getParameter("paymentnotes"));
-                    }
-
-                    pm.close();
-
-                    response.sendRedirect("/mycouncil?id=" + pid);
-                } else {
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                }
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            // Test if the user is logged in
+            if (!PermissionManager.SetUpPermissions(p, request)) {
+                throw new PermissionDeniedException();
             }
-        } else {
+
+            // Test to make sure all of the mandatory parameters were set
+            String pid = request.getParameter("id");
+            if (pid == null) {
+                throw new InvalidFormException();
+            }
+
+            // Test if the user has permission for this council
+            boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
+            ConferenceSettings cs = ConferenceSettings
+                    .GetConferenceSettings(pm);
+            if (!((haspermission && cs.isRegistrationOpen()) || p.IsUserAdmin())) {
+                throw new PermissionDeniedException();
+            }
+
+            Council council = Council.GetCouncil(pm, pid);
+            council.setName(request.getParameter("name"));
+            council.setUniversity(request.getParameter("university"));
+            council.setLocation(request.getParameter("location"));
+            council.setContact(request.getParameter("contact"));
+            council.setWebsite(request.getParameter("website"));
+
+            if (p.IsUserAdmin()) {
+                council.setAmountPaid(Double.parseDouble(request
+                        .getParameter("amountpaid")));
+                council.setPaymentNotes(request.getParameter("paymentnotes"));
+            }
+
+            response.sendRedirect("/mycouncil?id=" + pid);
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } catch (InvalidFormException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } finally {
+            pm.close();
         }
     }
 }
