@@ -171,12 +171,12 @@ public class ConferenceAttendee {
     /**
      * Creates a new instance of ConferenceAttendee.
      */
-    public ConferenceAttendee(double registrationFee) {
+    public ConferenceAttendee(double registrationFee, String email) {
         this.firstName = "";
         this.middleName = "";
         this.lastName = "";
         this.major = "";
-        this.email = "";
+        this.email = email;
         this.emergencyContactName = "";
         this.emergencyContactPhone = "";
         this.arrivalInformation = "";

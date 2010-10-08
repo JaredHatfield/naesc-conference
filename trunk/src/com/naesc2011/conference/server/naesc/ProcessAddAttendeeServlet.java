@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.naesc2011.conference.server.InvalidFormException;
 import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.AttendeePermission;
 import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
@@ -70,18 +71,17 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
                     .isRegistrationOpen()) || p.IsUserAdmin())) {
                 throw new PermissionDeniedException();
             }
-            ConferenceAttendee ca = new ConferenceAttendee(
-                    cs.getRegistrationFee());
 
             // We only add the member if they check the authorization
             // box and agreed to the payment terms.
             if (request.getParameter("authorization") != null) {
                 // Set all of the parameters that were passed in
+                ConferenceAttendee ca = new ConferenceAttendee(
+                        cs.getRegistrationFee(), request.getParameter("email"));
                 ca.setFirstName(request.getParameter("firstName"));
                 ca.setMiddleName(request.getParameter("middleName"));
                 ca.setLastName(request.getParameter("lastName"));
                 ca.setMajor(request.getParameter("major"));
-                ca.setEmail(request.getParameter("email"));
                 ca.setGender(ConferenceAttendee.Gender.valueOf(request
                         .getParameter("gender")));
                 ca.setShirtSize(ConferenceAttendee.ShirtSize.valueOf(request
@@ -94,11 +94,13 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
                 ca.setAllergies(request.getParameter("allergies"));
 
                 // Make the object persistent
-                try {
-                    council.getAttendees().add(ca);
-                    pm.makePersistent(ca);
-                } finally {
-                }
+                council.getAttendees().add(ca);
+                pm.makePersistent(ca);
+
+                // Add the attendee permission
+                AttendeePermission ap = new AttendeePermission(ca.getEmail(),
+                        council.getKey(), ca.getKey());
+                AttendeePermission.InserAttendeePermission(pm, ap);
 
                 // Save the tour selection
                 String tourid = request.getParameter("tour");

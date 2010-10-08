@@ -30,6 +30,7 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.naesc2011.conference.server.InvalidFormException;
 import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.AttendeePermission;
 import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
@@ -65,14 +66,16 @@ public class ProcessDeleteResumeServlet extends HttpServlet {
 
             // Test if the user has permission for this council
             boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
+            String mid = request.getParameter("m");
             ConferenceSettings cs = ConferenceSettings
                     .GetConferenceSettings(pm);
-            if (!((haspermission && cs.isRegistrationOpen()) || p.IsUserAdmin())) {
+            if (!(((haspermission || AttendeePermission.HasPermission(pm, p
+                    .getUser().getEmail(), pid, mid)) && cs
+                    .isRegistrationOpen()) || p.IsUserAdmin())) {
                 throw new PermissionDeniedException();
             }
 
             Council council = Council.GetCouncil(pm, pid);
-            String mid = request.getParameter("m");
             boolean found = false;
             ConferenceAttendee ca = null;
             BlobKey blobKey = null;

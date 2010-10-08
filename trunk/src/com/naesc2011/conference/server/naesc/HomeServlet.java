@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.AttendeePermission;
 import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
@@ -54,8 +55,7 @@ public class HomeServlet extends HttpServlet {
                     request);
 
             if (authenticated) {
-                // We are authenticated, determine if the user is a council
-                // admin
+                // We are authenticated, is user council admin
                 ConferenceSettings cs = ConferenceSettings
                         .GetConferenceSettings(pm);
                 request.setAttribute("conferencesettings", cs);
@@ -78,6 +78,11 @@ public class HomeServlet extends HttpServlet {
 
                     request.setAttribute("councils", c);
                 }
+
+                // Is the user an attendee admin
+                List<AttendeePermission> ap = AttendeePermission.GetPermission(
+                        pm, p.getUser().getEmail());
+                request.setAttribute("ap", ap);
             }
 
             String url = "/naesc/home.jsp";
