@@ -67,7 +67,7 @@ public class ProcessDeleteResumeServlet extends HttpServlet {
             boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
             ConferenceSettings cs = ConferenceSettings
                     .GetConferenceSettings(pm);
-            if ((haspermission && cs.isRegistrationOpen()) || p.IsUserAdmin()) {
+            if (!((haspermission && cs.isRegistrationOpen()) || p.IsUserAdmin())) {
                 throw new PermissionDeniedException();
             }
 
