@@ -20,11 +20,12 @@ package com.naesc2011.conference.server.naesc;
 import java.io.IOException;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.InvalidFormException;
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
@@ -42,38 +43,43 @@ public class ProcessSaveDelegateServlet extends HttpServlet {
      * Processes the request from the client.
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            // Test if the user is logged in
+            if (!PermissionManager.SetUpPermissions(p, request)) {
+                throw new PermissionDeniedException();
+            }
 
-        if (authenticated) {
+            // Test to make sure all of the mandatory parameters were set
             String pid = request.getParameter("id");
             String vote = request.getParameter("vote");
             String alternate = request.getParameter("alternate");
-            if (pid != null && vote != null && alternate != null) {
-                PersistenceManager pm = PMF.get().getPersistenceManager();
-                boolean haspermission = CouncilPermission.HasPermission(pm,
-                        pid, p);
-
-                ConferenceSettings cs = ConferenceSettings
-                        .GetConferenceSettings(pm);
-
-                if ((haspermission && cs.isRegistrationOpen())
-                        || p.IsUserAdmin()) {
-                    Council council = Council.GetCouncil(pm, pid);
-                    council.SetAlternateDeleaget(alternate);
-                    council.SetVotingDelegate(vote);
-                    pm.close();
-
-                    response.sendRedirect("/mycouncil?id=" + pid);
-                } else {
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                }
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            if (pid == null || vote == null || alternate == null) {
+                throw new InvalidFormException();
             }
-        } else {
+
+            boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
+            ConferenceSettings cs = ConferenceSettings
+                    .GetConferenceSettings(pm);
+            if (!((haspermission && cs.isRegistrationOpen()) || p.IsUserAdmin())) {
+                throw new PermissionDeniedException();
+            }
+
+            Council council = Council.GetCouncil(pm, pid);
+            council.SetAlternateDeleaget(alternate);
+            council.SetVotingDelegate(vote);
+
+            response.sendRedirect("/mycouncil?id=" + pid);
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } catch (InvalidFormException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } finally {
+            pm.close();
         }
     }
 }

@@ -27,6 +27,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.InvalidFormException;
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.ConferenceSettings;
@@ -46,56 +48,65 @@ public class EditAttendeeServlet extends HttpServlet {
      * Processes the request from the client.
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            // Test if the user is logged in
+            if (!PermissionManager.SetUpPermissions(p, request)) {
+                throw new PermissionDeniedException();
+            }
 
-        if (authenticated) {
+            // Test to make sure all of the mandatory parameters were set
             String pid = request.getParameter("id");
             request.setAttribute("id", pid);
-            if (pid != null) {
-                PersistenceManager pm = PMF.get().getPersistenceManager();
-                boolean haspermission = CouncilPermission.HasPermission(pm,
-                        pid, p);
-
-                if (haspermission || p.IsUserAdmin()) {
-                    ConferenceSettings cs = ConferenceSettings
-                            .GetConferenceSettings(pm);
-                    request.setAttribute("conferencesettings", cs);
-
-                    Council council = Council.GetCouncil(pm, pid);
-                    String mid = request.getParameter("m");
-                    boolean found = false;
-                    for (int i = 0; i < council.getAttendees().size(); i++) {
-                        long cid = council.getAttendees().get(i).getKey()
-                                .getId();
-                        if ((cid + "").equals(mid)) {
-                            ConferenceAttendee ca = council.getAttendees().get(
-                                    i);
-                            request.setAttribute("attendee", ca);
-                            request.setAttribute("tours", Tour.GetAllTours(pm));
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    if (found) {
-                        String url = "/naesc/editattendee.jsp";
-                        ServletContext context = getServletContext();
-                        RequestDispatcher dispatcher = context
-                                .getRequestDispatcher(url);
-                        dispatcher.forward(request, response);
-                    } else {
-                        response.sendError(HttpServletResponse.SC_NOT_FOUND);
-                    }
-                } else {
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                }
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            if (pid == null) {
+                throw new InvalidFormException();
             }
-        } else {
+
+            // Test if the user has permission for this council
+            boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
+            if (!(haspermission || p.IsUserAdmin())) {
+                throw new PermissionDeniedException();
+            }
+
+            ConferenceSettings cs = ConferenceSettings
+                    .GetConferenceSettings(pm);
+            request.setAttribute("conferencesettings", cs);
+            Council council = Council.GetCouncil(pm, pid);
+            String mid = request.getParameter("m");
+            boolean found = false;
+            for (int i = 0; i < council.getAttendees().size(); i++) {
+                long cid = council.getAttendees().get(i).getKey().getId();
+                if ((cid + "").equals(mid)) {
+                    ConferenceAttendee ca = council.getAttendees().get(i);
+                    request.setAttribute("attendee", ca);
+                    request.setAttribute("tours", Tour.GetAllTours(pm));
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                String url = "/naesc/editattendee.jsp";
+                ServletContext context = getServletContext();
+                RequestDispatcher dispatcher = context
+                        .getRequestDispatcher(url);
+                dispatcher.forward(request, response);
+            } else {
+                throw new PermissionDeniedException();
+            }
+
+        } catch (ServletException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } catch (InvalidFormException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } finally {
+            pm.close();
         }
     }
 }

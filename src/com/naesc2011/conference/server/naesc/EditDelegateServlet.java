@@ -27,6 +27,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.InvalidFormException;
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
@@ -44,36 +46,47 @@ public class EditDelegateServlet extends HttpServlet {
      * Processes the request from the client.
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
-
-        if (authenticated) {
-            String pid = request.getParameter("id");
-            if (pid != null) {
-                PersistenceManager pm = PMF.get().getPersistenceManager();
-                boolean haspermission = CouncilPermission.HasPermission(pm,
-                        pid, p);
-
-                if (haspermission || p.IsUserAdmin()) {
-                    ConferenceSettings cs = ConferenceSettings
-                            .GetConferenceSettings(pm);
-                    request.setAttribute("conferencesettings", cs);
-                    Council council = Council.GetCouncil(pm, pid);
-                    request.setAttribute("council", council);
-                    String url = "/naesc/editdelegate.jsp";
-                    ServletContext context = getServletContext();
-                    RequestDispatcher dispatcher = context
-                            .getRequestDispatcher(url);
-                    dispatcher.forward(request, response);
-                } else {
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                }
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            // Test if the user is logged in
+            if (!PermissionManager.SetUpPermissions(p, request)) {
+                throw new PermissionDeniedException();
             }
-        } else {
+
+            // Test to make sure all of the mandatory parameters were set
+            String pid = request.getParameter("id");
+            if (pid == null) {
+                throw new InvalidFormException();
+            }
+
+            // Test if the user has permission for this council
+            boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
+            if (haspermission || p.IsUserAdmin()) {
+                throw new PermissionDeniedException();
+            }
+
+            ConferenceSettings cs = ConferenceSettings
+                    .GetConferenceSettings(pm);
+            request.setAttribute("conferencesettings", cs);
+            Council council = Council.GetCouncil(pm, pid);
+            request.setAttribute("council", council);
+            String url = "/naesc/editdelegate.jsp";
+            ServletContext context = getServletContext();
+            RequestDispatcher dispatcher = context.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+
+        } catch (ServletException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } catch (InvalidFormException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } finally {
+            pm.close();
         }
     }
 }

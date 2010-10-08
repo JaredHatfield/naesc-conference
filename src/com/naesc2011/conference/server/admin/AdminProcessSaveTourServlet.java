@@ -20,11 +20,11 @@ package com.naesc2011.conference.server.admin;
 import java.io.IOException;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.PMF;
 import com.naesc2011.conference.shared.Tour;
@@ -40,12 +40,14 @@ public class AdminProcessSaveTourServlet extends HttpServlet {
      * Processes the request from the client.
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
-
-        if (authenticated) {
-            PersistenceManager pm = PMF.get().getPersistenceManager();
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            // Test if the user is logged in
+            if (!PermissionManager.SetUpPermissions(p, request)) {
+                throw new PermissionDeniedException();
+            }
 
             String id = request.getParameter("id");
             String name = request.getParameter("name");
@@ -61,13 +63,15 @@ public class AdminProcessSaveTourServlet extends HttpServlet {
                     // equal to the number of people already attending the tour
                     t.setMaximum(maximum);
                 }
-
-                pm.close();
             }
 
             response.sendRedirect("/admin/managetour");
-        } else {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } finally {
+            pm.close();
         }
     }
 }

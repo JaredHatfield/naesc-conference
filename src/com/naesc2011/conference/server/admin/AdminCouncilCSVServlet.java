@@ -22,11 +22,11 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.PMF;
@@ -42,12 +42,14 @@ public class AdminCouncilCSVServlet extends HttpServlet {
      * Processes the request from the client.
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
-
-        if (authenticated) {
-            PersistenceManager pm = PMF.get().getPersistenceManager();
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            // Test if the user is logged in
+            if (!PermissionManager.SetUpPermissions(p, request)) {
+                throw new PermissionDeniedException();
+            }
 
             List<Council> councils = Council.GetAllCouncils(pm);
             PrintWriter writer = response.getWriter();
@@ -61,8 +63,12 @@ public class AdminCouncilCSVServlet extends HttpServlet {
                         + councils.get(i).getAttendees().size() + '"' + "\n");
             }
 
-        } else {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } finally {
+            pm.close();
         }
     }
 }

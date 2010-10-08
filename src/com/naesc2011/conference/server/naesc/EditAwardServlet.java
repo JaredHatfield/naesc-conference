@@ -30,6 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.datastore.Key;
+import com.naesc2011.conference.server.InvalidFormException;
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.Award;
 import com.naesc2011.conference.shared.AwardApplication;
@@ -50,64 +52,75 @@ public class EditAwardServlet extends HttpServlet {
      * Processes the request from the client.
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            // Test if the user is logged in
+            if (!PermissionManager.SetUpPermissions(p, request)) {
+                throw new PermissionDeniedException();
+            }
 
-        if (authenticated) {
+            // Test to make sure all of the mandatory parameters were set
             String pid = request.getParameter("id");
             String aid = request.getParameter("a");
-            if (pid != null && aid != null) {
-                PersistenceManager pm = PMF.get().getPersistenceManager();
-                boolean haspermission = CouncilPermission.HasPermission(pm,
-                        pid, p);
-
-                Award award = null;
-                try {
-                    // Set the award
-                    award = Award.GetAward(pm, aid);
-                    request.setAttribute("award", award);
-                } catch (JDOObjectNotFoundException e) {
-                    // The object was not found in the data store so we treat
-                    // the page as unauthorized.
-                }
-
-                if ((haspermission || p.IsUserAdmin()) && award != null) {
-
-                    ConferenceSettings cs = ConferenceSettings
-                            .GetConferenceSettings(pm);
-                    request.setAttribute("conferencesettings", cs);
-
-                    Council council = Council.GetCouncil(pm, pid);
-                    request.setAttribute("councilid", council.getKey().getId());
-                    List<AwardSubmission> las = council.getAwardSubmissions();
-
-                    for (int i = 0; las != null && i < las.size(); i++) {
-                        Key k1 = las.get(i).getAward();
-                        Key k2 = award.getKey();
-                        if (k1.equals(k2)) {
-                            AwardSubmission sub = las.get(i);
-                            request.setAttribute("submission", sub);
-                            AwardApplication aa = AwardApplication.GetAward(pm,
-                                    sub.getApplication());
-                            request.setAttribute("application", aa);
-                            break;
-                        }
-                    }
-
-                    String url = "/naesc/editaward.jsp";
-                    ServletContext context = getServletContext();
-                    RequestDispatcher dispatcher = context
-                            .getRequestDispatcher(url);
-                    dispatcher.forward(request, response);
-                } else {
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                }
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            if (pid == null || aid == null) {
+                throw new InvalidFormException();
             }
-        } else {
+
+            // Test if the user has permission for this council
+            boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
+            Award award = null;
+            try {
+                // Set the award
+                award = Award.GetAward(pm, aid);
+                request.setAttribute("award", award);
+            } catch (JDOObjectNotFoundException e) {
+                // The object was not found in the data store so we treat
+                // the page as unauthorized.
+            }
+
+            if (!((haspermission || p.IsUserAdmin()) && award != null)) {
+                throw new PermissionDeniedException();
+            }
+
+            ConferenceSettings cs = ConferenceSettings
+                    .GetConferenceSettings(pm);
+            request.setAttribute("conferencesettings", cs);
+
+            Council council = Council.GetCouncil(pm, pid);
+            request.setAttribute("councilid", council.getKey().getId());
+            List<AwardSubmission> las = council.getAwardSubmissions();
+
+            for (int i = 0; las != null && i < las.size(); i++) {
+                Key k1 = las.get(i).getAward();
+                Key k2 = award.getKey();
+                if (k1.equals(k2)) {
+                    AwardSubmission sub = las.get(i);
+                    request.setAttribute("submission", sub);
+                    AwardApplication aa = AwardApplication.GetAward(pm,
+                            sub.getApplication());
+                    request.setAttribute("application", aa);
+                    break;
+                }
+            }
+
+            String url = "/naesc/editaward.jsp";
+            ServletContext context = getServletContext();
+            RequestDispatcher dispatcher = context.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+
+        } catch (ServletException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } catch (InvalidFormException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } finally {
+            pm.close();
         }
     }
+
 }

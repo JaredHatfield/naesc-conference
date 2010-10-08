@@ -20,11 +20,12 @@ package com.naesc2011.conference.server.naesc;
 import java.io.IOException;
 
 import javax.jdo.PersistenceManager;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.InvalidFormException;
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.ConferenceSettings;
@@ -44,79 +45,83 @@ public class ProcessAddAttendeeServlet extends HttpServlet {
      * Processes the request from the client.
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
-
-        if (authenticated) {
-            String pid = request.getParameter("councilid");
-            if (pid != null) {
-                PersistenceManager pm = PMF.get().getPersistenceManager();
-                boolean haspermission = CouncilPermission.HasPermission(pm,
-                        pid, p);
-
-                ConferenceSettings cs = ConferenceSettings
-                        .GetConferenceSettings(pm);
-                Council council = Council.GetCouncil(pm, pid);
-
-                if ((haspermission
-                        && cs.getMaxAttendees() > council.getAttendees().size() && cs
-                        .isRegistrationOpen()) || p.IsUserAdmin()) {
-                    ConferenceAttendee ca = new ConferenceAttendee(
-                            cs.getRegistrationFee());
-
-                    // We only add the member if they check the authorization
-                    // box and agreed to the payment terms.
-                    if (request.getParameter("authorization") != null) {
-                        // Set all of the parameters that were passed in
-                        ca.setFirstName(request.getParameter("firstName"));
-                        ca.setMiddleName(request.getParameter("middleName"));
-                        ca.setLastName(request.getParameter("lastName"));
-                        ca.setMajor(request.getParameter("major"));
-                        ca.setEmail(request.getParameter("email"));
-                        ca.setGender(ConferenceAttendee.Gender.valueOf(request
-                                .getParameter("gender")));
-                        ca.setShirtSize(ConferenceAttendee.ShirtSize
-                                .valueOf(request.getParameter("shirtSize")));
-                        ca.setEmergencyContactName(request
-                                .getParameter("ecName"));
-                        ca.setEmergencyContactPhone(request
-                                .getParameter("ecPhone"));
-                        ca.setArrivalInformation(request
-                                .getParameter("arrivalInformation"));
-                        ca.setVegetarian(request.getParameter("vegetarian") != null);
-                        ca.setAllergies(request.getParameter("allergies"));
-
-                        // Make the object persistent
-                        try {
-                            council.getAttendees().add(ca);
-                            pm.makePersistent(ca);
-                        } finally {
-                        }
-
-                        // Save the tour selection
-                        String tourid = request.getParameter("tour");
-                        if (tourid != null && !tourid.equals("-1")) {
-                            Tour t = Tour.GetTour(pm, tourid);
-                            if (t.hasRoom()) {
-                                t.addAttendee(council.getKey(), ca);
-                            }
-                        }
-
-                        pm.close();
-
-                        response.sendRedirect("/mycouncil?id=" + pid);
-                    } else {
-                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                    }
-                } else {
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                }
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            // Test if the user is logged in
+            if (!PermissionManager.SetUpPermissions(p, request)) {
+                throw new PermissionDeniedException();
             }
-        } else {
+
+            // Test to make sure all of the mandatory parameters were set
+            String pid = request.getParameter("councilid");
+            if (pid == null) {
+                throw new InvalidFormException();
+            }
+
+            // Test if the user has permission for this council
+            boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
+            ConferenceSettings cs = ConferenceSettings
+                    .GetConferenceSettings(pm);
+            Council council = Council.GetCouncil(pm, pid);
+            if (!((haspermission
+                    && cs.getMaxAttendees() > council.getAttendees().size() && cs
+                    .isRegistrationOpen()) || p.IsUserAdmin())) {
+                throw new PermissionDeniedException();
+            }
+            ConferenceAttendee ca = new ConferenceAttendee(
+                    cs.getRegistrationFee());
+
+            // We only add the member if they check the authorization
+            // box and agreed to the payment terms.
+            if (request.getParameter("authorization") != null) {
+                // Set all of the parameters that were passed in
+                ca.setFirstName(request.getParameter("firstName"));
+                ca.setMiddleName(request.getParameter("middleName"));
+                ca.setLastName(request.getParameter("lastName"));
+                ca.setMajor(request.getParameter("major"));
+                ca.setEmail(request.getParameter("email"));
+                ca.setGender(ConferenceAttendee.Gender.valueOf(request
+                        .getParameter("gender")));
+                ca.setShirtSize(ConferenceAttendee.ShirtSize.valueOf(request
+                        .getParameter("shirtSize")));
+                ca.setEmergencyContactName(request.getParameter("ecName"));
+                ca.setEmergencyContactPhone(request.getParameter("ecPhone"));
+                ca.setArrivalInformation(request
+                        .getParameter("arrivalInformation"));
+                ca.setVegetarian(request.getParameter("vegetarian") != null);
+                ca.setAllergies(request.getParameter("allergies"));
+
+                // Make the object persistent
+                try {
+                    council.getAttendees().add(ca);
+                    pm.makePersistent(ca);
+                } finally {
+                }
+
+                // Save the tour selection
+                String tourid = request.getParameter("tour");
+                if (tourid != null && !tourid.equals("-1")) {
+                    Tour t = Tour.GetTour(pm, tourid);
+                    if (t.hasRoom()) {
+                        t.addAttendee(council.getKey(), ca);
+                    }
+                }
+
+                response.sendRedirect("/mycouncil?id=" + pid);
+            } else {
+                throw new PermissionDeniedException();
+            }
+
+        } catch (IOException e) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } catch (InvalidFormException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        } finally {
+            pm.close();
         }
     }
 }

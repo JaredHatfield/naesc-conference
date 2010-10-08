@@ -48,38 +48,44 @@ public class HomeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PermissionManager p = new PermissionManager();
-        boolean authenticated = PermissionManager.SetUpPermissions(p, request);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            boolean authenticated = PermissionManager.SetUpPermissions(p,
+                    request);
 
-        if (authenticated) {
-            // We are authenticated, determine if the user is a council admin
-            PersistenceManager pm = PMF.get().getPersistenceManager();
-            ConferenceSettings cs = ConferenceSettings
-                    .GetConferenceSettings(pm);
-            request.setAttribute("conferencesettings", cs);
+            if (authenticated) {
+                // We are authenticated, determine if the user is a council
+                // admin
+                ConferenceSettings cs = ConferenceSettings
+                        .GetConferenceSettings(pm);
+                request.setAttribute("conferencesettings", cs);
 
-            List<CouncilPermission> councils = CouncilPermission.GetPermission(
-                    pm, p.getUser().getUserId());
+                List<CouncilPermission> councils = CouncilPermission
+                        .GetPermission(pm, p.getUser().getUserId());
 
-            if (councils.size() == 0) {
-                // The user has no permissions to existing councils
-                request.setAttribute("nocouncil", true);
-            } else {
-                // The user has access to an existing council
-                request.setAttribute("nocouncil", false);
+                if (councils.size() == 0) {
+                    // The user has no permissions to existing councils
+                    request.setAttribute("nocouncil", true);
+                } else {
+                    // The user has access to an existing council
+                    request.setAttribute("nocouncil", false);
 
-                List<Council> c = new ArrayList<Council>();
-                for (int i = 0; i < councils.size(); i++) {
-                    c.add(Council.GetCouncil(pm, councils.get(i).getCouncil()));
+                    List<Council> c = new ArrayList<Council>();
+                    for (int i = 0; i < councils.size(); i++) {
+                        c.add(Council.GetCouncil(pm, councils.get(i)
+                                .getCouncil()));
+                    }
+
+                    request.setAttribute("councils", c);
                 }
-
-                request.setAttribute("councils", c);
             }
+
+            String url = "/naesc/home.jsp";
+            ServletContext context = getServletContext();
+            RequestDispatcher dispatcher = context.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+        } finally {
             pm.close();
         }
-
-        String url = "/naesc/home.jsp";
-        ServletContext context = getServletContext();
-        RequestDispatcher dispatcher = context.getRequestDispatcher(url);
-        dispatcher.forward(request, response);
     }
 }
