@@ -19,6 +19,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.naesc2011.conference.shared.Council" %>
+<%@ page import="com.naesc2011.conference.shared.AttendeePermission" %>
 <%@ page import="com.naesc2011.conference.shared.ConferenceSettings" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -34,7 +35,12 @@
 	<% if(!(Boolean)request.getAttribute("authenticated")){ %>
 		You must log in to register or change your registration information.
 	<% } else { %>
-		You are logged in...<br />
+		<% @SuppressWarnings("unchecked") List<AttendeePermission> ap = (List<AttendeePermission>)request.getAttribute("ap");%>
+		<h3>Attendee</h3>
+		<% for(int i = 0; i < ap.size(); i++) { %>
+			<a href="/editattendee?id=<%= ap.get(i).getCouncil().getId() %>&m=<%= ap.get(i).getAttendee().getId() %>">Manage my Attendee Information</a><br />
+		<% } %>
+		<h3>Council</h3>
 		<% if((Boolean)request.getAttribute("nocouncil") ){ %>
 			<% if(cs.isRegistrationOpen()) { %>
 				<a href="/register">Register New Council</a>
@@ -45,7 +51,7 @@
 			<% @SuppressWarnings("unchecked") List<Council> councils = (List<Council>)request.getAttribute("councils");
 			   for(int i = 0; i < councils.size(); i++){ %>
 			   	<a href="/mycouncil?id=<%= councils.get(i).getKey().getId() %>">
-			   		<b>Manage:</b> <%= councils.get(i).getName() %>
+			   		<b>Manage Council:</b> <%= councils.get(i).getName() %>
 		   		</a>
 			   	
 			<% } %>

@@ -18,6 +18,7 @@
 package com.naesc2011.conference.server.naesc;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.naesc2011.conference.server.InvalidFormException;
 import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.AttendeePermission;
 import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
@@ -49,27 +51,30 @@ public class ProcessSaveAttendeeServlet extends HttpServlet {
         PermissionManager p = new PermissionManager();
         PersistenceManager pm = PMF.get().getPersistenceManager();
         try {
+            String pid = request.getParameter("id");
+
             // Test if the user is logged in
             if (!PermissionManager.SetUpPermissions(p, request)) {
                 throw new PermissionDeniedException();
             }
 
             // Test to make sure all of the mandatory parameters were set
-            String pid = request.getParameter("id");
             request.setAttribute("id", pid);
             if (pid == null) {
                 throw new InvalidFormException();
             }
 
             boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
+            String mid = request.getParameter("m");
             ConferenceSettings cs = ConferenceSettings
                     .GetConferenceSettings(pm);
-            if (!((haspermission && cs.isRegistrationOpen()) || p.IsUserAdmin())) {
+            if (!(((haspermission || AttendeePermission.HasPermission(pm, p
+                    .getUser().getEmail(), pid, mid)) && cs
+                    .isRegistrationOpen()) || p.IsUserAdmin())) {
                 throw new PermissionDeniedException();
             }
 
             Council council = Council.GetCouncil(pm, pid);
-            String mid = request.getParameter("m");
             boolean found = false;
             ConferenceAttendee ca = null;
             for (int i = 0; i < council.getAttendees().size(); i++) {
@@ -90,7 +95,7 @@ public class ProcessSaveAttendeeServlet extends HttpServlet {
                 ca.setMiddleName(request.getParameter("middleName"));
                 ca.setLastName(request.getParameter("lastName"));
                 ca.setMajor(request.getParameter("major"));
-                ca.setEmail(request.getParameter("email"));
+
                 ca.setGender(ConferenceAttendee.Gender.valueOf(request
                         .getParameter("gender")));
                 ca.setShirtSize(ConferenceAttendee.ShirtSize.valueOf(request
@@ -101,6 +106,20 @@ public class ProcessSaveAttendeeServlet extends HttpServlet {
                         .getParameter("arrivalInformation"));
                 ca.setVegetarian(request.getParameter("vegetarian") != null);
                 ca.setAllergies(request.getParameter("allergies"));
+
+                // Update the AttendeePermission & email
+                String email = request.getParameter("email");
+                if (!email.equals(ca.getEmail())) {
+                    // Update the current email address
+                    ca.setEmail(email);
+
+                    // Update the permission object
+                    List<AttendeePermission> ap = AttendeePermission
+                            .GetPermission(pm, council.getKey(), ca.getKey());
+                    if (ap.size() == 1) {
+                        ap.get(0).setEmail(email);
+                    }
+                }
 
                 // Update the tour selection
                 String tourid = request.getParameter("tour");

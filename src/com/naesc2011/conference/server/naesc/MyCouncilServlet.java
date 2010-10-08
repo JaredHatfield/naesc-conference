@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.naesc2011.conference.server.InvalidFormException;
 import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.AttendeePermission;
 import com.naesc2011.conference.shared.Award;
 import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
@@ -67,7 +68,16 @@ public class MyCouncilServlet extends HttpServlet {
             // Test if the user has permission for this council
             boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
             if (!(haspermission || p.IsUserAdmin())) {
-                throw new PermissionDeniedException();
+                if (AttendeePermission.HasPermission(pm,
+                        p.getUser().getEmail(), pid)) {
+                    // The user has permission, redirect them to the home page
+                    response.sendRedirect("/");
+
+                    // TODO: Display a custom my council page for the attendee
+                    return;
+                } else {
+                    throw new PermissionDeniedException();
+                }
             }
 
             // Retrieve everything for this page

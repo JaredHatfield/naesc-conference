@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.naesc2011.conference.server.InvalidFormException;
 import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.AttendeePermission;
 import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
@@ -66,7 +67,9 @@ public class EditAttendeeServlet extends HttpServlet {
 
             // Test if the user has permission for this council
             boolean haspermission = CouncilPermission.HasPermission(pm, pid, p);
-            if (!(haspermission || p.IsUserAdmin())) {
+            String mid = request.getParameter("m");
+            if (!(haspermission || p.IsUserAdmin() || AttendeePermission
+                    .HasPermission(pm, p.getUser().getEmail(), pid, mid))) {
                 throw new PermissionDeniedException();
             }
 
@@ -74,7 +77,6 @@ public class EditAttendeeServlet extends HttpServlet {
                     .GetConferenceSettings(pm);
             request.setAttribute("conferencesettings", cs);
             Council council = Council.GetCouncil(pm, pid);
-            String mid = request.getParameter("m");
             boolean found = false;
             for (int i = 0; i < council.getAttendees().size(); i++) {
                 long cid = council.getAttendees().get(i).getKey().getId();
