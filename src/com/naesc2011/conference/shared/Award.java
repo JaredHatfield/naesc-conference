@@ -240,7 +240,8 @@ public class Award {
      */
     @SuppressWarnings("unchecked")
     public static List<Award> GetAllAwards(PersistenceManager pm) {
-        String query = "select from " + Award.class.getName();
+        String query = "select from " + Award.class.getName()
+                + " order by name";
         return (List<Award>) pm.newQuery(query).execute();
     }
 
