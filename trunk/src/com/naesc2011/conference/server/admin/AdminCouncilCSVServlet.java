@@ -52,15 +52,23 @@ public class AdminCouncilCSVServlet extends HttpServlet {
             }
 
             List<Council> councils = Council.GetAllCouncils(pm);
+            response.setContentType("application/CSV");
             PrintWriter writer = response.getWriter();
-            writer.write("\"Council\",\"University\",\"Location\",\"Website\",\"Attendees\"\n");
+            writer.write("\"Council Name\",\"University\",\"Location\",\"Contact\","
+                    + "\"Website\",\"Attendee Count\",\"Amount Due\",\"Amount Paid\","
+                    + "\"Payment Notes\"\n");
 
             for (int i = 0; i < councils.size(); i++) {
                 writer.write('"' + councils.get(i).getName() + '"' + ',' + '"'
                         + councils.get(i).getUniversity() + '"' + ',' + '"'
                         + councils.get(i).getLocation() + '"' + ',' + '"'
+                        + councils.get(i).getContact() + '"' + ',' + '"'
                         + councils.get(i).getWebsite() + '"' + ',' + '"'
-                        + councils.get(i).getAttendees().size() + '"' + "\n");
+                        + councils.get(i).getAttendees().size() + '"' + ','
+                        + '"' + '$' + councils.get(i).getAttendeeCost() + '"'
+                        + ',' + '"' + '$' + councils.get(i).getAmountPaid()
+                        + '"' + ',' + '"' + councils.get(i).getPaymentNotes()
+                        + '"' + "\n");
             }
 
         } catch (IOException e) {

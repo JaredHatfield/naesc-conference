@@ -38,8 +38,10 @@
 			<td class="extralargecell">Website</td>
 			<td class="smallcell">Count</td>
 			<td class="smallcell">Cost</td>
+			<td class="smallcell">Paid</td>
 		</tr>
 		<% int totalAttendee = 0; %>
+		<% int totalPaid = 0; %>
 		<% int totalCost = 0; %>
 		<% for(Council council : councils) { %>
 			<tr>
@@ -55,6 +57,10 @@
 					<% totalCost += (int)council.getAttendeeCost(); %>
 					$<%= (int)council.getAttendeeCost() %>
 				</td>
+				<td>
+					<% totalPaid += (int)council.getAmountPaid(); %>
+					$<%= (int)council.getAmountPaid() %>
+				</td>
 			</tr>
 		<% } %>
 	</table>
@@ -68,6 +74,14 @@
 		<tr>
 			<td class="titlecol">Total Cost</td>
 			<td class="smallcell">$<%= totalCost %></td>
+		</tr>
+		<tr>
+			<td class="titlecol">Total Paid</td>
+			<td class="smallcell">$<%= totalPaid %></td>
+		</tr>
+		<tr>
+			<td class="titlecol">Outstanding</td>
+			<td class="smallcell">$<%= totalCost - totalPaid %></td>
 		</tr>
 	</table>
 </body>
