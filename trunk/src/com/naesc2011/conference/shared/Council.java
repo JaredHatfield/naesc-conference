@@ -389,7 +389,8 @@ public class Council {
      */
     @SuppressWarnings("unchecked")
     public static List<Council> GetAllCouncils(PersistenceManager pm) {
-        String query = "select from " + Council.class.getName();
+        String query = "select from " + Council.class.getName()
+                + " order by name";
         return (List<Council>) pm.newQuery(query).execute();
     }
 

@@ -243,7 +243,7 @@ public class Tour {
      */
     @SuppressWarnings("unchecked")
     public static List<Tour> GetAllTours(PersistenceManager pm) {
-        String query = "select from " + Tour.class.getName();
+        String query = "select from " + Tour.class.getName() + " order by name";
         return (List<Tour>) pm.newQuery(query).execute();
     }
 
