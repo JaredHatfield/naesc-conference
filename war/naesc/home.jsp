@@ -36,26 +36,31 @@
 		You must log in to register or change your registration information.
 	<% } else { %>
 		<% @SuppressWarnings("unchecked") List<AttendeePermission> ap = (List<AttendeePermission>)request.getAttribute("ap");%>
-		<h3>Attendee</h3>
-		<% for(int i = 0; i < ap.size(); i++) { %>
-			<a href="/editattendee?id=<%= ap.get(i).getCouncil().getId() %>&m=<%= ap.get(i).getAttendee().getId() %>">Manage my Attendee Information</a><br />
-		<% } %>
-		<h3>Council</h3>
-		<% if((Boolean)request.getAttribute("nocouncil") ){ %>
-			<% if(cs.isRegistrationOpen()) { %>
-				<a href="/register">Register New Council</a>
+		<fieldset>
+			<legend>Attendee</legend>
+			<% for(int i = 0; i < ap.size(); i++) { %>
+				<a href="/editattendee?id=<%= ap.get(i).getCouncil().getId() %>&m=<%= ap.get(i).getAttendee().getId() %>">Manage my Attendee Information</a><br />
+			<% } %>
+		</fieldset>
+		<br /><br />
+		<fieldset>
+			<legend>Council</legend>
+			<% if((Boolean)request.getAttribute("nocouncil") ){ %>
+				<% if(cs.isRegistrationOpen()) { %>
+					<a href="/register">Register New Council</a>
+				<% } else { %>
+					Registration is closed.
+				<% } %>
 			<% } else { %>
-				Registration is closed.
+				<% @SuppressWarnings("unchecked") List<Council> councils = (List<Council>)request.getAttribute("councils");
+				   for(int i = 0; i < councils.size(); i++){ %>
+				   	<a href="/mycouncil?id=<%= councils.get(i).getKey().getId() %>">
+				   		<b>Manage Council:</b> <%= councils.get(i).getName() %>
+			   		</a>
+				   	
+				<% } %>
 			<% } %>
-		<% } else { %>
-			<% @SuppressWarnings("unchecked") List<Council> councils = (List<Council>)request.getAttribute("councils");
-			   for(int i = 0; i < councils.size(); i++){ %>
-			   	<a href="/mycouncil?id=<%= councils.get(i).getKey().getId() %>">
-			   		<b>Manage Council:</b> <%= councils.get(i).getName() %>
-		   		</a>
-			   	
-			<% } %>
-		<% } %>
+		</fieldset>
 	<% } %>
 </body>
 </html>

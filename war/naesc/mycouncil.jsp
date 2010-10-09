@@ -33,133 +33,139 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	<h2>My Council</h2>
-	<h3>Information</h3>
-	<% Council council = (Council)request.getAttribute("council"); %>
-	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
-	<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards"); %>
-	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
-	
-	<table class="infotable">
-		<tr>
-			<td colspan="2" style="border-width: 0px; text-align: right;">
-				<a href="/editcouncil?id=<%= council.getKey().getId() %>"><img src="/static/edit.png" /></a>
-			</td>
-		</tr>
-		<tr>
-			<td class="titlecol">Name</td>
-			<td class="extralargecell"><%= council.getName() %></td>
-		</tr>
-		<tr>
-			<td class="titlecol">University</td>
-			<td><%= council.getUniversity() %></td>
-		</tr>
-		<tr>
-			<td class="titlecol">Location</td>
-			<td><%= council.getLocation() %></td>
-		</tr>
-		<tr>
-			<td class="titlecol">Contact</td>
-			<td><%= council.getContact() %></td>
-		</tr>
-		<tr>
-			<td class="titlecol">Website</td>
-			<td><%= council.getWebsite() %></td>
-		</tr>
-		<tr>
-			<td class="titlecol">Amount Due</td>
-			<td>$<%= (int)council.getAttendeeCost() %></td>
-		</tr>
-		<tr>
-			<td class="titlecol">Amount Paid</td>
-			<td>$<%= (int)council.getAmountPaid() %></td>
-		</tr>
-		<tr>
-			<td class="titlecol">Payment Notes</td>
-			<td><%= council.getPaymentNotes() %></td>
-		</tr>
-	</table>
-	
-	<h3>Award Applications</h3>
-	<% List<AwardSubmission> submitted = council.getAwardSubmissions(); %>
-	<table class="infotable">
-		<tr class="titlerow">
-			<td>Award Application</td>
-			<td>Submitted</td>
-		</tr>
-		<% for(int i = 0; i < awards.size(); i++) { %>
+	<fieldset>
+		<legend>Information</legend>
+		<% Council council = (Council)request.getAttribute("council"); %>
+		<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
+		<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards"); %>
+		<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
+		
+		<table class="infotable">
 			<tr>
-				<td class="largecell">
-					<% Award a = awards.get(i); %>
-				<a href="/editaward?id=<%= council.getKey().getId() %>&a=<%= a.getKey().getId() %>"><%= a.getName() %></a>
-				</td>
-				<td class="smallcell">
-					<% for(int j = 0; submitted != null && j < submitted.size(); j++) { %>
-						<% if(submitted.get(j).getAward().equals(a.getKey())) { %>
-							<% if(submitted.get(j).getSubmitted()){ %>
-								<img src="/static/check.png" alt="Submitted" title="Submitted" class="center">
-							<% } else { %>
-								<img src="/static/progress.png" alt="In Progress" title="In Progress" class="center">
-							<% } %>
-						<% break; } %>
-					<% } %>
+				<td colspan="2" style="border-width: 0px; text-align: right;">
+					<a href="/editcouncil?id=<%= council.getKey().getId() %>"><img src="/static/edit.png" /></a>
 				</td>
 			</tr>
-		<% } %>
-	</table>
-	
-	<h3>Attending Members</h3>
-	<table class="infotable">
-		<tr class="titlerow">
-			<td class="minicell">
-				<% if(council.getAttendees().size() < cs.getMaxAttendees() && (cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin"))) { %>
-					<a href="/addattendee?id=<%= council.getKey().getId() %>"><img src="/static/add.png" class="center" /></a>
-				<% } %>
-				(<%= council.getAttendees().size() %> of <%= cs.getMaxAttendees() %>)
-			</td>
-			<td class="mediumcell">Name</td>
-			<td class="mediumcell">Email</td>
-			<td class="mediumcell">Tour <a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a></td>
-			<td class="smallcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>"><img src="/static/edit.png" /></a></td>
-			<td class="smallcell">Registration</td>
-			<td class="minicell">Resume</td>
-			<td class="minicell">Complete</td>
-		</tr>
-		<% for(int i = 0; i < council.getAttendees().size(); i++) { %>
 			<tr>
-				<% ConferenceAttendee att = council.getAttendees().get(i); %>
-				<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= att.getKey().getId() %>"><img src="/static/edit.png" class="center" /></a></td>
-				<td><%= att.getFirstName() %> <%= council.getAttendees().get(i).getLastName() %></td>
-				<td><%= att.getEmail() %></td>
-				<td>
-					<% for(int j = 0; j < tours.size(); j++) { %>
-						<% if(tours.get(j).getKey().equals(att.getTour())) { %>
-							<%= tours.get(j).getName() %>
-						<% break; } %>
-					<% } %>
-				</td>
-				<td>
-					<% if(att.getVoteStatus() == null) { %>
-					<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.VOTING)) { %>
-						Voting
-					<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.ALTERNATE)) { %>
-						Alternate
-					<% } %>
-				</td>
-				<td>
-					$<%= (int)att.getRegistartionFee() %>
-				</td>
-				<td>
-					<% if(att.getResume() != null) { %>
-						<img src="/static/document.png" alt="Resume Uploaded" title="Resume Uploaded" class="center">
-					<% } %>
-				</td>
-				<td>
-					<% if(att.isAttendeeComplete()) { %>
-						<img src="/static/check.png" alt="Complete" title="Complete" class="center">
-					<% } %>
-				</td>
+				<td class="titlecol">Name</td>
+				<td class="extralargecell"><%= council.getName() %></td>
 			</tr>
-		<% } %>
-	</table>
+			<tr>
+				<td class="titlecol">University</td>
+				<td><%= council.getUniversity() %></td>
+			</tr>
+			<tr>
+				<td class="titlecol">Location</td>
+				<td><%= council.getLocation() %></td>
+			</tr>
+			<tr>
+				<td class="titlecol">Contact</td>
+				<td><%= council.getContact() %></td>
+			</tr>
+			<tr>
+				<td class="titlecol">Website</td>
+				<td><%= council.getWebsite() %></td>
+			</tr>
+			<tr>
+				<td class="titlecol">Amount Due</td>
+				<td>$<%= (int)council.getAttendeeCost() %></td>
+			</tr>
+			<tr>
+				<td class="titlecol">Amount Paid</td>
+				<td>$<%= (int)council.getAmountPaid() %></td>
+			</tr>
+			<tr>
+				<td class="titlecol">Payment Notes</td>
+				<td><%= council.getPaymentNotes() %></td>
+			</tr>
+		</table>
+	</fieldset>
+	<br /><br />
+	<fieldset>
+		<legend>Award Applications</legend>
+		<% List<AwardSubmission> submitted = council.getAwardSubmissions(); %>
+		<table class="infotable">
+			<tr class="titlerow">
+				<td>Award Name</td>
+				<td>Submitted</td>
+			</tr>
+			<% for(int i = 0; i < awards.size(); i++) { %>
+				<tr>
+					<td class="largecell">
+						<% Award a = awards.get(i); %>
+					<a href="/editaward?id=<%= council.getKey().getId() %>&a=<%= a.getKey().getId() %>"><%= a.getName() %></a>
+					</td>
+					<td class="smallcell">
+						<% for(int j = 0; submitted != null && j < submitted.size(); j++) { %>
+							<% if(submitted.get(j).getAward().equals(a.getKey())) { %>
+								<% if(submitted.get(j).getSubmitted()){ %>
+									<img src="/static/check.png" alt="Submitted" title="Submitted" class="center">
+								<% } else { %>
+									<img src="/static/progress.png" alt="In Progress" title="In Progress" class="center">
+								<% } %>
+							<% break; } %>
+						<% } %>
+					</td>
+				</tr>
+			<% } %>
+		</table>
+	</fieldset>
+	<br /><br />
+	<fieldset>
+		<legend>Attending Members</legend>
+		<table class="infotable">
+			<tr class="titlerow">
+				<td class="minicell">
+					<% if(council.getAttendees().size() < cs.getMaxAttendees() && (cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin"))) { %>
+						<a href="/addattendee?id=<%= council.getKey().getId() %>"><img src="/static/add.png" class="center" /></a>
+					<% } %>
+					(<%= council.getAttendees().size() %> of <%= cs.getMaxAttendees() %>)
+				</td>
+				<td class="mediumcell">Name</td>
+				<td class="mediumcell">Email</td>
+				<td class="mediumcell">Tour <a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a></td>
+				<td class="smallcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>"><img src="/static/edit.png" /></a></td>
+				<td class="smallcell">Registration</td>
+				<td class="minicell">Resume</td>
+				<td class="minicell">Complete</td>
+			</tr>
+			<% for(int i = 0; i < council.getAttendees().size(); i++) { %>
+				<tr>
+					<% ConferenceAttendee att = council.getAttendees().get(i); %>
+					<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= att.getKey().getId() %>"><img src="/static/edit.png" class="center" /></a></td>
+					<td><%= att.getFirstName() %> <%= council.getAttendees().get(i).getLastName() %></td>
+					<td><%= att.getEmail() %></td>
+					<td>
+						<% for(int j = 0; j < tours.size(); j++) { %>
+							<% if(tours.get(j).getKey().equals(att.getTour())) { %>
+								<%= tours.get(j).getName() %>
+							<% break; } %>
+						<% } %>
+					</td>
+					<td>
+						<% if(att.getVoteStatus() == null) { %>
+						<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.VOTING)) { %>
+							Voting
+						<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.ALTERNATE)) { %>
+							Alternate
+						<% } %>
+					</td>
+					<td>
+						$<%= (int)att.getRegistartionFee() %>
+					</td>
+					<td>
+						<% if(att.getResume() != null) { %>
+							<img src="/static/document.png" alt="Resume Uploaded" title="Resume Uploaded" class="center">
+						<% } %>
+					</td>
+					<td>
+						<% if(att.isAttendeeComplete()) { %>
+							<img src="/static/check.png" alt="Complete" title="Complete" class="center">
+						<% } %>
+					</td>
+				</tr>
+			<% } %>
+		</table>
+	</fieldset>
 </body>
 </html>
