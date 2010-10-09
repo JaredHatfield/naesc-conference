@@ -47,7 +47,6 @@
         <servlet-name>register</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.RegisterServlet</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>adminlistcouncil</servlet-name>
         <servlet-class>com.naesc2011.conference.server.admin.AdminListCouncilServlet</servlet-class>
@@ -254,7 +253,6 @@
         <servlet-name>processdeleteresume</servlet-name>
         <url-pattern>/process/deleteresume</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>processsavedelegate</servlet-name>
         <url-pattern>/process/savedelegate</url-pattern>
@@ -264,13 +262,14 @@
         <url-pattern>/process/saveaward</url-pattern>
     </servlet-mapping>
     
+    
 	<!-- Default page to serve -->
 	<welcome-file-list>
 		<welcome-file>home</welcome-file>
 	</welcome-file-list>
 	
     
-	<!--  Security Constraints -->
+	<!--  Security Constraint for Administrative Pages -->
 	<security-constraint>
 		<web-resource-collection>
             <web-resource-name>Administrative Pages</web-resource-name>
@@ -282,4 +281,26 @@
 			<role-name>admin</role-name>
 		</auth-constraint>
 	</security-constraint>
+    
+    <!--  Security Constraint for Process Servlets -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Process Submit Pages</web-resource-name>
+            <url-pattern>/process/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <!--  Security Constraint for enforcing SSL -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>All Pages</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
 </web-app>
