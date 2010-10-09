@@ -22,7 +22,9 @@
 	</div>
 	<div style="text-align: right; float: right;">
 		<% if((Boolean)request.getAttribute("authenticated")){ %>
-			<%= request.getAttribute("username") %> | 
+			<div style="display: inline; font-weight: bold;">
+				<%= request.getAttribute("username") %>
+			</div> | 
 			<% if((Boolean)request.getAttribute("isadmin")) { %>
 				<a href="/admin/">Admin</a> | 
 			<% } %>

@@ -1,3 +1,11 @@
+a img {
+	border-style: none;
+}
+
+html {
+	overflow-y: scroll;
+}
+
 img.center {
 	display: block;
 	margin-left: auto;
@@ -29,7 +37,7 @@ table.infotable td.minicell {
 	width: 3em;
 }
 table.infotable td.smallcell {
-	width: 6em;
+	width: 7em;
 }
 table.infotable td.mediumcell {
 	width: 10em;
@@ -77,7 +85,7 @@ input[disabled], select[disabled], textarea[disabled] {
 }
 fieldset {
 	border: 1px solid #556644;
-	width: 40em
+	display: inline;
 }
 legend {
 	font-size: 110%;
@@ -98,6 +106,7 @@ div#headbar {
 	border-bottom-style: solid;
 	border-bottom-color: grey;
 	padding-bottom: 10px;	
+	font-family: arial,sans-serif;
 }
 h1 {
 	font-size: 2em;
@@ -114,6 +123,9 @@ h2 {
 	border-bottom-width: 3px;
 	border-bottom-style: solid;
 	border-bottom-color: grey;
+}
+h2 a {
+	text-decoration: none;
 }
 h3 {
 	font-size: 1.5em;
