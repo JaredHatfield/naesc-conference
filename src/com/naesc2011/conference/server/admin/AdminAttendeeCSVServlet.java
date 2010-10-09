@@ -55,27 +55,19 @@ public class AdminAttendeeCSVServlet extends HttpServlet {
 
             List<Council> councils = Council.GetAllCouncils(pm);
             List<Tour> tours = Tour.GetAllTours(pm);
-
+            response.setContentType("application/CSV");
             PrintWriter writer = response.getWriter();
             writer.write("\"Council\",\"Last Name\",\"First Name\",\"Middle Name\","
                     + "\"Major\",\"Email\",\"Gender\",\"Shirt Size\","
                     + "\"Emergency Contact Name\",\"Emergency Contact Phone\",\"Arrival Informtion\","
-                    + "\"Vegetarian\",\"Allergies\",\"Voting Status\",\"Tour\"\n");
+                    + "\"Vegetarian\",\"Allergies\",\"Voting Status\",\"Registration Fee\",\"Tour\"\n");
 
             for (int i = 0; i < councils.size(); i++) {
                 Council council = councils.get(i);
-
-                writer.write('"' + council.getName() + '"' + ',');
-
                 List<ConferenceAttendee> attendees = council.getAttendees();
-
                 for (int j = 0; j < attendees.size(); j++) {
-                    if (j > 0) {
-                        writer.write('"' + council.getName() + '"' + ',');
-                    }
-
+                    writer.write('"' + council.getName() + '"' + ',');
                     ConferenceAttendee attendee = attendees.get(j);
-
                     writer.write('"' + attendee.getLastName() + '"' + ',' + '"'
                             + attendee.getFirstName() + '"' + ',' + '"'
                             + attendee.getMiddleName() + '"' + ',' + '"'
@@ -87,7 +79,6 @@ public class AdminAttendeeCSVServlet extends HttpServlet {
                             + '"' + attendee.getEmergencyContactPhone() + '"'
                             + ',' + '"' + attendee.getArrivalInformation()
                             + '"' + ',');
-
                     if (attendee.getVegetarian()) {
                         writer.write('"' + "Yes" + '"' + ',');
                     } else {
@@ -95,12 +86,17 @@ public class AdminAttendeeCSVServlet extends HttpServlet {
                     }
 
                     writer.write('"' + attendee.getAllergies() + '"' + ','
-                            + '"' + attendee.getVoteStatus() + '"' + ',');
-
-                    for (int k = 0; k < tours.size(); k++) {
-                        Tour tour = tours.get(k);
-                        if (tour.getKey().equals(attendee.getTour())) {
-                            writer.write('"' + tour.getName() + '"');
+                            + '"' + attendee.getVoteStatus() + '"' + ',' + '"'
+                            + '$' + attendee.getRegistartionFee() + '"' + ',');
+                    if (attendee.getTour() == null) {
+                        // The attendee does not have a tour selected
+                    } else {
+                        for (int k = 0; k < tours.size(); k++) {
+                            Tour tour = tours.get(k);
+                            if (tour.getKey().equals(attendee.getTour())) {
+                                writer.write('"' + tour.getName() + '"');
+                                break;
+                            }
                         }
                     }
 
