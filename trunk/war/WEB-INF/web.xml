@@ -72,6 +72,14 @@
         <servlet-class>com.naesc2011.conference.server.admin.AdminAwardServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>adminlistawards</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.admin.AdminListAwardsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>admindisplayaward</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.admin.AdminDisplayAwardServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>adminconferencesettings</servlet-name>
         <servlet-class>com.naesc2011.conference.server.admin.AdminConferenceSettingsServlet</servlet-class>
     </servlet>
@@ -200,6 +208,14 @@
     <servlet-mapping>
         <servlet-name>adminaward</servlet-name>
         <url-pattern>/admin/award</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminlistawards</servlet-name>
+        <url-pattern>/admin/listawards</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>admindisplayaward</servlet-name>
+        <url-pattern>/admin/displayaward</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>adminconferencesettings</servlet-name>

@@ -26,11 +26,19 @@
 <body>
 	<%@ include file="../header.jsp" %>
 	<h2>Admin</h2>
+	<h3>Management</h3>
 	<ul>
 		<li><a href="/admin/conferencesettings">Conference Settings</a></li>
 		<li><a href="/admin/managetour">Manage Tours</a></li>
 		<li><a href="/admin/award">Manage Awards</a></li>
+	</ul>
+	<h3>Information</h3>
+	<ul>
+		<li><a href="/admin/listawards">List Award Applications</a></li>
 		<li><a href="/admin/listcouncil">List All Councils</a></li>
+	</ul>
+	<h3>Export</h3>
+	<ul>
 		<li><a href="/admin/council.csv">Export Councils</a></li>
 		<li><a href="/admin/attendee.csv">Export Attendees</a></li>
 	</ul>
