@@ -18,9 +18,13 @@
 
 <div id="headbar">
 	<div style="text-align: left; float: left;">
+	<% if(request.getParameter("pagename") != null && request.getParameter("pagename").equals("Home")) { %>
+		<b>Home</b>
+	<% } else { %>
 		<a href="/">Home</a>
+	<% } %>
 	</div>
-	<div style="text-align: right; float: right;">
+	<div id="topbar" style="text-align: right; float: right;">
 		<% if((Boolean)request.getAttribute("authenticated")){ %>
 			<div style="display: inline; font-weight: bold;">
 				<%= request.getAttribute("username") %>
@@ -28,14 +32,11 @@
 			<% if((Boolean)request.getAttribute("isadmin")) { %>
 				<a href="/admin/">Admin</a> | 
 			<% } %>
-			<a href="<%= request.getAttribute("logouturl") %>">Logout</a>
+			<a href="<%= request.getAttribute("logouturl") %>">Sign out</a>
 		<% } else { %>
-			<a href="<%= request.getAttribute("loginurl") %>">Login</a>
+			<a href="<%= request.getAttribute("loginurl") %>">Sign in</a>
 		<% } %>
 	</div>
 </div>
-
-
-
 <h1>NAESC 2011 National Conference Registration</h1>
 
