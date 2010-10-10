@@ -28,7 +28,9 @@
 	<title>NAESC 2011 National Conference: Home</title>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Home" name="pagename"/>
+	</jsp:include>
 	<h2>Home</h2>
 	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 	
