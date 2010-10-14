@@ -38,137 +38,144 @@
 	</script>
 </head>
 <body onLoad="update();">
-	<%@ include file="../header.jsp" %>
-	<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
-	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
-	
-	<h2><a href="/mycouncil?id=<%= request.getAttribute("id") %>">My Council</a> &rarr; Edit Attendee</h2>
-		
-		<form method="post" action="/process/saveattendee">
-		<fieldset> 
-		<legend>Edit Attendee</legend>
-		<p><label>First Name:</label><input class="insmall" type="text" maxlength="500" name="firstName" value="<%= a.getFirstName() %>" /></p>
-		<p><label>Middle Name:</label><input class="insmall" type="text" maxlength="500" name="middleName" value="<%= a.getMiddleName() %>" /></p>
-		<p><label>Last Name:</label><input class="insmall" type="text" maxlength="500" name="lastName" value="<%= a.getLastName() %>" /></p>
-		<p><label>Major:</label><input class="insmall" type="text" maxlength="500" name="major" value="<%= a.getMajor() %>" /></p>
-		<p><label>Email:</label><input class="insmall" type="text" maxlength="500" name="email" value="<%= a.getEmail() %>" /></p>
-		<p>
-			<label>Gender:</label>
-			<select name="gender">
-			<% for(ConferenceAttendee.Gender g : ConferenceAttendee.Gender.values()) { %>
-				<% if(g.equals(a.getGender())) { %>
-					<option value="<%= g.toString() %>" selected="selected"><%= g.toString() %></option>
-				<% } else { %>
-					<option value="<%= g.toString() %>"><%= g.toString() %></option>
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Edit Attendee" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
+		<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
+		<h2><a href="/mycouncil?id=<%= request.getAttribute("id") %>">My Council</a> &rarr; Edit Attendee</h2>
+			<form method="post" action="/process/saveattendee">
+			<fieldset> 
+			<legend>Edit Attendee</legend>
+			<p><label>First Name:</label><input class="insmall" type="text" maxlength="500" name="firstName" value="<%= a.getFirstName() %>" /></p>
+			<p><label>Middle Name:</label><input class="insmall" type="text" maxlength="500" name="middleName" value="<%= a.getMiddleName() %>" /></p>
+			<p><label>Last Name:</label><input class="insmall" type="text" maxlength="500" name="lastName" value="<%= a.getLastName() %>" /></p>
+			<p><label>Major:</label><input class="insmall" type="text" maxlength="500" name="major" value="<%= a.getMajor() %>" /></p>
+			<p><label>Email:</label><input class="insmall" type="text" maxlength="500" name="email" value="<%= a.getEmail() %>" /></p>
+			<p>
+				<label>Gender:</label>
+				<select name="gender">
+				<% for(ConferenceAttendee.Gender g : ConferenceAttendee.Gender.values()) { %>
+					<% if(g.equals(a.getGender())) { %>
+						<option value="<%= g.toString() %>" selected="selected"><%= g.toString() %></option>
+					<% } else { %>
+						<option value="<%= g.toString() %>"><%= g.toString() %></option>
+					<% } %>
+					
 				<% } %>
-				
+				</select>
+			</p>
+			<p>
+				<label>Shirt Size:</label>
+				<select name="shirtSize">
+				<% for(ConferenceAttendee.ShirtSize ss : ConferenceAttendee.ShirtSize.values()) { %>
+					<% if(ss.equals(a.getShirtSize())) { %>
+						<option value="<%= ss.toString() %>" selected="selected"><%= ss.toString() %></option>
+					<% } else { %>
+						<option value="<%= ss.toString() %>"><%= ss.toString() %></option>
+					<% } %>
+					
+				<% } %>
+				</select>
+			</p>
+			
+			<p>
+				<label>Tour:</label>
+				<select name="tour">
+					<option value="-1">Select a Tour From the Following</option>
+				<% for(Tour t : tours) { %>
+					<% if(a.getTour() != null && t.getKey().equals(a.getTour())) { %>
+						<option value="<%= t.getKey().getId() %>" selected="selected"><%= t.getName() %></option>
+					<% } else if(t.hasRoom()) { %>
+						<option value="<%= t.getKey().getId() %>"><%= t.getName() %></option>
+					<% } %>
+					
+				<% } %>
+				</select>
+				<a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a>
+			</p>
+			
+			<p><label>Emergency Contact Name:</label><input class="insmall" type="text" maxlength="500" name="ecName" value="<%= a.getEmergencyContactName() %>" /></p>
+			<p><label>Emergency Contact Phone:</label><input class="insmall" type="text" maxlength="500" name="ecPhone" value="<%= a.getEmergencyContactPhone() %>" /></p>
+			<p><label>Arrival Information:</label><input class="insmall" type="text" maxlength="500" name="arrivalInformation" value="<%= a.getArrivalInformation() %>" /></p>
+			<p>
+				<label>Vegetarian:</label>
+					<% if(a.getVegetarian()) { %>
+						<input type="checkbox" name="vegetarian" checked="checked" />
+					<% } else { %>
+						<input type="checkbox" name="vegetarian" />
+					<% } %>
+			</p>
+			<p><label>Allergies:</label><input class="insmall" type="text" maxlength="500" name="allergies" value="<%= a.getAllergies() %>" /></p>
+			<% if(cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin")) { %>
+				<p class="submit">
+					<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
+					<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
+					<input type="submit" value="Update" />
+				</p>
 			<% } %>
-			</select>
-		</p>
-		<p>
-			<label>Shirt Size:</label>
-			<select name="shirtSize">
-			<% for(ConferenceAttendee.ShirtSize ss : ConferenceAttendee.ShirtSize.values()) { %>
-				<% if(ss.equals(a.getShirtSize())) { %>
-					<option value="<%= ss.toString() %>" selected="selected"><%= ss.toString() %></option>
-				<% } else { %>
-					<option value="<%= ss.toString() %>"><%= ss.toString() %></option>
-				<% } %>
-				
-			<% } %>
-			</select>
-		</p>
-		
-		<p>
-			<label>Tour:</label>
-			<select name="tour">
-				<option value="-1">Select a Tour From the Following</option>
-			<% for(Tour t : tours) { %>
-				<% if(a.getTour() != null && t.getKey().equals(a.getTour())) { %>
-					<option value="<%= t.getKey().getId() %>" selected="selected"><%= t.getName() %></option>
-				<% } else if(t.hasRoom()) { %>
-					<option value="<%= t.getKey().getId() %>"><%= t.getName() %></option>
-				<% } %>
-				
-			<% } %>
-			</select>
-			<a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a>
-		</p>
-		
-		<p><label>Emergency Contact Name:</label><input class="insmall" type="text" maxlength="500" name="ecName" value="<%= a.getEmergencyContactName() %>" /></p>
-		<p><label>Emergency Contact Phone:</label><input class="insmall" type="text" maxlength="500" name="ecPhone" value="<%= a.getEmergencyContactPhone() %>" /></p>
-		<p><label>Arrival Information:</label><input class="insmall" type="text" maxlength="500" name="arrivalInformation" value="<%= a.getArrivalInformation() %>" /></p>
-		<p>
-			<label>Vegetarian:</label>
-				<% if(a.getVegetarian()) { %>
-					<input type="checkbox" name="vegetarian" checked="checked" />
-				<% } else { %>
-					<input type="checkbox" name="vegetarian" />
-				<% } %>
-		</p>
-		<p><label>Allergies:</label><input class="insmall" type="text" maxlength="500" name="allergies" value="<%= a.getAllergies() %>" /></p>
-		<% if(cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin")) { %>
+			</fieldset>
+		</form>
+		<br />
+		<% if((Boolean)request.getAttribute("isadmin")) { %>
+		<form method="post" action="/admin/process/deleteattendee">
+			<fieldset> 
+			<legend>Delete Attendee</legend>
 			<p class="submit">
 				<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
 				<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
-				<input type="submit" value="Update" />
+				<input type="submit" value="Delete" />
 			</p>
+			</fieldset>
+		</form>
+		<br />
 		<% } %>
-		</fieldset>
-	</form>
-	<br />
-	<% if((Boolean)request.getAttribute("isadmin")) { %>
-	<form method="post" action="/admin/process/deleteattendee">
-		<fieldset> 
-		<legend>Delete Attendee</legend>
-		<p class="submit">
-			<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
-			<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
-			<input type="submit" value="Delete" />
-		</p>
-		</fieldset>
-	</form>
-	<br />
-	<% } %>
-	<form method="post" action="/process/deleteresume">
-		<fieldset> 
-		<legend>Resume</legend>
-			<% if(!cs.isRegistrationOpen() && !(Boolean)request.getAttribute("isadmin")) { %>
-				<% if(a.getResume() != null) { %>
+		<form method="post" action="/process/deleteresume">
+			<fieldset> 
+			<legend>Resume</legend>
+				<% if(!cs.isRegistrationOpen() && !(Boolean)request.getAttribute("isadmin")) { %>
+					<% if(a.getResume() != null) { %>
+						<p>
+							<label class="widelabel">
+								<a href="/downloadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Download Resume</a>
+							</label>
+						</p>
+					<% } else { %>
+						<p>
+							<label class="widelabel">
+								No resume was provided.
+							</label>
+						</p>
+					<% } %>
+				<% } else if(a.getResume() == null) { %>
+					<p>
+						<label class="widelabel">
+							<a href="/uploadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Upload Resume</a>
+						</label>
+					</p>
+				<% } else { %>
 					<p>
 						<label class="widelabel">
 							<a href="/downloadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Download Resume</a>
 						</label>
 					</p>
-				<% } else { %>
-					<p>
-						<label class="widelabel">
-							No resume was provided.
-						</label>
+					<br />
+					<p class="submit">
+						<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
+						<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
+						<input type="submit" value="Delete Resume" />
 					</p>
 				<% } %>
-			<% } else if(a.getResume() == null) { %>
-				<p>
-					<label class="widelabel">
-						<a href="/uploadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Upload Resume</a>
-					</label>
-				</p>
-			<% } else { %>
-				<p>
-					<label class="widelabel">
-						<a href="/downloadresume?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Download Resume</a>
-					</label>
-				</p>
-				<br />
-				<p class="submit">
-					<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
-					<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
-					<input type="submit" value="Delete Resume" />
-				</p>
-				
-			<% } %>
-		</fieldset>
-	
-	</form>
+			</fieldset>
+		</form>
+	</div>
+	<div id="rightbar">
+		<h3>Attendee Information</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

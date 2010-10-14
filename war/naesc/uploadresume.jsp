@@ -27,23 +27,33 @@
 	<title>NAESC 2011 National Conference: Upload Resume</title>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
-	<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
-	<h2><a href="/mycouncil?id=<%= request.getAttribute("id") %>">My Council</a> &rarr; <a href="/editattendee?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Edit Attendee</a> &rarr; Upload Resume</h2>
-		
-		<% BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();  %>
-		<form action="<%= blobstoreService.createUploadUrl("/process/uploadresume") %>" method="post" enctype="multipart/form-data">
-		<fieldset> 
-		<legend>Upload Resume</legend>
-		<p><label>Resume:</label><input type="file" name="<%= a.getResumeKey() %>"></p>
-    	<p class="submit">
-    	<label></label>
-		<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
-		<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
-		<input type="submit" value="Upload">
-		</p>
-		
-		</fieldset>
-	</form>
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Upload Resume" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<% ConferenceAttendee a = (ConferenceAttendee)request.getAttribute("attendee"); %>
+		<h2><a href="/mycouncil?id=<%= request.getAttribute("id") %>">My Council</a> &rarr; <a href="/editattendee?id=<%= request.getAttribute("id") %>&m=<%= a.getKey().getId() %>">Edit Attendee</a> &rarr; Upload Resume</h2>
+			
+			<% BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();  %>
+			<form action="<%= blobstoreService.createUploadUrl("/process/uploadresume") %>" method="post" enctype="multipart/form-data">
+			<fieldset> 
+			<legend>Upload Resume</legend>
+			<p><label>Resume:</label><input type="file" name="<%= a.getResumeKey() %>"></p>
+	    	<p class="submit">
+		    	<label></label>
+				<input type="hidden" name="id" value="<%= request.getAttribute("id") %>" />
+				<input type="hidden" name="m" value="<%= a.getKey().getId() %>" />
+				<input type="submit" value="Upload">
+			</p>
+			</fieldset>
+		</form>
+	</div>
+	<div id="rightbar">
+		<h3>Resume</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

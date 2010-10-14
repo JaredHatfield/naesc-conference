@@ -1,3 +1,58 @@
+/* The structure of the web page */
+div {
+	display: block;
+}
+div#main {
+	overflow: hidden;
+}
+div#main div#body, div#main div#rightbar {
+	/* Force the two columns to be the same height. */
+	margin-bottom: -2000px;
+	padding-bottom: 2000px;
+}
+div#headbar {
+	height: 1em;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: grey;
+	padding-bottom: 10px;	
+	font-family: arial,sans-serif;
+	font-size: 13px;
+}
+div#topbarleft { 
+	text-align: left;
+	float: left;	
+}
+div#topbarright {
+	text-align: right; 
+	float: right;
+}
+div#headertitle{
+	
+}
+div#body {
+	float: left;
+	width: 70%;
+	background-color: #eee;
+	min-height: 35em;
+	
+}
+div#rightbar {
+	float: right;
+	width: 28%;
+	background-color: #BCDAE2;
+	padding-left: 1%;
+	padding-right: 1%;
+	min-height: 35em;
+}
+div#footer {
+	width: 100%;
+	text-align:center;
+	padding-top: 10px;
+	font-size: 80%;
+}
+
+/* some random css stuff */
 a img {
 	border-style: none;
 }
@@ -100,24 +155,13 @@ legend {
 
 
 /* header information */
-div {
-	display: block;
-}
-div#headbar {
-	height: 1em;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-	border-bottom-color: grey;
-	padding-bottom: 10px;	
-	font-family: arial,sans-serif;
-	font-size: 13px;
-}
 h1 {
 	font-size: 2em;
 	font-weight: bold;
-	background-color: #eee;
+	background-color: #BCDAE2;
 	padding: 10px;
 	margin-top: 5px;
+	margin-bottom: 0px;
 	text-align: center;
 }
 h2 {

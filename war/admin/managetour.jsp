@@ -26,36 +26,46 @@
 	<title>Admin: Manage Tour</title>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
-	<h2>Add New Tour</h2>
-	<a href="/admin/"><img src="/static/back.png" /></a><br /><br />
-	
-	<form action="/admin/process/addtour" method="post"> 
-		<fieldset> 
-			<legend>Add Tour</legend> 
-			<p><label>Tour Name:</label><input class="insmall" type="text" maxlength="500" name="name" /></p>
-			<p><label>Tour Description:</label><input class="insmall" type="text" maxlength="500" name="description" /></p>
-			<p><label>Maximum Attendees:</label><input class="insmall" type="text" maxlength="500" name="maximum" /></p>
-			<p class="submit"><input type="submit" value="Add" /></p>
-		</fieldset> 
-	</form>
-	<h2>Manage Tours</h2>
-	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours");
-	   for(int i = 0; i < tours.size(); i++){ %>
-		   <form action="/admin/process/savetour" method="post"> 
-				<fieldset> 
-					<legend>Update Tour</legend> 
-					<p><label>Tour Name:</label><input class="insmall" type="text" maxlength="500" name="name" value="<%= tours.get(i).getName() %>" /></p>
-					<p><label>Tour Description:</label><input class="insmall" type="text" maxlength="500" name="description" value="<%= tours.get(i).getDescription() %>" /></p>
-					<p><label>Maximum Attendees:</label><input class="insmall" type="text" maxlength="500" name="maximum" value="<%= tours.get(i).getMaximum() %>" /></p>
-					<p><label>Attending:</label><%= tours.get(i).getTourMembers().size() %></p>
-					<p class="submit">
-						<input type="hidden" name="id" value="<%= tours.get(i).getKey().getId() %>" />
-						<input type="submit" value="Update" />
-					</p>
-				</fieldset> 
-			</form>
-			<br />
-	<% } %>
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Manage Tours" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<h2>Add New Tour</h2>
+		<a href="/admin/"><img src="/static/back.png" /></a><br /><br />
+		<form action="/admin/process/addtour" method="post"> 
+			<fieldset> 
+				<legend>Add Tour</legend> 
+				<p><label>Tour Name:</label><input class="insmall" type="text" maxlength="500" name="name" /></p>
+				<p><label>Tour Description:</label><input class="insmall" type="text" maxlength="500" name="description" /></p>
+				<p><label>Maximum Attendees:</label><input class="insmall" type="text" maxlength="500" name="maximum" /></p>
+				<p class="submit"><input type="submit" value="Add" /></p>
+			</fieldset> 
+		</form>
+		<h2>Manage Tours</h2>
+		<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours");
+		   for(int i = 0; i < tours.size(); i++){ %>
+			   <form action="/admin/process/savetour" method="post"> 
+					<fieldset> 
+						<legend>Update Tour</legend> 
+						<p><label>Tour Name:</label><input class="insmall" type="text" maxlength="500" name="name" value="<%= tours.get(i).getName() %>" /></p>
+						<p><label>Tour Description:</label><input class="insmall" type="text" maxlength="500" name="description" value="<%= tours.get(i).getDescription() %>" /></p>
+						<p><label>Maximum Attendees:</label><input class="insmall" type="text" maxlength="500" name="maximum" value="<%= tours.get(i).getMaximum() %>" /></p>
+						<p><label>Attending:</label><%= tours.get(i).getTourMembers().size() %></p>
+						<p class="submit">
+							<input type="hidden" name="id" value="<%= tours.get(i).getKey().getId() %>" />
+							<input type="submit" value="Update" />
+						</p>
+					</fieldset> 
+				</form>
+				<br />
+		<% } %>
+	</div>
+	<div id="rightbar">
+		<h3>Attendee Tours</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

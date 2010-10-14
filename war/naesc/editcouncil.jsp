@@ -37,29 +37,40 @@
 	</script>
 </head>
 <body onLoad="update();">
-	<%@ include file="../header.jsp" %>
-	<% Council council = (Council)request.getAttribute("council"); %>
-	<h2><a href="/mycouncil?id=<%= council.getKey().getId() %>">My Council</a> &rarr; Edit Council</h2>
-	
-	<form action="/process/savecouncil" method="post"> 
-		<fieldset> 
-			<legend>Edit Council</legend> 
-			<p><label>Council Name:</label><input class="insmall" type="text" maxlength="500" name="name" value="<%= council.getName() %>" /></p>
-			<p><label>University:</label><input class="insmall" type="text" maxlength="500" name="university" value="<%= council.getUniversity() %>" /></p>
-			<p><label>Location:</label><input class="insmall" type="text" maxlength="500" name="location" value="<%= council.getLocation() %>" /></p>
-			<p><label>Contact:</label><input class="insmall" type="text" maxlength="500" name="contact" value="<%= council.getContact() %>" /></p>
-			<p><label>Website:</label><input class="insmall" type="text" maxlength="500" name="website" value="<%= council.getWebsite() %>" /></p>
-			<% if((Boolean)request.getAttribute("isadmin")) { %>
-				<p><label>Amount Paid:</label><input class="insmall" type="text" maxlength="500" name="amountpaid" value="<%= council.getAmountPaid() %>" /></p>
-				<p><label>Payment Notes:</label><input class="insmall" type="text" maxlength="500" name="paymentnotes" value="<%= council.getPaymentNotes() %>" /></p>
-			<% } %>
-			<% if(cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin")) { %>
-				<p class="submit">
-					<input type="hidden" name="id" value="<%= council.getKey().getId() %>">
-					<input type="submit" value="Submit" />
-				</p>
-			<% } %>
-		</fieldset> 
-	</form>
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Edit Council" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<% Council council = (Council)request.getAttribute("council"); %>
+		<h2><a href="/mycouncil?id=<%= council.getKey().getId() %>">My Council</a> &rarr; Edit Council</h2>
+		
+		<form action="/process/savecouncil" method="post"> 
+			<fieldset> 
+				<legend>Edit Council</legend> 
+				<p><label>Council Name:</label><input class="insmall" type="text" maxlength="500" name="name" value="<%= council.getName() %>" /></p>
+				<p><label>University:</label><input class="insmall" type="text" maxlength="500" name="university" value="<%= council.getUniversity() %>" /></p>
+				<p><label>Location:</label><input class="insmall" type="text" maxlength="500" name="location" value="<%= council.getLocation() %>" /></p>
+				<p><label>Contact:</label><input class="insmall" type="text" maxlength="500" name="contact" value="<%= council.getContact() %>" /></p>
+				<p><label>Website:</label><input class="insmall" type="text" maxlength="500" name="website" value="<%= council.getWebsite() %>" /></p>
+				<% if((Boolean)request.getAttribute("isadmin")) { %>
+					<p><label>Amount Paid:</label><input class="insmall" type="text" maxlength="500" name="amountpaid" value="<%= council.getAmountPaid() %>" /></p>
+					<p><label>Payment Notes:</label><input class="insmall" type="text" maxlength="500" name="paymentnotes" value="<%= council.getPaymentNotes() %>" /></p>
+				<% } %>
+				<% if(cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin")) { %>
+					<p class="submit">
+						<input type="hidden" name="id" value="<%= council.getKey().getId() %>">
+						<input type="submit" value="Submit" />
+					</p>
+				<% } %>
+			</fieldset> 
+		</form>
+	</div>
+	<div id="rightbar">
+		<h3>Council Information</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

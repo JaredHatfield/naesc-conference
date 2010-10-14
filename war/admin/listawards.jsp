@@ -28,44 +28,55 @@
 	<title>Admin: List Awards</title>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
-	<h2>List of Awards</h2>
-	<a href="/admin/"><img src="/static/back.png" /></a><br /><br />
-	<% @SuppressWarnings("unchecked") List<Council> councils = (List<Council>)request.getAttribute("councils"); %>
-	<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards"); %>
-	
-	<table class="infotable">
-		<tr class="titlerow">
-			<td class="mediumcell">Name</td>
-			<td class="mediumcell">University</td>
-			<% for(int i = 0; i < awards.size(); i++) { %>
-				<td>
-					<%= awards.get(i).getName() %>
-				</td>
-			<% } %>
-		</tr>
-		<% for(Council council : councils) { %>
-			<tr>
-				<td><a href="/mycouncil?id=<%= council.getKey().getId() %>"><%= council.getName() %></a></td>
-				<td><%= council.getUniversity() %></td>
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Award Application" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<h2>List of Awards</h2>
+		<a href="/admin/"><img src="/static/back.png" /></a><br /><br />
+		<% @SuppressWarnings("unchecked") List<Council> councils = (List<Council>)request.getAttribute("councils"); %>
+		<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards"); %>
+		
+		<table class="infotable">
+			<tr class="titlerow">
+				<td class="mediumcell">Name</td>
+				<td class="mediumcell">University</td>
 				<% for(int i = 0; i < awards.size(); i++) { %>
 					<td>
-						<% Award a = awards.get(i); %>
-						<% List<AwardSubmission> submitted = council.getAwardSubmissions(); %>
-						<% for(int j = 0; submitted != null && j < submitted.size(); j++) { %>
-							<% if(submitted.get(j).getAward().equals(a.getKey())) { %>
-								<a href="/admin/displayaward?id=<%= council.getKey().getId() %>&a=<%= a.getKey().getId() %>">View</a>
-								<% if(submitted.get(j).getSubmitted()){ %>
-									<img src="/static/check.png" alt="Submitted" title="Submitted">
-								<% } else { %>
-									<img src="/static/progress.png" alt="In Progress" title="In Progress">
-								<% } %>
-							<% break; } %>
-						<% } %>
+						<%= awards.get(i).getName() %>
 					</td>
 				<% } %>
 			</tr>
-		<% } %>
-	</table>
+			<% for(Council council : councils) { %>
+				<tr>
+					<td><a href="/mycouncil?id=<%= council.getKey().getId() %>"><%= council.getName() %></a></td>
+					<td><%= council.getUniversity() %></td>
+					<% for(int i = 0; i < awards.size(); i++) { %>
+						<td>
+							<% Award a = awards.get(i); %>
+							<% List<AwardSubmission> submitted = council.getAwardSubmissions(); %>
+							<% for(int j = 0; submitted != null && j < submitted.size(); j++) { %>
+								<% if(submitted.get(j).getAward().equals(a.getKey())) { %>
+									<a href="/admin/displayaward?id=<%= council.getKey().getId() %>&a=<%= a.getKey().getId() %>">View</a>
+									<% if(submitted.get(j).getSubmitted()){ %>
+										<img src="/static/check.png" alt="Submitted" title="Submitted">
+									<% } else { %>
+										<img src="/static/progress.png" alt="In Progress" title="In Progress">
+									<% } %>
+								<% break; } %>
+							<% } %>
+						</td>
+					<% } %>
+				</tr>
+			<% } %>
+		</table>
+	</div>
+	<div id="rightbar">
+		<h3>Award Application</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

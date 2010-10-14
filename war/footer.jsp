@@ -15,30 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  --%>
-
-<div id="headbar">
-	<div id="topbarleft">
-	<% if(request.getParameter("pagename") != null && request.getParameter("pagename").equals("Home")) { %>
-		<b>Home</b>
-	<% } else { %>
-		<a href="/">Home</a>
-	<% } %>
-	</div>
-	<div id="topbarright">
-		<% if((Boolean)request.getAttribute("authenticated")){ %>
-			<div style="display: inline; font-weight: bold;">
-				<%= request.getAttribute("username") %>
-			</div> | 
-			<% if((Boolean)request.getAttribute("isadmin")) { %>
-				<a href="/admin/">Admin</a> | 
-			<% } %>
-			<a href="<%= request.getAttribute("logouturl") %>">Sign out</a>
-		<% } else { %>
-			<a href="<%= request.getAttribute("loginurl") %>">Sign in</a>
-		<% } %>
-	</div>
-</div>
-<div id="headertitle">
-	<h1>NAESC 2011 National Conference Registration</h1>
+<div id="footer">
+	<a href="http://code.google.com/p/naesc-conference/">Powered by NAESC Conference</a>
 </div>
 

@@ -30,30 +30,41 @@
 	<title>Admin: Display Award</title>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
-	<h2>Award Application</h2>
-	<a href="/admin/listawards"><img src="/static/back.png" /></a><br /><br />
-	<% Award a = (Award)request.getAttribute("award"); %>
-	<% AwardApplication app = (AwardApplication)request.getAttribute("application"); %>
-	<% AwardSubmission sub = (AwardSubmission)request.getAttribute("submission"); %>
-	<% Council council = (Council)request.getAttribute("council"); %>
-	<form> 
-		<fieldset> 
-			<legend><%= a.getName() %> - <%= council.getName() %> at <%= council.getUniversity() %></legend> 
-			<% if(sub != null && sub.getSubmitted()) { %>
-				<p style="font-weight: bold; text-align: center;">Submitted on <%= sub.getSubmittedOn() %></p>
-			<% } else { %>
-				<p style="font-weight: bold; text-align: center;">In Progress...</p>
-			<% } %>
-				<p><label class="widelabel"><%= a.getQuestion1() %></label></p><br />
-				<p style="font-size: 80%"><%= app.getQuestion1().getValue().replace("\n", "<br />") %></p>
-				<p><label class="widelabel"><%= a.getQuestion2() %></label></p><br />
-				<p style="font-size: 80%"><%= app.getQuestion2().getValue().replace("\n", "<br />") %></p>
-				<p><label class="widelabel"><%= a.getQuestion3() %></label></p><br />
-				<p style="font-size: 80%"><%= app.getQuestion3().getValue().replace("\n", "<br />") %></p>
-				<p><label class="widelabel"><%= a.getQuestion4() %></label></p><br />
-				<p style="font-size: 80%"><%= app.getQuestion4().getValue().replace("\n", "<br />") %></p>
-		</fieldset> 
-	</form>
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Award Application" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<h2>Award Application</h2>
+		<a href="/admin/listawards"><img src="/static/back.png" /></a><br /><br />
+		<% Award a = (Award)request.getAttribute("award"); %>
+		<% AwardApplication app = (AwardApplication)request.getAttribute("application"); %>
+		<% AwardSubmission sub = (AwardSubmission)request.getAttribute("submission"); %>
+		<% Council council = (Council)request.getAttribute("council"); %>
+		<form> 
+			<fieldset> 
+				<legend><%= a.getName() %> - <%= council.getName() %> at <%= council.getUniversity() %></legend> 
+				<% if(sub != null && sub.getSubmitted()) { %>
+					<p style="font-weight: bold; text-align: center;">Submitted on <%= sub.getSubmittedOn() %></p>
+				<% } else { %>
+					<p style="font-weight: bold; text-align: center;">In Progress...</p>
+				<% } %>
+					<p><label class="widelabel"><%= a.getQuestion1() %></label></p><br />
+					<p style="font-size: 80%"><%= app.getQuestion1().getValue().replace("\n", "<br />") %></p>
+					<p><label class="widelabel"><%= a.getQuestion2() %></label></p><br />
+					<p style="font-size: 80%"><%= app.getQuestion2().getValue().replace("\n", "<br />") %></p>
+					<p><label class="widelabel"><%= a.getQuestion3() %></label></p><br />
+					<p style="font-size: 80%"><%= app.getQuestion3().getValue().replace("\n", "<br />") %></p>
+					<p><label class="widelabel"><%= a.getQuestion4() %></label></p><br />
+					<p style="font-size: 80%"><%= app.getQuestion4().getValue().replace("\n", "<br />") %></p>
+			</fieldset> 
+		</form>
+	</div>
+	<div id="rightbar">
+		<h3>Award Application</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>
