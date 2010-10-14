@@ -31,10 +31,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.AttendeePermission;
+import com.naesc2011.conference.shared.Award;
 import com.naesc2011.conference.shared.ConferenceSettings;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.CouncilPermission;
 import com.naesc2011.conference.shared.PMF;
+import com.naesc2011.conference.shared.Tour;
 
 public class HomeServlet extends HttpServlet {
 
@@ -54,12 +56,21 @@ public class HomeServlet extends HttpServlet {
             boolean authenticated = PermissionManager.SetUpPermissions(p,
                     request);
 
+            // The conference settings
+            ConferenceSettings cs = ConferenceSettings
+                    .GetConferenceSettings(pm);
+            request.setAttribute("conferencesettings", cs);
+
+            // The list of tours
+            List<Tour> tours = Tour.GetAllTours(pm);
+            request.setAttribute("tours", tours);
+
+            // The list of awards
+            List<Award> awards = Award.GetAllAwards(pm);
+            request.setAttribute("awards", awards);
+
             if (authenticated) {
                 // We are authenticated, is user council admin
-                ConferenceSettings cs = ConferenceSettings
-                        .GetConferenceSettings(pm);
-                request.setAttribute("conferencesettings", cs);
-
                 List<CouncilPermission> councils = CouncilPermission
                         .GetPermission(pm, p.getUser().getUserId());
 

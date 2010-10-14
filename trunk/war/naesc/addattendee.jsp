@@ -44,72 +44,83 @@
 	</script>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
-	<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
-	<% Council council = (Council)request.getAttribute("council"); %>
-	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
-	
-	<h2><a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">My Council</a> &rarr; Add Attendee</h2>
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Add Attendee" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<% @SuppressWarnings("unchecked") List<Tour> tours = (List<Tour>)request.getAttribute("tours"); %>
+		<% Council council = (Council)request.getAttribute("council"); %>
+		<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
 		
-		<form name="addattendee" method="post" action="/process/addattendee" onSubmit="return checkme();">
-		<fieldset> 
-		<legend>Add Attendee</legend>
-		<p><label>First Name:</label><input class="insmall" type="text" maxlength="500" name="firstName" /></p>
-		<p><label>Middle Name:</label><input class="insmall" type="text" maxlength="500" name="middleName" /></p>
-		<p><label>Last Name:</label><input class="insmall" type="text" maxlength="500" name="lastName" /></p>
-		<p><label>Major:</label><input class="insmall" type="text" maxlength="500" name="major" /></p>
-		<p><label>Email:</label><input class="insmall" type="text" maxlength="500" name="email" /></p>
-		<p>
-			<label>Gender:</label>
-			<select name="gender">
-			<% for(ConferenceAttendee.Gender g : ConferenceAttendee.Gender.values()) { %>
-				<option value="<%= g.toString() %>"><%= g.toString() %></option>
-			<% } %>
-			</select>
-		</p>
-		<p>
-			<label>Shirt Size:</label>
-			<select name="shirtSize">
-			<% for(ConferenceAttendee.ShirtSize ss : ConferenceAttendee.ShirtSize.values()) { %>
-				<option value="<%= ss.toString() %>"><%= ss.toString() %></option>
-			<% } %>
-			</select>
-		</p>
-		
-		<p>
-			<label>Tour:</label>
-			<select name="tour">
-				<option value="-1">Select a Tour From the Following</option>
-			<% for(Tour t : tours) { %>
-				<% if(t.hasRoom()) { %>
-					<option value="<%= t.getKey().getId() %>"><%= t.getName() %></option>
+		<h2><a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">My Council</a> &rarr; Add Attendee</h2>
+			
+			<form name="addattendee" method="post" action="/process/addattendee" onSubmit="return checkme();">
+			<fieldset> 
+			<legend>Add Attendee</legend>
+			<p><label>First Name:</label><input class="insmall" type="text" maxlength="500" name="firstName" /></p>
+			<p><label>Middle Name:</label><input class="insmall" type="text" maxlength="500" name="middleName" /></p>
+			<p><label>Last Name:</label><input class="insmall" type="text" maxlength="500" name="lastName" /></p>
+			<p><label>Major:</label><input class="insmall" type="text" maxlength="500" name="major" /></p>
+			<p><label>Email:</label><input class="insmall" type="text" maxlength="500" name="email" /></p>
+			<p>
+				<label>Gender:</label>
+				<select name="gender">
+				<% for(ConferenceAttendee.Gender g : ConferenceAttendee.Gender.values()) { %>
+					<option value="<%= g.toString() %>"><%= g.toString() %></option>
 				<% } %>
-			<% } %>
-			</select>
-			<a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a>
-		</p>
-		
-		<p><label>Emergency Contact Name:</label><input class="insmall" type="text" maxlength="500" name="ecName" /></p>
-		<p><label>Emergency Contact Phone:</label><input class="insmall" type="text" maxlength="500" name="ecPhone" /></p>
-		<p><label>Arrival Information:</label><input class="insmall" type="text" maxlength="500" name="arrivalInformation" /></p>
-		<p><label>Vegetarian:</label><input type="checkbox" name="vegetarian" /></p>
-		<p><label>Allergies:</label><input class="insmall" type="text" maxlength="500" name="allergies" /></p>
-		<p style="margin-left: 10em; margin-top: 2em; margin-bottom: 6em;">
-			<label style="margin-left: 0em; color: red;" class="widelabel">
-				<input type="checkbox" name="authorization" />By checking this box, your council and/or the member attending agrees to and is obligated to pay the $<%= (int)cs.getRegistrationFee() %> registration fee unless a cancellation request is submitted before <%= cs.getLateRegistrationDateString() %>.
-			</label>
-		</p>
-		<p class="submit">
-			<input type="hidden" name="councilid" value="<%= request.getAttribute("councilid") %>">
-			<input type="hidden" name="id">
-			<input type="submit" value="Add" />
-		</p>
-		<hr />
-		<p>
-			<% int additional = cs.getMaxAttendees() - council.getAttendees().size(); %>
-			<label class="widelabel">Note: <%= additional %> additional attendees can be added.</label>
-		</p>
-		</fieldset>
-	</form>
+				</select>
+			</p>
+			<p>
+				<label>Shirt Size:</label>
+				<select name="shirtSize">
+				<% for(ConferenceAttendee.ShirtSize ss : ConferenceAttendee.ShirtSize.values()) { %>
+					<option value="<%= ss.toString() %>"><%= ss.toString() %></option>
+				<% } %>
+				</select>
+			</p>
+			
+			<p>
+				<label>Tour:</label>
+				<select name="tour">
+					<option value="-1">Select a Tour From the Following</option>
+				<% for(Tour t : tours) { %>
+					<% if(t.hasRoom()) { %>
+						<option value="<%= t.getKey().getId() %>"><%= t.getName() %></option>
+					<% } %>
+				<% } %>
+				</select>
+				<a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a>
+			</p>
+			
+			<p><label>Emergency Contact Name:</label><input class="insmall" type="text" maxlength="500" name="ecName" /></p>
+			<p><label>Emergency Contact Phone:</label><input class="insmall" type="text" maxlength="500" name="ecPhone" /></p>
+			<p><label>Arrival Information:</label><input class="insmall" type="text" maxlength="500" name="arrivalInformation" /></p>
+			<p><label>Vegetarian:</label><input type="checkbox" name="vegetarian" /></p>
+			<p><label>Allergies:</label><input class="insmall" type="text" maxlength="500" name="allergies" /></p>
+			<p style="margin-left: 10em; margin-top: 2em; margin-bottom: 6em;">
+				<label style="margin-left: 0em; color: red;" class="widelabel">
+					<input type="checkbox" name="authorization" />By checking this box, your council and/or the member attending agrees to and is obligated to pay the $<%= (int)cs.getRegistrationFee() %> registration fee unless a cancellation request is submitted before <%= cs.getLateRegistrationDateString() %>.
+				</label>
+			</p>
+			<p class="submit">
+				<input type="hidden" name="councilid" value="<%= request.getAttribute("councilid") %>">
+				<input type="hidden" name="id">
+				<input type="submit" value="Add" />
+			</p>
+			<hr />
+			<p>
+				<% int additional = cs.getMaxAttendees() - council.getAttendees().size(); %>
+				<label class="widelabel">Note: <%= additional %> additional attendees can be added.</label>
+			</p>
+			</fieldset>
+		</form>
+	</div>
+	<div id="rightbar">
+		<h3>Adding Attendees</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

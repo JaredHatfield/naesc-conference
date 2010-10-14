@@ -26,40 +26,49 @@
 	<title>Admin: Award</title>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
-	<h2>Award</h2>
-	<a href="/admin/"><img src="/static/back.png" /></a><br /><br />
-	
-	<form action="/admin/process/addaward" method="post"> 
-		<fieldset> 
-			<legend>Add Award</legend> 
-			<p><label>Award Name:</label><input class="insmall" type="text" maxlength="500" name="name" /></p>
-			<p><label>Question 1:</label><input class="insmall" type="text" maxlength="500" name="q1" /></p>
-			<p><label>Question 2:</label><input class="insmall" type="text" maxlength="500" name="q2" /></p>
-			<p><label>Question 3:</label><input class="insmall" type="text" maxlength="500" name="q3" /></p>
-			<p><label>Question 4:</label><input class="insmall" type="text" maxlength="500" name="q4" /></p>
-			<p class="submit"><input type="submit" value="Add" /></p>
-		</fieldset> 
-	</form>
-	
-	<h2>Manage Awards</h2>
-	<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards");
-	   for(int i = 0; i < awards.size(); i++){ %>
-		   <form action="/admin/process/saveaward" method="post"> 
-				<fieldset> 
-					<legend>Update Award</legend> 
-					<p><label>Award Name:</label><input class="insmall" type="text" maxlength="500" name="name" value="<%= awards.get(i).getName() %>" /></p>
-					<p><label>Question 1:</label><input class="insmall" type="text" maxlength="500" name="q1" value="<%= awards.get(i).getQuestion1() %>" /></p>
-					<p><label>Question 2:</label><input class="insmall" type="text" maxlength="500" name="q2" value="<%= awards.get(i).getQuestion2() %>" /></p>
-					<p><label>Question 3:</label><input class="insmall" type="text" maxlength="500" name="q3" value="<%= awards.get(i).getQuestion3() %>" /></p>
-					<p><label>Question 4:</label><input class="insmall" type="text" maxlength="500" name="q4" value="<%= awards.get(i).getQuestion4() %>" /></p>
-					<p class="submit">
-						<input type="hidden" name="id" value="<%= awards.get(i).getKey().getId() %>" />
-						<input type="submit" value="Update" />
-					</p>
-				</fieldset> 
-			</form>
-			<br />
-	<% } %>
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Manage Awards" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<h2>Add New Award</h2>
+		<a href="/admin/"><img src="/static/back.png" /></a><br /><br />
+		<form action="/admin/process/addaward" method="post"> 
+			<fieldset> 
+				<legend>Add Award</legend> 
+				<p><label>Award Name:</label><input class="insmall" type="text" maxlength="500" name="name" /></p>
+				<p><label>Question 1:</label><input class="insmall" type="text" maxlength="500" name="q1" /></p>
+				<p><label>Question 2:</label><input class="insmall" type="text" maxlength="500" name="q2" /></p>
+				<p><label>Question 3:</label><input class="insmall" type="text" maxlength="500" name="q3" /></p>
+				<p><label>Question 4:</label><input class="insmall" type="text" maxlength="500" name="q4" /></p>
+				<p class="submit"><input type="submit" value="Add" /></p>
+			</fieldset> 
+		</form>
+		<h2>Manage Awards</h2>
+		<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards");
+		   for(int i = 0; i < awards.size(); i++){ %>
+			   <form action="/admin/process/saveaward" method="post"> 
+					<fieldset> 
+						<legend>Update Award</legend> 
+						<p><label>Award Name:</label><input class="insmall" type="text" maxlength="500" name="name" value="<%= awards.get(i).getName() %>" /></p>
+						<p><label>Question 1:</label><input class="insmall" type="text" maxlength="500" name="q1" value="<%= awards.get(i).getQuestion1() %>" /></p>
+						<p><label>Question 2:</label><input class="insmall" type="text" maxlength="500" name="q2" value="<%= awards.get(i).getQuestion2() %>" /></p>
+						<p><label>Question 3:</label><input class="insmall" type="text" maxlength="500" name="q3" value="<%= awards.get(i).getQuestion3() %>" /></p>
+						<p><label>Question 4:</label><input class="insmall" type="text" maxlength="500" name="q4" value="<%= awards.get(i).getQuestion4() %>" /></p>
+						<p class="submit">
+							<input type="hidden" name="id" value="<%= awards.get(i).getKey().getId() %>" />
+							<input type="submit" value="Update" />
+						</p>
+					</fieldset> 
+				</form>
+				<br />
+		<% } %>
+	</div>
+	<div id="rightbar">
+		<h3>Council Awards</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

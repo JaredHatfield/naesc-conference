@@ -39,62 +39,70 @@
 	</script>
 </head>
 <body onLoad="update();">
-	<%@ include file="../header.jsp" %>
-	<% Award a = (Award)request.getAttribute("award"); %>
-	<% AwardApplication app = (AwardApplication)request.getAttribute("application"); %>
-	<% AwardSubmission sub = (AwardSubmission)request.getAttribute("submission"); %>
-	<h2><a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">My Council</a> &rarr; Edit Award</h2>
-		
-	<form action="/process/saveaward" method="post"> 
-		<fieldset> 
-			<legend><%= a.getName() %></legend> 
-			<% if(app == null) { %>
-				<p><label class="widelabel"><%= a.getQuestion1() %></label></p>
-				<p><textarea cols="70" rows="8" name="q1"></textarea></p>
-				<p><label class="widelabel"><%= a.getQuestion2() %></label></p>
-				<p><textarea cols="70" rows="8" name="q2"></textarea></p>
-				<p><label class="widelabel"><%= a.getQuestion3() %></label></p>
-				<p><textarea cols="70" rows="8" name="q3"></textarea></p>
-				<p><label class="widelabel"><%= a.getQuestion4() %></label></p>
-				<p><textarea cols="70" rows="8" name="q4"></textarea></p>
-			<% } else if(sub != null && sub.getSubmitted()) { %>
-				<p style="font-weight: bold; text-align: center;">Submitted on <%= sub.getSubmittedOn() %></p>
-				<p><label class="widelabel"><%= a.getQuestion1() %></label></p><br />
-				<p style="font-size: 70%"><%= app.getQuestion1().getValue().replace("\n", "<br />") %></p>
-				<p><label class="widelabel"><%= a.getQuestion2() %></label></p><br />
-				<p style="font-size: 70%"><%= app.getQuestion2().getValue().replace("\n", "<br />") %></p>
-				<p><label class="widelabel"><%= a.getQuestion3() %></label></p><br />
-				<p style="font-size: 70%"><%= app.getQuestion3().getValue().replace("\n", "<br />") %></p>
-				<p><label class="widelabel"><%= a.getQuestion4() %></label></p><br />
-				<p style="font-size: 70%"><%= app.getQuestion4().getValue().replace("\n", "<br />") %></p>
-			<% } else { %>
-				<p><label class="widelabel"><%= a.getQuestion1() %></label></p>
-				<p><textarea cols="70" rows="8" name="q1"><%= app.getQuestion1().getValue() %></textarea></p>
-				<p><label class="widelabel"><%= a.getQuestion2() %></label></p>
-				<p><textarea cols="70" rows="8" name="q2"><%= app.getQuestion2().getValue() %></textarea></p>
-				<p><label class="widelabel"><%= a.getQuestion3() %></label></p>
-				<p><textarea cols="70" rows="8" name="q3"><%= app.getQuestion3().getValue() %></textarea></p>
-				<p><label class="widelabel"><%= a.getQuestion4() %></label></p>
-				<p><textarea cols="70" rows="8" name="q4"><%= app.getQuestion4().getValue() %></textarea></p>
-			<% } %>
-			<% if((sub == null || !sub.getSubmitted()) && (cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin"))) { %>
-				<br />
-				<input type="hidden" name="id" value="<%= request.getAttribute("councilid") %>" />
-				<input type="hidden" name="a" value="<%= a.getKey().getId() %>" />
-				<p>
-					<label style="width: 20em;">Save your responses.<br />You will be able to edit your responses.</label>
-					<input type="submit" name="submitbutton" value="Save" />
-				</p>
-				<br />
-				<p>
-					<label style="width: 20em;">Submit application for consideration.<br />You will not be able to edit your responses.</label>
-					<input type="submit" name="submitbutton" value="Submit" />
-				</p>
-			<% } %>
-		</fieldset> 
-	</form>
-	
-	
-	
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Edit Award" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<% Award a = (Award)request.getAttribute("award"); %>
+		<% AwardApplication app = (AwardApplication)request.getAttribute("application"); %>
+		<% AwardSubmission sub = (AwardSubmission)request.getAttribute("submission"); %>
+		<h2><a href="/mycouncil?id=<%= request.getAttribute("councilid") %>">My Council</a> &rarr; Edit Award</h2>
+			
+		<form action="/process/saveaward" method="post"> 
+			<fieldset> 
+				<legend><%= a.getName() %></legend> 
+				<% if(app == null) { %>
+					<p><label class="widelabel"><%= a.getQuestion1() %></label></p>
+					<p><textarea cols="70" rows="8" name="q1"></textarea></p>
+					<p><label class="widelabel"><%= a.getQuestion2() %></label></p>
+					<p><textarea cols="70" rows="8" name="q2"></textarea></p>
+					<p><label class="widelabel"><%= a.getQuestion3() %></label></p>
+					<p><textarea cols="70" rows="8" name="q3"></textarea></p>
+					<p><label class="widelabel"><%= a.getQuestion4() %></label></p>
+					<p><textarea cols="70" rows="8" name="q4"></textarea></p>
+				<% } else if(sub != null && sub.getSubmitted()) { %>
+					<p style="font-weight: bold; text-align: center;">Submitted on <%= sub.getSubmittedOn() %></p>
+					<p><label class="widelabel"><%= a.getQuestion1() %></label></p><br />
+					<p style="font-size: 70%"><%= app.getQuestion1().getValue().replace("\n", "<br />") %></p>
+					<p><label class="widelabel"><%= a.getQuestion2() %></label></p><br />
+					<p style="font-size: 70%"><%= app.getQuestion2().getValue().replace("\n", "<br />") %></p>
+					<p><label class="widelabel"><%= a.getQuestion3() %></label></p><br />
+					<p style="font-size: 70%"><%= app.getQuestion3().getValue().replace("\n", "<br />") %></p>
+					<p><label class="widelabel"><%= a.getQuestion4() %></label></p><br />
+					<p style="font-size: 70%"><%= app.getQuestion4().getValue().replace("\n", "<br />") %></p>
+				<% } else { %>
+					<p><label class="widelabel"><%= a.getQuestion1() %></label></p>
+					<p><textarea cols="70" rows="8" name="q1"><%= app.getQuestion1().getValue() %></textarea></p>
+					<p><label class="widelabel"><%= a.getQuestion2() %></label></p>
+					<p><textarea cols="70" rows="8" name="q2"><%= app.getQuestion2().getValue() %></textarea></p>
+					<p><label class="widelabel"><%= a.getQuestion3() %></label></p>
+					<p><textarea cols="70" rows="8" name="q3"><%= app.getQuestion3().getValue() %></textarea></p>
+					<p><label class="widelabel"><%= a.getQuestion4() %></label></p>
+					<p><textarea cols="70" rows="8" name="q4"><%= app.getQuestion4().getValue() %></textarea></p>
+				<% } %>
+				<% if((sub == null || !sub.getSubmitted()) && (cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin"))) { %>
+					<br />
+					<input type="hidden" name="id" value="<%= request.getAttribute("councilid") %>" />
+					<input type="hidden" name="a" value="<%= a.getKey().getId() %>" />
+					<p>
+						<label style="width: 20em;">Save your responses.<br />You will be able to edit your responses.</label>
+						<input type="submit" name="submitbutton" value="Save" />
+					</p>
+					<br />
+					<p>
+						<label style="width: 20em;">Submit application for consideration.<br />You will not be able to edit your responses.</label>
+						<input type="submit" name="submitbutton" value="Submit" />
+					</p>
+				<% } %>
+			</fieldset> 
+		</form>
+	</div>
+	<div id="rightbar">
+		<h3>Award Applications</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

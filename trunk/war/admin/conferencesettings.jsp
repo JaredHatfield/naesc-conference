@@ -25,25 +25,35 @@
 	<title>Admin: Conference Settings</title>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
-	<h2>Conference Settings</h2>
-	<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
-	<a href="/admin/"><img src="/static/back.png" /></a><br /><br />
-	
-	<form action="/admin/process/saveconferencesettings" method="post"> 
-		<fieldset> 
-			<legend>Conference Settings</legend> 
-			<p><label>Conference Name:</label><input class="insmall" type="text" maxlength="500" name="conferenceName" value="<%= cs.getConferenceName() %>" /></p>
-			<br />
-			<p><label>Early Registration Date:</label><input class="insmall" type="text" maxlength="500" name="earlyDate" value="<%= cs.getEarlyRegistrationDateString() %>" /></p>
-			<p><label>Early Registration Fee:</label><input class="insmall" type="text" maxlength="500" name="earlyFee" value="<%= cs.getEarlyRegistrationFee() %>" /></p>
-			<br />
-			<p><label>Late Registration Date:</label><input class="insmall" type="text" maxlength="500" name="lateDate" value="<%= cs.getLateRegistrationDateString() %>" /></p>
-			<p><label>Late Registration Fee:</label><input class="insmall" type="text" maxlength="500" name="lateFee" value="<%= cs.getLateRegistrationFee() %>" /></p>
-			<br />
-			<p><label>Maximum Attendees Per Council:</label><input class="insmall" type="text" maxlength="500" name="maxattendees" value="<%= cs.getMaxAttendees() %>" /></p>
-			<p class="submit"><input type="submit" value="Update" /></p>
-		</fieldset> 
-	</form>
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Conference Settings" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<h2>Conference Settings</h2>
+		<% ConferenceSettings cs = (ConferenceSettings)request.getAttribute("conferencesettings"); %>
+		<a href="/admin/"><img src="/static/back.png" /></a><br /><br />
+		<form action="/admin/process/saveconferencesettings" method="post"> 
+			<fieldset> 
+				<legend>Conference Settings</legend> 
+				<p><label>Conference Name:</label><input class="insmall" type="text" maxlength="500" name="conferenceName" value="<%= cs.getConferenceName() %>" /></p>
+				<br />
+				<p><label>Early Registration Date:</label><input class="insmall" type="text" maxlength="500" name="earlyDate" value="<%= cs.getEarlyRegistrationDateString() %>" /></p>
+				<p><label>Early Registration Fee:</label><input class="insmall" type="text" maxlength="500" name="earlyFee" value="<%= cs.getEarlyRegistrationFee() %>" /></p>
+				<br />
+				<p><label>Late Registration Date:</label><input class="insmall" type="text" maxlength="500" name="lateDate" value="<%= cs.getLateRegistrationDateString() %>" /></p>
+				<p><label>Late Registration Fee:</label><input class="insmall" type="text" maxlength="500" name="lateFee" value="<%= cs.getLateRegistrationFee() %>" /></p>
+				<br />
+				<p><label>Maximum Attendees Per Council:</label><input class="insmall" type="text" maxlength="500" name="maxattendees" value="<%= cs.getMaxAttendees() %>" /></p>
+				<p class="submit"><input type="submit" value="Update" /></p>
+			</fieldset> 
+		</form>
+	</div>
+	<div id="rightbar">
+		<h3>Conference Settings</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

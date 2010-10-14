@@ -37,55 +37,64 @@
 	</script>
 </head>
 <body onLoad="update();">
-	<%@ include file="../header.jsp" %>
-	<% Council council = (Council)request.getAttribute("council"); %>
-	
-	<h2><a href="/mycouncil?id=<%= council.getKey().getId() %>">My Council</a> &rarr; Edit Delegates</h2>
-	
-	<form action="/process/savedelegate" method="post"> 
-		<fieldset> 
-			<legend>Select Delegates</legend>
-			<p>
-				<label>Voting Delegate</label>
-				<select name="vote">
-					<option id="-1">Select Voting Delegate</option>
-					<% for(int i = 0; i < council.getAttendees().size();i++) { %>
-						<% ConferenceAttendee att = council.getAttendees().get(i); %>
-						<% ConferenceAttendee.VoteStatus vote = att.getVoteStatus(); %>
-						<% if(vote != null && vote.equals(ConferenceAttendee.VoteStatus.VOTING)) { %>
-							<option value="<%= att.getKey().getId() %>" selected="selected">
-						<% } else { %>
-							<option value="<%= att.getKey().getId() %>">
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Edit Delegate" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<% Council council = (Council)request.getAttribute("council"); %>
+		<h2><a href="/mycouncil?id=<%= council.getKey().getId() %>">My Council</a> &rarr; Edit Delegates</h2>
+		<form action="/process/savedelegate" method="post"> 
+			<fieldset> 
+				<legend>Select Delegates</legend>
+				<p>
+					<label>Voting Delegate</label>
+					<select name="vote">
+						<option id="-1">Select Voting Delegate</option>
+						<% for(int i = 0; i < council.getAttendees().size();i++) { %>
+							<% ConferenceAttendee att = council.getAttendees().get(i); %>
+							<% ConferenceAttendee.VoteStatus vote = att.getVoteStatus(); %>
+							<% if(vote != null && vote.equals(ConferenceAttendee.VoteStatus.VOTING)) { %>
+								<option value="<%= att.getKey().getId() %>" selected="selected">
+							<% } else { %>
+								<option value="<%= att.getKey().getId() %>">
+							<% } %>
+							<%= att.getFullName() %>
+							</option>
 						<% } %>
-						<%= att.getFullName() %>
-						</option>
-					<% } %>
-				</select>
-			</p>
-			<p>
-				<label>Alternate Delegate</label>
-				<select name="alternate">
-					<option id="-1">Select Alternate Delegate</option>
-					<% for(int i = 0; i < council.getAttendees().size();i++) { %>
-						<% ConferenceAttendee att = council.getAttendees().get(i); %>
-						<% ConferenceAttendee.VoteStatus vote = att.getVoteStatus(); %>
-						<% if(vote != null && vote.equals(ConferenceAttendee.VoteStatus.ALTERNATE)) { %>
-							<option value="<%= att.getKey().getId() %>" selected="selected">
-						<% } else { %>
-							<option value="<%= att.getKey().getId() %>">
-						<% } %>
-						<%= att.getFullName() %>
-						</option>
-					<% } %>
-				</select>
-			</p>
-			<% if(cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin")) { %>
-				<p class="submit">
-					<input type="hidden" name="id" value="<%= council.getKey().getId() %>">
-					<input type="submit" value="Submit" />
+					</select>
 				</p>
-			<% } %>
-		</fieldset> 
-	</form>
+				<p>
+					<label>Alternate Delegate</label>
+					<select name="alternate">
+						<option id="-1">Select Alternate Delegate</option>
+						<% for(int i = 0; i < council.getAttendees().size();i++) { %>
+							<% ConferenceAttendee att = council.getAttendees().get(i); %>
+							<% ConferenceAttendee.VoteStatus vote = att.getVoteStatus(); %>
+							<% if(vote != null && vote.equals(ConferenceAttendee.VoteStatus.ALTERNATE)) { %>
+								<option value="<%= att.getKey().getId() %>" selected="selected">
+							<% } else { %>
+								<option value="<%= att.getKey().getId() %>">
+							<% } %>
+							<%= att.getFullName() %>
+							</option>
+						<% } %>
+					</select>
+				</p>
+				<% if(cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin")) { %>
+					<p class="submit">
+						<input type="hidden" name="id" value="<%= council.getKey().getId() %>">
+						<input type="submit" value="Submit" />
+					</p>
+				<% } %>
+			</fieldset> 
+		</form>
+	</div>
+	<div id="rightbar">
+		<h3>Delegates</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

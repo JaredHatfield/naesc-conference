@@ -24,16 +24,27 @@
 	<title>NAESC 2011 National Conference: Register</title>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
-	<h2>Register</h2>
-	<form action="/process/register" method="post"> 
-		<fieldset> 
-			<legend>Register Council</legend> 
-			<p><label>Council Name:</label><input class="insmall" type="text" maxlength="500" name="name" /></p>
-			<p><label>University:</label><input class="insmall" type="text" maxlength="500" name="university" /></p>
-			<p><label>Location:</label><input class="insmall" type="text" maxlength="500" name="location" /></p>
-			<p class="submit"><input type="submit" value="Submit" /></p>
-		</fieldset> 
-	</form>
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Register" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<h2>Register</h2>
+		<form action="/process/register" method="post"> 
+			<fieldset> 
+				<legend>Register Council</legend> 
+				<p><label>Council Name:</label><input class="insmall" type="text" maxlength="500" name="name" /></p>
+				<p><label>University:</label><input class="insmall" type="text" maxlength="500" name="university" /></p>
+				<p><label>Location:</label><input class="insmall" type="text" maxlength="500" name="location" /></p>
+				<p class="submit"><input type="submit" value="Submit" /></p>
+			</fieldset> 
+		</form>
+	</div>
+	<div id="rightbar">
+		<h3>Registration</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

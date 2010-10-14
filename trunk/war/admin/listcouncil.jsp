@@ -26,63 +26,74 @@
 	<title>Admin: List Council</title>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
-	<h2>List of Registered Councils</h2>
-	<a href="/admin/"><img src="/static/back.png" /></a><br /><br />
-	<% @SuppressWarnings("unchecked") List<Council> councils = (List<Council>)request.getAttribute("councils"); %>
-	<table class="infotable">
-		<tr class="titlerow">
-			<td class="mediumcell">Name</td>
-			<td class="mediumcell">University</td>
-			<td class="mediumcell">Location</td>
-			<td class="extralargecell">Website</td>
-			<td class="smallcell">Count</td>
-			<td class="smallcell">Cost</td>
-			<td class="smallcell">Paid</td>
-		</tr>
-		<% int totalAttendee = 0; %>
-		<% int totalPaid = 0; %>
-		<% int totalCost = 0; %>
-		<% for(Council council : councils) { %>
-			<tr>
-				<td><a href="/mycouncil?id=<%= council.getKey().getId() %>"><%= council.getName() %></a></td>
-				<td><%= council.getUniversity() %></td>
-				<td><%= council.getLocation() %></td>
-				<td><a href="<%= council.getWebsite() %>"><%= council.getWebsite() %></a></td>
-				<td>
-					<% totalAttendee += council.getAttendees().size(); %>
-					<%= council.getAttendees().size() %>
-				</td>
-				<td>
-					<% totalCost += (int)council.getAttendeeCost(); %>
-					$<%= (int)council.getAttendeeCost() %>
-				</td>
-				<td>
-					<% totalPaid += (int)council.getAmountPaid(); %>
-					$<%= (int)council.getAmountPaid() %>
-				</td>
+<div id="main">
+	<jsp:include page="../header.jsp">
+		<jsp:param value="Award Application" name="pagename"/>
+	</jsp:include>
+	<div id="body">
+		<h2>List of Registered Councils</h2>
+		<a href="/admin/"><img src="/static/back.png" /></a><br /><br />
+		<% @SuppressWarnings("unchecked") List<Council> councils = (List<Council>)request.getAttribute("councils"); %>
+		<table class="infotable">
+			<tr class="titlerow">
+				<td class="mediumcell">Name</td>
+				<td class="mediumcell">University</td>
+				<td class="mediumcell">Location</td>
+				<td class="extralargecell">Website</td>
+				<td class="smallcell">Count</td>
+				<td class="smallcell">Cost</td>
+				<td class="smallcell">Paid</td>
 			</tr>
-		<% } %>
-	</table>
-	
-	<h3>Statistics</h3>
-	<table class="infotable">
-		<tr>
-			<td class="titlecol">Total Attending</td>
-			<td class="smallcell"><%= totalAttendee %></td>
-		</tr>
-		<tr>
-			<td class="titlecol">Total Cost</td>
-			<td class="smallcell">$<%= totalCost %></td>
-		</tr>
-		<tr>
-			<td class="titlecol">Total Paid</td>
-			<td class="smallcell">$<%= totalPaid %></td>
-		</tr>
-		<tr>
-			<td class="titlecol">Outstanding</td>
-			<td class="smallcell">$<%= totalCost - totalPaid %></td>
-		</tr>
-	</table>
+			<% int totalAttendee = 0; %>
+			<% int totalPaid = 0; %>
+			<% int totalCost = 0; %>
+			<% for(Council council : councils) { %>
+				<tr>
+					<td><a href="/mycouncil?id=<%= council.getKey().getId() %>"><%= council.getName() %></a></td>
+					<td><%= council.getUniversity() %></td>
+					<td><%= council.getLocation() %></td>
+					<td><a href="<%= council.getWebsite() %>"><%= council.getWebsite() %></a></td>
+					<td>
+						<% totalAttendee += council.getAttendees().size(); %>
+						<%= council.getAttendees().size() %>
+					</td>
+					<td>
+						<% totalCost += (int)council.getAttendeeCost(); %>
+						$<%= (int)council.getAttendeeCost() %>
+					</td>
+					<td>
+						<% totalPaid += (int)council.getAmountPaid(); %>
+						$<%= (int)council.getAmountPaid() %>
+					</td>
+				</tr>
+			<% } %>
+		</table>
+		
+		<h3>Statistics</h3>
+		<table class="infotable">
+			<tr>
+				<td class="titlecol">Total Attending</td>
+				<td class="smallcell"><%= totalAttendee %></td>
+			</tr>
+			<tr>
+				<td class="titlecol">Total Cost</td>
+				<td class="smallcell">$<%= totalCost %></td>
+			</tr>
+			<tr>
+				<td class="titlecol">Total Paid</td>
+				<td class="smallcell">$<%= totalPaid %></td>
+			</tr>
+			<tr>
+				<td class="titlecol">Outstanding</td>
+				<td class="smallcell">$<%= totalCost - totalPaid %></td>
+			</tr>
+		</table>
+	</div>
+	<div id="rightbar">
+		<h3>Councils</h3>
+		<!-- TODO: Put instructions here -->
+	</div>
+</div>
+<jsp:include page="../footer.jsp" />
 </body>
 </html>
