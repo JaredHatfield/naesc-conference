@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
 import com.naesc2011.conference.shared.AttendeePermission;
 import com.naesc2011.conference.shared.Award;
@@ -53,6 +54,11 @@ public class HomeServlet extends HttpServlet {
         PermissionManager p = new PermissionManager();
         PersistenceManager pm = PMF.get().getPersistenceManager();
         try {
+            if (!request.getRequestURI().equals("/")) {
+                // We will display 404 pages for everything except for the home
+                // page.
+                throw new PermissionDeniedException();
+            }
             boolean authenticated = PermissionManager.SetUpPermissions(p,
                     request);
 
@@ -100,6 +106,8 @@ public class HomeServlet extends HttpServlet {
             ServletContext context = getServletContext();
             RequestDispatcher dispatcher = context.getRequestDispatcher(url);
             dispatcher.forward(request, response);
+        } catch (PermissionDeniedException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
         } finally {
             pm.close();
         }

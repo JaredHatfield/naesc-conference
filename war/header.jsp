@@ -40,6 +40,5 @@
 </div>
 <div id="headertitle">
 	<img src="/static/naesc.png" id="logo" />
-	<h1>NAESC 2011 National<br />Conference Registration</h1>
 </div>
 
