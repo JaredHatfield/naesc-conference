@@ -49,7 +49,9 @@
 	</div>
 	<div id="rightbar">
 		<h3>Administration</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			Everything that you can do as an administrator.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

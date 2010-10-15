@@ -41,8 +41,18 @@
 		</form>
 	</div>
 	<div id="rightbar">
-		<h3>Registration</h3>
-		<!-- TODO: Put instructions here -->
+		<h3>The First Step</h3>
+		<p>
+			One person from your council needs to register as their council admin.
+			This user will be able to add attendees and submit the award applications.
+		</p>
+		<p>
+			When an attendee is added they are able to modify their information when they log in with the same email address that is associated with that attendee.
+			Individual attendees have permission to modify their information and upload a resume.
+		</p>
+		<p>
+			If you are not the primary contact for a council and are an attendee you should not register a new council.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

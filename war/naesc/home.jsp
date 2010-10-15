@@ -43,8 +43,12 @@
 			<% @SuppressWarnings("unchecked") List<AttendeePermission> ap = (List<AttendeePermission>)request.getAttribute("ap");%>
 			<fieldset>
 				<legend>Attendee</legend>
-				<% for(int i = 0; i < ap.size(); i++) { %>
-					<a href="/editattendee?id=<%= ap.get(i).getCouncil().getId() %>&m=<%= ap.get(i).getAttendee().getId() %>">Manage my Attendee Information</a><br />
+				<% if(ap.size() == 0) { %>
+					Your email address is not registered as attending.
+				<% } else { %>
+					<% for(int i = 0; i < ap.size(); i++) { %>
+						<a href="/editattendee?id=<%= ap.get(i).getCouncil().getId() %>&m=<%= ap.get(i).getAttendee().getId() %>">Manage my Attendee Information</a><br />
+					<% } %>
 				<% } %>
 			</fieldset>
 			<br /><br />

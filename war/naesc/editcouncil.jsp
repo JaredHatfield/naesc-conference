@@ -68,7 +68,8 @@
 	</div>
 	<div id="rightbar">
 		<h3>Council Information</h3>
-		<!-- TODO: Put instructions here -->
+		You can modify the attributes associated with your council.
+		All of the fields are required.
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

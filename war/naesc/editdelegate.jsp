@@ -92,7 +92,9 @@
 	</div>
 	<div id="rightbar">
 		<h3>Delegates</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			Selection of your council's voting delegate and alternate delegate can be made from the list of conference attendees.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

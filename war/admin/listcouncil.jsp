@@ -93,7 +93,9 @@
 	</div>
 	<div id="rightbar">
 		<h3>Councils</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			All of the councils that are attending.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

@@ -173,7 +173,15 @@
 	</div>
 	<div id="rightbar">
 		<h3>Attendee Information</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			Complete all of the fields for an attendee in order to complete the registration process.
+		</p>
+		<p>
+			Space on each tour is limited and the list of tours is available by clicking <img src="/static/info.png" /> next to the tour drop down list.
+		</p>
+		<p>
+			Resumes are required for each attendee and must be uploaded before registration closes.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />
