@@ -92,6 +92,9 @@ table.infotable {
 table.infotable td {
 	padding: 3px;
 }
+table.infotable img {
+	vertical-align:middle;	
+}
 table.infotable tr.titlerow {
 	background-color: lightgray;
 	font-weight: bold;
@@ -139,6 +142,10 @@ label.widelabel {
 	margin-right: 0em;
 	margin-left: 1em;
 }
+input[disabled], select[disabled], textarea[disabled] {
+	background-color: white;
+	color: #999;
+}
 input, select {
 	color: black;
 	background: lightgrey;
@@ -153,10 +160,6 @@ input.insmall {
 	color: #000;
 	background: lightgrey;
 	border: 2px outset #556644;
-}
-input[disabled], select[disabled], textarea[disabled] {
-	background-color: white;
-	color: black;
 }
 p.confirmbox {
 	margin-left: 11em;

@@ -121,7 +121,9 @@
 			<table class="infotable">
 				<tr>
 					<td colspan="8" style="border-width: 0px; text-align: right;">
-						<%= council.getAttendees().size() %> of <%= cs.getMaxAttendees() %> Attendees Registered
+						<% if(council.getAttendees().size() == cs.getMaxAttendees()) { %>
+							You have reached the maximum number of attendees.
+						<% } %>
 					</td>
 				</tr>
 				<tr class="titlerow">
@@ -181,7 +183,8 @@
 	<div id="rightbar">
 		<h3>Manage your Council</h3>
 		<p>
-			In order to complete the registration process your council information needs to be provided.
+			In order to complete the registration process your council information needs to be provided.  
+			The general information about your council can be modified by clicking <img src="/static/edit.png" /> above the information table.
 		</p>
 		<p>
 			The amount due is based on the cost of individual attendees based on when the attendee was registered.
@@ -190,14 +193,21 @@
 		<h3>Awards</h3>
 		<p>
 			Your council is able to apply for awards that will be awarded at the conference.
-			The award applications can be saved while they are in progress.
-			In order to be considered the application must be submitted.
+			The award applications can be saved while they are in progress as indicated by the <img src="/static/progress.png" /> icon.
+			In order to be considered the application must be submitted which is indicated by the <img src="/static/check.png" /> icon.
 		</p>
 		<h3>Attendees</h3>
 		<p>
-			Each conference attendee can be added and their information can be provided.
+			You can add up to <b><%= cs.getMaxAttendees() %></b> conference attendees by click the <img src="/static/add.png" /> image under the <b>Attending Members</b> heading.
+			Attendee information can be changed until registration closes by clicking <img src="/static/edit.png" /> next to each attendee.
+		</p>
+		<p>
 			The attendee will be able to log in with their email address that matches the one provided and will be able to edit their information.
 			Resumes are required and can be uploaded by the council admin or the conference attendee.
+		</p>
+		<p>
+			The <img src="/static/document.png" /> icon indicates that a resume has been uploaded.
+			When all of the required information for an attendee has been provided <img src="/static/check.png" /> will appear next to the attendee.
 		</p>
 		<h3>Delegates</h3>
 		<p>
