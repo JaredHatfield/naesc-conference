@@ -1,4 +1,7 @@
 /* The structure of the web page */
+body {
+	font-family: arial,sans-serif;
+}
 div {
 	display: block;
 }
@@ -28,19 +31,20 @@ div#topbarright {
 	float: right;
 }
 div#headertitle{
-	
+	background: #31396B;
+	min-height: 160px;
 }
 div#body {
 	float: left;
 	width: 70%;
-	background-color: #eee;
+	background-color: #fff;
 	min-height: 35em;
-	
 }
 div#rightbar {
 	float: right;
 	width: 28%;
-	background-color: #BCDAE2;
+	background-color: #31396B;
+	color: white;
 	padding-left: 1%;
 	padding-right: 1%;
 	min-height: 35em;
@@ -53,10 +57,20 @@ div#footer {
 }
 
 /* some random css stuff */
+img#logo {
+	float:left;
+}
 a img {
 	border-style: none;
 }
-
+a:visited, a:link {
+	color: #31396B;
+	text-decoration: none;
+}
+div#headbar a:visited, div#headbar a:link {
+	color: #0000CC;
+	text-decoration: underline;
+}
 html {
 	overflow-y: scroll;
 }
@@ -69,15 +83,14 @@ img.center {
 
 
 /* Format the tables */
+table {
+	width: 100%;
+}
 table.infotable {
-	border-spacing: ;
 	border-style: none;
 }
 table.infotable td {
-	border-width: 1px;
 	padding: 3px;
-	border-style: inset;
-	border-color: gray;
 }
 table.infotable tr.titlerow {
 	background-color: lightgray;
@@ -103,12 +116,18 @@ table.infotable td.largecell {
 table.infotable td.extralargecell {
 	width: 22em;
 }
+table.infotable td.cellone {
+	background-color: #eee;
+}
+table.infotable td.celltwo {
+	background-color: #ddd;
+}
 
 /* Format the HTML form */
 label {
-	font-size: 80%;
+	font-size: 90%;
 	font-weight: bold;
-	width: 12em;
+	width: 12.5em;
 	float: left;
 	text-align: right;
 	margin-right: 0.5em;
@@ -139,47 +158,45 @@ input[disabled], select[disabled], textarea[disabled] {
 	color: black;
 }
 fieldset {
-	border: 1px solid #556644;
+	border: 4px solid #000066;
 	display: inline;
-	min-width: 40em;
+	min-width: 35em;
 	margin-left: 2em;
 	margin-bottom: 1em;
 }
 legend {
 	font-size: 110%;
+	font-weight: bold;
 	color: black;
-	background: lightgrey;
-	border: 1px solid black;
+	background: #fff;
+	border: 4px solid #000066;
 	padding: 4px 40px
 }
 
 
 /* header information */
 h1 {
-	font-size: 2em;
+	font-size: 2.5em;
 	font-weight: bold;
-	background-color: #BCDAE2;
-	padding: 10px;
+	background-color: #31396B;
+	color: white;
 	margin-top: 5px;
 	margin-bottom: 0px;
-	text-align: center;
+	padding-top: 30px;
+	text-align: left;
 }
 h2 {
-	font-size: 1.8em;
+	font-size: 1.4em;
 	padding-top: 10px;
 	padding-left: 1em;
-	border-bottom-width: 3px;
-	border-bottom-style: solid;
-	border-bottom-color: grey;
-}
-h2 a {
-	text-decoration: none;
+	border-bottom: 4px solid #31396B;
+	color: #31396B
 }
 h3 {
-	font-size: 1.5em;
-	padding-top: 10px;
+	font-size: 1.2em;
+	padding-top: 12px;
 	padding-left: 1.5em;
-	border-bottom-width: 2px;
+	border-bottom-width: 4px;
 	border-bottom-style: solid;
 	border-bottom-color: #ddd;
 }

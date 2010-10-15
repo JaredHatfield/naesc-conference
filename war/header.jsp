@@ -39,6 +39,7 @@
 	</div>
 </div>
 <div id="headertitle">
-	<h1>NAESC 2011 National Conference Registration</h1>
+	<img src="/static/naesc.png" id="logo" />
+	<h1>NAESC 2011 National<br />Conference Registration</h1>
 </div>
 
