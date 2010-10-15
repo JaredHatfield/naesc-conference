@@ -33,6 +33,7 @@ div#topbarright {
 div#headertitle{
 	background: #31396B;
 	min-height: 160px;
+	margin-top: 5px;
 }
 div#body {
 	float: left;
@@ -209,5 +210,5 @@ h3 {
 	padding-left: 1.5em;
 	border-bottom-width: 4px;
 	border-bottom-style: solid;
-	border-bottom-color: #ddd;
+	border-bottom-color: white;
 }

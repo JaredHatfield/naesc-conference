@@ -175,7 +175,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
-        <url-pattern>/home</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>mycouncil</servlet-name>
@@ -277,14 +277,8 @@
         <servlet-name>processsaveaward</servlet-name>
         <url-pattern>/process/saveaward</url-pattern>
     </servlet-mapping>
-    
-    
-	<!-- Default page to serve -->
-	<welcome-file-list>
-		<welcome-file>home</welcome-file>
-	</welcome-file-list>
-	
-    
+
+
 	<!--  Security Constraint for Administrative Pages -->
 	<security-constraint>
 		<web-resource-collection>
