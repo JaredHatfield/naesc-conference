@@ -22,6 +22,20 @@
 <head>
 	<%@ include file="../htmlhead.jsp" %>
 	<title>NAESC 2011 National Conference: Register</title>
+	<script language="JavaScript" type="text/JavaScript">
+	<!--//
+	function checkme() {
+		if (!document.registercouncil.authorization.checked) {
+			missinginfo = "You must agree to the terms before registering your council.";
+			alert(missinginfo);
+			return false;
+		}
+		else { 
+			return true;
+		}
+	}
+	// --->
+	</script>
 </head>
 <body>
 <div id="main">
@@ -30,12 +44,18 @@
 	</jsp:include>
 	<div id="body">
 		<h2>Register</h2>
-		<form action="/process/register" method="post"> 
+		<form name="registercouncil"  action="/process/register" method="post" onSubmit="return checkme();"> 
 			<fieldset> 
 				<legend>Register Council</legend> 
 				<p><label>Council Name:</label><input class="insmall" type="text" maxlength="500" name="name" /></p>
 				<p><label>University:</label><input class="insmall" type="text" maxlength="500" name="university" /></p>
 				<p><label>Location:</label><input class="insmall" type="text" maxlength="500" name="location" /></p>
+				<p class="confirmbox">
+					<label class="widelabel">
+						<input type="checkbox" name="authorization" />
+						By checking this box, you agree to complete the registration process and pay the required registration fees.  Each council should only register once.  Conference attendees are added once the council has been registered.
+					</label>
+				</p>
 				<p class="submit"><input type="submit" value="Submit" /></p>
 			</fieldset> 
 		</form>
