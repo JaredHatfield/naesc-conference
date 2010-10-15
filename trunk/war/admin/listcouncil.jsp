@@ -47,21 +47,23 @@
 			<% int totalAttendee = 0; %>
 			<% int totalPaid = 0; %>
 			<% int totalCost = 0; %>
-			<% for(Council council : councils) { %>
+			<% for(int k = 0; k < councils.size(); k++) { %>
 				<tr>
-					<td><a href="/mycouncil?id=<%= council.getKey().getId() %>"><%= council.getName() %></a></td>
-					<td><%= council.getUniversity() %></td>
-					<td><%= council.getLocation() %></td>
-					<td><a href="<%= council.getWebsite() %>"><%= council.getWebsite() %></a></td>
-					<td>
+					<% Council council  = councils.get(k); %>
+					<% String altcolor = (k % 2 == 0) ? "cellone" : "celltwo"; %>
+					<td class="<%= altcolor %>"><a href="/mycouncil?id=<%= council.getKey().getId() %>"><%= council.getName() %></a></td>
+					<td class="<%= altcolor %>"><%= council.getUniversity() %></td>
+					<td class="<%= altcolor %>"><%= council.getLocation() %></td>
+					<td class="<%= altcolor %>"><a href="<%= council.getWebsite() %>"><%= council.getWebsite() %></a></td>
+					<td class="<%= altcolor %>">
 						<% totalAttendee += council.getAttendees().size(); %>
 						<%= council.getAttendees().size() %>
 					</td>
-					<td>
+					<td class="<%= altcolor %>">
 						<% totalCost += (int)council.getAttendeeCost(); %>
 						$<%= (int)council.getAttendeeCost() %>
 					</td>
-					<td>
+					<td class="<%= altcolor %>">
 						<% totalPaid += (int)council.getAmountPaid(); %>
 						$<%= (int)council.getAmountPaid() %>
 					</td>
@@ -73,19 +75,19 @@
 		<table class="infotable">
 			<tr>
 				<td class="titlecol">Total Attending</td>
-				<td class="smallcell"><%= totalAttendee %></td>
+				<td class="cellone"><%= totalAttendee %></td>
 			</tr>
 			<tr>
 				<td class="titlecol">Total Cost</td>
-				<td class="smallcell">$<%= totalCost %></td>
+				<td class="celltwo">$<%= totalCost %></td>
 			</tr>
 			<tr>
 				<td class="titlecol">Total Paid</td>
-				<td class="smallcell">$<%= totalPaid %></td>
+				<td class="cellone">$<%= totalPaid %></td>
 			</tr>
 			<tr>
 				<td class="titlecol">Outstanding</td>
-				<td class="smallcell">$<%= totalCost - totalPaid %></td>
+				<td class="celltwo">$<%= totalCost - totalPaid %></td>
 			</tr>
 		</table>
 	</div>

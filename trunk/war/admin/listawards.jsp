@@ -48,12 +48,14 @@
 					</td>
 				<% } %>
 			</tr>
-			<% for(Council council : councils) { %>
+			<% for(int k = 0; k < councils.size(); k++) { %>
 				<tr>
-					<td><a href="/mycouncil?id=<%= council.getKey().getId() %>"><%= council.getName() %></a></td>
-					<td><%= council.getUniversity() %></td>
+					<% Council council  = councils.get(k); %>
+					<% String altcolor = (k % 2 == 0) ? "cellone" : "celltwo"; %>
+					<td class="<%= altcolor %>"><a href="/mycouncil?id=<%= council.getKey().getId() %>"><%= council.getName() %></a></td>
+					<td class="<%= altcolor %>"><%= council.getUniversity() %></td>
 					<% for(int i = 0; i < awards.size(); i++) { %>
-						<td>
+						<td class="<%= altcolor %>">
 							<% Award a = awards.get(i); %>
 							<% List<AwardSubmission> submitted = council.getAwardSubmissions(); %>
 							<% for(int j = 0; submitted != null && j < submitted.size(); j++) { %>

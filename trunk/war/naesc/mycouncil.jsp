@@ -52,35 +52,35 @@
 				</tr>
 				<tr>
 					<td class="titlecol">Name</td>
-					<td class="extralargecell"><%= council.getName() %></td>
+					<td class="cellone"><%= council.getName() %></td>
 				</tr>
 				<tr>
 					<td class="titlecol">University</td>
-					<td><%= council.getUniversity() %></td>
+					<td class="celltwo"><%= council.getUniversity() %></td>
 				</tr>
 				<tr>
 					<td class="titlecol">Location</td>
-					<td><%= council.getLocation() %></td>
+					<td class="cellone"><%= council.getLocation() %></td>
 				</tr>
 				<tr>
 					<td class="titlecol">Contact</td>
-					<td><%= council.getContact() %></td>
+					<td class="celltwo"><%= council.getContact() %></td>
 				</tr>
 				<tr>
 					<td class="titlecol">Website</td>
-					<td><%= council.getWebsite() %></td>
+					<td class="cellone"><%= council.getWebsite() %></td>
 				</tr>
 				<tr>
 					<td class="titlecol">Amount Due</td>
-					<td>$<%= (int)council.getAttendeeCost() %></td>
+					<td class="celltwo">$<%= (int)council.getAttendeeCost() %></td>
 				</tr>
 				<tr>
 					<td class="titlecol">Amount Paid</td>
-					<td>$<%= (int)council.getAmountPaid() %></td>
+					<td class="cellone">$<%= (int)council.getAmountPaid() %></td>
 				</tr>
 				<tr>
 					<td class="titlecol">Payment Notes</td>
-					<td><%= council.getPaymentNotes() %></td>
+					<td class="celltwo"><%= council.getPaymentNotes() %></td>
 				</tr>
 			</table>
 		</fieldset>
@@ -91,15 +91,16 @@
 			<table class="infotable">
 				<tr class="titlerow">
 					<td>Award Name</td>
-					<td>Submitted</td>
+					<td class="smallcell">Submitted</td>
 				</tr>
 				<% for(int i = 0; i < awards.size(); i++) { %>
 					<tr>
-						<td class="largecell">
+						<% String altcolor = (i % 2 == 0) ? "cellone" : "celltwo"; %>
+						<td class="<%= altcolor %>">
 							<% Award a = awards.get(i); %>
 						<a href="/editaward?id=<%= council.getKey().getId() %>&a=<%= a.getKey().getId() %>"><%= a.getName() %></a>
 						</td>
-						<td class="smallcell">
+						<td class="<%= altcolor %>">
 							<% for(int j = 0; submitted != null && j < submitted.size(); j++) { %>
 								<% if(submitted.get(j).getAward().equals(a.getKey())) { %>
 									<% if(submitted.get(j).getSubmitted()){ %>
@@ -118,12 +119,16 @@
 		<fieldset>
 			<legend>Attending Members</legend>
 			<table class="infotable">
+				<tr>
+					<td colspan="8" style="border-width: 0px; text-align: right;">
+						<%= council.getAttendees().size() %> of <%= cs.getMaxAttendees() %> Attendees Registered
+					</td>
+				</tr>
 				<tr class="titlerow">
 					<td class="minicell">
 						<% if(council.getAttendees().size() < cs.getMaxAttendees() && (cs.isRegistrationOpen() || (Boolean)request.getAttribute("isadmin"))) { %>
 							<a href="/addattendee?id=<%= council.getKey().getId() %>"><img src="/static/add.png" class="center" /></a>
 						<% } %>
-						(<%= council.getAttendees().size() %> of <%= cs.getMaxAttendees() %>)
 					</td>
 					<td class="mediumcell">Name</td>
 					<td class="mediumcell">Email</td>
@@ -131,38 +136,39 @@
 					<td class="smallcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>"><img src="/static/edit.png" /></a></td>
 					<td class="smallcell">Registration</td>
 					<td class="minicell">Resume</td>
-					<td class="minicell">Complete</td>
+					<td>Complete</td>
 				</tr>
 				<% for(int i = 0; i < council.getAttendees().size(); i++) { %>
 					<tr>
+						<% String altcolor = (i % 2 == 0) ? "cellone" : "celltwo"; %>
 						<% ConferenceAttendee att = council.getAttendees().get(i); %>
-						<td><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= att.getKey().getId() %>"><img src="/static/edit.png" class="center" /></a></td>
-						<td><%= att.getFirstName() %> <%= council.getAttendees().get(i).getLastName() %></td>
-						<td><%= att.getEmail() %></td>
-						<td>
+						<td class="<%= altcolor %>"><a href="/editattendee?id=<%= council.getKey().getId() %>&m=<%= att.getKey().getId() %>"><img src="/static/edit.png" class="center" /></a></td>
+						<td class="<%= altcolor %>"><%= att.getFirstName() %> <%= council.getAttendees().get(i).getLastName() %></td>
+						<td class="<%= altcolor %>"><%= att.getEmail() %></td>
+						<td class="<%= altcolor %>">
 							<% for(int j = 0; j < tours.size(); j++) { %>
 								<% if(tours.get(j).getKey().equals(att.getTour())) { %>
 									<%= tours.get(j).getName() %>
 								<% break; } %>
 							<% } %>
 						</td>
-						<td>
-						<% if(att.getVoteStatus() == null) { %>
-						<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.VOTING)) { %>
-							Voting
-						<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.ALTERNATE)) { %>
-							Alternate
-						<% } %>
+						<td class="<%= altcolor %>">
+							<% if(att.getVoteStatus() == null) { %>
+							<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.VOTING)) { %>
+								Voting
+							<% } else if(att.getVoteStatus().equals(ConferenceAttendee.VoteStatus.ALTERNATE)) { %>
+								Alternate
+							<% } %>
 						</td>
-						<td>
+						<td class="<%= altcolor %>">
 							$<%= (int)att.getRegistartionFee() %>
 						</td>
-						<td>
+						<td class="<%= altcolor %>">
 							<% if(att.getResume() != null) { %>
 								<img src="/static/document.png" alt="Resume Uploaded" title="Resume Uploaded" class="center">
 							<% } %>
 						</td>
-						<td>
+						<td class="<%= altcolor %>">
 							<% if(att.isAttendeeComplete()) { %>
 								<img src="/static/check.png" alt="Complete" title="Complete" class="center">
 							<% } %>
