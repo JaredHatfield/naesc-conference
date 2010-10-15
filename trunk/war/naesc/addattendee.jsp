@@ -98,8 +98,8 @@
 			<p><label>Arrival Information:</label><input class="insmall" type="text" maxlength="500" name="arrivalInformation" /></p>
 			<p><label>Vegetarian:</label><input type="checkbox" name="vegetarian" /></p>
 			<p><label>Allergies:</label><input class="insmall" type="text" maxlength="500" name="allergies" /></p>
-			<p style="margin-left: 10em; margin-top: 2em; margin-bottom: 6em;">
-				<label style="margin-left: 0em; color: red;" class="widelabel">
+			<p class="confirmbox">
+				<label class="widelabel">
 					<input type="checkbox" name="authorization" />By checking this box, your council and/or the member attending agrees to and is obligated to pay the $<%= (int)cs.getRegistrationFee() %> registration fee unless a cancellation request is submitted before <%= cs.getLateRegistrationDateString() %>.
 				</label>
 			</p>
@@ -118,7 +118,17 @@
 	</div>
 	<div id="rightbar">
 		<h3>Adding Attendees</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			Each memmber attending the conference needs to be added and registered.
+			Attendees will be able to log in with the email address provided and modify their own information.
+			All of the fields to not need to be filled out when an attendee is added.
+		</p>
+		<p>
+			Once an attendee has been added, you will be able to upload a resume.
+		</p>
+		<p>
+			You must agree to the payment terms before an attendee can be added.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

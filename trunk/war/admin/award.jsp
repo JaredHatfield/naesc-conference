@@ -66,7 +66,9 @@
 	</div>
 	<div id="rightbar">
 		<h3>Council Awards</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			Manage the list of award applications.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

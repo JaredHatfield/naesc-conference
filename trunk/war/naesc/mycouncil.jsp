@@ -133,7 +133,7 @@
 					<td class="mediumcell">Name</td>
 					<td class="mediumcell">Email</td>
 					<td class="mediumcell">Tour <a href="/tourlist" onClick="return popup(this, 'Tour List')"><img src="/static/info.png" /></a></td>
-					<td class="smallcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>"><img src="/static/edit.png" /></a></td>
+					<td class="mediumcell">Delegate <a href="/editdelegate?id=<%= council.getKey().getId() %>"><img src="/static/edit.png" /></a></td>
 					<td class="smallcell">Registration</td>
 					<td class="minicell">Resume</td>
 					<td>Complete</td>
@@ -180,7 +180,30 @@
 	</div>
 	<div id="rightbar">
 		<h3>Manage your Council</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			In order to complete the registration process your council information needs to be provided.
+		</p>
+		<p>
+			The amount due is based on the cost of individual attendees based on when the attendee was registered.
+			When your payment has been submitted and processed the payment information will be updated.
+		</p>
+		<h3>Awards</h3>
+		<p>
+			Your council is able to apply for awards that will be awarded at the conference.
+			The award applications can be saved while they are in progress.
+			In order to be considered the application must be submitted.
+		</p>
+		<h3>Attendees</h3>
+		<p>
+			Each conference attendee can be added and their information can be provided.
+			The attendee will be able to log in with their email address that matches the one provided and will be able to edit their information.
+			Resumes are required and can be uploaded by the council admin or the conference attendee.
+		</p>
+		<h3>Delegates</h3>
+		<p>
+			To select your council's delegates, click the <img src="/static/edit.png" /> image next to the <b>Delegate</b> heading.
+			You will be able to select one voting delegate and one alternate delegate from your list of conference attendees.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

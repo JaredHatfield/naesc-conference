@@ -51,7 +51,9 @@
 	</div>
 	<div id="rightbar">
 		<h3>Resume</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			Each attendee is required to provide a resume in PDF form.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

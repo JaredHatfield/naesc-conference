@@ -16,6 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  --%>
 <div id="footer">
-	<a href="http://code.google.com/p/naesc-conference/">Powered by NAESC Conference</a>
+	Powered by <a href="http://code.google.com/p/naesc-conference/">NAESC Conference</a>
 </div>
 

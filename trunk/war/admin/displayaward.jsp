@@ -62,7 +62,9 @@
 	</div>
 	<div id="rightbar">
 		<h3>Award Application</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			A submitted award application.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

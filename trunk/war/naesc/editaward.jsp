@@ -100,7 +100,14 @@
 	</div>
 	<div id="rightbar">
 		<h3>Award Applications</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			Award applications must have all parts completed.
+			If you are not finished with the application, you are able to save your progress and return later to finish the application.
+			Once you have completed the application it can be submitted and will no longer be able to be edited.
+		</p>
+		<p>
+			The application must be submitted before registration closes.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

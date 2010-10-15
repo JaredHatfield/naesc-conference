@@ -63,7 +63,9 @@
 	</div>
 	<div id="rightbar">
 		<h3>Attendee Tours</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			Manage the list of available tours.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />

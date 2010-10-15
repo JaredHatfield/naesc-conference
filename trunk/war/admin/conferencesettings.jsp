@@ -51,7 +51,9 @@
 	</div>
 	<div id="rightbar">
 		<h3>Conference Settings</h3>
-		<!-- TODO: Put instructions here -->
+		<p>
+			Modify the global settings for the conference.
+		</p>
 	</div>
 </div>
 <jsp:include page="../footer.jsp" />
