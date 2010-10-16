@@ -48,6 +48,14 @@ public class ProcessUploadResumeServlet extends HttpServlet {
     /**
      * Processes the request from the client.
      */
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        doPost(request, response);
+    }
+
+    /**
+     * Processes the request from the client.
+     */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         PermissionManager p = new PermissionManager();
