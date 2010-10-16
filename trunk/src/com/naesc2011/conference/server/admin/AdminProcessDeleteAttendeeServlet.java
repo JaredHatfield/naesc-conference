@@ -18,6 +18,7 @@
 package com.naesc2011.conference.server.admin;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.HttpServlet;
@@ -30,6 +31,7 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.naesc2011.conference.server.InvalidFormException;
 import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
+import com.naesc2011.conference.shared.AttendeePermission;
 import com.naesc2011.conference.shared.ConferenceAttendee;
 import com.naesc2011.conference.shared.Council;
 import com.naesc2011.conference.shared.PMF;
@@ -90,6 +92,11 @@ public class AdminProcessDeleteAttendeeServlet extends HttpServlet {
                     blobstoreService.delete(blobKey);
                     ca.setResume(null);
                 }
+
+                // Delete the AttendeePermission object
+                List<AttendeePermission> ap = AttendeePermission.GetPermission(
+                        pm, council.getKey(), ca.getKey());
+                pm.deletePersistentAll(ap);
 
                 // Now delete the attendee from the council
                 council.getAttendees().remove(ca);
