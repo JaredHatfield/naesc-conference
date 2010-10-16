@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datastore-indexes autoGenerate="true">
+    <datastore-index kind="ConferenceAttendee" ancestor="true">
+        <property name="attendees_INTEGER_IDX" direction="asc"/>
+    </datastore-index>
+    <datastore-index kind="AwardSubmission" ancestor="true">
+        <property name="awardSubmissions_INTEGER_IDX" direction="asc"/>
+    </datastore-index>
+    <datastore-index kind="TourMember" ancestor="true">
+        <property name="tourMembers_INTEGER_IDX" direction="asc"/>
+    </datastore-index>
+</datastore-indexes>
