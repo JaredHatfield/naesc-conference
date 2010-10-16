@@ -25,6 +25,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.blobstore.BlobInfo;
+import com.google.appengine.api.blobstore.BlobInfoFactory;
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
@@ -103,19 +105,34 @@ public class ProcessUploadResumeServlet extends HttpServlet {
                 // uploaded
                 BlobstoreService blobstoreService = BlobstoreServiceFactory
                         .getBlobstoreService();
+                BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
                 Map<String, BlobKey> blobs = blobstoreService
                         .getUploadedBlobs(request);
                 BlobKey blobKey = blobs.get(ca.getResumeKey());
 
                 if (blobKey == null) {
                     // It was not uploaded
+                    response.sendRedirect("/editattendee?id=" + pid + "&m="
+                            + mid);
                 } else {
-                    // It was uploaded, so save the key.
-                    ca.setResume(blobKey);
-                    ca.update();
+                    // Get the BlobInfo
+                    BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(blobKey);
+                    String filename = blobInfo.getFilename();
+                    if (filename.substring(filename.length() - 3,
+                            filename.length()).equalsIgnoreCase("PDF")) {
+                        // A PDF was uploaded, so save the key.
+                        ca.setResume(blobKey);
+                        ca.update();
+                        response.sendRedirect("/editattendee?id=" + pid + "&m="
+                                + mid);
+                    } else {
+                        // It was not a PDF, so delete the object and display
+                        // for with error
+                        blobstoreService.delete(blobKey);
+                        response.sendRedirect("/uploadresume?id=" + pid + "&m="
+                                + mid + "&error=pdf");
+                    }
                 }
-
-                response.sendRedirect("/editattendee?id=" + pid + "&m=" + mid);
             } else {
                 throw new PermissionDeniedException();
             }

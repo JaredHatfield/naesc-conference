@@ -27,6 +27,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.naesc2011.conference.server.InvalidFormException;
 import com.naesc2011.conference.server.PermissionDeniedException;
 import com.naesc2011.conference.server.PermissionManager;
@@ -77,10 +79,11 @@ public class UploadResumeServlet extends HttpServlet {
 
             Council council = Council.GetCouncil(pm, pid);
             boolean found = false;
+            ConferenceAttendee ca = null;
             for (int i = 0; i < council.getAttendees().size(); i++) {
                 long cid = council.getAttendees().get(i).getKey().getId();
                 if ((cid + "").equals(mid)) {
-                    ConferenceAttendee ca = council.getAttendees().get(i);
+                    ca = council.getAttendees().get(i);
                     request.setAttribute("attendee", ca);
 
                     // Only allow the page to be displayed if they do
@@ -94,6 +97,12 @@ public class UploadResumeServlet extends HttpServlet {
             }
 
             if (found) {
+                BlobstoreService blobstoreService = BlobstoreServiceFactory
+                        .getBlobstoreService();
+                String uurl = blobstoreService
+                        .createUploadUrl("/process/uploadresume?id=" + pid
+                                + "&m=" + ca.getKey().getId());
+                request.setAttribute("uploadurl", uurl);
                 String url = "/naesc/uploadresume.jsp";
                 ServletContext context = getServletContext();
                 RequestDispatcher dispatcher = context
