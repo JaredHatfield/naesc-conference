@@ -219,7 +219,7 @@ public class PermissionManager {
             request.setAttribute("authenticated", true);
             request.setAttribute("username", p.getUser().getNickname());
             request.setAttribute("logouturl", p.getUserService()
-                    .createLogoutURL("/home"));
+                    .createLogoutURL("/"));
             request.setAttribute("isadmin", p.IsUserAdmin());
 
             return true;
