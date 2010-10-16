@@ -71,7 +71,7 @@ public class ProcessRegisterServlet extends HttpServlet {
                 }
             }
 
-            response.sendRedirect("/home");
+            response.sendRedirect("/");
         } catch (PermissionDeniedException e) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         } finally {
