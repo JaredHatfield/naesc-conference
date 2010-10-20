@@ -53,11 +53,14 @@ public class AdminProcessSaveTourServlet extends HttpServlet {
             String name = request.getParameter("name");
             String description = request.getParameter("description");
             int maximum = Integer.parseInt(request.getParameter("maximum"));
+            String url = request.getParameter("url");
 
-            if (id != null && name != null && description != null) {
+            if (id != null && name != null && description != null
+                    && url != null) {
                 Tour t = Tour.GetTour(pm, id);
                 t.setName(name);
                 t.setDescription(description);
+                t.setUrl(url);
                 if (maximum >= t.getTourMembers().size()) {
                     // We can only update the count to a number less than or
                     // equal to the number of people already attending the tour

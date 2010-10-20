@@ -59,6 +59,12 @@ public class Tour {
     private int maximum;
 
     /**
+     * The URL for additional information about the tour.
+     */
+    @Persistent
+    private String url;
+
+    /**
      * The list of tour members.
      */
     @Persistent
@@ -75,10 +81,11 @@ public class Tour {
      * @param maximum
      *            The max number of people for the tour.
      */
-    public Tour(String name, String description, int maximum) {
+    public Tour(String name, String description, int maximum, String url) {
         this.name = name;
         this.description = description;
         this.maximum = maximum;
+        this.url = url;
         this.tourMembers = new ArrayList<TourMember>();
     }
 
@@ -142,6 +149,28 @@ public class Tour {
         String s = description.replaceAll("\\<.*?>", "");
         if (!this.description.equals(s)) {
             this.description = s;
+        }
+    }
+
+    /**
+     * Gets the url.
+     * 
+     * @return The url.
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Sets the url.
+     * 
+     * @param url
+     *            The url to set.
+     */
+    public void setUrl(String url) {
+        String s = url.replaceAll("\\<.*?>", "");
+        if (!this.url.equals(s)) {
+            this.url = s;
         }
     }
 
