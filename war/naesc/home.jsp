@@ -87,7 +87,11 @@
 			<% } else { %>
 				<p>
 			<% } %>
-				<b><%= t.getName() %></b>
+				<% if(t.getUrl().length() == 0) { %>
+					<b><%= t.getName() %></b>
+				<% } else { %>
+					<b><a href="<%= t.getUrl() %>"><%= t.getName() %></a></b>
+				<% } %>
 				<i><%= t.getDescription() %></i>
 				(<%= t.getTourMembers().size() %> of <%= t.getMaximum() %>)
 			</p>

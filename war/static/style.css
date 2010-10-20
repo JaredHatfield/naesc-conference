@@ -72,6 +72,9 @@ div#headbar a:visited, div#headbar a:link {
 	color: #0000CC;
 	text-decoration: underline;
 }
+div#rightbar a:visited, div#rightbar a:link {
+	color: white;
+}
 html {
 	overflow-y: scroll;
 }
