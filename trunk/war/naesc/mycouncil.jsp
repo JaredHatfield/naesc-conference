@@ -46,7 +46,10 @@
 			
 			<table class="infotable">
 				<tr>
-					<td colspan="2" style="border-width: 0px; text-align: right;">
+					<td>
+						<a href="/invoice?id=<%= council.getKey().getId() %>">View Invoice</a>
+					</td>
+					<td style="border-width: 0px; text-align: right;">
 						<a href="/editcouncil?id=<%= council.getKey().getId() %>"><img src="/static/edit.png" /></a>
 					</td>
 				</tr>

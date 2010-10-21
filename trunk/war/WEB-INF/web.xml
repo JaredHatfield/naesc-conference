@@ -44,6 +44,10 @@
         <servlet-class>com.naesc2011.conference.server.naesc.MyCouncilServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>invoice</servlet-name>
+        <servlet-class>com.naesc2011.conference.server.naesc.InvoiceServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>register</servlet-name>
         <servlet-class>com.naesc2011.conference.server.naesc.RegisterServlet</servlet-class>
     </servlet>
@@ -180,6 +184,10 @@
     <servlet-mapping>
         <servlet-name>mycouncil</servlet-name>
         <url-pattern>/mycouncil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>invoice</servlet-name>
+        <url-pattern>/invoice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
