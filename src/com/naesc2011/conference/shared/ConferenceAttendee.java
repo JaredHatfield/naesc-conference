@@ -19,6 +19,7 @@ package com.naesc2011.conference.shared;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -217,6 +218,16 @@ public class ConferenceAttendee {
      */
     public Date getAdded() {
         return added;
+    }
+
+    /**
+     * Gets the date the attendee was added in a formatted string.
+     * 
+     * @return The formatted string with the date.
+     */
+    public String getAddedFormatted() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        return dateFormat.format(this.added);
     }
 
     /**

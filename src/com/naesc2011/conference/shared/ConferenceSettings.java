@@ -20,6 +20,7 @@ package com.naesc2011.conference.shared;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -77,6 +78,12 @@ public class ConferenceSettings {
     private int maxAttendees;
 
     /**
+     * The address of the council that will be used on the invoice.
+     */
+    @Persistent
+    private String address;
+
+    /**
      * The formatter for reading and writing the date
      */
     private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
@@ -94,13 +101,15 @@ public class ConferenceSettings {
      *            The late registration date.
      */
     private ConferenceSettings(String conferenceName, double earlyFee,
-            double lateFee, Date earlyDate, Date lateDate, int maxAttendees) {
+            double lateFee, Date earlyDate, Date lateDate, int maxAttendees,
+            String address) {
         this.conferenceName = conferenceName;
         this.earlyRegistrationFee = earlyFee;
         this.lateRegistrationFee = lateFee;
         this.earlyRegistrationDate = earlyDate;
         this.lateRegistrationDate = lateDate;
         this.maxAttendees = maxAttendees;
+        this.address = address;
     }
 
     /**
@@ -284,6 +293,24 @@ public class ConferenceSettings {
     }
 
     /**
+     * @param address
+     *            the address to set
+     */
+    public void setAddress(String address) {
+        String s = address.replaceAll("\\<.*?>", "");
+        if (!this.address.equals(s)) {
+            this.address = s;
+        }
+    }
+
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
      * Gets the current registration fee.
      * 
      * @return The current registration fee.
@@ -320,6 +347,17 @@ public class ConferenceSettings {
     }
 
     /**
+     * Gets the date for today.
+     * 
+     * @return Todays date.
+     */
+    public static String getTodaysDate() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        return dateFormat.format(calendar.getTime());
+    }
+
+    /**
      * Gets the instance of the ConferenceSettings object.
      */
     @SuppressWarnings("unchecked")
@@ -331,7 +369,7 @@ public class ConferenceSettings {
             return cs.get(0);
         } else if (cs.size() == 0) {
             ConferenceSettings c = new ConferenceSettings("My Conference", 10,
-                    20, new Date(), new Date(), 1);
+                    20, new Date(), new Date(), 1, "Address not set");
             pm.makePersistent(c);
             return c;
         } else {

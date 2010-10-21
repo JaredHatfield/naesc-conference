@@ -45,6 +45,8 @@
 				<p><label>Late Registration Fee:</label><input class="insmall" type="text" maxlength="500" name="lateFee" value="<%= cs.getLateRegistrationFee() %>" /></p>
 				<br />
 				<p><label>Maximum Attendees Per Council:</label><input class="insmall" type="text" maxlength="500" name="maxattendees" value="<%= cs.getMaxAttendees() %>" /></p>
+				<br />
+				<p><label>Invoice Address:</label><textarea cols="30" rows="5" name="address"><%= cs.getAddress() %></textarea></p>
 				<p class="submit"><input type="submit" value="Update" /></p>
 			</fieldset> 
 		</form>

@@ -1,0 +1,77 @@
+div#main {
+	width: 800px;
+	margin: 0px auto;
+	font: normal normal normal 14px/1.4 Georgia, serif;
+}
+div#payeeaddress {
+
+}
+table#invoiceinfo {
+	margin-bottom: 20px;
+}
+table#invoiceinfo td {
+	width: 150px;
+}
+table#addressesinfo {
+	width: 100%;	
+}
+table#addressesinfo td {
+	width: 50%;	
+	border: 0px;
+}
+table#addressesinfo p.paymentname {
+	font-weight: bold;
+	float: left;
+}
+table#addressesinfo p.paymentaddress {
+	margin-left: 40px;
+	margin-top: 50px;
+}
+table#addressesinfo p#paymentcounciladdress {
+	font-family: "Courier New", Courier, monospace;
+}
+table.infotable {
+	width: 100%;
+}
+table#paymentnotes {
+	margin-top: 40px;	
+}
+table#paymentnotes td#paynote {
+	width: 300px;
+	text-align: right;
+}
+table td {
+	border: 1px solid black;
+	padding: 5px;
+	vertical-align: top;
+}
+td.shaded {
+	background: #ddd;
+	font-weight: bold;
+}
+td#costcol {
+	width: 150px;	
+}
+td#datecol {
+	width: 100px;	
+}
+td#regcol {
+	width: 150px;
+}
+td.content {
+	font-family: "Courier New", Courier, monospace;
+}
+td.footercolinfo {
+	text-align: right;
+	padding-right: 20px;	
+}
+td#balancedue {
+	background: #ddd;
+	font-weight: bold;	
+}
+table { 
+	border-collapse: collapse;
+}
+h1 {
+	text-align: center;
+}
