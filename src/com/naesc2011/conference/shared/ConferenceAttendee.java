@@ -147,22 +147,17 @@ public class ConferenceAttendee {
      */
     @Persistent
     private double registartionFee;
-    
+
     /**
      * The list of options for major.
      */
-    public static String[] Majors = new String[] {
-        	"Aerospace Engineering/Engineering Mechanics", 
-        	"Biological/Biomedical Engineering",
-        	"Chemical Engineering",
-        	"Civil Engineering",
-        	"Electrical/Computer Engineering",
-        	"Environmental Engineering",
-        	"Manufacturing/Industrial Engineering",
-        	"Mechanical Engineering",
-        	"Nuclear Engineering",
-        	"Petroleum/Geology/Geosystems Engineering"
-    };
+    public static String[] Majors = new String[] { "Choose a Major",
+            "Aerospace Engineering", "Biological/Biomedical Engineering",
+            "Chemical Engineering", "Civil Engineering",
+            "Computer Engineering", "Electrical Engineering",
+            "Environmental Engineering", "Industrial Engineering",
+            "Manufacturing Engineering", "Mechanical Engineering",
+            "Nuclear Engineering", "Petroleum/Geology/Geosystems Engineering" };
 
     /**
      *
@@ -629,13 +624,11 @@ public class ConferenceAttendee {
      */
     public boolean isAttendeeComplete() {
         return ((major.length() > 0)
-        		&& (email.length() > 6)
-                && (gender != null)
-                && (shirtSize != null)
-                && (emergencyContactName.length() > 0)
+                && (!major.equals(ConferenceAttendee.Majors[0]))
+                && (email.length() > 6) && (gender != null)
+                && (shirtSize != null) && (emergencyContactName.length() > 0)
                 && (emergencyContactPhone.length() > 6)
-                && (arrivalInformation.length() > 0)
-                && (voteStatus != null)
+                && (arrivalInformation.length() > 0) && (voteStatus != null)
                 && (tour != null) && (resume != null));
     }
 }
