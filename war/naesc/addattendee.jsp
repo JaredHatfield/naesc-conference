@@ -61,7 +61,16 @@
 			<p><label>First Name:</label><input class="insmall" type="text" maxlength="500" name="firstName" /></p>
 			<p><label>Middle Name:</label><input class="insmall" type="text" maxlength="500" name="middleName" /></p>
 			<p><label>Last Name:</label><input class="insmall" type="text" maxlength="500" name="lastName" /></p>
-			<p><label>Major:</label><input class="insmall" type="text" maxlength="500" name="major" /></p>
+			
+			<p>
+				<label>Major:</label>
+				<select name="major">
+				<% for(int i = 0; i < ConferenceAttendee.Majors.length; i++) { %>
+					<option value="<%= ConferenceAttendee.Majors[i] %>"><%= ConferenceAttendee.Majors[i] %></option>
+				<% } %>
+				</select>
+			</p>
+			
 			<p><label>Email:</label><input class="insmall" type="text" maxlength="500" name="email" /></p>
 			<p>
 				<label>Gender:</label>

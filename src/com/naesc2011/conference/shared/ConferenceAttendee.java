@@ -147,6 +147,22 @@ public class ConferenceAttendee {
      */
     @Persistent
     private double registartionFee;
+    
+    /**
+     * The list of options for major.
+     */
+    public static String[] Majors = new String[] {
+        	"Aerospace Engineering/Engineering Mechanics", 
+        	"Biological/Biomedical Engineering",
+        	"Chemical Engineering",
+        	"Civil Engineering",
+        	"Electrical/Computer Engineering",
+        	"Environmental Engineering",
+        	"Manufacturing/Industrial Engineering",
+        	"Mechanical Engineering",
+        	"Nuclear Engineering",
+        	"Petroleum/Geology/Geosystems Engineering"
+    };
 
     /**
      *
@@ -612,11 +628,14 @@ public class ConferenceAttendee {
      * @return True if the attendee record has all of the required fields.
      */
     public boolean isAttendeeComplete() {
-        return ((major.length() > 0) && (email.length() > 6)
-                && (gender != null) && (shirtSize != null)
+        return ((major.length() > 0)
+        		&& (email.length() > 6)
+                && (gender != null)
+                && (shirtSize != null)
                 && (emergencyContactName.length() > 0)
                 && (emergencyContactPhone.length() > 6)
-                && (arrivalInformation.length() > 0) && (voteStatus != null)
+                && (arrivalInformation.length() > 0)
+                && (voteStatus != null)
                 && (tour != null) && (resume != null));
     }
 }
