@@ -52,7 +52,20 @@
 			<p><label>First Name:</label><input class="insmall" type="text" maxlength="500" name="firstName" value="<%= a.getFirstName() %>" /></p>
 			<p><label>Middle Name:</label><input class="insmall" type="text" maxlength="500" name="middleName" value="<%= a.getMiddleName() %>" /></p>
 			<p><label>Last Name:</label><input class="insmall" type="text" maxlength="500" name="lastName" value="<%= a.getLastName() %>" /></p>
-			<p><label>Major:</label><input class="insmall" type="text" maxlength="500" name="major" value="<%= a.getMajor() %>" /></p>
+			
+			<p>
+				<label>Major:</label>
+				<select name="major">
+				<% for(int i = 0; i < ConferenceAttendee.Majors.length; i++) { %>
+					<% if(ConferenceAttendee.Majors[i].equals(a.getMajor())) { %>
+						<option value="<%= ConferenceAttendee.Majors[i] %>" selected="selected"><%= ConferenceAttendee.Majors[i] %></option>
+					<% } else { %>
+						<option value="<%= ConferenceAttendee.Majors[i] %>"><%= ConferenceAttendee.Majors[i] %></option>
+					<% } %>
+				<% } %>
+				</select>
+			</p>
+			
 			<p><label>Email:</label><input class="insmall" type="text" maxlength="500" name="email" value="<%= a.getEmail() %>" /></p>
 			<p>
 				<label>Gender:</label>
