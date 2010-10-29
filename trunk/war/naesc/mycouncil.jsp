@@ -83,7 +83,11 @@
 				</tr>
 				<tr>
 					<td class="titlecol">Payment Notes</td>
-					<td class="celltwo"><%= council.getPaymentNotes() %></td>
+					<td class="celltwo">
+						<p style="width: 23em;">
+							<%= council.getPaymentNotes() %>
+						</p>
+					</td>
 				</tr>
 			</table>
 		</fieldset>
