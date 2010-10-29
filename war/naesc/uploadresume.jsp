@@ -46,6 +46,8 @@
 			    		<label></label>
 						<input type="submit" value="Upload">
 					</p>
+					<hr />
+					<p><label class="widelabel">Note: Resume must be a PDF file.  All other files will be rejected.</label></p>
 				</fieldset>
 			</form>
 		<% } %>
