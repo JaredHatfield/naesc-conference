@@ -100,7 +100,7 @@
 		<% @SuppressWarnings("unchecked") List<Award> awards = (List<Award>)request.getAttribute("awards"); %>
 		<ul>
 			<% for(int i = 0; i < awards.size(); i++) { %>
-				<li><%= awards.get(i).getName() %>
+				<li><b><%= awards.get(i).getName() %>:</b> <i><%= awards.get(i).getDescription() %></i>
 					<ul>
 						<li><i><%= awards.get(i).getQuestion1() %></i></li>
 						<li><i><%= awards.get(i).getQuestion2() %></i></li>
