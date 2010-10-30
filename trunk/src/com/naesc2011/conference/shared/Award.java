@@ -45,6 +45,12 @@ public class Award {
     private String name;
 
     /**
+     * The award description.
+     */
+    @Persistent
+    private String description;
+
+    /**
      * The first question.
      */
     @Persistent
@@ -73,6 +79,8 @@ public class Award {
      * 
      * @param name
      *            The name of the application.
+     * @param description
+     *            The description of the application.
      * @param one
      *            The first question.
      * @param two
@@ -82,8 +90,10 @@ public class Award {
      * @param four
      *            The forth question.
      */
-    public Award(String name, String one, String two, String three, String four) {
+    public Award(String name, String description, String one, String two,
+            String three, String four) {
         this.name = name;
+        this.description = description;
         this.question1 = one;
         this.question2 = two;
         this.question3 = three;
@@ -129,6 +139,24 @@ public class Award {
         if (!this.name.equals(s)) {
             this.name = s;
         }
+    }
+
+    /**
+     * @param description
+     *            the description to set
+     */
+    public void setDescription(String description) {
+        String s = description.replaceAll("\\<.*?>", "");
+        if (!this.description.equals(s)) {
+            this.description = s;
+        }
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
     }
 
     /**

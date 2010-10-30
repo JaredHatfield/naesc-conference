@@ -50,6 +50,7 @@ public class AdminProcessAddAwardServlet extends HttpServlet {
             }
 
             String name = request.getParameter("name");
+            String description = request.getParameter("description");
             String q1 = request.getParameter("q1");
             String q2 = request.getParameter("q2");
             String q3 = request.getParameter("q3");
@@ -57,7 +58,7 @@ public class AdminProcessAddAwardServlet extends HttpServlet {
 
             if (name != null && q1 != null && q2 != null && q3 != null
                     && q4 != null) {
-                Award a = new Award(name, q1, q2, q3, q4);
+                Award a = new Award(name, description, q1, q2, q3, q4);
                 Award.InsertAward(pm, a);
             }
 

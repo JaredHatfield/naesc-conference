@@ -51,7 +51,11 @@
 			
 		<form action="/process/saveaward" method="post"> 
 			<fieldset> 
-				<legend><%= a.getName() %></legend> 
+				<legend><%= a.getName() %></legend>
+				<p style="font-style : italic; color: grey;">
+					<label class="widelabel" style=""><%= a.getDescription() %></label>
+				</p>
+				<br />
 				<% if(app == null) { %>
 					<p><label class="widelabel"><%= a.getQuestion1() %></label></p>
 					<p><textarea cols="70" rows="8" name="q1"></textarea></p>
