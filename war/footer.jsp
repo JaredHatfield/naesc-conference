@@ -16,6 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  --%>
 <div id="footer">
-	Powered by <a href="http://code.google.com/p/naesc-conference/">NAESC Conference</a>
+	<br />
+	Open Source: <a href="http://code.google.com/p/naesc-conference/">NAESC Conference</a>
+	<br />
+	<br />
+	<img src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" alt="Powered by Google App Engine" />
 </div>
 
