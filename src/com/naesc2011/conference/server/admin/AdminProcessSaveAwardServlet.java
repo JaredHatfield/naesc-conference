@@ -51,6 +51,7 @@ public class AdminProcessSaveAwardServlet extends HttpServlet {
 
             String id = request.getParameter("id");
             String name = request.getParameter("name");
+            String description = request.getParameter("description");
             String q1 = request.getParameter("q1");
             String q2 = request.getParameter("q2");
             String q3 = request.getParameter("q3");
@@ -60,6 +61,7 @@ public class AdminProcessSaveAwardServlet extends HttpServlet {
                     && q3 != null && q4 != null) {
                 Award a = Award.GetAward(pm, id);
                 a.setName(name);
+                a.setDescription(description);
                 a.setQuestion1(q1);
                 a.setQuestion2(q2);
                 a.setQuestion3(q3);

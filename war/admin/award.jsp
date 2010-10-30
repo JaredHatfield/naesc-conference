@@ -37,6 +37,7 @@
 			<fieldset> 
 				<legend>Add Award</legend> 
 				<p><label>Award Name:</label><input class="insmall" type="text" maxlength="500" name="name" /></p>
+				<p><label>Description:</label><input class="insmall" type="text" maxlength="500" name="description" /></p>
 				<p><label>Question 1:</label><input class="insmall" type="text" maxlength="500" name="q1" /></p>
 				<p><label>Question 2:</label><input class="insmall" type="text" maxlength="500" name="q2" /></p>
 				<p><label>Question 3:</label><input class="insmall" type="text" maxlength="500" name="q3" /></p>
@@ -51,6 +52,7 @@
 					<fieldset> 
 						<legend>Update Award</legend> 
 						<p><label>Award Name:</label><input class="insmall" type="text" maxlength="500" name="name" value="<%= awards.get(i).getName() %>" /></p>
+						<p><label>Description:</label><input class="insmall" type="text" maxlength="500" name="description" value="<%= awards.get(i).getDescription() %>" /></p>
 						<p><label>Question 1:</label><input class="insmall" type="text" maxlength="500" name="q1" value="<%= awards.get(i).getQuestion1() %>" /></p>
 						<p><label>Question 2:</label><input class="insmall" type="text" maxlength="500" name="q2" value="<%= awards.get(i).getQuestion2() %>" /></p>
 						<p><label>Question 3:</label><input class="insmall" type="text" maxlength="500" name="q3" value="<%= awards.get(i).getQuestion3() %>" /></p>

@@ -44,6 +44,10 @@
 		<form> 
 			<fieldset> 
 				<legend><%= a.getName() %> - <%= council.getName() %> at <%= council.getUniversity() %></legend> 
+				<p style="font-style : italic; color: grey;">
+					<label class="widelabel" style=""><%= a.getDescription() %></label>
+				</p>
+				<br />
 				<% if(sub != null && sub.getSubmitted()) { %>
 					<p style="font-weight: bold; text-align: center;">Submitted on <%= sub.getSubmittedOn() %></p>
 				<% } else { %>
