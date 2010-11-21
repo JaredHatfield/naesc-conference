@@ -3,10 +3,10 @@
   <application>naesc2011</application>
   <version>6</version>
 
-  <!-- Configure serving/caching of GWT files -->
+  <!-- Configure serving/caching of files -->
   <static-files>
     <include path="/static/**" expiration="1d" />
-    <include  path="/favicon.ico" />
+    <include path="/favicon.ico" expiration="1d" />
   </static-files>
 
   <!-- Configure java.util.logging -->
@@ -14,4 +14,8 @@
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
   </system-properties>
 
+  <!-- Add the Appstats to the Console -->
+  <admin-console>
+    <page name="Appstats" url="/appstats/" />
+  </admin-console>
 </appengine-web-app>
