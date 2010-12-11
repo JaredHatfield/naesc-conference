@@ -75,11 +75,12 @@ public class DownloadResumeServlet extends HttpServlet {
             Council council = Council.GetCouncil(pm, pid);
             boolean found = false;
             BlobKey blobKey = null;
+            String name = "";
             for (int i = 0; i < council.getAttendees().size(); i++) {
                 long cid = council.getAttendees().get(i).getKey().getId();
                 if ((cid + "").equals(mid)) {
                     ConferenceAttendee ca = council.getAttendees().get(i);
-                    request.setAttribute("attendee", ca);
+                    name = ca.getLastName() + ", " + ca.getFirstName();
 
                     // Only allow the page to be displayed if they do
                     // not have a resume uploaded
@@ -96,6 +97,17 @@ public class DownloadResumeServlet extends HttpServlet {
                 // Display the file from the blobstore
                 BlobstoreService blobstoreService = BlobstoreServiceFactory
                         .getBlobstoreService();
+
+                // Retreive the file name of the uploaded blob
+                // BlobInfoFactory blobInfoFactory = new BlobInfoFactory();
+                // BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(blobKey);
+                // String filename = blobInfo.getFilename();
+
+                response.setContentType("application/pdf");
+                response.setHeader("Content-disposition",
+                        "attachment; filename=\"" + council.getName() + " - "
+                                + name + "\"");
+
                 blobstoreService.serve(blobKey, response);
             } else {
                 throw new PermissionDeniedException();

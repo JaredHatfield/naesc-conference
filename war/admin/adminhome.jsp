@@ -40,6 +40,7 @@
 		<ul>
 			<li><a href="/admin/listawards">List Award Applications</a></li>
 			<li><a href="/admin/listcouncil">List All Councils</a></li>
+			<li><a href="/admin/listattendees">List All Attendees</a></li>
 		</ul>
 		<h3>Export</h3>
 		<ul>
